@@ -3,6 +3,55 @@
 
 \chapter{Build}
 
+\section{Problem Statement} 
+With progression in manufacturing there is a growing demand for high-quality products, that means that the meta parts needs to be produced with high precision and accuracy. Here the sprin back is an undesired side effect which need to be mimimized. \cite[p. 1]{baig_machinelearningprediction_2021}
+Sheet metal forming in manufacturing need a high level of quality and precision. Therefore, the spring back of a sheet metal is an important parameter to consider. \cite[p. 1]{cruz_applicationmachinelearning_2021}
+Predicting spring back is important to reduce the number of trial and error cycles in the manufacturing process.
+Also predicting spring back is complex because of many variables and parameters and often not all of them are known. 
+Therefore, a machine learning model should predict the spring back of a sheet metal with a high accuracy and correctness. When using the \ac{ML} model small errors in the prediction can cause fitting problems in the manufacturing process.
+
+% Nevertheless, it should be noticed that there
+% are numerous variables involved in sheet metal forming
+% process, which are related to the material properties, the
+% tools geometry and process parameters. This makes the
+% optimization of process conditions quite complex, partic-
+% ularly in the production of components which require
+% several stages, and thus more than one set of tools.
+% \cite[]{dib_singleensembleclassifiers_2020}
+
+\paragraph*{\textbf{Design Principle 1}: Correctness}
+Does the artifact predict the spring back of a sheet metal with a high accuracy and correctness?
+
+% Prediction of new cases 
+\paragraph*{\textbf{Design Principle 2}: Appropriateness}
+Is the artifact appropriate for the given problem?
+
+\paragraph*{\textbf{Design Principle 3}: Relevance}
+Does the artifact achieve a good bias-variance trade-off?
+
+\paragraph*{\textbf{Design Principle 4}: Robustness}
+How well does the artifact handle outliers, noise and missing data?
+
+\paragraph*{\textbf{Design Principle 5}: Stability}
+Does the artifact generate repeatable results when trained on different datasets?
+
+
+% “Sheet metal forming includes simple processes, such as bending, stretch forming and spinning, and more complex processes, like roll forming and deep drawing [16]. Each type of process has its specifications and parameters, including the tools geometry. Process design becomes even more complex when it is required to combine several processes and/or steps to produce the component. The main driver for the development of numerical tools, enabling the virtual tryout of sheet metal forming components, is the industry, in particular the automotive industry, due to the enormous amount of components involved in car production. The outer panels are usually the largest components, and their production involves the most complex operations, including deep drawing.” ([Dib et al., 2020, p. 2](zotero://select/library/items/GIQLS492)) ([pdf](zotero://open-pdf/library/items/EP7HGFT8?page=2&annotation=JVHVQTJS))
+
+\paragraph*{\textbf{Design Principle 6}: Interpretability}
+Is the artifact easy to understand and explain?
+
+Conventional processes are often based on empirical trial and error approaches. \cite[p. 1]{dib_singleensembleclassifiers_2020}
+A common approach is to experimentally create so named 'technology tables' which contain the bending parameters and the resulting spring back. (Quelle: Hochstrate?)
+This process is time and cost intensive and therefore often not suitable for the production of high-volume and low-cost components.
+Therefore, one of the benefits of using machine learning should be the reduction of the number of trial and error cycles in the manufacturing process. 
+Furthermore, training the model should take not too much time and resources.
+
+\paragraph*{\textbf{Design Principle 7}: Resource utilization}
+How many resources does the artifact need to train and predict?
+
+
+
 \section{Dataset generation}
 For the dataset generation, bending experiments were performed on metal sheets with different thicknesses.
 % material
@@ -13,6 +62,44 @@ Each piece was bend one time using a \textit{Zwick} three-point-bending machine.
 
 Python script where developed to covert the output data format from the machine to CSV files.
 The following describes the experimental setup used for the experiments performed.
+
+\subsection{Preliminary Tests}
+A number of preliminary tests were conducted to determine the influence of the punch penetration on the spring back.
+
+\subsubsection{Multiple Cycles}
+One approach was to test if multiple spring back can be measure using only one sheet.
+Therefore, the machine was programmed to perform multiple cycles in one attempt and bend the metal sheet multiple times. The benefit of this approach would have been a faster generation of the dataset because spring backs could be measured in on attempt, also less material would have been used.
+
+Figure~\ref{springback_multiple} shows one of these attempts. The metal sheet was bent 4 times using $y_p$ values from 5 to 8. The results show, that 4 different spring backs can be measured, but the spring back does not vary like expected. It was observed as well, that the spring backs are different in every attempt, this is shown in Figure~\ref{springback_multiple_inconsistent_results}.
+Bending 4 different metal sheets each only one time returned very different results.
+A possible explanation could be the cold deformation of the steel, which is not reversible. Because this approach did not work, the machine was programmed to perform one cycle at a time.
+
+\captionsetup{width=0.45\textwidth}
+
+\begin{figure}[H]
+    \centering
+    \begin{minipage}[b]{0.5\textwidth}
+        \centering
+        \includegraphics[width=0.9\textwidth]{springback_multiple.jpg} % first figure itself
+        \caption{Experiment: Bending one metal sheet multiple times with different $y_p$ values.}
+        \label{springback_multiple}
+    \end{minipage}\hfill
+    \begin{minipage}[b]{0.5\textwidth}
+        \centering
+        \includegraphics[width=1.1\textwidth]{springback_multiple_inconsistent_results.png} % second figure itself
+        \caption{Inconsisten results bending one metal sheet mutliple times. The spread of the results is very large.}
+        \label{springback_multiple_inconsistent_results}
+    \end{minipage}
+    \label{fig:springback_multiple_overview}
+\end{figure}
+
+\subsubsection{Brake Bending Machine}
+Before using the three point bending machine, a brake bending machine was used to test the influence of the bending on the spring back. The brake bending machine is a machine used to bend metal sheets. It is a very common machine in the industry and is used to bend metal sheets to a specific radius. The brake bending machine used is a \textit{Bendmaster 1000} from \textit{Bendmaster}.
+
+After a series of bends it was observed, that the spring back values where much higher than expected. The explanation for that behavior was, that altering the position the bending beam of that specific machine was not enough to get the desired angle. Thus, the machine excluded for the generation of the data and the three point bending machine was used instead.
+
+Despite the inaccurate data, it was later observed, that the distribution of the spring backs was very similar to the later experiments with the three point bending machine.
+
 
 \subsection{Experimental setup}
 The setup consists of a three-point-bending machine with a punch and a die with no bottom. The machine used is the \textit{Zwick MX 25A} material testing machine.
@@ -148,45 +235,11 @@ After the punch is moved back, the force is reduced and the punch penetration is
 % 	\label{fig:imagej-screenshot}
 % \end{figure}
 
-\section{Preliminary Tests}
-A number of preliminary tests were conducted to determine the influence of the punch penetration on the spring back.
-
-\subsection{Multiple Cycles}
-One approach was to test if multiple spring back can be measure using only one sheet.
-Therefore, the machine was programmed to perform multiple cycles in one attempt and bend the metal sheet multiple times. The benefit of this approach would have been a faster generation of the dataset because spring backs could be measured in on attempt, also less material would have been used.
-
-Figure~\ref{springback_multiple} shows one of these attempts. The metal sheet was bent 4 times using $y_p$ values from 5 to 8. The results show, that 4 different spring backs can be measured, but the spring back does not vary like expected. It was observed as well, that the spring backs are different in every attempt, this is shown in Figure~\ref{springback_multiple_inconsistent_results}.
-Bending 4 different metal sheets each only one time returned very different results.
-A possible explanation could be the cold deformation of the steel, which is not reversible. Because this approach did not work, the machine was programmed to perform one cycle at a time.
-
-\captionsetup{width=0.45\textwidth}
-
-\begin{figure}[H]
-    \centering
-    \begin{minipage}[b]{0.5\textwidth}
-        \centering
-        \includegraphics[width=0.9\textwidth]{springback_multiple.jpg} % first figure itself
-        \caption{Experiment: Bending one metal sheet multiple times with different $y_p$ values.}
-        \label{springback_multiple}
-    \end{minipage}\hfill
-    \begin{minipage}[b]{0.5\textwidth}
-        \centering
-        \includegraphics[width=1.1\textwidth]{springback_multiple_inconsistent_results.png} % second figure itself
-        \caption{Inconsisten results bending one metal sheet mutliple times. The spread of the results is very large.}
-        \label{springback_multiple_inconsistent_results}
-    \end{minipage}
-    \label{fig:springback_multiple_overview}
-\end{figure}
-
-\subsection{Brake Bending Machine}
-Before using the three point bending machine, a brake bending machine was used to test the influence of the bending on the spring back. The brake bending machine is a machine used to bend metal sheets. It is a very common machine in the industry and is used to bend metal sheets to a specific radius. The brake bending machine used is a \textit{Bendmaster 1000} from \textit{Bendmaster}.
-
-After a series of bends it was observed, that the spring back values where much higher than expected. The explanation for that behavior was, that altering the position the bending beam of that specific machine was not enough to get the desired angle. Thus, the machine excluded for the generation of the data and the three point bending machine was used instead.
-
-Despite the inaccurate data, it was later observed, that the distribution of the spring backs was very similar to the later experiments with the three point bending machine.
 
 \subsection{Computational Setup}
 For training the machine learning models a ThinkPad X1 Carbon 2019 with an Intel Core i7-10610U CPU @ 1.80GHz and 16 GB RAM was used. The operating system used is Ubuntu 20.04.2 LTS. The code for the model is written in Python 3.8.5 using the IDE PyCharm The libraries used are mentioned in Table
+
+\captionsetup{width=1\textwidth}
 
 \begin{table}[H]
     \centering

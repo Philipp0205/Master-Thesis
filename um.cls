@@ -192,6 +192,7 @@
 \setlength{\bibsep}{6.5pt}
 
 \newtheorem{theorem}{Theorem}[section]
+\newtheorem{designprinciple}{Design Principle}[section]
 \newtheorem{corollary}{Corollary}[theorem]
 \newtheorem{lemma}[theorem]{Lemma}
 

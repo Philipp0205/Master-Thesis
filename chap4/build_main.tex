@@ -15,11 +15,11 @@ Python script where developed to covert the output data format from the machine 
 The following describes the experimental setup used for the experiments performed.
 
 \subsection{Experimental setup}
-The setup consists of a three-point-bending machine with a punch and a die with no bottom. The machine used is the \textit{Zwick MX 25A} material testing machine. 
+The setup consists of a three-point-bending machine with a punch and a die with no bottom. The machine used is the \textit{Zwick MX 25A} material testing machine.
 The machine is equipped with a load cell and a displacement sensor. The load cell is used to measure the force applied to the sheet and the displacement sensor is used to measure the displacement of the punch.
 The machine is controlled by a computer and a software called \textit{ZwickRoell TestXpert}. The software is used to control the machine and to save the output data.
 
-The experimental setup and its parameters are shown in Figure~\ref{fig:setup} where $V$ is the die opening, $y_p$ is the punch penetration which is the distance the punch is moved into the sheet. 
+The experimental setup and its parameters are shown in Figure~\ref{fig:setup} where $V$ is the die opening, $y_p$ is the punch penetration which is the distance the punch is moved into the sheet.
 The paramter $t$ is the sheet thickness,  $\alpha$ is the sheet corresponding bending angle. Parameter $r_p$ is the punch radius which is the radius of the tip of the punch and $r_m$ is the die radius.
 
 
@@ -31,10 +31,10 @@ The paramter $t$ is the sheet thickness,  $\alpha$ is the sheet corresponding be
     \label{fig:setup}
 \end{figure}
 
- In order to get consistent results, a number of constant and variable parameters were chosen. 
+In order to get consistent results, a number of constant and variable parameters were chosen.
 The parameters include the punch-and-die tooling made of steel where die punch had a radius ($r_p$) of 5 mm and and die radius ($r_m$) of 10 mm. The die opening $V$ was varied between 10 and 50 mm and the punch penetration $y_p$ was varied between 0 and 20 mm.
-The machine was configured to move the punch with a constant speed of 100 mm/min until it measured a resistance of 1 N. That meant, that the punch reached the metal plate and the actual bending process can start. After a hold time of 1 second the punch was moved with a slower speed of 8 mm/min until the specified punch penetration was reached. 
-The length and width of the metal sheet was 100 mm and 20 mm respectively. The sheet thickness was varied between 0.5 and 3 mm. 
+The machine was configured to move the punch with a constant speed of 100 mm/min until it measured a resistance of 1 N. That meant, that the punch reached the metal plate and the actual bending process can start. After a hold time of 1 second the punch was moved with a slower speed of 8 mm/min until the specified punch penetration was reached.
+The length and width of the metal sheet was 100 mm and 20 mm respectively. The sheet thickness was varied between 0.5 and 3 mm.
 The constant parameters are shown in Table~\ref{tab:constant_parameters} and the varying parameters are shown in Table~\ref{tab:verying_parameters}.
 
 \begin{table}[H]
@@ -42,9 +42,9 @@ The constant parameters are shown in Table~\ref{tab:constant_parameters} and the
     \begin{tabular}{|l|l|l|}
         \hline
         \textbf{Parameter} & \textbf{Value}                      & \textbf{Unit} \\ \hline
-        Punch penetration  & 2.5, 5, 7.5, 10, 12.5, 15, 17.5, 20 & mm            \\ 
-        Die opening        & 10, 20, 30, 40, 50                  & mm            \\ 
-        Thickness          & 0,5, 1, 1.5, 2, 2.5, 3              & mm            \\ 
+        Punch penetration  & 2.5, 5, 7.5, 10, 12.5, 15, 17.5, 20 & mm            \\
+        Die opening        & 10, 20, 30, 40, 50                  & mm            \\
+        Thickness          & 0,5, 1, 1.5, 2, 2.5, 3              & mm            \\
         \hline
     \end{tabular}
     \caption{Experimental setup varying parameters}
@@ -56,14 +56,14 @@ The constant parameters are shown in Table~\ref{tab:constant_parameters} and the
     \begin{tabular}{|l|l|l|}
         \hline
         \textbf{Parameter}            & \textbf{Value} & \textbf{Unit} \\ \hline
-        Punch radius                  & 5              & mm            \\ 
-        Die radius                    & 5              & mm            \\ 
-        Sheet thickness               & 0.5, 1, 2      & mm            \\ 
-        Sheet width                   & 20             & mm            \\ 
-        Sheet length                  & 100            & mm            \\ 
-        Punch speed                   & 100            & mm/min        \\ 
-        Punch speed after penetration & 8              & mm/min        \\ 
-        Punch force                   & 1              & N             \\ 
+        Punch radius                  & 5              & mm            \\
+        Die radius                    & 5              & mm            \\
+        Sheet thickness               & 0.5, 1, 2      & mm            \\
+        Sheet width                   & 20             & mm            \\
+        Sheet length                  & 100            & mm            \\
+        Punch speed                   & 100            & mm/min        \\
+        Punch speed after penetration & 8              & mm/min        \\
+        Punch force                   & 1              & N             \\
         \hline
     \end{tabular}
     \caption{Experimental setup constant parameters}
@@ -71,24 +71,18 @@ The constant parameters are shown in Table~\ref{tab:constant_parameters} and the
 \end{table}
 
 
-
 \subsection{Measuring The Spring Back}
-The output data contained different data points, which were used to calculate the spring back. 
+The output data contained different data points, which were used to calculate the spring back.
 Important parameters for the calculation are the force, punch penetration and testing time.
-As shown in Figure~\ref{fig:springback_measured} at the $yp$ maximum the punch penetration and the force are maximized as well. The punch stays at that position for 1 second and then moves back with a slower speed. This hold time a limitation of the machine and can not be changed. 
+As shown in Figure~\ref{fig:springback_measured} at the $yp$ maximum the punch penetration and the force are maximized as well. The punch stays at that position for 1 second and then moves back with a slower speed. This hold time a limitation of the machine and can not be changed.
 After the punch is moved back, the force is reduced and the punch penetration is reduced as well, until the punch is at the initial position. For a short time after the lift, the load  cell still measures a force. That is because the metal sheet springs back and the punch is still in contact with the sheet. This was measured using a python script, the green and the yellow point represent the resulting spring back distance.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.7\textwidth]{springback_measured}
+    \includegraphics[width=0.6\textwidth]{springback_measured}
     \caption{A steel metal sheet was bent with a punch penetration of 5 mm the spring back is 0.37 mm. The blue line shows the force and the blue line shows the punch penetration.}
     \label{fig:springback_measured}
 \end{figure}
-
-
-
-
-
 
 % \paragraph{Bend deduction:}
 % Measuring the bend deduction is more complex. After a metal sheet is bent, it is hard to measure the flat pattern length because the material is malformed at the bent. 
@@ -154,10 +148,77 @@ After the punch is moved back, the force is reduced and the punch penetration is
 % 	\label{fig:imagej-screenshot}
 % \end{figure}
 
+\section{Preliminary Tests}
+A number of preliminary tests were conducted to determine the influence of the punch penetration on the spring back.
 
-\section{Computational Setup}
+\subsection{Multiple Cycles}
+One approach was to test if multiple spring back can be measure using only one sheet.
+Therefore, the machine was programmed to perform multiple cycles in one attempt and bend the metal sheet multiple times. The benefit of this approach would have been a faster generation of the dataset because spring backs could be measured in on attempt, also less material would have been used.
+
+Figure~\ref{springback_multiple} shows one of these attempts. The metal sheet was bent 4 times using $y_p$ values from 5 to 8. The results show, that 4 different spring backs can be measured, but the spring back does not vary like expected. It was observed as well, that the spring backs are different in every attempt, this is shown in Figure~\ref{springback_multiple_inconsistent_results}.
+Bending 4 different metal sheets each only one time returned very different results.
+A possible explanation could be the cold deformation of the steel, which is not reversible. Because this approach did not work, the machine was programmed to perform one cycle at a time.
+
+\captionsetup{width=0.45\textwidth}
+
+\begin{figure}[H]
+    \centering
+    \begin{minipage}[b]{0.5\textwidth}
+        \centering
+        \includegraphics[width=0.9\textwidth]{springback_multiple.jpg} % first figure itself
+        \caption{Experiment: Bending one metal sheet multiple times with different $y_p$ values.}
+        \label{springback_multiple}
+    \end{minipage}\hfill
+    \begin{minipage}[b]{0.5\textwidth}
+        \centering
+        \includegraphics[width=1.1\textwidth]{springback_multiple_inconsistent_results.png} % second figure itself
+        \caption{Inconsisten results bending one metal sheet mutliple times. The spread of the results is very large.}
+        \label{springback_multiple_inconsistent_results}
+    \end{minipage}
+    \label{fig:springback_multiple_overview}
+\end{figure}
+
+\subsection{Brake Bending Machine}
+Before using the three point bending machine, a brake bending machine was used to test the influence of the bending on the spring back. The brake bending machine is a machine used to bend metal sheets. It is a very common machine in the industry and is used to bend metal sheets to a specific radius. The brake bending machine used is a \textit{Bendmaster 1000} from \textit{Bendmaster}.
+
+After a series of bends it was observed, that the spring back values where much higher than expected. The explanation for that behavior was, that altering the position the bending beam of that specific machine was not enough to get the desired angle. Thus, the machine excluded for the generation of the data and the three point bending machine was used instead.
+
+Despite the inaccurate data, it was later observed, that the distribution of the spring backs was very similar to the later experiments with the three point bending machine.
+
+\subsection{Computational Setup}
+For training the machine learning models a ThinkPad X1 Carbon 2019 with an Intel Core i7-10610U CPU @ 1.80GHz and 16 GB RAM was used. The operating system used is Ubuntu 20.04.2 LTS. The code for the model is written in Python 3.8.5 using the IDE PyCharm The libraries used are mentioned in Table
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|ll|}
+        \hline
+        \textbf{Library} & \textbf{Version} \\
+        \hline
+        numpy        & 1.23.2  \\
+        pandas       & 1.5.1   \\
+        matplotlib   & 3.6.2  \\ \hline 
+    \end{tabular}
+    \label{table:libraries}
+    \caption{Libraries used for the machine learning models.}
+\end{table}
+
+\subsection{Data Preprocessing}
+% "Although the dataset collected from the experimental setup includes seven features (parameters), the 
+% first three parameters; load tonnage, load holding time, and gap between the punch and the die, are 
+% combined to form a single feature, "Machine". It is because different combinations of these factors may 
+% be combined to form a single machine setting parameters. The other parameters are; blank material, 
+% thickness, width and initial bend angle. Hence, there are five features of the dataset, which levels are 
+% shown in Table 4. Two of which, namely machine and material, are treated as categorical features, so 
+% using scikit-learn's OrdinalEncoder these features were encoded into an integer array. While the 
+% remaining three features were treated as continuous features, for standardizing these features scikit-
+% learn's StandardScaler was used. It transformed the data so that for each feature, its distribution 
+% will have a mean value of 0 and a standard deviation of 1. The formula used for this is as follows Eq 
+% (1)." 
+% \cite[p. 7]{baig_machinelearningprediction_2021}
 
 \section{Model Selection}
+
+
 
 \section{Model Training}
 

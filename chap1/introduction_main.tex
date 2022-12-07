@@ -1,43 +1,13 @@
 \chapter{Introduction}
 
-“Sheet metal forming has been employed for centuries in diverse manufacturing industries to create a wide range of products that may be used in several applications. Among different forming techniques, sheet bending and stamping can be considered the most important variants in forming industry. These techniques have been continuously improved in recent decades to meet the growing need for lightweight metallic components in the automotive sector in order to address environmental concerns about energy efficiency and emissions [1,2].” 
-\cite[p. 1]{cruz_applicationmachinelearning_2021} \\
+Sheet metal forming has been used for centuries in different manufacturing industries to create a wide range of products for different applications. 
+Sheet metal bending and stamping can be considered as the most important variants in the forming industry. \cite[p. 1]{cruz_applicationmachinelearning_2021} 
+Therefore these have been continuously improved in recent decades to meet the growing demand especially in  automotive and aircraft industries with the goal to reduce energy efficiency and emissions. \cite[p. 4]{zheng_reviewformingtechniques_2018}
 
-The increasing availability of data, which becomes a continually increasing trend in
-multiple fields of application, has given machine learning approaches a renewed interest in recent
-years. Accordingly, manufacturing processes and sheet metal forming follow such directions, having
-in mind the efficiency and control of the many parameters involved, in processing and material
-characterization. In this article, two applications are considered to explore the capability of machine
-learning modeling through shallow artificial neural networks (ANN). 
-\cite[]{cruz_applicationmachinelearning_2021}
+Sprinback is a common phenomenon in sheet metal forming processes. It is a deformation of the sheet metal that occurs when the sheet metal is bent. Therefore, predicting the spring back is important to reduce the number of trial and error cycles in the manufacturing process. \cite[p. 1]{cruz_applicationmachinelearning_2021} 
+Sheet metal forming is a complex process that involves a large number of variables and parameters Therefore, it is difficult to predict the spring back accurately, which makes it an interesting case for machine learning.
 
-To bend a sheet metal material, different methods can be used such as
-air bending, coining, and bottom bending. Air bending, Figure 1a, is a process in which the
-punch deforms the sheet by bending without the sheet being coined against the bottom
-die.
-. Therefore, it is frequently the preferred bending method because it provides a high
-level of flexibility, as it is possible to obtain different bending angles using the same set
-of tools by only controlling the punch stroke. However, this process is characterized by
-strong nonlinear behavior, considering its parameters and their interrelationships [3].
-In bending operations, one of the most important issues to consider is the spring-
-back effect. In fact, the removal of the tools causes the release of the installed residual
-stresses, leading to elastic recovery of the material and a change in the final bending angle.
-Consequently, estimating the springback effect becomes a vital requirement for achieving
-an accurate and regulated procedure. To address this issue, several authors tried to esti-
-mate the springback behavior in bending operations in order to develop compensation
-methods based on experimental, analytic and numerical approaches. 
-\cite[]{cruz_applicationmachinelearning_2021}
-
-
-"Sheet metal bending is a typical operation and springback is an unintended consequence of this 
-operation. Since it causes fitting issues in the assembly, which leads to quality problems, anticipating it 
-long before the bending operation is done is essential in today's production, so that machining 
-parameters can be adjusted accordingly. In order to predict springback with minimum errors, this paper 
-presents the idea for the development of machine learning models using tree-based learning algorithms 
-(A class of machine learning algorithms).
-"
-
-\section{Motivation} % why is this a non trivial problem
+In order to predict springback with minimium errors, this thesis build and evaluates different machine learning models to predict the springback of a sheet metal. The models are evaluated based on the mean absolute error (MAE) and the root mean squared error (RMSE). The best model is then used to predict the springback of a sheet metal with different parameters. 
 
 \section{Problem statement}
 With the rapid development in manufacturing and increasing demand for high-quality products, the 
@@ -52,7 +22,3 @@ in technology and the development of manufacturing 4.0 also triggered the need f
 It means that the machines are producing data at an unprecedented scale, so now it is needed to have 
 fast learning algorithms that can give accurate results in a short amount of time. 
 \cite[]{baig_machinelearningprediction_2021}
-
-\section{Our Approach}
-
-\section{Document Structure}

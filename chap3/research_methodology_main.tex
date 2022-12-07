@@ -19,7 +19,7 @@ The term artifacts is intentionally broad and can take on different forms. In th
 DSR can be implemented in various ways, a prominent example is provided by Peffers et al. and shown in Figure \ref{fig:dsr_process}
 The approach comprises six steps, which are dived into the superordinate phases "Build" and "Evaluate". This thesis follows these phases.
 
- \begin{figure}
+ \begin{figure}[H]
 	\centering
 	\includegraphics[width=1.1\linewidth]{chap3/images/dsr_process.png}
 	\caption[DSR Process]{Design Science Research Approach according to Peffers et al. Picture: \cite[p. 72]{sonnenberg_evaluationpatternsdesign_2012}}
@@ -79,25 +79,38 @@ which can then be DPs.
 \cite[p. 6]{koppenhagen_designscienceresearch_2012}
 
 
-\section{Evaluationn of Machine Learning Models }
-tbd...
+\section{Evaluation of Machine Learning Models}
+In the field of software engineering there are already standards that define the quality of software systems and its components like ISO/IEC 25010. 
+\cite[]{siebert_constructionqualitymodel_} noted, that such standards can not applied directly to ML and therefore need to be adapted. Therefore they re-interpreted and extended these existing quality models to the ML context. \cite[p. 1]{siebert_constructionqualitymodel_}
+In order to define the Design Principles for the artifacts in this work, the considerations of \cite[]{siebert_constructionqualitymodel_} are used. This enables a systematic process in order to assess the quality of the developed artifacts.
+
+
+
 
 \subsection{Goal Question Metric Approach}
-To make the defined quality attributes measurable, the “Goal-Question-Metric”-approach (GQM) was chosen in this work, which is one of the most common approaches and is divided into three levels: 
-(Basili et al., 2002, p. 3).
+To make the defined quality attributes measurable, the “Goal-Question-Metric”-approach \ac{GQM} was chosen in this work. It is one of the most common approaches in DSR and is divided into three levels.
+\cite[p. 3]{basili_goalquestionmetric_}
 
-\paragraph{1. conceptual level (goal):}
-A goal, which usually corresponds to a quality criterion, is set for an object.
+\paragraph{1. Conceptual level (goal):}
+"A goal is defined for an object, for a variety of reasons,
+with respect to various models of quality, from various points of view, relative to a
+particular environment." \cite[p. 3]{basili_goalquestionmetric_}
+
 \paragraph{2. operational level (question):}
-Questions are asked to define how an objective can be achieved.
+"A set of questions is used to characterize the way
+the assessment/achievement of a specific goal is going to be performed based on
+some characterizing model. Questions try to characterize the object of
+measurement (product, process, resource) with respect to a selected quality issue
+and to determine its quality from the selected viewpoint." \cite[p. 3]{basili_goalquestionmetric_}
+
 \paragraph{3. quantitative level (metric):}
-A set of data is associated with each question with the aim of answering it. Depending on the question, the data can be collected and evaluated objectively or subjectively.
+"A set of data is associated with every question in order to answer it in a quantitative way."  \cite[p. 3]{basili_goalquestionmetric_}
 
 Objectives, questions and metrics can be presented in a hierarchical structure.
 
-\begin{figure}[ht!] % supposedly places it here ...
+\begin{figure}[H] % supposedly places it here ...
 	\centering
-	\includegraphics[width=0.6\linewidth]{gqm}
+	\includegraphics[width=0.7\linewidth]{gqm}
 	\caption[GQM tree stucture ]{Goal-Question-Metric Ansatz \cite[p. 3]{basili_goalquestionmetric_}} 
 	\label{fig:gqm}
 \end{figure}

@@ -1,8 +1,33 @@
 \chapter{Evaluation}
+This chapter critically examines the machine learning models conceived and partially implemented in the previous chapter.
+Table X shows an overview of the evaluated criteria. These are structured according to the Goal-Question-Metric approach
 
-In an ideal world, you should have two kind of evaluations. The first is against some ground truth (perhaps a random model?). The second kind of evaluation is against other people's work (accuracy, speed, etc.). Any dimension which is of interest, should be evaluated.  Evaluation should be statistically sound.
+Mean Absolute Error (MAE)
+how far the predictions are from the actual output
 
-\Blindtext
+
+\begin{longtable}{|l|p{6cm}|p{3cm}|}
+    \hline
+    \textbf{Goal}                 & \textbf{Question}                                                                                               & \textbf{Metric}                                      \\
+
+    \hline
+    \textbf{Appropriatness}       & How well does the model type fit the current task?                                                              & Prerequisites for model type                         \\
+    \hline
+    \textbf{Correctness}          & Ability of the model to perform the current task measured on the development dataset and the runtime dataset    &
+    Precision, Recall, F-score                                                                                                                                                                             \\
+    \hline
+    \textbf{Relevance}            & Does the model achieve a good bias-variance tradeoff? Which means neither overfitting or unterfitting the data. & Variance of cross-validation and fit                 \\
+    \hline
+    \textbf{Robustness}           & Ability of the model to outliers, noise and other data quality issues                                           & Variance of cross-validation, fit                    \\
+    \hline
+    \textbf{Stability}            & Does the artifact generate repeatable results when trained on different data?                                   & Equalized Loss of Accuracy (ELA)                     \\
+    \hline
+    \textbf{Interpretability}     & How well can the model be explained?                                                                            & Complexity measures (e.g., no. of parameters, depth) \\
+    \hline
+    \textbf{Resource utilization} & How much resources are required to train and run the model?                                                     & Training time, runtime, storage space                \\
+    \hline
+    \caption{Overview of the goals, questions and metrics for the evaluation of artifacts following the \ac{GQM} approach.}
+\end{longtable}
+
 
 \section{Summary}
-\blindtext

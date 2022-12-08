@@ -4,51 +4,71 @@
 \chapter{Build}
 
 \section{Problem Statement} 
+The following design principles is a selection of \cite{siebert_constructionqualitymodel_}'s quality parameters for \ac{ML} models.
+In this \ac{DSR} work the artifacts are \ac{ML} models therefore these design principles are used to evaluate them.
+
+\subsubsection*{Design Principle 1: Correctness}
+\textit{Does the artifact predict the spring back of a sheet metal with a high accuracy and correctness?}
 With progression in manufacturing there is a growing demand for high-quality products, that means that the meta parts needs to be produced with high precision and accuracy. Here the sprin back is an undesired side effect which need to be mimimized. \cite[p. 1]{baig_machinelearningprediction_2021}
 Sheet metal forming in manufacturing need a high level of quality and precision. Therefore, the spring back of a sheet metal is an important parameter to consider. \cite[p. 1]{cruz_applicationmachinelearning_2021}
 Predicting spring back is important to reduce the number of trial and error cycles in the manufacturing process.
 Also predicting spring back is complex because of many variables and parameters and often not all of them are known. 
 Therefore, a machine learning model should predict the spring back of a sheet metal with a high accuracy and correctness. When using the \ac{ML} model small errors in the prediction can cause fitting problems in the manufacturing process.
 
-% Nevertheless, it should be noticed that there
-% are numerous variables involved in sheet metal forming
-% process, which are related to the material properties, the
-% tools geometry and process parameters. This makes the
-% optimization of process conditions quite complex, partic-
-% ularly in the production of components which require
-% several stages, and thus more than one set of tools.
-% \cite[]{dib_singleensembleclassifiers_2020}
+% Using an analytical model to compare the artifact. (miranda 2018 paper)
 
-\paragraph*{\textbf{Design Principle 1}: Correctness}
-Does the artifact predict the spring back of a sheet metal with a high accuracy and correctness?
-
-% Prediction of new cases 
-\paragraph*{\textbf{Design Principle 2}: Appropriateness}
-Is the artifact appropriate for the given problem?
-
-\paragraph*{\textbf{Design Principle 3}: Relevance}
-Does the artifact achieve a good bias-variance trade-off?
-
-\paragraph*{\textbf{Design Principle 4}: Robustness}
-How well does the artifact handle outliers, noise and missing data?
-
-\paragraph*{\textbf{Design Principle 5}: Stability}
-Does the artifact generate repeatable results when trained on different datasets?
+\subsubsection*{Design Principle 2: Appropriateness}
+\textit{Is the artifact appropriate for the given problem?}
+While selecting a model it is important that it fits the problem/task and can deal with the given data. \cite[p. 16]{siebert_constructionqualitymodel_}
 
 
-% “Sheet metal forming includes simple processes, such as bending, stretch forming and spinning, and more complex processes, like roll forming and deep drawing [16]. Each type of process has its specifications and parameters, including the tools geometry. Process design becomes even more complex when it is required to combine several processes and/or steps to produce the component. The main driver for the development of numerical tools, enabling the virtual tryout of sheet metal forming components, is the industry, in particular the automotive industry, due to the enormous amount of components involved in car production. The outer panels are usually the largest components, and their production involves the most complex operations, including deep drawing.” ([Dib et al., 2020, p. 2](zotero://select/library/items/GIQLS492)) ([pdf](zotero://open-pdf/library/items/EP7HGFT8?page=2&annotation=JVHVQTJS))
+\subsubsection*{Design Principle 3: Relevance}
+\textit{Does the artifact achieve a good bias-variance trade-off?}
 
-\paragraph*{\textbf{Design Principle 6}: Interpretability}
-Is the artifact easy to understand and explain?
+In addition to measure the correctness it is important to understand "why" the learner has this performance. 
+This is important to understand the limitations of the model and to improve it. 
+Therefore, it is important to understand the bias-variance trade-off. \cite[p. 50]{zhou_machinelearning_2021}
+Bias measures the differences between the learnesrs expected prediction and the ground-truth label. This results in the fitting ability of the learner. 
+Variances measures the change of learning performance of the learner because of changes in the training set. This results in the impact of data disturbance on the results. \cite[p. 51]{zhou_machinelearning_2021}
+
+\subsubsection*{Design Principle 4: Robustness}
+\textit{How well does the artifact handle outliers, noise and missing data?}
+
+"Noise is common in any real-world data set and may adversely affect classifiers built under the effect of
+such type of disturbance. Some of these classifiers are widely recognized for their good performance
+when dealing with imperfect data. However, the noise robustness of the classifiers is an important issue
+in noisy environments and it must be carefully studied. Both performance and robustness are two
+independent concepts that are usually considered separately, but the conclusions reached with one of
+these metrics do not necessarily imply the same conclusions with the other. Therefore, involving both
+concepts seems to be crucial in order determine the expected behavior of the classifiers against noise.
+Existing measures fail to properly integrate these two concepts, and they are also not well suited to
+compare different techniques over the same data. This paper proposes a new measure to establish the
+expected behavior of a classifier with noisy data trying to minimize the problems of considering
+performance and robustness individually: the Equalized Loss of Accuracy (ELA)."
+
+
+\subsubsection*{Design Principle 5: Stability}
+\textit{Does the artifact generate repeatable results when trained on different datasets?}
+
+
+\subsubsection*{Design Principle 6: Interpretability}
+\textit{Is the artifact easy to understand and explain?}
+
+It should be noticed, that there are many parameters and variables involved in the sheet metal forming process. 
+That makes the process design quite complex, particularly in the production of components which require several stages, and thus more than one set of tools. \cite[p. 1]{dib_singleensembleclassifiers_2020}
+A model which allows conclusions how the results where generated is better.
+
+\subsection*{Design Principle 7: Resource utilization}
+\textit{How many resources does the artifact need to train and predict?}
 
 Conventional processes are often based on empirical trial and error approaches. \cite[p. 1]{dib_singleensembleclassifiers_2020}
 A common approach is to experimentally create so named 'technology tables' which contain the bending parameters and the resulting spring back. (Quelle: Hochstrate?)
 This process is time and cost intensive and therefore often not suitable for the production of high-volume and low-cost components.
 Therefore, one of the benefits of using machine learning should be the reduction of the number of trial and error cycles in the manufacturing process. 
 Furthermore, training the model should take not too much time and resources.
-
-\paragraph*{\textbf{Design Principle 7}: Resource utilization}
-How many resources does the artifact need to train and predict?
+As mentioned before often FEM-simulation are used to virtually try out metal forming processes. However, fully exploring the design space is computationally expensive and often not possible. \cite[p. 3]{dib_singleensembleclassifiers_2020} 
+The number of experiments can be reduced using a meta-model like \ac{ANN}. \cite[p. 3]{dib_singleensembleclassifiers_2020}
+A approach fully based on \ac{ML} should perfor
 
 
 
@@ -106,15 +126,14 @@ The setup consists of a three-point-bending machine with a punch and a die with 
 The machine is equipped with a load cell and a displacement sensor. The load cell is used to measure the force applied to the sheet and the displacement sensor is used to measure the displacement of the punch.
 The machine is controlled by a computer and a software called \textit{ZwickRoell TestXpert}. The software is used to control the machine and to save the output data.
 
-The experimental setup and its parameters are shown in Figure~\ref{fig:setup} where $V$ is the die opening, $y_p$ is the punch penetration which is the distance the punch is moved into the sheet.
+The experimental setup and the process parameters are shown in Figure~\ref{fig:setup} where $V$ is the die opening, $y_p$ is the punch penetration which is the distance the punch is moved into the sheet.
 The paramter $t$ is the sheet thickness,  $\alpha$ is the sheet corresponding bending angle. Parameter $r_p$ is the punch radius which is the radius of the tip of the punch and $r_m$ is the die radius.
-
 
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.6\textwidth]{setup}
-    \caption{Experimental setup: sheet bending angle ($\alpha$), sheet thickness ($t$), punch penetration ($y_p$), die opening ($V$), punch radius ($r_p$), die radius ($r_m$), inside bending radius ($r_i$).}
+    \caption{Process parameters: Sheet bending angle ($\alpha$), sheet thickness ($t$), punch penetration ($y_p$), die opening ($V$), punch radius ($r_p$), die radius ($r_m$), inside bending radius ($r_i$).}
     \label{fig:setup}
 \end{figure}
 
@@ -271,7 +290,15 @@ For training the machine learning models a ThinkPad X1 Carbon 2019 with an Intel
 
 \section{Model Selection}
 
-
+\begin{itemize}
+    \item Multi-layer Perceptron (MLP)
+    \item Decision Tree (DT)
+    \item Random forest (RF)
+    \item Naive Bayes (NB)
+    \item Support vector machine (SVM)
+    \item K-Nearest neighbors (KNN) 
+    \item Logistic Regression (LR)
+\end{itemize}
 
 \section{Model Training}
 

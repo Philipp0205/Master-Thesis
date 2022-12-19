@@ -270,17 +270,6 @@ For training the machine learning models a ThinkPad X1 Carbon 2019 with an Intel
     \caption{Libraries used for the machine learning models.}
 \end{table}
 
-\begin{tikzpicture}
-    \begin{axis}
-        xmajorgrids = true , 
-        ymajorgrids = true,
-        grid style = dashed,
-        % Add scatter plot 
-        \addplot [scatter, only marks, mark = square*, mark size = 4] coordinates {(1, 1) (2, 2) (3, 3) (4, 4) (5, 5)};
-        % Add scatter plot
-    \end{axis}
-\end{tikzpicture}
-
 \subsection{Data Preprocessing}
 % "Although the dataset collected from the experimental setup includes seven features (parameters), the 
 % first three parameters; load tonnage, load holding time, and gap between the punch and the die, are 
@@ -308,9 +297,41 @@ For training the machine learning models a ThinkPad X1 Carbon 2019 with an Intel
 \end{itemize}
 
 \subsection{Support Vector Regression (SVR)}
+Support Vector Machines \ac{SVM} are used for classification problems. The \ac{SVM} algorithm is used to find a hyperplane in an N-dimensional space (N - the number of features) that distinctly classifies the data points. \cite[p. 42]{awad_efficientlearningmachines_2015}
+Predicting the spring back is a regression problem, so the \ac{SVM} algorithm is not suitable for this problem. It therefore is a generalization of classification problems, where the model returns continuous values instead of finite set of values. 
+The Support Vector Regression \ac{SVR} algorithm is derived from the \ac{SVM} algorithm and accomblishes this generalization by introducing an $\epsilon$-intensive region around the function ($\epsilon-tube$).  \cite[p. 67]{awad_efficientlearningmachines_2015}
 
+\subsection{Multi Linear Regression}
+\subsection{Polynomial Regression}
+\subsection{Decision Tree Regression}
+\subsection{Random Forest Regression}
+Random forest \cite[]{breiman_randomforests_2001}is a type of ensemble learning algorithm in which multiple decision trees, referred to as "weak learners," are trained and combined to produce a more accurate and stable prediction, known as a "strong learner." \cite[p. 24]{awad_efficientlearningmachines_2015}
+
+
+Random forests are usually used for classification problems, but they can also be used for regression problems. \cite[p. 25]{breiman_randomforests_2001}
+
+
+
+
+
+
+\subsubsection*{Results}
 
 \section{Model Training}
+
+\subsection{Training-Test Split}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{test_train_split}
+    \caption{The training and test dataset.}
+    \label{fig:springback_measured}
+\end{figure}
+
+\subsubsection*{Tuning Random Forest Regression}
+bootstrap: true, criterion: squared error, min samples leaf : 1, min samples split: 2, max features: 0.5119924258446656, n estimators: 35, n jobs: -1. 
+
+
 
 
 

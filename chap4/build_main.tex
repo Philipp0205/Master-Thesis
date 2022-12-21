@@ -285,17 +285,6 @@ For training the machine learning models a ThinkPad X1 Carbon 2019 with an Intel
 % \cite[p. 7]{baig_machinelearningprediction_2021}
 
 \section{Model Selection}
-
-\begin{itemize}
-    \item Simple Linear Regression
-    \item Multiple Linear Regression
-    \item Polynomial Regression
-    \item Support Vector Regression
-    \item Decision Tree Regression
-    \item Random Forest Regression
-
-\end{itemize}
-
 \subsection{Support Vector Regression (SVR)}
 Support Vector Machines \ac{SVM} are used for classification problems. The \ac{SVM} algorithm is used to find a hyperplane in an N-dimensional space (N - the number of features) that distinctly classifies the data points. \cite[p. 42]{awad_efficientlearningmachines_2015}
 Predicting the spring back is a regression problem, so the \ac{SVM} algorithm is not suitable for this problem. It therefore is a generalization of classification problems, where the model returns continuous values instead of finite set of values. 
@@ -305,15 +294,66 @@ The Support Vector Regression \ac{SVR} algorithm is derived from the \ac{SVM} al
 \subsection{Polynomial Regression}
 \subsection{Decision Tree Regression}
 \subsection{Random Forest Regression}
-Random forest \cite[]{breiman_randomforests_2001}is a type of ensemble learning algorithm in which multiple decision trees, referred to as "weak learners," are trained and combined to produce a more accurate and stable prediction, known as a "strong learner." \cite[p. 24]{awad_efficientlearningmachines_2015}
+% Erst einmal auf decision tree generell eingehen
+A commonly used method in machine learning. The goal is to solve classification or regression problems by predicting the value of a output variable by one or multiple input variables. \cite[p. 253]{shaik_briefsurveyrandom_2019} 
+To build a \ac{DT} the source dataset represents the root node of the tree this data set is split into leafs (children) by using a set of spitting rules until each leaf in the \ac{DT} is "pure" and only contains one target value. Depending on the use cases this is a single class or a single regression value. \cite[p. 70-72]{muller_introductionmachinelearning_2016}
+% -> Problem von decision tree 
+The main drawbback of \ac{DT}s is the tendency to overfit and poor generalization performance, what makes them not paticaly for most use cases. Therefore usualy ensemble methods are used instead of a single \ac{DT}. \cite[p. 78]{muller_introductionmachinelearning_2016} \cite[p. 251]{liu_newmachinelearning_2012}
+% -> Warum random forst das problem löst 
+Random forest \cite[]{breiman_randomforests_2001} is a type of ensemble learning algorithm in which multiple decision trees, which are "weak learners," are trained and combined to produce a more accurate and stable prediction, known as a "strong learner." \cite[p. 24]{awad_efficientlearningmachines_2015}
+The risk of overfitting is mitigated by subset and feature randomization. Each root node uses a unique subset of the data and each leaf is split using a random features. This ensures that no single tree sees all of the data, allowing the model to focus on general patterns rather than being sensitive to noise. \cite[p. 251]{liu_newmachinelearning_2012}
+% -> Beschreibung Random forest / Random foret regression 
+In this supervised learning method, 
+%which was influenced by the research of Amit and Geman (1997), Ho (1998), and Dietterich (2000), 
+a "divide and conquer" approach is used. This involves dividing the data into smaller samples, incrementally building a randomized tree predictor for each sample, and then combining (aggregating) these predictors together. This approach has proven to be effective. Because not only one but multiple classifiers are used the random forest learning is known as ensemble model. \cite[p. 254]{shaik_briefsurveyrandom_2019}
+
+% -> Vorteile / Nachteile Random Forest 
+This mechanism is flexible enough to handle classifications and regression problems, this is one of the reasons that random forests count to the most successful \ac{ML} methods. \cite[p. 3-4]{biau_randomforestguided_2016} \cite[p. 25]{breiman_randomforests_2001} 
+
+%
+% Advantages
+%
+Random forests are a type of machine learning algorithm that uses bagging and the random selection of features to produce accurate results. They are effective at handling noise and can work with both continuous and categorical variables. This combination of techniques helps improve the performance of the algorithm. \cite[p. 259]{liu_newmachinelearning_2012}
+Decision trees have a limitation in their ability to overfit, which is a disadvantage. This is mitigated by the use of subset and feature randomization. Specifically, each base model uses a unique subset of the data, and each node in the decision tree is split using a random set of features. This ensures that no single tree sees all of the data, allowing the model to focus on general patterns rather than being sensitive to noise. \cite[p. 259]{liu_newmachinelearning_2012}
+
+% Bagging technique helps the algorithms performance. 
+% Works well out of the box with no hyperparameter tuning.
+% Fast, robust, and can show feature importances which can be quite useful.
+
+% Disadvantages
+%
+
+% Boosted algos usuallaly outperform Random Forest.
+% RF is not able to extrapolate based on the data. It can only predict within the range of the training data.
+% Random forest regressor is unalbe to discover trens that would enable it in extrapolating values that fall outside of the training set.   
+
+%  Extrapolating is the process of estimating or predicting something beyond the range of available data. (chatgpt)
+
+%
+% Alogithm steps 
+%
+
+% The following Random Forest Algorithm [9] gives the steps in constructing the
+% decision trees.
+% • Take N as the number of training data instances in the samples. Let M be the
+% number of attributes in given input dataset.
+% • Let m be the Number of parameter in the input that determines the next attribute
+% to be chosen at each tree node; (where mislesserthan M).
+% • The training samples are taken and a tree is constructed for each sample with
+% replacement.
+% • For tree node, arbitrarily select m attributes in that particular node.
+% • The best split is computed based on the m input attributes of the sample dataset.
+% • Each tree is grown without pruning.
+% \cite[p. 254-255]{shaik_briefsurveyrandom_2019}
+
+% A random forest does not require any cross veriﬁcation and it is not over-ﬁtting [8]. The
+% Random forest uses Adaboost and Bootstrapping techniques to construct multiple
+% classiﬁers. \cite[p. 254]{shaik_briefsurveyrandom_2019} 
 
 
-Random forests are usually used for classification problems, but they can also be used for regression problems. \cite[p. 25]{breiman_randomforests_2001}
+% In a classification random forest, each tree in the forest makes a prediction for the class label of a given example, and the final prediction is made by majority vote, with the class label that receives the most votes being chosen as the prediction. In a regression random forest, each tree in the forest makes a prediction for the continuous value, and the final prediction is made by averaging the predictions of all the trees in the forest. (chatgpt)
 
-
-
-
-
+% In both cases, the random forest model creates a large number of decision trees and trains them on different subsets of the training data. The decision trees are trained using a technique called bagging, which involves randomly selecting a subset of the training examples for each tree and training the tree on that subset. The idea behind bagging is to train each tree on a slightly different subset of the data, which can help to reduce overfitting and improve the overall performance of the model. (chat gpt)
 
 \subsubsection*{Results}
 
@@ -324,11 +364,11 @@ Random forests are usually used for classification problems, but they can also b
 \begin{figure}[H]
     \centering
     \includegraphics[width=1\textwidth]{test_train_split}
-    \caption{The training and test dataset.}
+    \caption{The training and test dataset. (Data especially for V40 is still missing)}
     \label{fig:springback_measured}
 \end{figure}
 
-\subsubsection*{Tuning Random Forest Regression}
+\subsubsection*{Tuning}
 bootstrap: true, criterion: squared error, min samples leaf : 1, min samples split: 2, max features: 0.5119924258446656, n estimators: 35, n jobs: -1. 
 
 

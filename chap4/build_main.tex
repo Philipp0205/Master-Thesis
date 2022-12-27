@@ -134,12 +134,12 @@ The constant parameters are shown in Table~\ref{tab:constant_parameters} and the
 
 \begin{table}[H]
     \centering
-    \begin{tabular}{|l|l|l|}
+    \begin{tabular}{|l|l|l|l|}
         \hline
-        \textbf{Parameter} & \textbf{Value}                      & \textbf{Unit} \\ \hline
-        Punch penetration  & 2.5, 5, 7.5, 10, 12.5, 15, 17.5, 20 & mm            \\
-        Die opening        & 10, 20, 30, 40, 50                  & mm            \\
-        Thickness          & 0,5, 1, 1.5, 2, 2.5, 3              & mm            \\
+        \textbf{Parameter} & \textbf{} & \textbf{Value}                      & \textbf{Unit} \\ \hline
+        Punch penetration  & $y_p$     & 2.5, 5, 7.5, 10, 12.5, 15, 17.5, 20 & mm                                   \\
+        Die opening        & $V$       & 10, 20, 30, 40, 50                  & mm                                   \\
+        Thickness          & $t$       & 0,5, 1, 1.5, 2, 2.5, 3              & mm                                   \\
         \hline
     \end{tabular}
     \caption{Experimental setup varying parameters}
@@ -180,8 +180,8 @@ After the punch is moved back, the force is reduced and the punch penetration is
 \end{figure}
 
 \begin{filecontents*}{example.dat}
-Method Pink-1C Pink-AC Green-1C Green-AC Blue-1C Blue-AC Cyan-1C Cyan-AC Red-1C Red-AC Orange-1C Orange-AC
-Square 24.75 4.8 32.28 7.39 32.65 7.53 31.96 7.18 33.57 8 33.19 7.08
+    Method Pink-1C Pink-AC Green-1C Green-AC Blue-1C Blue-AC Cyan-1C Cyan-AC Red-1C Red-AC Orange-1C Orange-AC
+    Square 24.75 4.8 32.28 7.39 32.65 7.53 31.96 7.18 33.57 8 33.19 7.08
 \end{filecontents*}
 
 
@@ -287,7 +287,7 @@ For training the machine learning models a ThinkPad X1 Carbon 2019 with an Intel
 \section{Model Selection}
 \subsection{Support Vector Regression (SVR)}
 Support Vector Machines \ac{SVM} are used for classification problems. The \ac{SVM} algorithm is used to find a hyperplane in an N-dimensional space (N - the number of features) that distinctly classifies the data points. \cite[p. 42]{awad_efficientlearningmachines_2015}
-Predicting the spring back is a regression problem, so the \ac{SVM} algorithm is not suitable for this problem. It therefore is a generalization of classification problems, where the model returns continuous values instead of finite set of values. 
+Predicting the spring back is a regression problem, so the \ac{SVM} algorithm is not suitable for this problem. It therefore is a generalization of classification problems, where the model returns continuous values instead of finite set of values.
 The Support Vector Regression \ac{SVR} algorithm is derived from the \ac{SVM} algorithm and accomblishes this generalization by introducing an $\epsilon$-intensive region around the function ($\epsilon-tube$).  \cite[p. 67]{awad_efficientlearningmachines_2015}
 
 \subsection{Multi Linear Regression}
@@ -295,7 +295,7 @@ The Support Vector Regression \ac{SVR} algorithm is derived from the \ac{SVM} al
 \subsection{Decision Tree Regression}
 \subsection{Random Forest Regression}
 % Erst einmal auf decision tree generell eingehen
-A commonly used method in machine learning. The goal is to solve classification or regression problems by predicting the value of a output variable by one or multiple input variables. \cite[p. 253]{shaik_briefsurveyrandom_2019} 
+A commonly used method in machine learning. The goal is to solve classification or regression problems by predicting the value of a output variable by one or multiple input variables. \cite[p. 253]{shaik_briefsurveyrandom_2019}
 To build a \ac{DT} the source dataset represents the root node of the tree this data set is split into leafs (children) by using a set of spitting rules until each leaf in the \ac{DT} is "pure" and only contains one target value. Depending on the use cases this is a single class or a single regression value. \cite[p. 70-72]{muller_introductionmachinelearning_2016}
 % -> Problem von decision tree 
 The main drawbback of \ac{DT}s is the tendency to overfit and poor generalization performance, what makes them not paticaly for most use cases. Therefore usualy ensemble methods are used instead of a single \ac{DT}. \cite[p. 78]{muller_introductionmachinelearning_2016} \cite[p. 251]{liu_newmachinelearning_2012}
@@ -303,12 +303,12 @@ The main drawbback of \ac{DT}s is the tendency to overfit and poor generalizatio
 Random forest \cite[]{breiman_randomforests_2001} is a type of ensemble learning algorithm in which multiple decision trees, which are "weak learners," are trained and combined to produce a more accurate and stable prediction, known as a "strong learner." \cite[p. 24]{awad_efficientlearningmachines_2015}
 The risk of overfitting is mitigated by subset and feature randomization. Each root node uses a unique subset of the data and each leaf is split using a random features. This ensures that no single tree sees all of the data, allowing the model to focus on general patterns rather than being sensitive to noise. \cite[p. 251]{liu_newmachinelearning_2012}
 % -> Beschreibung Random forest / Random foret regression 
-In this supervised learning method, 
+In this supervised learning method,
 %which was influenced by the research of Amit and Geman (1997), Ho (1998), and Dietterich (2000), 
 a "divide and conquer" approach is used. This involves dividing the data into smaller samples, incrementally building a randomized tree predictor for each sample, and then combining (aggregating) these predictors together. This approach has proven to be effective. Because not only one but multiple classifiers are used the random forest learning is known as ensemble model. \cite[p. 254]{shaik_briefsurveyrandom_2019}
 
 % -> Vorteile / Nachteile Random Forest 
-This mechanism is flexible enough to handle classifications and regression problems, this is one of the reasons that random forests count to the most successful \ac{ML} methods. \cite[p. 3-4]{biau_randomforestguided_2016} \cite[p. 25]{breiman_randomforests_2001} 
+This mechanism is flexible enough to handle classifications and regression problems, this is one of the reasons that random forests count to the most successful \ac{ML} methods. \cite[p. 3-4]{biau_randomforestguided_2016} \cite[p. 25]{breiman_randomforests_2001}
 
 %
 % Advantages
@@ -369,7 +369,7 @@ Decision trees have a limitation in their ability to overfit, which is a disadva
 \end{figure}
 
 \subsubsection*{Tuning}
-bootstrap: true, criterion: squared error, min samples leaf : 1, min samples split: 2, max features: 0.5119924258446656, n estimators: 35, n jobs: -1. 
+bootstrap: true, criterion: squared error, min samples leaf : 1, min samples split: 2, max features: 0.5119924258446656, n estimators: 35, n jobs: -1.
 
 
 

@@ -29,6 +29,26 @@ how far the predictions are from the actual output
     \caption{Overview of the goals, questions and metrics for the evaluation of artifacts following the \ac{GQM} approach.}
 \end{longtable}
 
+\section{Correctness}
+\subsection{Random Forest} 
+With 100 estimators in \ac{RF} a \ac{mse} of 0.15 and \ac{rmse} 0.39 was achieved. 
+Figure~\ref{fig:rf_feature_importance} compares and visualizes the relative importance of the features used for training the model. 
+As shown, the thickness is the most important feature followed by distance and die open. The results show, that all three featured are relevant for the outcome and so no feature can be removed from the dataset to get a better performance of the model. 
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{Random_Forest_Regression_importances}
+    \caption{Relative feature importance}
+    \label{fig:rf_feature_importance}
+\end{figure}
+
+In further experiments boosting was used with the goal of predicting the target vector more precise. A \ac{mse} of 0.27 and \ac{rmse} of 0.52 as achieved and therefore no better performance to the default random forest. 
+
+
+
+
+
 
 
 

@@ -130,20 +130,20 @@ In order to get consistent results, a number of constant and variable parameters
 The parameters include the punch-and-die tooling made of steel where die punch had a radius ($r_p$) of 5 mm and and die radius ($r_m$) of 10 mm. The die opening $V$ was varied between 10 and 50 mm and the punch penetration $y_p$ was varied between 0 and 20 mm.
 The machine was configured to move the punch with a constant speed of 100 mm/min until it measured a resistance of 1 N. That meant, that the punch reached the metal plate and the actual bending process can start. After a hold time of 1 second the punch was moved with a slower speed of 8 mm/min until the specified punch penetration was reached.
 The length and width of the metal sheet was 100 mm and 20 mm respectively. The sheet thickness was varied between 0.5 and 3 mm.
-The constant parameters are shown in Table~\ref{tab:constant_parameters} and the varying parameters are shown in Table~\ref{tab:verying_parameters}.
+The constant parameters are shown in Table~\ref{tab:constant_parameters} and the varying parameters are shown in Table~\ref{tab:varying_parameters}.
 
 \begin{table}[H]
     \centering
     \begin{tabular}{|l|l|l|l|}
         \hline
         \textbf{Parameter} & \textbf{} & \textbf{Value}                      & \textbf{Unit} \\ \hline
-        Punch penetration  & $y_p$     & 2.5, 5, 7.5, 10, 12.5, 15, 17.5, 20 & mm                                   \\
-        Die opening        & $V$       & 10, 20, 30, 40, 50                  & mm                                   \\
-        Thickness          & $t$       & 0,5, 1, 1.5, 2, 2.5, 3              & mm                                   \\
+        Punch penetration  & $y_p$     & 2.5, 5, 7.5, 10, 12.5, 15, 17.5, 20 & mm            \\
+        Die opening        & $V$       & 10, 20, 30, 40, 50                  & mm            \\
+        Thickness          & $t$       & 0,5, 1, 1.5, 2, 2.5, 3              & mm            \\
         \hline
     \end{tabular}
     \caption{Experimental setup varying parameters}
-    \label{tab:verying_parameters}
+    \label{tab:varying_parameters}
 \end{table}
 
 \begin{table}[H]
@@ -166,7 +166,10 @@ The constant parameters are shown in Table~\ref{tab:constant_parameters} and the
 \end{table}
 
 
-\subsection{Measuring The Spring Back}
+
+
+
+\subsection{Measuring The Spring Back} \label{sec:measuring_the_spring_back}
 The output data contained different data points, which were used to calculate the spring back.
 Important parameters for the calculation are the force, punch penetration and testing time.
 As shown in Figure~\ref{fig:springback_measured} at the $yp$ maximum the punch penetration and the force are maximized as well. The punch stays at that position for 1 second and then moves back with a slower speed. This hold time a limitation of the machine and can not be changed.
@@ -174,7 +177,7 @@ After the punch is moved back, the force is reduced and the punch penetration is
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.6\textwidth]{springback_measured}
+    \includegraphics[width=0.7\textwidth]{springback_measured}
     \caption{A steel metal sheet was bent with a punch penetration of 5 mm the spring back is 0.37 mm. The blue line shows the force and the blue line shows the punch penetration.}
     \label{fig:springback_measured}
 \end{figure}
@@ -184,75 +187,32 @@ After the punch is moved back, the force is reduced and the punch penetration is
     Square 24.75 4.8 32.28 7.39 32.65 7.53 31.96 7.18 33.57 8 33.19 7.08
 \end{filecontents*}
 
+\subsection{Exploring The Dataset}
+The output data of the bending machine contained 26 features which can be found in the appendix. Out of these features only the standard power and the distance $y_p$ and the force are relevant for calculating the spring back which was described in the last section \ref{sec:measuring_the_spring_back}.
+The final dataset therefore contained 3 features plus the added spring back.
+In total 396 data points where crated using the described approach.
+An example of the dataset is shown in Table~\ref{tab:dataset_example}.
 
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|l|l|l|l|l|}
+        \hline
+        \textbf{} & \textbf{distance} & \textbf{spring back} & \textbf{thickness} & \textbf{die opening} \\ \hline
+        1         & 5                 & 0.6667               & 2.0                & 50                   \\
+        2         & 15                & 0.9164               & 2.0                & 50                   \\
+        3         & 10                & 0.6829               & 2.0                & 50                   \\
+        ...       & ...               & ...                  & ...                & ...                  \\
+        396       & 5                 & 0.6667               & 3.0                & 10                   \\
+        \hline
+    \end{tabular}
+    \caption{Features used for the machine learning models}
+    \label{tab:dataset_example}
+\end{table}
 
-% \paragraph{Bend deduction:}
-% Measuring the bend deduction is more complex. After a metal sheet is bent, it is hard to measure the flat pattern length because the material is malformed at the bent. 
-% As a result, the neutral axis is not in the center of the sheet and hard to measure, but it can be calculated using different approaches. %quelle und ausführlicher und grunlagen teil  
-% There are multiple ways to measure the bend deduction described earlier. 
-% % K-Faktor Muss noch in theorie teil 
-% In this setup, the method described in the DIN6395 was used. This method uses a k-factor which is an approximated value and therefore and therefore it can be inaccurate. (Equation~\ref{eq:kfactor}). % cite DIN norm 
-
-% \begin{equation}\label{eq:kfactor}
-%     k=0.65+\frac{1}{2}\log{\frac{r}{s}}
-% \end{equation}
-
-% \begin{figure}[ht!] % supposedly places it here ...
-% 	\centering
-% 	\includegraphics[width=0.5\linewidth]{k-factor}
-% 	\caption[Graphical representation of the correction factor]{Graphical representation of the correction factor.}
-% 	\label{fig:test1}
-% \end{figure}
-
-% The DIN 6935 used the formula for the stretched length, $length=a+b+v$ where \textit{a} and \textit{b} are the side lengths of the sheet and \textit{v} is a correction value for the deduction. \cite{din6935}
-% The stretched length is measured different depending on the bending angle.
-
-% \paragraph{Opening angle $\beta 0^\circ$ to $90^\circ$} 
-% For opening angles between $0^\circ$and $90^\circ$ the side lengths \textit{a} and \textit{b} are dimensioned from the tangent of the bend to the edge. 
-% To calculate the compensation value \textit{v} (Equation~\ref{eq:v1}) is used
-% \cite{din6935}.
-
-% \begin{equation}\label{eq:v1}
-%         v=\pi*(\frac{180^\circ-}{180^\circ})*(r+\frac{s}{2}*k)-2(r+s)
-% \end{equation}
-
-% \begin{figure}[H]
-% 	\centering
-% 	\includegraphics[width=0.5\linewidth]{bending-angle-90}
-% 	\caption[Opening angles $\beta 0^\circ$ to $90^\circ$]{Opening angles $\beta 0^\circ$ to $90^\circ$ \cite{din6935}}
-% 	\label{fig:v1-image}
-% \end{figure}
-
-% \paragraph{Bending angle $\beta90^\circ$ to $165^\circ$} (Equation~\ref{eq:v1})
-% For opening angles between $90^\circ$ and $165^\circ$ the side lengths \textit{a} and \textit{b} are dimensioned from the apex to the edge. 
-% To calculate the compensation value \textit{v} (Equation~\ref{eq:v1}) is used. 
-% \cite{din6935}
-
-% \begin{equation}\label{eq:v2}
-%     v=\pi*(\frac{180^\circ-}{180^\circ})*(r+\frac{s}{2}*k)-2(r+s)+\tan{\frac{180^\circ-\beta}{2}}
-% \end{equation}
-
-% \begin{figure}[!ht]
-% 	\centering
-% 	\includegraphics[width=0.5\linewidth]{bending-angle-165}
-% 	\caption[Opening angles $\beta90^\circ$ to $165^\circ$]{Opening angles $\beta90^\circ$ to $165^\circ$ \cite{din6935}}
-% 	\label{fig:v2-image}
-% \end{figure}
-
-% For opening angles between $165^\circ$ and $180^\circ$ the compensation value \textit{v} is 0. The values for v would be negligibly small. \cite{din6935} The side lengths \textit{a} and \textit{b} where measured using the software \textit{ImageJ}. 
-
-% Edge cracking is not measured for now because the steel used has no high-strength and with machine in usage it was not possible to create edge cracking.
-
-% \begin{figure}[!ht]
-% 	\centering
-% 	\includegraphics[width=0.5\linewidth]{example-image}
-% 	\caption[Screenshot ImageJ]{Screenshot ImageJ}
-% 	\label{fig:imagej-screenshot}
-% \end{figure}
 
 
 \subsection{Computational Setup}
-For training the machine learning models a ThinkPad X1 Carbon 2019 with an Intel Core i7-10610U CPU @ 1.80GHz and 16 GB RAM was used. The operating system used is Ubuntu 20.04.2 LTS. The code for the model is written in Python 3.8.5 using the IDE PyCharm The libraries used are mentioned in Table
+For training the machine learning models a ThinkPad X1 Carbon 2019 with an Intel Core i7-10610U CPU @ 1.80GHz and 16 GB RAM was used. The operating system used is Ubuntu 20.04.2 LTS. The code for the model is written in Python 3.8.5 using the IDE PyCharm. The libraries used are mentioned in Table~\ref{table:libraries}.
 
 \captionsetup{width=1\textwidth}
 
@@ -266,23 +226,18 @@ For training the machine learning models a ThinkPad X1 Carbon 2019 with an Intel
         pandas           & 1.5.1            \\
         matplotlib       & 3.6.2            \\ \hline
     \end{tabular}
-    \label{table:libraries}
     \caption{Libraries used for the machine learning models.}
+    \label{table:libraries}
 \end{table}
 
-\subsection{Data Preprocessing}
-% "Although the dataset collected from the experimental setup includes seven features (parameters), the 
-% first three parameters; load tonnage, load holding time, and gap between the punch and the die, are 
-% combined to form a single feature, "Machine". It is because different combinations of these factors may 
-% be combined to form a single machine setting parameters. The other parameters are; blank material, 
-% thickness, width and initial bend angle. Hence, there are five features of the dataset, which levels are 
-% shown in Table 4. Two of which, namely machine and material, are treated as categorical features, so 
-% using scikit-learn's OrdinalEncoder these features were encoded into an integer array. While the 
-% remaining three features were treated as continuous features, for standardizing these features scikit-
-% learn's StandardScaler was used. It transformed the data so that for each feature, its distribution 
-% will have a mean value of 0 and a standard deviation of 1. The formula used for this is as follows Eq 
-% (1)." 
-% \cite[p. 7]{baig_machinelearningprediction_2021}
+Looking at the correlation matrix shown in Figure~\ref*{fig:correlation_matrix} it can be seen, that the distance and the spring back are more correlated than the other features. This is expected, because the punch penetration $y_p$ is the main factor which influences the spring back. The other features are not correlated with each other, no multicollinearity is present which is good for the machine learning models.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{correlation_matrix}
+    \caption{Correlation matrix}
+    \label{fig:correlation_matrix}
+\end{figure}
 
 \section{Model Selection}
 \subsection{Support Vector Regression (SVR)}
@@ -359,13 +314,19 @@ Decision trees have a limitation in their ability to overfit, which is a disadva
 
 \section{Model Training}
 
+
 \subsection{Training-Test Split}
+Figure~\ref{fig:train_test_split} shows the data set and which parts of it is used for training and testing the used models. Samples with a die opening of 30 are used to test the performance and the remaining part is used for training. 
+A different approach would be to us a random test and train split, this would lead to a better performance of the models but would not evaluate their ability to predict new data of a different die opening.
+The die opening 30 was chosen because it is in the middle of the selected data set and therefore the models should be able to predict the data of this die opening.
+All models are trained with the same data set and the same parameters. The only difference is the used algorithm.
+
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=1\textwidth]{test_train_split}
     \caption{The training and test dataset. (Data especially for V40 is still missing)}
-    \label{fig:springback_measured}
+    \label{fig:train_test_split}
 \end{figure}
 
 \subsubsection*{Tuning}
@@ -379,4 +340,68 @@ bootstrap: true, criterion: squared error, min samples leaf : 1, min samples spl
 
 
 
+
+% \paragraph{Bend deduction:}
+% Measuring the bend deduction is more complex. After a metal sheet is bent, it is hard to measure the flat pattern length because the material is malformed at the bent. 
+% As a result, the neutral axis is not in the center of the sheet and hard to measure, but it can be calculated using different approaches. %quelle und ausführlicher und grunlagen teil  
+% There are multiple ways to measure the bend deduction described earlier. 
+% % K-Faktor Muss noch in theorie teil 
+% In this setup, the method described in the DIN6395 was used. This method uses a k-factor which is an approximated value and therefore and therefore it can be inaccurate. (Equation~\ref{eq:kfactor}). % cite DIN norm 
+
+% \begin{equation}\label{eq:kfactor}
+%     k=0.65+\frac{1}{2}\log{\frac{r}{s}}
+% \end{equation}
+
+% \begin{figure}[ht!] % supposedly places it here ...
+% 	\centering
+% 	\includegraphics[width=0.5\linewidth]{k-factor}
+% 	\caption[Graphical representation of the correction factor]{Graphical representation of the correction factor.}
+% 	\label{fig:test1}
+% \end{figure}
+
+% The DIN 6935 used the formula for the stretched length, $length=a+b+v$ where \textit{a} and \textit{b} are the side lengths of the sheet and \textit{v} is a correction value for the deduction. \cite{din6935}
+% The stretched length is measured different depending on the bending angle.
+
+% \paragraph{Opening angle $\beta 0^\circ$ to $90^\circ$} 
+% For opening angles between $0^\circ$and $90^\circ$ the side lengths \textit{a} and \textit{b} are dimensioned from the tangent of the bend to the edge. 
+% To calculate the compensation value \textit{v} (Equation~\ref{eq:v1}) is used
+% \cite{din6935}.
+
+% \begin{equation}\label{eq:v1}
+%         v=\pi*(\frac{180^\circ-}{180^\circ})*(r+\frac{s}{2}*k)-2(r+s)
+% \end{equation}
+
+% \begin{figure}[H]
+% 	\centering
+% 	\includegraphics[width=0.5\linewidth]{bending-angle-90}
+% 	\caption[Opening angles $\beta 0^\circ$ to $90^\circ$]{Opening angles $\beta 0^\circ$ to $90^\circ$ \cite{din6935}}
+% 	\label{fig:v1-image}
+% \end{figure}
+
+% \paragraph{Bending angle $\beta90^\circ$ to $165^\circ$} (Equation~\ref{eq:v1})
+% For opening angles between $90^\circ$ and $165^\circ$ the side lengths \textit{a} and \textit{b} are dimensioned from the apex to the edge. 
+% To calculate the compensation value \textit{v} (Equation~\ref{eq:v1}) is used. 
+% \cite{din6935}
+
+% \begin{equation}\label{eq:v2}
+%     v=\pi*(\frac{180^\circ-}{180^\circ})*(r+\frac{s}{2}*k)-2(r+s)+\tan{\frac{180^\circ-\beta}{2}}
+% \end{equation}
+
+% \begin{figure}[!ht]
+% 	\centering
+% 	\includegraphics[width=0.5\linewidth]{bending-angle-165}
+% 	\caption[Opening angles $\beta90^\circ$ to $165^\circ$]{Opening angles $\beta90^\circ$ to $165^\circ$ \cite{din6935}}
+% 	\label{fig:v2-image}
+% \end{figure}
+
+% For opening angles between $165^\circ$ and $180^\circ$ the compensation value \textit{v} is 0. The values for v would be negligibly small. \cite{din6935} The side lengths \textit{a} and \textit{b} where measured using the software \textit{ImageJ}. 
+
+% Edge cracking is not measured for now because the steel used has no high-strength and with machine in usage it was not possible to create edge cracking.
+
+% \begin{figure}[!ht]
+% 	\centering
+% 	\includegraphics[width=0.5\linewidth]{example-image}
+% 	\caption[Screenshot ImageJ]{Screenshot ImageJ}
+% 	\label{fig:imagej-screenshot}
+% \end{figure}
 

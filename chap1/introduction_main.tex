@@ -9,19 +9,16 @@ Sheet metal forming is a complex process that involves a large number of variabl
 
 In order to predict springback with minimium errors, this thesis build and evaluates different machine learning models to predict the springback of a sheet metal. The models are evaluated based on the mean absolute error (MAE) and the root mean squared error (RMSE). The best model is then used to predict the springback of a sheet metal with different parameters. 
 
-% Sheet metal forming is a manufacturing process that is
-% commonly used for producing high-volume and low-cost
-% components in the automotive, aircraft and home appliance
-% industries. In this process, forces are applied to the metallic
-% sheet to modify its geometry, enabling the production of
-% complex shapes. The forces are applied by tools whose
-% geometry dictates the shape of the component. The process
-% design is complex because only the final shape of the
-% component is known. Moreover, the process is highly
-% nonlinear due to the large deformations imposed to the
-% metal sheet, which presents plastic behaviour, but also as a
-% result of the evolutionary boundary conditions imposed by
-% the contact between the tools and the sheet. The conven-
-% tional process design is based on empirical knowledge and
-% an experimental ‘‘trial-and-error’’ approach. In 
-% \cite[]{dib_singleensembleclassifiers_2020}
+\section{Problem Statement}
+"There are two major types of supervised machine learning problems,
+called classification and regression." \cite[p. 34]{muller_introductionmachine_2016}
+
+"For regression tasks, the goal is to predict a continuous number, or a
+floating-point number in programming terms (or real number in
+mathematical terms). Predicting a person’s annual income from their
+education, their age, and where they live is an example of a regression
+task. When predicting income, the predicted value is an amount, and
+can be any number in a given range. Another example of a regression task
+is predicting the yield of a corn farm given attributes such as
+previous yields, weather, and number of employees working on the farm.
+The yield again can be an arbitrary number." \cite[p. 34]{muller_introductionmachinelearning_2016}

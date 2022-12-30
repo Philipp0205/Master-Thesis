@@ -3,23 +3,6 @@
 
 \chapter{Build}
 
-\section{Problem Statement}
-"There are two major types of supervised machine learning problems,
-called classification and regression." \cite[p. 34]{muller_introductionmachine_2016}
-
-"For regression tasks, the goal is to predict a continuous number, or a
-floating-point number in programming terms (or real number in
-mathematical terms). Predicting a person’s annual income from their
-education, their age, and where they live is an example of a regression
-task. When predicting income, the predicted value is an amount, and
-can be any number in a given range. Another example of a regression task
-is predicting the yield of a corn farm given attributes such as
-previous yields, weather, and number of employees working on the farm.
-The yield again can be an arbitrary number." \cite[p. 34]{muller_introductionmachinelearning_2016}
-
-
-
-
 \section{tbd}
 The following design principles is a selection of \cite{siebert_constructionqualitymodel_}'s quality parameters for \ac{ML} models.
 In this \ac{DSR} work the artifacts are \ac{ML} models therefore these design principles are used to evaluate them.
@@ -89,6 +72,7 @@ Each piece was bend one time using a \textit{Zwick} three-point-bending machine.
 Python script where developed to covert the output data format from the machine to CSV files.
 The following describes the experimental setup used for the experiments performed.
 
+% Pado: Since the data collection was technically done outside of the thesis period, 4.2.1 (Multiple cycles) can be omitted. 4.2.2 is needed in order to understand the data set.
 \subsection{Preliminary Tests}
 A number of preliminary tests were conducted to determine the influence of the punch penetration on the spring back.
 
@@ -170,7 +154,6 @@ The constant parameters are shown in Table~\ref{tab:constant_parameters} and the
         \textbf{Parameter}            & \textbf{Value} & \textbf{Unit} \\ \hline
         Punch radius                  & 5              & mm            \\
         Die radius                    & 5              & mm            \\
-        Sheet thickness               & 0.5, 1, 2      & mm            \\
         Sheet width                   & 20             & mm            \\
         Sheet length                  & 100            & mm            \\
         Punch speed                   & 100            & mm/min        \\
@@ -189,7 +172,7 @@ The constant parameters are shown in Table~\ref{tab:constant_parameters} and the
 \subsection{Measuring The Spring Back} \label{sec:measuring_the_spring_back}
 The output data contained different data points, which were used to calculate the spring back.
 Important parameters for the calculation are the force, punch penetration and testing time.
-As shown in Figure~\ref{fig:springback_measured} at the $yp$ maximum the punch penetration and the force are maximized as well. The punch stays at that position for 1 second and then moves back with a slower speed. This hold time a limitation of the machine and can not be changed.
+As shown in Figure~\ref{fig:springback_measured} at the $y_p$ maximum the punch penetration and the force are maximized as well. The punch stays at that position for 1 second and then moves back with a slower speed. This hold time a limitation of the machine and can not be changed.
 After the punch is moved back, the force is reduced and the punch penetration is reduced as well, until the punch is at the initial position. For a short time after the lift, the load  cell still measures a force. That is because the metal sheet springs back and the punch is still in contact with the sheet. This was measured using a python script, the green and the yellow point represent the resulting spring back distance.
 
 \begin{figure}[H]
@@ -227,6 +210,7 @@ An example of the dataset is shown in Table~\ref{tab:dataset_example}.
 \end{table}
 
 
+% Pado: This is a little confusing - does the Y axis show the force? Why is the blue line the shape it is? Is it maybe two separate lines, the movement of the punch and the reaction of the metal? 
 
 \subsection{Computational Setup}
 For training the machine learning models a ThinkPad X1 Carbon 2019 with an Intel Core i7-10610U CPU @ 1.80GHz and 16 GB RAM was used. The operating system used is Ubuntu 20.04.2 LTS. The code for the model is written in Python 3.8.5 using the IDE PyCharm. The libraries used are mentioned in Table~\ref{table:libraries}.

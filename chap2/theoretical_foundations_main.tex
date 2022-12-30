@@ -1,22 +1,33 @@
 \chapter{Theoretical Foundations}
 
 \section{Sheet Metal Bending}
-Sheet metal bending is a forming operation that is commonly used to produce high-volume and low-cost component in different industries. Forces are applied on the sheet metal to change it's geometry to manufacture different shapes. 
+% Definitoin sheet metal bending
+The process of sheet metal bending involves using force to shape sheet metal into a desired form. It is usually used to produce large quantities of components at a low cost in various industries. 
 \cite[p. 1]{dib_singleensembleclassifiers_2020}
-Sheet metal bending is considered complex because only the final state of the sheet metal is known, so there are many possible bending sequences which could get applied. Furthermore, the process is highly nonlinear because large deformations are applied to the sheet metal with the consequence of plastic behavior.
-Conventional processes are often based on empirical trial and error approaches. \cite[p. 1]{dib_singleensembleclassifiers_2020}
-A common approach is to experimentally create so named 'technology tables' which contain the bending parameters and the resulting spring back. (Quelle Hochstrate?)
+% Complexity sheet metal bending
+One aspect which makes the the process of sheet metal forming complex is that it is characterized by highly non-linear behavior due to large deformations of the metal sheet and is therefore hard to predict. 
+As a result, traditional methods often rely on trail and error approaches, \cite[p. 1]{dib_singleensembleclassifiers_2020}, such as creating 'technology tables' which contain bending parameters and resulting spring back data. These tables are created by performing a lot of different experiments with different bending angles and metal sheets.
 This process is time and cost intensive and therefore often not suitable for the production of high-volume and low-cost components.
 
 \subsubsection{Sheet Metal}
-Sheet metal is any form of that has a relatively large length to thickness ratio, their thicknesses are typically from 0.4mm to 6mm.  % fundamentals buch 
-\cite[]{baig_machinelearningprediction_2021}
-Parts made of sheet metals are manufactured with different methods, such as stamping, bending, shaping etc. Bending is one of the most common methods to manufacture sheet metal parts. % manufactuing buch  \lineskip
-% Anwendung sheet mal z.B. automotive
+% Definition
+Sheet metal is any form of metal that has a relatively large length to thickness ratio, their thicknesses are typically from 0.4 mm to 6 mm. Above is considered to be plate and below is considered to be foil. Sheet metal is usually manufactured by flat rolling.
+% Material 
+Low-carbon steel is the most commonly used type of sheet metal. Its low cost and has a good formability as well as its sufficient strength for most applications.
+\cite[p. 405]{groover_fundamentalsmodernmanufacturing_2020}
+Therefore it is used in this work as well. 
+% Commercial importance 
+Sheet metals play a vital role in many industries. A significant number of consumer and industrial products such as automobiles contain sheet metal parts.  
+% Manufacturing methods
+Most sheet metal forming operations are performed on machines called presses and these operations are known as pressworking. These presses usually use tooling called punch and die or stamping die. Three main processes are categoize the sheet metal forming processes: cutting, bending and drawing, where bending is the the most common and only relevant process for this thesis.  Bending and drawing are used to shape sheet metal parts into their required forms.
+\cite[p. 405]{groover_fundamentalsmodernmanufacturing_2020}
+
 
 \subsubsection{Bending}
 Bending is a forming operation that is used to change the shape of a sheet metal. The applied load is beyond its yield strength but below its ultimate tensile strength to achieve a permanent deformation \cite[p. 1]{baig_machinelearningprediction_2021}
 During bending the metal on the outside of the neural plane is stretched and the metal on the inside of the neutral plane is compressed. The neutral plane is the plane that is perpendicular to the bending axis. \cite[p. 3]{baig_machinelearningprediction_2021}
+
+% Pado:  Since you are including figures, make sure to mention/describe them in the text (this would be a great opportunity here to define what the punch and die are in this case - the common meaning of die is „Würfel“ as in „roll the dice“, so the term needs defining here for the computer science public.
 
 \begin{figure}[H]
     \centering
@@ -39,8 +50,12 @@ It is typically the preferred bending method because, its high flexibility becau
     \label{fig:air-bending}
 \end{figure}
 
+% Pado: What’s a press brake bending machine?
+
 Today press brake bending machines like air bending machines are usually equipped with "copmputer numeral control" (CNC) systems that can automatically control the bending process and produce the desired shape." \cite[p. 3]{miranda_formingspringbackprediction_2018}
 The air bending process is shows strong nonlinear behavior, considering its parameters and their interrelationships. \cite[p. 3]{miranda_formingspringbackprediction_2018}
+
+% Pado: More detail, please! What exactly are its parameters? What are the non-linearly affected measures?
 
 \subsubsection{Spring Back} 
 When the punch and therefore the bending pressure is removed at the end of the deformation operation, elastic energy remains in the bent part. This elastic energy is released and the metal sheet partially returns to its original shape. \cite[p. 113-114]{groover_fundamentalsmodernmanufacturing_2020} 
@@ -192,6 +207,10 @@ Ensemble techniques in machine learning to involve the construction of multiple 
 % \cite{baig_machinelearningprediction_2021}
 
 \section{State of research}
+
+% Pado: Expand this discussion a little and move it up (see comment above) 
+
+
 % There is a considerable amount of literature on modeling of the
 % air-bending process. Several significant references are summa-
 % rized here briefly. \cite[]{kim_predictionbendallowance_2007}

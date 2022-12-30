@@ -1,12 +1,11 @@
 \chapter{Evaluation}
 This chapter critically examines the machine learning models conceived and partially implemented in the previous chapter.
-Table X shows an overview of the evaluated criteria. These are structured according to the Goal-Question-Metric approach
+Table~\ref*{tab:evaluation_criteria} shows an overview of the evaluated criteria. These are structured according to the Goal-Question-Metric approach
 
-Mean Absolute Error (MAE)
-how far the predictions are from the actual output
+Mean Absolute Error (MAE) how far the predictions are from the actual output
 
 
-\begin{longtable}{|l|p{6cm}|p{3cm}|}
+\begin{longtable}{|l|p{7cm}|p{3cm}|}
     \hline
     \textbf{Goal}                 & \textbf{Question}                                                                                               & \textbf{Metric}                                      \\
 
@@ -27,13 +26,14 @@ how far the predictions are from the actual output
     \textbf{Resource utilization} & How much resources are required to train and run the model?                                                     & Training time, runtime, storage space                \\
     \hline
     \caption{Overview of the goals, questions and metrics for the evaluation of artifacts following the \ac{GQM} approach.}
+    \label{tab:evaluation_criteria}
 \end{longtable}
 
 \section{Correctness}
-\subsection{Random Forest} 
-With 100 estimators in \ac{RF} a \ac{mse} of 0.15 and \ac{rmse} 0.39 was achieved. 
-Figure~\ref{fig:rf_feature_importance} compares and visualizes the relative importance of the features used for training the model. 
-As shown, the thickness is the most important feature followed by distance and die open. The results show, that all three featured are relevant for the outcome and so no feature can be removed from the dataset to get a better performance of the model. 
+\subsection{Random Forest}
+With 100 estimators in \ac{RF} a \ac{mse} of 0.15 and \ac{rmse} 0.39 was achieved.
+Figure~\ref{fig:rf_feature_importance} compares and visualizes the relative importance of the features used for training the model.
+As shown, the thickness is the most important feature followed by distance and die open. The results show, that all three featured are relevant for the outcome and so no feature can be removed from the dataset to get a better performance of the model.
 
 
 \begin{figure}[H]
@@ -43,8 +43,107 @@ As shown, the thickness is the most important feature followed by distance and d
     \label{fig:rf_feature_importance}
 \end{figure}
 
-In further experiments boosting was used with the goal of predicting the target vector more precise. A \ac{mse} of 0.27 and \ac{rmse} of 0.52 as achieved and therefore no better performance to the default random forest. 
+In further experiments boosting was used with the goal of predicting the target vector more precise. A \ac{mse} of 0.27 and \ac{rmse} of 0.52 as achieved and therefore no better performance to the default random forest.
 
+
+\section{Appropriateness}
+% How well does the model type fit the current task?
+% Prerequisites for model type
+
+\section{Correctness}
+To measure the correctness of the model, the following metrics are used: 
+
+\paragraph*{Mean Absolute Error (MAE)}
+
+\begin{equation}
+    \label{eq:mae}
+    MAE = \frac{1}{n} \sum_{i=1}^{n} |e_i|
+\end{equation}
+
+\paragraph*{Mean Squared Error (MSE)}
+
+\begin{equation}
+    \label{eq:mse}
+    MSE = \frac{1}{n} \sum_{i=1}^{n} e^2
+\end{equation}
+
+\paragraph*{Root Mean Squared Error (RMSE)}
+
+\begin{equation}
+    \label{eq:rmse}
+    RMSE = \sqrt{MSE}
+\end{equation}
+
+In the formulas \ref{eq:mae}, \ref{eq:rmse} and \ref{eq:rmse} $e_i$ is the prediction error which is the difference between the predicted value by the model the actual value. 
+$y_i$ is the actual value and $n$ is the number of samples in the testing data set.
+
+% What are the differences between the metrics?
+% -> Copilot
+"The mean absolute error (MAE) and mean squared error (MSE) are the most commonly used metrics for
+evaluating the performance of regression models. The MAE is the average of the absolute differences between
+the predicted and actual values. The MSE is the average of the squared differences between the predicted and
+actual values. The MSE is more sensitive to outliers than the MAE. The RMSE is the square root of the MSE.
+The RMSE is the most popular metric for evaluating the performance of regression models. The RMSE is
+interpretable in the same units as the response variable. The RMSE is more sensitive to outliers than the MAE.
+
+% Table wit hall used machine learning models and their metrics
+
+\subsection{Overview of the used machine learning models and their metrics}
+\begin{longtable}{l|l|l|l}
+    \textbf{Model Name 2} & \textbf{MAE} & \textbf{MSE} & \textbf{RMSE} \\
+    \hline
+    \textbf{Random Forest} & 0.15 & 0.03 & 0.18 \\
+    \hline
+    \textbf{Boosting} & 0.27 & 0.07 & 0.26 \\
+    \hline
+    \textbf{Linear Regression} & 0.27 & 0.07 & 0.26 \\
+    \hline
+    \textbf{Support Vector Regression} & 0.27 & 0.07 & 0.26 \\
+    \hline
+    \caption{Overview of the used machine learning models and their metrics.}
+    \label{tab:ml_models}
+\end{longtable}
+
+% Ability of the model to perform the current task measured on the development dataset and the runtime dataset
+% Precision, Recall, F-score 
+
+% How did baig et al. do it?
+% -> MAE, MSE, RMSE 2
+
+% I should cross validation as well to measure genelization performance of each model as well as the stability of the model. 
+
+
+
+\section{Relevance}
+% Does the model achieve a good bias-variance tradeoff? Which means neither overfitting or unterfitting the data.
+% Variance of cross-validation and fit
+
+\section{Robustness}
+% Ability of the model to outliers, noise and other data quality issues
+% Variance of cross-validation, fit
+
+\section{Stability}
+To measure the stability of the model, the following metrics are used:
+
+\paragraph*{Equalized Loss of Accuracy (ELA)}
+
+\begin{equation}
+    \label{eq:ela}
+    ELA = \frac{1}{n} \sum_{i=1}^{n} \frac{1}{\hat{y}_i} |y_i - \hat{y}_i|
+\end{equation}
+
+
+
+% Does the artifact generate repeatable results when trained on different data?
+% Equalized Loss of Accuracy (ELA)
+
+\section{Interpretability}
+% How well can the model be explained?
+% Complexity measures (e.g., no. of parameters, depth)
+
+\section{Resource utilization}
+% How much resources are required to train and run the model?
+% Training time, runtime, storage space
 
 
 

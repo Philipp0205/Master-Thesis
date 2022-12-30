@@ -81,6 +81,54 @@ Prerequisite for all compensation methods is that the springback is known theref
 % \cite{baig_machinelearningprediction_2021}
 
 \section{Machine Learning}
+\subsection{Supervised Learning}
+
+"Remember that supervised learning is used whenever we want to predict a
+certain outcome from a given input, and we have examples of input/output
+pairs. We build a machine learning model from these input/output pairs,
+which comprise our training set. Our goal is to make accurate
+predictions for new, never-before-seen data. Supervised learning often
+requires human effort to build the training set, but afterward
+automates and often speeds up an otherwise laborious or infeasible task." \cite[p. 34]{muller_introductionmachinelearning_2016}
+
+\subsection{Overfitting and Underfitting}
+"In supervised learning, we want to build a model on the training data
+and then be able to make accurate predictions on new, unseen data that
+has the same characteristics as the training set that we used. If a
+model is able to make accurate predictions on unseen data, we say it is
+able to generalize from the training set to the test set. We want to
+build a model that is able to generalize as accurately as possible. " \cite[p. 35]{muller_introductionmachinelearning_2016}
+
+"Usually we build a model in such a way that it can make accurate
+predictions on the training set. If the training and test sets have
+enough in common, we expect the model to also be accurate on the test
+set. However, there are some cases where this can go wrong. For example,
+if we allow ourselves to build very complex models, we can always be as
+accurate as we like on the training set." 
+\cite[p. 35]{muller_introductionmachinelearning_2016}
+
+"The only measure of whether an algorithm will perform well on new data
+is the evaluation on the test set. However, intuitively3 we expect simple models to generalize
+better to new data. If the rule was “People older than 50 want to buy a
+boat,” and this would explain the behavior of all the
+customers, we would trust it more than the rule involving children and
+marital status in addition to age. Therefore, we always want to find
+the simplest model. Building a model that is too complex for the amount
+of information we have, as our novice data scientist did, is called
+overfitting. Overfitting occurs when you fit a model too closely to
+the particularities of the training set and obtain a model that works
+well on the training set but is not able to generalize to new data. On
+the other hand, if your model is too simple—say, “Everybody who owns a
+house buys a boat”—then you might not be able to capture all the
+aspects of and variability in the data, and your model will do badly even
+on the training set. Choosing too simple a model is called
+underfitting."  \cite[p. 35]{muller_introductionmachinelearning_2016}
+
+
+
+
+
+
 \subsection{Ensemble Learning}
 Ensemble techniques in machine learning to involve the construction of multiple models, called "learners," for a given task. The primary goal of these methods is to improve the accuracy and performance of the model by combining the predictions of multiple learners. Ensemble techniques differ from single classifier methods by constructing multiple models and combining them using a voting strategy in order to highlight different aspects of the data. This can potentially lead to improved overall performance. \cite[p. 253]{shaik_briefsurveyrandom_2019}
 

@@ -4,6 +4,23 @@
 \chapter{Build}
 
 \section{Problem Statement}
+"There are two major types of supervised machine learning problems,
+called classification and regression." \cite[p. 34]{muller_introductionmachine_2016}
+
+"For regression tasks, the goal is to predict a continuous number, or a
+floating-point number in programming terms (or real number in
+mathematical terms). Predicting a person’s annual income from their
+education, their age, and where they live is an example of a regression
+task. When predicting income, the predicted value is an amount, and
+can be any number in a given range. Another example of a regression task
+is predicting the yield of a corn farm given attributes such as
+previous yields, weather, and number of employees working on the farm.
+The yield again can be an arbitrary number." \cite[p. 34]{muller_introductionmachinelearning_2016}
+
+
+
+
+\section{tbd}
 The following design principles is a selection of \cite{siebert_constructionqualitymodel_}'s quality parameters for \ac{ML} models.
 In this \ac{DSR} work the artifacts are \ac{ML} models therefore these design principles are used to evaluate them.
 
@@ -310,6 +327,14 @@ Decision trees have a limitation in their ability to overfit, which is a disadva
 
 % In both cases, the random forest model creates a large number of decision trees and trains them on different subsets of the training data. The decision trees are trained using a technique called bagging, which involves randomly selecting a subset of the training examples for each tree and training the tree on that subset. The idea behind bagging is to train each tree on a slightly different subset of the data, which can help to reduce overfitting and improve the overall performance of the model. (chat gpt)
 
+\subsubsection{Gradient Boosting Regression Tree} 
+A gradient boosting regression is a type of ensemble learning algorithm in which multiple decision trees are combines to produce a more accurate and stable prediction. Similar to the random forest algorithm  gradient boosting combines multiple weak learners to create a strong learner.
+The difference to a random forest is, that the trees are trained in a serial manner and each tree corrects the errors of the previous tree. \cite[p. 88-89]{muller_introductionmachinelearning_2016}
+Gradient boosted tree use strong pre-pruning and therefore produce shallow trees with a depth of one to five. This brings the advantage of a smaller model which uses less memory and also results in a faster prediction.
+Usually generating more trees improves the overall performance of the model. \cite[p. 88-89]{muller_introductionmachinelearning_2016} 
+Also the algorithm performs well without scaling the dataset and can handle a mixture of binary and continuous features. \cite[p. 88-89]{muller_introductionmachinelearning_2016}
+Like other tree-based models it does not perform well on high-dimensional data. 
+
 \subsubsection*{Results}
 
 \section{Model Training}
@@ -329,16 +354,60 @@ All models are trained with the same data set and the same parameters. The only 
     \label{fig:train_test_split}
 \end{figure}
 
-\subsubsection*{Tuning}
+\subsection{Random Forest}
+
+\subsubsection*{Hyperparameter Tuning}
+
+\paragraph*{$n_estimators$} 
+Sets the number of decision trees to construct. 
 bootstrap: true, criterion: squared error, min samples leaf : 1, min samples split: 2, max features: 0.5119924258446656, n estimators: 35, n jobs: -1.
 
+\paragraph*{$max depth$} 
+"As expected, the accuracy on the training set is 100%—because the leaves are
+pure, the tree was grown deep enough that it could perfectly
+memorize all the labels on the training data. The test set accuracy is
+slightly worse than for the linear models we looked at previously, which had around 95%
+accuracy. " \cite[p. 133-136]{muller_introductionmachinelearning_2016}
+
+"If we don’t restrict the depth of a decision tree, the tree
+can become arbitrarily deep and complex. Unpruned trees are therefore
+prone to overfitting and not generalizing well to new data. Now let’s
+apply pre-pruning to the tree, which will stop developing the tree
+before we perfectly fit to the training data. One option is to
+stop building the tree after a certain depth has been reached. Here we
+set $max_depth=4$, meaning only four consecutive questions can be asked
+(cf. Figures  and). Limiting the depth of the tree decreases overfitting. This leads to a
+lower accuracy on the training set, but an improvement on the test set:" \cite[p. 133-136]{muller_introduction_2016}
 
 
 
+\subsection{Gradient Boosted Regression Trees} 
 
+\subsubsection*{Hyperparameter Tuning}
 
+"Gradient boosted trees are frequently the winning entries in machine
+learning competitions, and are widely used in industry. They are
+generally a bit more sensitive to parameter settings than random
+forests, but can provide better accuracy if the parameters are set
+correctly." \cite[p. 88-89]{muller_introductionmachinelearning_2016}
 
+"Apart from the pre-pruning and the number of trees in the ensemble,
+another important parameter of gradient boosting is the learning rate,
+which controls how strongly each tree tries to correct the mistakes of
+the previous trees. A higher learning rate means each tree can make
+stronger corrections, allowing for more complex models. Adding more trees to the ensemble, which can be accomplished by increasing
+n estimators, also increases the model complexity, as the model has
+more chances to correct mistakes on the training set." \cite[p. 88-89]{muller_introductionmachinelearning_2016}
 
+"The main parameters of gradient boosted tree models are the number
+of trees, n estimators, and the learning rate, which controls the degree to which each tree is allowed to correct the mistakes of the previous trees.
+These two parameters are highly interconnected, as a lower
+learning rate means that more trees are needed to build a model of
+similar complexity. In contrast to random forests, where a higher
+n estimators value is always better, increasing n estimators in gradient
+boosting leads to a more complex model, which may lead to overfitting. A
+common practice is to fit n estimators depending on the time and
+memory budget, and then search over different learning rates." \cite[p. 88-89]{muller_introductionmachinelearning_2016}
 
 
 % \paragraph{Bend deduction:}

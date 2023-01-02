@@ -18,9 +18,9 @@ Mean Absolute Error (MAE) how far the predictions are from the actual output
     \hline
     \textbf{Relevance}            & Does the model achieve a good bias-variance tradeoff? Which means neither overfitting or unterfitting the data. & Variance of cross-validation and fit                 \\
     \hline
-    \textbf{Robustness}           & Ability of the model to outliers, noise and other data quality issues                                           & Variance of cross-validation, fit                    \\
+    \textbf{Robustness}           & Ability of the model to outliers, noise and other data quality issues                                           & Equalized Loss of Accuracy (ELA)                    \\
     \hline
-    \textbf{Stability}            & Does the artifact generate repeatable results when trained on different data?                                   & Equalized Loss of Accuracy (ELA)                     \\
+    \textbf{Stability}            & Does the artifact generate repeatable results when trained on different data?                                   & Leave-one-out-cross validation stability                     \\
     \hline
     \textbf{Interpretability}     & How well can the model be explained?                                                                            & Complexity measures (e.g., no. of parameters, depth) \\
     \hline
@@ -30,7 +30,12 @@ Mean Absolute Error (MAE) how far the predictions are from the actual output
     \label{tab:evaluation_criteria}
 \end{longtable}
 
-\section{DP1: Correctness}
+\section{DP1: Appropriateness}
+% How well does the model type fit the current task?
+% Prerequisites for model type
+
+
+\section{DP2: Correctness}
 % Ability of the model to perform the current task measured on the development dataset and the runtime dataset
 The model must be able to perform well on the selected task. 
 To measure the correctness of the model, the metrics MAE, MSE and RMSE are used.
@@ -99,9 +104,6 @@ interpretable in the same units as the response variable. The RMSE is more sensi
 
 % I should cross validation as well to measure genelization performance of each model as well as the stability of the model. 
 
-
-
-
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.6\textwidth]{Random_Forest_Regression_importances}
@@ -118,25 +120,21 @@ Figure~\ref{fig:rf_feature_importance} compares and visualizes the relative impo
 As shown, the thickness is the most important feature followed by distance and die open. The results show, that all three featured are relevant for the outcome and so no feature can be removed from the dataset to get a better performance of the model.
 
 
-\section{DP1: Appropriateness}
-% How well does the model type fit the current task?
-% Prerequisites for model type
-
-
 
 \section{Relevance}
 % Does the model achieve a good bias-variance tradeoff? Which means neither overfitting or unterfitting the data.
 
 % Variance of cross-validation and fit
+% -> Fit -> R2
+
 
 \section{Robustness}
 % Ability of the model to outliers, noise and other data quality issues
 % Variance of cross-validation, fit
 
-% Cross validation heatmap
+% Equalized Loss of Accuracy (ELA) 
 
-\section{Stability}
-To measure the stability of the model, the following metrics are used:
+To measure the robustness of the model, the following metrics are used:
 
 \paragraph*{Equalized Loss of Accuracy (ELA)}
 
@@ -147,21 +145,60 @@ To measure the stability of the model, the following metrics are used:
 
 
 
+\section{Stability}
 % Does the artifact generate repeatable results when trained on different data?
-% Equalized Loss of Accuracy (ELA)
+% Leave-one-out cross-validation
+
+To measure the stability of the model, the following metrics are used:
+
+\paragraph*{Leave-one-out cross-validation}
+
+\begin{equation}
+    \label{eq:loo}
+    LOO = \frac{1}{n} \sum_{i=1}^{n} \frac{1}{\hat{y}_i} |y_i - \hat{y}_i|
+\end{equation}
+
 
 \section{Interpretability}
 % How well can the model be explained?
 % Complexity measures (e.g., no. of parameters, depth)
 
+To measure the interpretability of the model, the following metrics are used:
+
+% From Copilot
+\paragraph*{Complexity measures}
+
+\begin{equation}
+    \label{eq:complexity}
+    Complexity = \frac{1}{n} \sum_{i=1}^{n} \frac{1}{\hat{y}_i} |y_i - \hat{y}_i|
+\end{equation}
+
 \section{Resource utilization}
 % How much resources are required to train and run the model?
 % Training time, runtime, storage space
 
+To measure the resource utilization of the model, the following metrics are used:
 
+% From Copilot
+\paragraph*{Training time}
 
+\begin{equation}i
+    \label{eq:training_time}
+    Training Time = \frac{1}{n} \sum_{i=1}^{n} \frac{1}{\hat{y}_i} |y_i - \hat{y}_i|
+\end{equation}
 
+\paragraph*{Runtime}
 
+\begin{equation}
+    \label{eq:runtime}
+    Runtime = \frac{1}{n} \sum_{i=1}^{n} \frac{1}{\hat{y}_i} |y_i - \hat{y}_i|
+\end{equation}
 
+\paragraph*{Storage space}
+
+\begin{equation}
+    \label{eq:storage_space}
+    Storage Space = \frac{1}{n} \sum_{i=1}^{n} \frac{1}{\hat{y}_i} |y_i - \hat{y}_i|
+\end{equation}
 
 \section{Summary}

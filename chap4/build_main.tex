@@ -311,21 +311,20 @@ Decision trees have a limitation in their ability to overfit, which is a disadva
 
 % In both cases, the random forest model creates a large number of decision trees and trains them on different subsets of the training data. The decision trees are trained using a technique called bagging, which involves randomly selecting a subset of the training examples for each tree and training the tree on that subset. The idea behind bagging is to train each tree on a slightly different subset of the data, which can help to reduce overfitting and improve the overall performance of the model. (chat gpt)
 
-\subsubsection{Gradient Boosting Regression Tree} 
+\subsubsection{Gradient Boosting Regression Tree}
 A gradient boosting regression is a type of ensemble learning algorithm in which multiple decision trees are combines to produce a more accurate and stable prediction. Similar to the random forest algorithm  gradient boosting combines multiple weak learners to create a strong learner.
 The difference to a random forest is, that the trees are trained in a serial manner and each tree corrects the errors of the previous tree. \cite[p. 88-89]{muller_introductionmachinelearning_2016}
 Gradient boosted tree use strong pre-pruning and therefore produce shallow trees with a depth of one to five. This brings the advantage of a smaller model which uses less memory and also results in a faster prediction.
-Usually generating more trees improves the overall performance of the model. \cite[p. 88-89]{muller_introductionmachinelearning_2016} 
+Usually generating more trees improves the overall performance of the model. \cite[p. 88-89]{muller_introductionmachinelearning_2016}
 Also the algorithm performs well without scaling the dataset and can handle a mixture of binary and continuous features. \cite[p. 88-89]{muller_introductionmachinelearning_2016}
-Like other tree-based models it does not perform well on high-dimensional data. 
+Like other tree-based models it does not perform well on high-dimensional data.
 
 \subsubsection*{Results}
 
 \section{Model Training}
 
-
 \subsection{Training-Test Split}
-Figure~\ref{fig:train_test_split} shows the data set and which parts of it is used for training and testing the used models. Samples with a die opening of 30 are used to test the performance and the remaining part is used for training. 
+Figure~\ref{fig:train_test_split} shows the data set and which parts of it is used for training and testing the used models. Samples with a die opening of 30 are used to test the performance and the remaining part is used for training.
 A different approach would be to us a random test and train split, this would lead to a better performance of the models but would not evaluate their ability to predict new data of a different die opening.
 The die opening 30 was chosen because it is in the middle of the selected data set and therefore the models should be able to predict the data of this die opening.
 All models are trained with the same data set and the same parameters. The only difference is the used algorithm.
@@ -340,18 +339,21 @@ All models are trained with the same data set and the same parameters. The only 
 
 \subsection{Random Forest}
 
+% TODO: Random forest tunen und dann die Ergebnisse hier einfügen
 \subsubsection*{Hyperparameter Tuning}
+Grid search cross validation was used to find the best hyperparameters for the random forest model using Scikit-learn's default \texttt{GridSearchCV} function.
+The following hyperparameters were tuned:
 
-\paragraph*{$n_estimators$} 
-Sets the number of decision trees to construct. 
-bootstrap: true, criterion: squared error, min samples leaf : 1, min samples split: 2, max features: 0.5119924258446656, n estimators: 35, n jobs: -1.
+\paragraph*{$n\_estimators$} Sets the number of decision trees to construct.
+Was set to X determined by the grid search.
 
-\paragraph*{$max depth$} 
+\paragraph*{$max\_depth$}
 "As expected, the accuracy on the training set is 100%—because the leaves are
 pure, the tree was grown deep enough that it could perfectly
 memorize all the labels on the training data. The test set accuracy is
 slightly worse than for the linear models we looked at previously, which had around 95%
 accuracy. " \cite[p. 133-136]{muller_introductionmachinelearning_2016}
+
 
 "If we don’t restrict the depth of a decision tree, the tree
 can become arbitrarily deep and complex. Unpruned trees are therefore
@@ -363,9 +365,19 @@ set $max_depth=4$, meaning only four consecutive questions can be asked
 (cf. Figures  and). Limiting the depth of the tree decreases overfitting. This leads to a
 lower accuracy on the training set, but an improvement on the test set:" \cite[p. 133-136]{muller_introduction_2016}
 
+\paragraph*{$min\_samples\_split$}
 
+\paragraph*{$min\_samples\_leaf$}
 
-\subsection{Gradient Boosted Regression Trees} 
+\paragraph*{$bootstrap$}
+
+\paragraph*{$criterion$} Is set to "mse" which stands for mean squared error. 
+The dataset only contains continuous numerical values and therefore the mean squared error is the best choice for the criterion. 
+% TODO: Elaborate on this
+
+\paragraph*{$max\_features$} Is set to "auto" which means that the algorithm uses all features for training the model. As shown in Figure~\ref{fig:rf_feature_importance} all features are important for the prediction of the spring back. Therefore, all features are used for training the model.
+
+\subsection{Gradient Boosted Regression Trees}
 
 \subsubsection*{Hyperparameter Tuning}
 

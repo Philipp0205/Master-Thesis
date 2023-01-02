@@ -23,6 +23,8 @@ Most sheet metal forming operations are performed on machines called presses and
 \cite[p. 405]{groover_fundamentalsmodernmanufacturing_2020}
 
 
+% TODO: Hier habe ich beim überarbeiten das letze mal aufgehört. 
+% 30.12. 18:03 
 \subsubsection{Bending}
 Bending is a forming operation that is used to change the shape of a sheet metal. The applied load is beyond its yield strength but below its ultimate tensile strength to achieve a permanent deformation \cite[p. 1]{baig_machinelearningprediction_2021}
 During bending the metal on the outside of the neural plane is stretched and the metal on the inside of the neutral plane is compressed. The neutral plane is the plane that is perpendicular to the bending axis. \cite[p. 3]{baig_machinelearningprediction_2021}
@@ -139,60 +141,23 @@ aspects of and variability in the data, and your model will do badly even
 on the training set. Choosing too simple a model is called
 underfitting."  \cite[p. 35]{muller_introductionmachinelearning_2016}
 
-
-
-
-
-
 \subsection{Ensemble Learning}
 Ensemble techniques in machine learning to involve the construction of multiple models, called "learners," for a given task. The primary goal of these methods is to improve the accuracy and performance of the model by combining the predictions of multiple learners. Ensemble techniques differ from single classifier methods by constructing multiple models and combining them using a voting strategy in order to highlight different aspects of the data. This can potentially lead to improved overall performance. \cite[p. 253]{shaik_briefsurveyrandom_2019}
 
-% "Ensembles are methods that combine multiple machine learning models to
-% create more powerful models. There are many models in the machine
-% learning literature that belong to this category, but there are two
-% ensemble models that have proven to be effective on a wide range of
-% datasets for classification and regression, both of which use decision
-% trees as their building blocks: random forests and gradient boosted
-% decision trees." 
+\subsection{Evaluations and Improvements of Models}
+\subsubsection{Cross Validation}
+Cross-validation is a method of evaluating the performance of a model by training multiple models on different subsets of the data and evaluating their performance. The most common version of cross-validation is k-fold cross-validation, in which the data is divided into k folds, and k models are trained, each using a different fold as the test set and the remaining folds as the training set. 
+The accuracy of each model is then evaluated, and the average accuracy across all k models is used as an estimate of the generalization performance of the model. This process helps to reduce the variability in model performance due to the specific choice of training and test sets, and is therefore considered to be a more stable and reliable way to evaluate the performance of a model. 
+\cite[p. 252-260]{muller_introductionmachinelearning_2016}
 
-% \section{Regression}
+\subsubsection{Grid Search}
+Each machine learning method has a number of parameters that can be tuned to improve the performance of the model. Parameters are often not known in advance and must be tuned to the data. 
+This is a common task in machine learning and therefore there are standard methods like grid search to find the best parameters. 
+Grid search is a method of systematically working through multiple combinations of parameters (called grid), cross-validating as it goes to determine which tune gives the best performance.
+\cite[p. 260-275]{muller_introductionmachinelearning_2016}
 
-% \paragraph{Regression Genereal}
 
-% \begin{itemize}
-%     \item Explain influence of a set of variables on the outcome of another variable 
-%     \item Find out which input variables are the most significant influencers of the output variable 
-%     \item Identify a function that explains and predicts the value of the output variable when given the values of the input variables, therefore also called function fitting: y = f(x)
-%     \item source: regression lecture 
-% \end{itemize}
-
-% Types of regression
-% \begin{itemize}
-%     \item Linear Regression
-%     \item Logistic Regression
-% \end{itemize}
-
-% Key assumption linear relationship between input and outcome variables, but input and outcome variables can be transformed to achieve a linear relationship 
-
-% Regression is probabilistic, not deterministic 
-% – Probabilistic: Provides only expected values, based on probabilities, will include random errors 
-% – Deterministic: If input variables are known, output variables can be precisely determined. Examples: Newton’s Laws in Physical sciences (Foundation of classical mechanics)
-
-% \paragraph{Model Description}
-% ...
-
-% \paragraph{Model Evaluation} 
-% Three aspects should be investigated in model evaluation of regression models: 
-% – Overall accuracy and explanatory power of the model 
-% – Significance of each independent variable for the outcome 
-% – Confirmation of the assumptions of linear regression models
-
-% - Accuarcy: (Mean) squared error 
-% - Explanatory power (Squared correlation)
-
-% % more in lecture 
-
-% \section{}{ML in Bending}
+\section{State of research}
 % “Recently, there has been an increasing use of machine learning (ML) algorithms in various applications related to sheet metal forming to improve decision making and achieve cost-effective, defect-free, and optimal manufacturing quality [17,18]. The ML algorithms can be divided mainly in three categories: supervised learning, unsupervised learning [19], and reinforcement learning [20]. Generally, supervised learning is preferred and is used in classification or regression problems, encompassing support vector machine (SVM) algorithms, naive Bayes classifier, decision tree, the K-nearest neighbor (KNN) algorithm and artificial neural networks (ANN).” 
 % \cite{cruz_applicationmachinelearning_2021}
 
@@ -206,7 +171,6 @@ Ensemble techniques in machine learning to involve the construction of multiple 
 % "Hence, this research article used tree-based learning algorithms which have high explainability, needs less computational power, and need less data to train the model." 
 % \cite{baig_machinelearningprediction_2021}
 
-\section{State of research}
 
 % Pado: Expand this discussion a little and move it up (see comment above) 
 

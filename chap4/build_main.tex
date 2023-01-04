@@ -3,7 +3,7 @@
 
 \chapter{Build}
 
-\section{tbd}
+\section{Design Principles}
 The following design principles is a selection of \cite{siebert_constructionqualitymodel_}'s quality parameters for \ac{ML} models.
 In this \ac{DSR} work the artifacts are \ac{ML} models therefore these design principles are used to evaluate them.
 
@@ -177,15 +177,24 @@ After the punch is moved back, the force is reduced and the punch penetration is
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.7\textwidth]{springback_measured}
+    \includegraphics[width=0.9\textwidth]{springback_measured}
     \caption{A steel metal sheet was bent with a punch penetration of 5 mm the spring back is 0.37 mm. The blue line shows the force and the blue line shows the punch penetration.}
     \label{fig:springback_measured}
 \end{figure}
+
+\subsubsection*{\textit{Notes}}
+\begin{itemize}
+    \item \textit{Why is an initial force measured before the punch is moved?}
+    \item \textit{TODO: Add legend for grey line (punch penetration) and blue line (force))}
+    \item \textit{TODO: More dpi for the image}
+\end{itemize}
+
 
 \begin{filecontents*}{example.dat}
     Method Pink-1C Pink-AC Green-1C Green-AC Blue-1C Blue-AC Cyan-1C Cyan-AC Red-1C Red-AC Orange-1C Orange-AC
     Square 24.75 4.8 32.28 7.39 32.65 7.53 31.96 7.18 33.57 8 33.19 7.08
 \end{filecontents*}
+
 
 \subsection{Exploring The Dataset}
 The output data of the bending machine contained 26 features which can be found in the appendix. Out of these features only the standard power and the distance $y_p$ and the force are relevant for calculating the spring back which was described in the last section \ref{sec:measuring_the_spring_back}.
@@ -208,6 +217,16 @@ An example of the dataset is shown in Table~\ref{tab:dataset_example}.
     \caption{Features used for the machine learning models}
     \label{tab:dataset_example}
 \end{table}
+
+
+\subsection{Data Preprocessing}
+
+The three independent features $y_p$, $V$ and $t$ as well as the dependend feature $spring\_back$ were normalized using the \texttt{MinMaxScaler}from the scikit-learn library. The \texttt{MinMaxScaler} scales the data between 0 and 1. The scaler was fitted on the training data and then used to transform the test data. The scaler was saved to be used for the prediction of the spring back of the real world data.
+
+Scaling is only done on the training data, because cross-validation is later used to tune and evaluate the models. Scaling the whole data set before the split would lead to data leakage because the min and max values of the test data would be used to scale the training data.
+How the data was split can be seen in Figure~\ref{fig:train_test_split}.
+
+Because cross-validation is later used to tune and evaluate the models the data was split before the scaling. How the data was split can be seen in Figure~\ref{fig:train_test_split}.
 
 
 % Pado: This is a little confusing - does the Y axis show the force? Why is the blue line the shape it is? Is it maybe two separate lines, the movement of the punch and the reaction of the metal? 
@@ -337,45 +356,64 @@ All models are trained with the same data set and the same parameters. The only 
     \label{fig:train_test_split}
 \end{figure}
 
+Notes regarding Figure~\ref*{fig:train_test_split}:
+\begin{itemize}
+    \item V10 $y_p$ 15,20 are measures inaccurate
+    \item V20 $y_p$ 15 (10-20) and $y_p$ 17 is measured inaccurate
+\end{itemize}
+
 \subsection{Random Forest}
 
 % TODO: Random forest tunen und dann die Ergebnisse hier einfügen
 \subsubsection*{Hyperparameter Tuning}
-Grid search cross validation was used to find the best hyperparameters for the random forest model using Scikit-learn's default \texttt{GridSearchCV} function.
-The following hyperparameters were tuned:
+Grid search cross validation was used to find the best hyperparameters for the random forest model using Scikit-Learn's default \texttt{GridSearchCV} function. 
+All hyperparameters are summarized in Table~\ref{tab:hyperparameters_rf}. 
+The \textit{criterion} hyperparameter was set to \textit{absolute\_error} because the absolute error is the metric used to evaluate the model.
+The \textit{n\_estimators} where set to 10 using grid search cross validation, because the model should not be too complex and the number of trees should not be too high. 
+The \textit{max\_depth} was set to 10 using grid search cross validation. The default unpruned model did overfit the training data and was not able to generalize on the new data well. This is expected behavior of decision trees which is descriped by \cite[p. 133-136]{muller_introductionmachinelearning_2016} amongst others. 
+The \textit{min\_samples\_split} was set to 2 using grid search cross validation. The default value of 2 was chosen because it is the default value of the random forest model in Scikit-Learn.
+The \textit{min\_samples\_leaf} was set to 1 using grid search cross validation. The default value of 1 was chosen because it is the default value of the random forest model in Scikit-Learn.
+The \textit{max\_features} was set to \textit{auto} and therefor the models does use all avialble featues. As described in Figure~\ref{fig:rf_feature_importance} only limited featues are avaialbe and all of them are important for the depenend variable spring back
 
-\paragraph*{$n\_estimators$} Sets the number of decision trees to construct.
-Was set to X determined by the grid search.
+\begin{table}[H]
+    \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
+        \sisetup{group-minimum-digits = 4}
+        \centering
+        \caption{Hyperparameters of the random forest model.}
+        \label{tab:hyperparameters_rf}
+        \begin{tabular}{llp{7cm}}
+            \toprule
+            \thead{\textbf{Hyperparameter}} & \thead{\textbf{Value}} & \thead{\textbf{Description}}                                        \\
+            %  \unit{(Kcal\per\mole)\squared}}} & \thead{RMSD l.b.} & \thead{RMSD u.b.}  \\
+            \toprule
+            n\_estimators                   & 10                      & The number of trees in the forest.                                  \\
+            \hdashline
+            criterion                       & absolute\_error                    & The function to measure the quality of a split.                     \\
+            \hdashline
+            max\_depth                      & 30                    & The maximum depth of the tree.                                      \\
+            \hdashline
+            min\_samples\_split             & 4                      & The minimum number of samples required to split an internal node.   \\
+            \hdashline
+            min\_samples\_leaf              & 2                      & The minimum number of samples required to be at a leaf node.        \\
+            \hdashline
+            max\_features                   & auto                   & The number of features to consider when looking for the best split. \\
+            \hdashline
+            max\_leaf\_nodes                & X                      & Grow trees with max\_leaf\_nodes in best-first fashion.             \\
+            \bottomrule
+            max\_leaf\_nodes                & X                      & Grow trees with max\_leaf\_nodes in best-first fashion.             \\
+            \bottomrule
+        \end{tabular}
+    \end{tcolorbox}
+\end{table}
 
-\paragraph*{$max\_depth$}
-"As expected, the accuracy on the training set is 100%—because the leaves are
-pure, the tree was grown deep enough that it could perfectly
-memorize all the labels on the training data. The test set accuracy is
-slightly worse than for the linear models we looked at previously, which had around 95%
-accuracy. " \cite[p. 133-136]{muller_introductionmachinelearning_2016}
+\subsubsection*{Notes}
+\begin{itemize}
+    \item \sout{With a test test split (V30) the models does not achieve a good R2 score. That means that the model is not able to generalize well to new data (0.0something).}
+    \item \sout{When using a random test train split the R2 score is much better (0.9something).}
+    \item  \sout{Look again at spring back calculation}
+\end{itemize}
 
 
-"If we don’t restrict the depth of a decision tree, the tree
-can become arbitrarily deep and complex. Unpruned trees are therefore
-prone to overfitting and not generalizing well to new data. Now let’s
-apply pre-pruning to the tree, which will stop developing the tree
-before we perfectly fit to the training data. One option is to
-stop building the tree after a certain depth has been reached. Here we
-set $max_depth=4$, meaning only four consecutive questions can be asked
-(cf. Figures  and). Limiting the depth of the tree decreases overfitting. This leads to a
-lower accuracy on the training set, but an improvement on the test set:" \cite[p. 133-136]{muller_introduction_2016}
-
-\paragraph*{$min\_samples\_split$}
-
-\paragraph*{$min\_samples\_leaf$}
-
-\paragraph*{$bootstrap$}
-
-\paragraph*{$criterion$} Is set to "mse" which stands for mean squared error. 
-The dataset only contains continuous numerical values and therefore the mean squared error is the best choice for the criterion. 
-% TODO: Elaborate on this
-
-\paragraph*{$max\_features$} Is set to "auto" which means that the algorithm uses all features for training the model. As shown in Figure~\ref{fig:rf_feature_importance} all features are important for the prediction of the spring back. Therefore, all features are used for training the model.
 
 \subsection{Gradient Boosted Regression Trees}
 

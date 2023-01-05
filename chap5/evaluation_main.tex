@@ -54,12 +54,14 @@ To measure the correctness of the model, the metrics MAE, MSE and RMSE are used.
 In the formulas \ref{eq:mae}, \ref{eq:mse} and \ref{eq:rmse} the variable $e_i$ is the prediction error which is the difference between the predicted value by the model the actual value.
 $y_i$ is the actual value and $n$ is the number of samples in the testing data set.
 
-\paragraph*{Mean Absolute Error (MAE)}
+The mean absolute error (MAE) and mean squared error (MSE) are the most commonly used metrics for evaluating the performance of regression models. \paragraph*{Mean Absolute Error (MAE)}
 
 \begin{equation}
     \label{eq:mae}
     MAE = \frac{1}{n} \sum_{i=1}^{n} |e_i|
 \end{equation}
+
+The MSE is the average of the squared differences between the predicted and the actual values. The MSE is more sensitive to outliers than the MAE.
 
 \paragraph*{Mean Squared Error (MSE)}
 
@@ -68,6 +70,10 @@ $y_i$ is the actual value and $n$ is the number of samples in the testing data s
     MSE = \frac{1}{n} \sum_{i=1}^{n} e^2
 \end{equation}
 
+The RMSE is the square root of the MSE. The RMSE is the most popular metric for evaluating the performance of regression models. The RMSE is interpretable in the same units as the response variable. The RMSE is more sensitive to outliers than the MAE.
+The MAE is the average of the absolute difference between the predicted and actual values.
+Additionally the $R^2$ was added to the overview. The $R^2$ is a statistical measure of how close the data are to the fitted regression line. It is also known as the coefficient of determination, or the coefficient of multiple determination for multiple regression. The value of the $R^2$ is the percentage of the response variable variation that is explained by a linear model.
+
 \paragraph*{Root Mean Squared Error (RMSE)}
 
 \begin{equation}
@@ -75,76 +81,99 @@ $y_i$ is the actual value and $n$ is the number of samples in the testing data s
     RMSE = \sqrt{MSE}
 \end{equation}
 
-% What are the differences between the metrics?
-% -> Copilot
-"The mean absolute error (MAE) and mean squared error (MSE) are the most commonly used metrics for
-evaluating the performance of regression models. The MAE is the average of the absolute differences between
-the predicted and actual values. The MSE is the average of the squared differences between the predicted and
-actual values. The MSE is more sensitive to outliers than the MAE. The RMSE is the square root of the MSE.
-The RMSE is the most popular metric for evaluating the performance of regression models. The RMSE is
-interpretable in the same units as the response variable. The RMSE is more sensitive to outliers than the MAE."
+For a full overview about the performance all three metrics are sued for the evaluation.
 
+\subsection{Goal Hierarchy}
+
+The correctness describes the ability of the model to perform on the selected task. Concrete, the model has to predict the spring back as correct as possible. The goal hierarchy for the correctness is shown in Figure~\ref{fig:goal_hierarchie_correctness}.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.6\textwidth]{goal_hierarchie_correctness}
-    \caption{Relative feature importance}
+    \caption{Goal hierarchy: Correctness}
     \label{fig:goal_hierarchie_correctness}
 \end{figure}
 
-
-\subsection{Overview of the used machine learning models and their metrics}
+\subsection{Results}
 
 % Table wit hall used machine learning models and their metrics
 \begin{table}[H]
     \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
-        \sisetup{group-minimum-digits = 4}
+        % \sisetup{group-minimum-digits = 4}
         \centering
-        \caption{Overview of the used machine learning models and their metrics.}
-        \label{tab:ml_models}
         \begin{tabular}{llll}
             \toprule
-            \thead{\textbf{Model Name}}        & \thead{\textbf{MAE}}  
-                                               & \thead{\textbf{MSE}}
-                                               & \thead{\textbf{RMSE}}                              
-                                               & \thead{\textbf{R}} \\
-            \toprule
-            \textbf{Random Forest}             & 0.15                  & 0.03                 & 0.18 & R\\
+            \thead{\textbf{Model Name}}         & \thead{\textbf{MAE}}
+                                                & \thead{\textbf{MSE}}
+                                                & \thead{\textbf{RMSE}}               \\
+            \textbf{Random Forest (rand split)} & 0.14                  & 0.05 & 0.22 \\
+            \textbf{Random Forest}              & 0.16                  & 0.04 & 0.21 \\
             \hdashline
-            \textbf{Boosting}                  & 0.27                  & 0.07                 & 0.26 & R\\
+            \textbf{Boosting}                   & 0                     & 0    & 0    \\
             \hdashline
-            \textbf{Linear Regression}         & 0.27                  & 0.07                 & 0.26 & R\\
+            \textbf{Linear Regression}          & 0                     & 0    & 0    \\
             \hdashline
-            \textbf{Support Vector Regression} & 0.27                  & 0.07                 & 0.26 & R\\
-            \hdashline
+            \textbf{Support Vector Regression}  & 0                     & 0    & 0    \\
+            \bottomrule
         \end{tabular}
+        \caption{Overview of the used machine learning models and their metrics.}
+        \label{tab:ml_models}
     \end{tcolorbox}
 \end{table}
-
-% How did baig et al. do it?
-% -> MAE, MSE, RMSE 2
-
-% I should cross validation as well to measure genelization performance of each model as well as the stability of the model. 
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.6\textwidth]{Random_Forest_Regression_importances}
-    \caption{Relative feature importance}
-    \label{fig:rf_feature_importance}
-\end{figure}
-
-In further experiments boosting was used with the goal of predicting the target vector more precise. A \ac{mse} of 0.27 and \ac{rmse} of 0.52 as achieved and therefore no better performance to the default random forest.
-
-
-\subsection{Random Forest}
-With 100 estimators in \ac{RF} a \ac{mse} of 0.15 and \ac{rmse} 0.39 was achieved.
-Figure~\ref{fig:rf_feature_importance} compares and visualizes the relative importance of the features used for training the model.
-As shown, the thickness is the most important feature followed by distance and die open. The results show, that all three featured are relevant for the outcome and so no feature can be removed from the dataset to get a better performance of the model.
 
 
 
 \section{Relevance}
 % Does the model achieve a good bias-variance tradeoff? Which means neither overfitting or unterfitting the data.
+
+% Bias variane trade-off 
+
+The model is relevant if it is able to achieve a good bias-variance tradeoff. This means neither overfitting or unterfitting the data.
+The variance of cross-validation scores gives an idea on how stable the model's performance is when it is trained an evaluated on different subsets of data.
+% Chat GPT 
+If the variance is low, it means that the model's performance is relatively consistent across different folds, and you can have more confidence in the evaluation. On the other hand, if the variance is high, it means that the model's performance can vary significantly depending on which data points are used as the test set, and you should be more cautious when interpreting the results.
+
+If the variance is low, it means that the model's performance is relatively consistent across different folds, and you can have more confidence in the evaluation. On the other hand, if the variance is high, it means that the model's performance can vary significantly depending on which data points are used as the test set, and you should be more cautious when interpreting the results.
+
+\paragraph*{Variance of cross-validation and fit}
+
+\begin{equation}
+    \label{eq:variance_cross}
+    Variance_{cross} = \frac{1}{n} \sum_{i=1}^{n} (\hat{y}_i - y_i)^2
+\end{equation}
+
+\paragraph*{R2}
+
+\begin{equation}
+    \label{eq:r2}
+    R^2 = 1 - \frac{Variance_{cross}}{Variance_{fit}}
+\end{equation}
+
+Table~\ref*{tab:ml_models_relevance} shows the variance of cross-validation and the $R^2$ for all used machine learning models.
+To calculate the variance of cross-validation  the variance of Scikit-Learn's \texttt{cross\_val\_score} was calculated. five-fold cross-validation was used to calculate the variance of cross-validation. The $R^2$ was calculated with the formula~\ref{eq:r2}. 
+
+\begin{table}[H]
+    \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
+        % \sisetup{group-minimum-digits = 4}
+        \centering
+        \begin{tabular}{lll}
+            \toprule
+            \thead{\textbf{Model Name}} & \thead{\textbf{Variance of CV}}
+                                        & \thead{\textbf{$R^2$}}                \\
+            \toprule
+            \textbf{Random Forest}      & 0.034                           & 0.771 \\
+            \hdashline
+            \textbf{Boosting}           & 0.000                           & 0.000 \\
+            \hdashline
+            \textbf{Linear Regression}  & 0.000                           & 0.000 \\
+            \hdashline
+            \textbf{Support Vector}     & 0.000                           & 0.000 \\
+            \bottomrule
+        \end{tabular}
+        \caption{Overview of the used machine learning models and their metrics.}
+        \label{tab:ml_models_relevance}
+    \end{tcolorbox}
+\end{table}
 
 % Variance of cross-validation and fit
 % -> Fit -> R2
@@ -156,7 +185,8 @@ As shown, the thickness is the most important feature followed by distance and d
 
 % Equalized Loss of Accuracy (ELA) 
 
-To measure the robustness of the model, the following metrics are used:
+Robustness is the ability of the model to handle outliers, noise and other data quality issues. \cite[p. 16]{siebert_constructionqualitymodel_} To measure the robustness of the model the Equalized Loss of Accuracy (ELA) is used. The ELA is a measure of the accuracy of the model. It is calculated by the mean of the absolute error divided by the mean of the predicted values. The lower the ELA, the better the model is able to predict the spring back.
+Also the $R^2$ can be used to measure the robustness of the model..
 
 \paragraph*{Equalized Loss of Accuracy (ELA)}
 
@@ -165,9 +195,15 @@ To measure the robustness of the model, the following metrics are used:
     ELA = \frac{1}{n} \sum_{i=1}^{n} \frac{1}{\hat{y}_i} |y_i - \hat{y}_i|
 \end{equation}
 
+\subsubsection*{Notes} 
+
+\begin{itemize}
+    \item TODO: Search other metric for ELA. ELA is only for classification problems.
+\end{itemize}
 
 
-\section{Stability}
+
+\section{Stability}\
 % Does the artifact generate repeatable results when trained on different data?
 % Leave-one-out cross-validation
 
@@ -184,6 +220,8 @@ To measure the stability of the model, the following metrics are used:
 \section{Interpretability}
 % How well can the model be explained?
 % Complexity measures (e.g., no. of parameters, depth)
+
+% R^2 value ???? 
 
 To measure the interpretability of the model, the following metrics are used:
 

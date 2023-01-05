@@ -19,15 +19,25 @@ Therefore it is used in this work as well.
 % Commercial importance 
 Sheet metals play a vital role in many industries. A significant number of consumer and industrial products such as automobiles contain sheet metal parts.  
 % Manufacturing methods
-Most sheet metal forming operations are performed on machines called presses and these operations are known as pressworking. These presses usually use tooling called punch and die or stamping die. Three main processes are categoize the sheet metal forming processes: cutting, bending and drawing, where bending is the the most common and only relevant process for this thesis.  Bending and drawing are used to shape sheet metal parts into their required forms.
+Most sheet metal forming operations are performed on machines called presses and these operations are known as pressworking. These presses usually use tooling called punch and die or stamping die. Three main processes are categorize the sheet metal forming processes: cutting, bending and drawing, where bending is the the most common and only relevant process for this thesis.  Bending and drawing are used to shape sheet metal parts into their required forms.
 \cite[p. 405]{groover_fundamentalsmodernmanufacturing_2020}
-
 
 % TODO: Hier habe ich beim überarbeiten das letze mal aufgehört. 
 % 30.12. 18:03 
 \subsubsection{Bending}
-Bending is a forming operation that is used to change the shape of a sheet metal. The applied load is beyond its yield strength but below its ultimate tensile strength to achieve a permanent deformation \cite[p. 1]{baig_machinelearningprediction_2021}
-During bending the metal on the outside of the neural plane is stretched and the metal on the inside of the neutral plane is compressed. The neutral plane is the plane that is perpendicular to the bending axis. \cite[p. 3]{baig_machinelearningprediction_2021}
+% Bending definition and description
+Bending is a forming operation that is used to change the shape of a sheet metal by apply a load to it. 
+The load is applied in way that exceeds the yield strength of the metal, but is below its ultimate tensile strength, which allows the metal to bet permanently deformed into a new shape. \cite[p. 1]{baig_machinelearningprediction_2021}
+
+% Bendin process
+During the bending process, the metal on the outside of the neural plane (the plane that is perpendicular to the bending axis) is stretched, while the metal, while the metal on the inside is compressed. 
+This results in a curvature of the sheet metal in the direction of the applied load.
+\cite[p. 3]{baig_machinelearningprediction_2021}
+% How curvature is achieved 
+The amount of curvature that is achieved in the bending process is determined by the amount of load applied, the thickness and properties of the metal, and the location and length of the neutral plane. By controlling these factors, it is possible to achieve precise and consistent results in the bending of sheet metal.
+
+Figure~\ref{fig:neutral-plane} shows the neutral plane after the bending operation, it is visible, that is is closer to the inside of the bend than to the outside of the bend. 
+The arrows show where the metal was stretched and where it was compressed.
 
 % Pado:  Since you are including figures, make sure to mention/describe them in the text (this would be a great opportunity here to define what the punch and die are in this case - the common meaning of die is „Würfel“ as in „roll the dice“, so the term needs defining here for the computer science public.
 
@@ -39,11 +49,12 @@ During bending the metal on the outside of the neural plane is stretched and the
 \end{figure}
 
 \subsubsection{Air Bending}
+% Definition
 Air bending is a variant in the V-Bending process which is performed using puch-and-die tooling. \cite[p. 416]{groover_fundamentalsmodernmanufacturing_2020} 
-It is commonly used in automotive industry to manufacture sheet metal parts. \cite{kim_predictionbendallowance_2007}
-In this process the punch sheet metal comes in contact of the outside edges of the die, as well as the punch tip, but it does not come in contact with the die surface. 
-It is typically the preferred bending method because, its high flexibility because it is possible to achieve different bending angles using the same punch-and-die tooling.
-\cite[p. 3]{miranda_formingspringbackprediction_2018}\cite[p. 1]{cruz_applicationmachinelearning_2021} 
+As illustrated in Figure~\ref{fig:air-bending} the punch pushed the sheet metal which is placed in the die down.
+% Punch and die Tooling explanation
+In other bending forms the die is also used to shape or form the metal in a specific way. This is where the term "die" comes from in this context. (Source missing)
+In other bending methods the die is fully closed and provides a form where the sheet metal is pressed into. In air bending this is not the case, but the term stays the same. (Source missing)
 
 \begin{figure}[H]
     \centering
@@ -52,13 +63,17 @@ It is typically the preferred bending method because, its high flexibility becau
     \label{fig:air-bending}
 \end{figure}
 
-% Pado: What’s a press brake bending machine?
+% Usage of air bending
+Air bending is commonly used in automotive industry to manufacture sheet metal parts. \cite[p. 342]{kim_predictionbendallowance_2007}
+In this process the punch sheet metal comes in contact of the outside edges of the die, as well as the punch tip, but it does not come in contact with the die surface. 
+It is typically the preferred bending method because, its high flexibility because it is possible to achieve different bending angles using the same punch-and-die tooling.
+\cite[p. 3]{miranda_formingspringbackprediction_2018}\cite[p. 1]{cruz_applicationmachinelearning_2021} 
 
-Today press brake bending machines like air bending machines are usually equipped with "copmputer numeral control" (CNC) systems that can automatically control the bending process and produce the desired shape." \cite[p. 3]{miranda_formingspringbackprediction_2018}
+% Pado: What’s a press brake bending machine?
+Today sheet metal bending machines like air bending machines are usually equipped with "copmputer numeral control" (CNC) systems that can automatically control the bending process and produce the desired shape." \cite[p. 3]{miranda_formingspringbackprediction_2018}
 The air bending process is shows strong nonlinear behavior, considering its parameters and their interrelationships. \cite[p. 3]{miranda_formingspringbackprediction_2018}
 
 % Pado: More detail, please! What exactly are its parameters? What are the non-linearly affected measures?
-
 \subsubsection{Spring Back} 
 When the punch and therefore the bending pressure is removed at the end of the deformation operation, elastic energy remains in the bent part. This elastic energy is released and the metal sheet partially returns to its original shape. \cite[p. 113-114]{groover_fundamentalsmodernmanufacturing_2020} 
 

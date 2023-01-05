@@ -196,7 +196,7 @@ After the punch is moved back, the force is reduced and the punch penetration is
 \end{filecontents*}
 
 
-\subsection{Exploring The Dataset}
+\subsection{Dataset Exploration}
 The output data of the bending machine contained 26 features which can be found in the appendix. Out of these features only the standard power and the distance $y_p$ and the force are relevant for calculating the spring back which was described in the last section \ref{sec:measuring_the_spring_back}.
 The final dataset therefore contained 3 features plus the added spring back.
 In total 396 data points where crated using the described approach.
@@ -217,6 +217,23 @@ An example of the dataset is shown in Table~\ref{tab:dataset_example}.
     \caption{Features used for the machine learning models}
     \label{tab:dataset_example}
 \end{table}
+
+\begin{itemize}
+    \item \sout{TODO: Describe Figure~\ref{fig:rf_feature_importance}}
+\end{itemize}
+
+With 100 estimators in \ac{RF} a \ac{mse} of 0.15 and \ac{rmse} 0.39 was achieved.
+Figure~\ref{fig:rf_feature_importance} compares and visualizes the relative importance of the features used for training the model.
+As shown, the thickness is the most important feature followed by distance and die open. The results show, that all three featured are relevant for the outcome and so no feature can be removed from the dataset to get a better performance of the model.
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{Random_Forest_Regression_importances}
+    \caption{Relative feature importance}
+    \label{fig:rf_feature_importance}
+\end{figure}
+
 
 
 \subsection{Data Preprocessing}
@@ -366,11 +383,11 @@ Notes regarding Figure~\ref*{fig:train_test_split}:
 
 % TODO: Random forest tunen und dann die Ergebnisse hier einfügen
 \subsubsection*{Hyperparameter Tuning}
-Grid search cross validation was used to find the best hyperparameters for the random forest model using Scikit-Learn's default \texttt{GridSearchCV} function. 
-All hyperparameters are summarized in Table~\ref{tab:hyperparameters_rf}. 
+Grid search cross validation was used to find the best hyperparameters for the random forest model using Scikit-Learn's default \texttt{GridSearchCV} function.
+All hyperparameters are summarized in Table~\ref{tab:hyperparameters_rf}.
 The \textit{criterion} hyperparameter was set to \textit{absolute\_error} because the absolute error is the metric used to evaluate the model.
-The \textit{n\_estimators} where set to 10 using grid search cross validation, because the model should not be too complex and the number of trees should not be too high. 
-The \textit{max\_depth} was set to 10 using grid search cross validation. The default unpruned model did overfit the training data and was not able to generalize on the new data well. This is expected behavior of decision trees which is descriped by \cite[p. 133-136]{muller_introductionmachinelearning_2016} amongst others. 
+The \textit{n\_estimators} where set to 10 using grid search cross validation, because the model should not be too complex and the number of trees should not be too high.
+The \textit{max\_depth} was set to 10 using grid search cross validation. The default unpruned model did overfit the training data and was not able to generalize on the new data well. This is expected behavior of decision trees which is descriped by \cite[p. 133-136]{muller_introductionmachinelearning_2016} amongst others.
 The \textit{min\_samples\_split} was set to 2 using grid search cross validation. The default value of 2 was chosen because it is the default value of the random forest model in Scikit-Learn.
 The \textit{min\_samples\_leaf} was set to 1 using grid search cross validation. The default value of 1 was chosen because it is the default value of the random forest model in Scikit-Learn.
 The \textit{max\_features} was set to \textit{auto} and therefor the models does use all avialble featues. As described in Figure~\ref{fig:rf_feature_importance} only limited featues are avaialbe and all of them are important for the depenend variable spring back
@@ -386,11 +403,11 @@ The \textit{max\_features} was set to \textit{auto} and therefor the models does
             \thead{\textbf{Hyperparameter}} & \thead{\textbf{Value}} & \thead{\textbf{Description}}                                        \\
             %  \unit{(Kcal\per\mole)\squared}}} & \thead{RMSD l.b.} & \thead{RMSD u.b.}  \\
             \toprule
-            n\_estimators                   & 10                      & The number of trees in the forest.                                  \\
+            n\_estimators                   & 10                     & The number of trees in the forest.                                  \\
             \hdashline
-            criterion                       & absolute\_error                    & The function to measure the quality of a split.                     \\
+            criterion                       & absolute\_error        & The function to measure the quality of a split.                     \\
             \hdashline
-            max\_depth                      & 30                    & The maximum depth of the tree.                                      \\
+            max\_depth                      & 30                     & The maximum depth of the tree.                                      \\
             \hdashline
             min\_samples\_split             & 4                      & The minimum number of samples required to split an internal node.   \\
             \hdashline

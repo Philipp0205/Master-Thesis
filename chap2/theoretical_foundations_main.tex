@@ -75,55 +75,50 @@ The air bending process is shows strong nonlinear behavior, considering its para
 
 % Pado: More detail, please! What exactly are its parameters? What are the non-linearly affected measures?
 \subsubsection{Spring Back} 
-When the punch and therefore the bending pressure is removed at the end of the deformation operation, elastic energy remains in the bent part. This elastic energy is released and the metal sheet partially returns to its original shape. \cite[p. 113-114]{groover_fundamentalsmodernmanufacturing_2020} 
+% How the spring back is created
+When the punch and therefore the bending pressure is removed at the end of the deformation operation, elastic energy remains in the bent part. This elastic energy is released, and the metal sheet partially returns to its original shape. \cite[p. 113-114]{groover_fundamentalsmodernmanufacturing_2020} In metal forming this process is called spring back and is illustrated in Figure~\ref{fig:spring-back}. 
+% Descriptoin of figure 
+The solid line shows the metal plate in its original for when the punch was still applied. The dashed line shows the metal plate after the punch was removed. The metal plate is partially returned to its original shape. The angle before the spring back is usually denoted as $\alpha_f$ and the angle after spring back as $\alpha_i$. 
+% Introduce of formula
+The spring back ($\Delta \alpha_{SB}$) is therefore the difference between $\alpha_f$ and $\alpha_i$ as show in equation~\ref*{eq:calculation_springback}. \cite[p. 6]{cruz_applicationmachinelearning_2021}
 
+\begin{equation}
+    \delta \alpha_{SB} = \alpha_i - \alpha_f
+    \label{eq:calculation_springback}
+\end{equation}
+
+% Prevent spring back 
 To address this issue there are several methods to compensate the spring back. For example one common method is over bending, which means that the punch angle and radius are fabricated smaller than the specified angle. 
 \cite[p. 114]{groover_fundamentalsmodernmanufacturing_2020}
-Prerequisite for all compensation methods is that the springback is known therefore the accurate prediction of the springback play an important role in the manufacturing process.
+Prerequisite for all compensation methods is that the spring back is known therefore the accurate prediction of the spring back play an important role in the manufacturing process.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.5\textwidth]{spring-back}
-    \caption{Spring back \cite[p. ]{cruz_applicationmachinelearning_2021}}
+    \caption{Spring back \cite[p. 5]{cruz_applicationmachinelearning_2021}}
     \label{fig:spring-back}
 \end{figure}
-% \section{Bending allowance and k-factor}
-% "As always, real-world materials do not behave as simply as our models. After the material has taken on its new shape in between the hardened steel tools of the press, this central neutral line will be pretty messed up by the interaction. We can’t really know the course of the neutral line after the bend without a detailed and rather complex model of the material characteristics. To make things easy, an imaginary neutral line based on a simplified approximation can be used to predict the length of the flat pattern:"
-% "To do this, a correction factor, k, is introduced. The factor offsets the neutral line piece in the bend region from its center path until it has the length of the corresponding region of the flat pattern. The k-factor is empirically determined for a given material, material thickness, bend radius, and bending method. It reflects all real but unknown distortions in the bend region."
 
-% "Since the k-factor depends on several factors, tables of empirically determined k-factors for given setups are used. Using the k-factor, we can now calculate the bend allowance "BA", which is the length of flat material that goes into the bend region. It’s simply the arc length of the "imaginary" neutral line piece, that has been offset by the k-factor:"
-% "Of course, the approximation is only as realistic as the k-factor used, and it makes sense to keep your own table with k-values for the materials you intend to work with. However, the following values are a good starting point:"
-
-
-
-% \section{Bend deduction}
-% "In practice, the flat pattern length is always shorter than the sum of A and B, so everything above can be condensed in the difference between A + B and L, which is called the bend deduction "BD"." 
-% \cite{by_artsciencebending_2016a}
-
-% “Die beim Biegevorgang stattfindende plastische Formänderung beschränkt sich dabei nicht nur auf eine reine Richtungsänderung, sondern es tritt gleichfalls eine plastische Änderung der Länge auf. So wird die dem Werkzeug zugewandte Seite des Biegeteils gestaucht, während die gegenüberliegende Seite eine Verlängerung infolge Dehnung erfährt. Dieses Verhalten während des Umformprozesses wird als Biegeverkürzung oder auch als Biegezugabe bezeichnet, je nachdem, welche Seite des Biegeteils man betrachtet.” 
-% \cite{rockhausen_integrationsolidworksprozesskette_2010} 
-
-% “Dabei ist diese plastische Verformung keineswegs linear und ihre Berechnung nicht trivial. Die Biegezugabe stellt einen Zahlenwert dar, der von mehreren Faktoren abhängig ist, so zum Beispiel vom Material, von der Blechdicke und den verwendeten Werkzeugen. Zwar gibt es hierfür Formeln zu ihrer Berechnung, so zum Beispiel nach DIN 6935, doch auch diese approximieren nur die in der Fertigung tatsächlich auftretenden Biegezugaben. Daher werden oft Erfahrungswerte zugrunde gelegt, die oftmals die zuverlässigere Annäherung darstellen.” 
-% \cite{rockhausen_integrationsolidworksprozesskette_2010} 
-
-% springback is entirely intercorrelated with the stress distribution on sheet metal as residual stresses [42]. Its behavior is also affected by material properties such as strain hardening, elastic property evolution, the presence of Bauschinger effects, elastic and plastic anisotropy, and tribology between contacting surfaces [43]. Although there are mathematical models for predicting springback in bending situations, most of them are simplistic and do not take into account all influential factors.” (Cruz et al., 2021, p. 4) 
-
-% \section{}{Machine Learning}
-% "Machine learning is a branch of Artificial intelligence in which, given input data points and output value, a computer algorithm learns rules by Analyzing the data. In other words, it gives systems the ability to learn and improve themselves without explicitly being programmed. The recent advancement in technology and the development of manufacturing 4.0 also triggered the need for machine learning. It means that the machines are producing data at an unprecedented scale, so now it is needed to have fast learning algorithms that can give accurate results in a short amount of time. This need triggered engineers worldwide to build new sets of algorithms that are fast at learning and can also give reliable answers. One such group of algorithms already exist which are known as tree-based learning algorithms. A tree-based learning algorithm is a group of machine learning algorithms that are used for supervised learning."
-% \cite{baig_machinelearningprediction_2021}
 
 \section{Machine Learning}
+Machine learning also called \ac{ML} is a field of study that involves using statistical and computational techniques to analyze and learn from data. \cite[p. 1]{muller_introductionmachinelearning_2016}
+
 \subsection{Supervised Learning}
+Supervised learning is a type of machine learning where we have a set of input/output pairs that we use to train a model to predict an outcome for a given input. We use this model to make predictions on new, unseen data, the training set. It consists of the input/output pairs, needs to be created manually, but once the model is trained, it can automate and potentially improve upon tasks that would be time-consuming or difficult for humans to perform. \cite[p. 25]{muller_introductionmachinelearning_2016} 
 
-"Remember that supervised learning is used whenever we want to predict a
-certain outcome from a given input, and we have examples of input/output
-pairs. We build a machine learning model from these input/output pairs,
-which comprise our training set. Our goal is to make accurate
-predictions for new, never-before-seen data. Supervised learning often
-requires human effort to build the training set, but afterward
-automates and often speeds up an otherwise laborious or infeasible task." \cite[p. 34]{muller_introductionmachinelearning_2016}
+\subsection{Regression} 
+There are two main types of supervised machine learning problems: classification and regression.
+For regression problems it is the goal to predict a continuous numerical value. This can be a real number in mathematical terms or a floating-point number in programming terms. 
+\cite[p. 226]{muller_introductionmachinelearning_2016}  
+Classification problems involve predicting a class label, which is a choice from a predefined list of possible options. \cite[p. 25]{muller_introductionmachinelearning_2016} 
 
-\subsection{Overfitting and Underfitting}
+Predicting the spring back is a regression problem because the spring back is a continuous numerical value, therefore this work focuses on supervised learning for a regression problem and does not further consider classification problems.
+"There are two major types of supervised machine learning problems, called classifica‐
+tion and regression.
+
+
+\subsection{Overfitting and Underfitting}leave-onesupa
+
 "In supervised learning, we want to build a model on the training data
 and then be able to make accurate predictions on new, unseen data that
 has the same characteristics as the training set that we used. If a
@@ -270,4 +265,28 @@ The authors conclude that the MLP and the SVM are the best performing algorithms
 
 
 
+% \section{Bending allowance and k-factor}
+% "As always, real-world materials do not behave as simply as our models. After the material has taken on its new shape in between the hardened steel tools of the press, this central neutral line will be pretty messed up by the interaction. We can’t really know the course of the neutral line after the bend without a detailed and rather complex model of the material characteristics. To make things easy, an imaginary neutral line based on a simplified approximation can be used to predict the length of the flat pattern:"
+% "To do this, a correction factor, k, is introduced. The factor offsets the neutral line piece in the bend region from its center path until it has the length of the corresponding region of the flat pattern. The k-factor is empirically determined for a given material, material thickness, bend radius, and bending method. It reflects all real but unknown distortions in the bend region."
+
+% "Since the k-factor depends on several factors, tables of empirically determined k-factors for given setups are used. Using the k-factor, we can now calculate the bend allowance "BA", which is the length of flat material that goes into the bend region. It’s simply the arc length of the "imaginary" neutral line piece, that has been offset by the k-factor:"
+% "Of course, the approximation is only as realistic as the k-factor used, and it makes sense to keep your own table with k-values for the materials you intend to work with. However, the following values are a good starting point:"
+
+
+
+% \section{Bend deduction}
+% "In practice, the flat pattern length is always shorter than the sum of A and B, so everything above can be condensed in the difference between A + B and L, which is called the bend deduction "BD"." 
+% \cite{by_artsciencebending_2016a}
+
+% “Die beim Biegevorgang stattfindende plastische Formänderung beschränkt sich dabei nicht nur auf eine reine Richtungsänderung, sondern es tritt gleichfalls eine plastische Änderung der Länge auf. So wird die dem Werkzeug zugewandte Seite des Biegeteils gestaucht, während die gegenüberliegende Seite eine Verlängerung infolge Dehnung erfährt. Dieses Verhalten während des Umformprozesses wird als Biegeverkürzung oder auch als Biegezugabe bezeichnet, je nachdem, welche Seite des Biegeteils man betrachtet.” 
+% \cite{rockhausen_integrationsolidworksprozesskette_2010} 
+
+% “Dabei ist diese plastische Verformung keineswegs linear und ihre Berechnung nicht trivial. Die Biegezugabe stellt einen Zahlenwert dar, der von mehreren Faktoren abhängig ist, so zum Beispiel vom Material, von der Blechdicke und den verwendeten Werkzeugen. Zwar gibt es hierfür Formeln zu ihrer Berechnung, so zum Beispiel nach DIN 6935, doch auch diese approximieren nur die in der Fertigung tatsächlich auftretenden Biegezugaben. Daher werden oft Erfahrungswerte zugrunde gelegt, die oftmals die zuverlässigere Annäherung darstellen.” 
+% \cite{rockhausen_integrationsolidworksprozesskette_2010} 
+
+% springback is entirely intercorrelated with the stress distribution on sheet metal as residual stresses [42]. Its behavior is also affected by material properties such as strain hardening, elastic property evolution, the presence of Bauschinger effects, elastic and plastic anisotropy, and tribology between contacting surfaces [43]. Although there are mathematical models for predicting springback in bending situations, most of them are simplistic and do not take into account all influential factors.” (Cruz et al., 2021, p. 4) 
+
+% \section{}{Machine Learning}
+% "Machine learning is a branch of Artificial intelligence in which, given input data points and output value, a computer algorithm learns rules by Analyzing the data. In other words, it gives systems the ability to learn and improve themselves without explicitly being programmed. The recent advancement in technology and the development of manufacturing 4.0 also triggered the need for machine learning. It means that the machines are producing data at an unprecedented scale, so now it is needed to have fast learning algorithms that can give accurate results in a short amount of time. This need triggered engineers worldwide to build new sets of algorithms that are fast at learning and can also give reliable answers. One such group of algorithms already exist which are known as tree-based learning algorithms. A tree-based learning algorithm is a group of machine learning algorithms that are used for supervised learning."
+% \cite{baig_machinelearningprediction_2021}
 

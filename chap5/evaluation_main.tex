@@ -1,7 +1,12 @@
 \chapter{Evaluation}
 % take a step back and put your results from 4 into context. 
 This chapter critically examines the machine learning models conceived and partially implemented in the previous chapter.
-Table~\ref*{tab:evaluation_criteria} shows an overview of the evaluated criteria. These are structured according to the Goal-Question-Metric approach Mean Absolute Error (MAE) how far the predictions are from the actual output.
+Table~\ref*{tab:evaluation_criteria} shows an overview of the evaluated criteria. These are structured according to the Goal-Question-Metric approach.
+
+The quality metrics are oriented on the quality model from \cite[]{siebert_constructionqualitymodel_}, which is based on the ISO/IEC 9126 standard for the evaluation of software quality. \cite[]{iso9126_softwareproductqualitymodel_}. The standard was changed to fit the requirements of machine learning models.
+
+The metrics of the goal \textit{Robustness} where original only defined for classification models and therefore needed to be changed.
+\textit{TODO: Explain what has been changed}
 
 \captionsetup{margin={5pt,5pt}}
 
@@ -9,15 +14,14 @@ Table~\ref*{tab:evaluation_criteria} shows an overview of the evaluated criteria
     \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
         \sisetup{group-minimum-digits = 4}
         \centering
-        \caption{Overview of the goals, questions and metrics for the evaluation of artifacts following the \ac{GQM} approach.}
-        \label{tab:evaluation_criteria_2}
+        \label{tab:evaluation_criteria}
         {\renewcommand{\arraystretch}{1}
-            \begin{tabular}{p{2.5cm}p{6cm}p{3cm}}
+            \begin{tabular}{p{2cm}p{8cm}p{3cm}}
                 \toprule
                 \thead{\textbf{Goal}}         & \thead{\textbf{Question}}                                                                                       & \thead{\textbf{Metric}}                              \\
 
                 \hdashline
-                \textbf{Appropriatness}       & How well does the model type fit the current task?                                                              & Prerequisites for model type                         \\
+                \textbf{Appropriat- ness}     & How well does the model type fit the current task?                                                              & Prerequisites for model type                         \\
 
                 \hdashline
                 \textbf{Correctness}          & Ability of the model to perform the current task measured on the development dataset and the runtime dataset    &
@@ -32,15 +36,23 @@ Table~\ref*{tab:evaluation_criteria} shows an overview of the evaluated criteria
                 \textbf{Stability}            & Does the artifact generate repeatable results when trained on different data?                                   & Leave-one-out-cross validation stability             \\
 
                 \hdashline
-                \textbf{Interpretability}     & How well can the model be explained?                                                                            & Complexity measures (e.g., no. of parameters, depth) \\
+                \textbf{Interpret- ability}   & How well can the model be explained?                                                                            & Complexity measures (e.g., no. of parameters, depth) \\
 
                 \hdashline
                 \textbf{Resource utilization} & How much resources are required to train and run the model?                                                     & Training time, runtime, storage space                \\
                 \bottomrule
             \end{tabular}
+            \caption{Overview of the goals, questions and metrics for the evaluation of artifacts following the \ac{GQM} approach.}
         } % renew command 
     \end{tcolorbox}
 \end{table}
+
+\subsubsection*{\textit{Notes}}
+
+\begin{itemize}
+    \item \textit{TODO: Improve layout of table}
+\end{itemize}
+
 
 \section{DP1: Appropriateness}
 % How well does the model type fit the current task?
@@ -83,16 +95,16 @@ Additionally the $R^2$ was added to the overview. The $R^2$ is a statistical mea
 
 For a full overview about the performance all three metrics are sued for the evaluation.
 
-\subsection{Goal Hierarchy}
+% \subsection{Goal Hierarchy}
 
-The correctness describes the ability of the model to perform on the selected task. Concrete, the model has to predict the spring back as correct as possible. The goal hierarchy for the correctness is shown in Figure~\ref{fig:goal_hierarchie_correctness}.
+% The correctness describes the ability of the model to perform on the selected task. Concrete, the model has to predict the spring back as correct as possible. The goal hierarchy for the correctness is shown in Figure~\ref{fig:goal_hierarchie_correctness}.
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.6\textwidth]{goal_hierarchie_correctness}
-    \caption{Goal hierarchy: Correctness}
-    \label{fig:goal_hierarchie_correctness}
-\end{figure}
+% \begin{figure}[H]
+%     \centering
+%     \includegraphics[width=0.6\textwidth]{goal_hierarchie_correctness}
+%     \caption{Goal hierarchy: Correctness}
+%     \label{fig:goal_hierarchie_correctness}
+% \end{figure}
 
 \subsection{Results}
 
@@ -121,6 +133,7 @@ The correctness describes the ability of the model to perform on the selected ta
     \end{tcolorbox}
 \end{table}
 
+\textit{Explanation of results...}
 
 
 \section{Relevance}
@@ -135,12 +148,14 @@ If the variance is low, it means that the model's performance is relatively cons
 
 If the variance is low, it means that the model's performance is relatively consistent across different folds, and you can have more confidence in the evaluation. On the other hand, if the variance is high, it means that the model's performance can vary significantly depending on which data points are used as the test set, and you should be more cautious when interpreting the results.
 
-\paragraph*{Variance of cross-validation and fit}
+\paragraph*{Variance of cross-validation}
 
-\begin{equation}
-    \label{eq:variance_cross}
-    Variance_{cross} = \frac{1}{n} \sum_{i=1}^{n} (\hat{y}_i - y_i)^2
-\end{equation}
+
+
+% \begin{equation}
+%     \label{eq:variance_cross}
+%     Variance_{cross} = \frac{1}{n} \sum_{i=1}^{n} (\hat{y}_i - y_i)^2
+% \end{equation}
 
 \paragraph*{R2}
 
@@ -179,21 +194,92 @@ To calculate the variance of cross-validation  the variance of Scikit-Learn's \t
 % -> Fit -> R2
 
 
+\label{sec:robustness}
 \section{Robustness}
 % Ability of the model to outliers, noise and other data quality issues
 % Variance of cross-validation, fit
 
 % Equalized Loss of Accuracy (ELA) 
 
-Robustness is the ability of the model to handle outliers, noise and other data quality issues. \cite[p. 16]{saez_evaluatingclassifierbehavior_2016}
-To classification problems there is already an established metric to measure the robustness of the model. This metric is the Equalized Loss of Accuracy (ELA). \cite[p. 1]{saez_evaluatingclassifierbehavior_2016}
-There is no direct equivalent of the ELA measure for regression tasks, since the ELA measure is specific to classification. However, there are a number of ways to evaluate the performance of regression models, including mean squared error (MSE), mean absolute error (MAE), and root mean squared error (RMSE). You can use these measures to compare the performance of different regression models on a given task.
-Also the $R^2$ can be used to measure the robustness of the model.
+% Definition of robustness
+According to \cite{saez_evaluatingclassifierbehavior_2016} robustness "is the capability of an
+algorithm to build models that are insensitive to data corruptions and suffer less from the impact of noise" \cite[p. 2]{saez_evaluatingclassifierbehavior_2016}.
+In this context the metric Equalized Loss of Accuracy (\ac{ELA}) was established to measure the robustness of different machine learning models. But the \ac{ELA} is only usable for classification models, therefore a different metric has to be found.
 
-\subsubsection*{Notes}
+There are a number of ways to evaluate the performance of regression models, including mean squared error (MSE), mean absolute error (MAE), and root mean squared error (RMSE). You can use these measures to compare the performance of different regression models on a given task. Also the $R^2$ can be used to measure the robustness of the model.
+
+As mentioned in section~\ref{sec:dataset_exploration}~dataset~exploration the dataset has a high quality with no outliers and no missing values.
+Therefore, these data quality issues will be added to the dataset to measure the robustness of the model.
+
+\subsection{Missing values}
+When applying the model to real-world data, there is a chance that some values are missing. Two possible scenarios are possible:
+
+\begin{enumerate}
+    \item \textbf{Missing $Vt$-combinations}: There is no data available about a metal with a certain thickness and die opening. Reasons could be that the metal is not used in the industry or the data was never measured.
+    \item \textbf{Missing values}: There is data for the $Vt$ combination but some values are missing because of general data quality issues.
+    \item \textbf{Outliers}: There are values that are not in the range of the dataset. Reasons could be that the data was measured incorrectly.
+\end{enumerate}
+
+To measure all three of these scenarios, three different tests where created. The first test measures the robustness of the model.
+
+\subsubsection*{1. Missing $Vt$-combinations}
+As can be seen Figure~\ref{fig:train_test_split} of the test and training dataset, all possible $Vt$ combinations in the set parameter range where measured.
+This is not the case in real-world data. Therefore, the robustness of the model has to be measured with missing $Vt$ combinations.
+
+Therefore, certain $Vt$ combinations were removed from the training dataset. The removed $Vt$ combinations were chosen randomly. The number of removed $Vt$ combinations was 10\% of the total number of $Vt$ combinations in the training dataset.
+Subsequently the model was trained on the training dataset with the removed data and evaluated on the test dataset.
+In a second step the missing data was added to the training dataset again and the model was trained and evaluated as well.
+The loss of accuracy was calculated between both runs.
+
+\subsubsection*{2. Missing values}
+
+\subsubsection*{3. Outliers and wrong data}
+To measure the robustness of the model, outliers were added to the data. The outliers were added to the data in the following way:
+
+Outliers where added to the training dataset.
+The model was trained on the training dataset.
+The model was evaluated on the test dataset.
+The outliers where removed from the training dataset.
+The process was repeated 100 times.
+
+\subsubsection*{Noise}
+\textit{Not sure if I want to measure that.}
+
+
+Note: This process of measuring the robustness of the model differs from the approach used by \cite{siebert_constructionqualitymodel_} and \cite{saez_evaluatingclassifierbehavior_2016}.
+
+\subsection{Results}
+
+\begin{table}[H]
+    \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
+        % \sisetup{group-minimum-digits = 4}
+        \centering
+        \begin{tabular}{llll}
+            \toprule
+            \thead{\textbf{Model Name}} & {\thead{\textbf{Missing $Vt$-combinations}                 \\ \unit{loa}}}
+
+                                        & {\thead{\textbf{Missing Values}                            \\ \unit{loa}}}
+                                        & {\thead{\textbf{Outliers}                                  \\ \unit{loa}}}                  \\
+            \toprule
+            \textbf{Random Forest}      & 0.034                                      & 0.000 & 0.771 \\
+            \hdashline
+            \textbf{Boosting}           & 0.000                                      & 0.000 & 0.000 \\
+            \hdashline
+            \textbf{Linear Regression}  & 0.000                                      & 0.000 & 0.000 \\
+            \hdashline
+            \textbf{Support Vector}     & 0.000                                      & 0.000 & 0.000 \\
+            \bottomrule
+        \end{tabular}
+        \caption{Results of used machine learning models regarding the design principle robustness.}
+        \label{tab:results_robustness}
+    \end{tcolorbox}
+\end{table}
+
+\subsubsection*{\textit{Notes}}
 
 \begin{itemize}
-    \item An alternative metric instead of ELA could be the approach of Scher and Trügler. But it would be necessary to implement the metric in Python.
+    \item \textit{An alternative metric instead of ELA could be the approach of Scher and Trügler. But it would be necessary to implement the metric in Python.}
+    \item \textit{Decide if I want to evaluate noise as well or if the rest is enough.}
 \end{itemize}
 
 
@@ -299,7 +385,7 @@ A model that takes longer to make predictions may be more complex than a model t
             \toprule
             \textbf{\ac{RF}}            & 0.000                              & 0.000                      & 0.000 & 0.000 \\
             \hdashline
-            \textbf{\ac{RFB}}           & 0.000                              & 0.000                      & 0.000 & 0.000 \\
+            \textbf{\ac{RF} Bossing}    & 0.000                              & 0.000                      & 0.000 & 0.000 \\
             \hdashline
             \textbf{LR}                 & 0.000                              & 0.000                      & 0.000 & 0.000 \\
             \hdashline
@@ -343,15 +429,15 @@ The more storage space required to store the model, the more resources are requi
         \centering
         \begin{tabular}{llll}
             \toprule
-            \thead{\textbf{Model Name}} & {\thead{\textbf{Training time}\\ \unit[]{s}}}
-                                        & {\thead{\textbf{Runtime}\\ \unit[]{ms}}}       & {\thead{\textbf{Storage space}\\ \unit{kb}}}
+            \thead{\textbf{Model Name}} & {\thead{\textbf{Training time}                  \\ \unit[]{s}}}
+                                        & {\thead{\textbf{Runtime}                        \\ \unit[]{ms}}}       & {\thead{\textbf{Storage space}\\ \unit{kb}}}
             \\
             \toprule
-            \textbf{\ac{RF}}            & 0.0222 & 2.0275 & 80.2                                                                   \\
+            \textbf{\ac{RF}}            & 0.0222                         & 2.0275 & 80.2  \\
             \hdashline
-            \textbf{LR}                 & 0.000                          & 0.000                          & 0.000 \\
+            \textbf{LR}                 & 0.000                          & 0.000  & 0.000 \\
             \hdashline
-            \textbf{SVM}                & 0.000                          & 0.000                          & 0.000 \\
+            \textbf{SVM}                & 0.000                          & 0.000  & 0.000 \\
             \bottomrule
         \end{tabular}
         \caption{Overview of the used machine learning models and their metrics.}

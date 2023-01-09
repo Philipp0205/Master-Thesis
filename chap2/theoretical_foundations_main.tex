@@ -117,8 +117,7 @@ Predicting the spring back is a regression problem because the spring back is a 
 tion and regression.
 
 
-\subsection{Overfitting and Underfitting}leave-onesupa
-
+\subsection{Overfitting and Underfitting}
 "In supervised learning, we want to build a model on the training data
 and then be able to make accurate predictions on new, unseen data that
 has the same characteristics as the training set that we used. If a
@@ -150,6 +149,19 @@ house buys a boat”—then you might not be able to capture all the
 aspects of and variability in the data, and your model will do badly even
 on the training set. Choosing too simple a model is called
 underfitting."  \cite[p. 35]{muller_introductionmachinelearning_2016}
+
+\subsection{Bias-Variance Tradeoff}
+% Bias 
+Bias measures how well the central tendency of a learner's model approximates the actual function it is trying to learn. If the model consistently learns the true function accurately, it is unbiased. Otherwise, it is biased. \cite[p. 7-8]{neal_biasvariancetradeofftextbooks_2019}
+In essence the bias is the differences between the predicted values by the model and the actual values.
+A high bias indiactes a model with a complex fit to the training data and therefore overfits \cite[p. 20]{neal_biasvariancetradeofftextbooks_2019} 
+
+% Variance 
+Variance measure how much the model's prediction vary, when trained on different subsets of the data. That means that a model with low variance generalizes one new data. A high variance indicates that the model as a complex fit to the data and therefore is overfitting the training data. This means it will not perform well on new data. \cite[p. 7-8]{neal_biasvariancetradeofftextbooks_2019}
+
+% Tradeoff 
+Both, high variance and high bias are undesirable properties for a model. The goal is, to find a model with low bias and low variance. This is called the bias-variance trade off. \cite[p. 9]{neal_biasvariancetradeofftextbooks_2019}
+
 
 \subsection{Ensemble Learning}
 Ensemble techniques in machine learning to involve the construction of multiple models, called "learners," for a given task. The primary goal of these methods is to improve the accuracy and performance of the model by combining the predictions of multiple learners. Ensemble techniques differ from single classifier methods by constructing multiple models and combining them using a voting strategy in order to highlight different aspects of the data. This can potentially lead to improved overall performance. \cite[p. 253]{shaik_briefsurveyrandom_2019}

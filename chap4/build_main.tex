@@ -196,7 +196,9 @@ After the punch is moved back, the force is reduced and the punch penetration is
 \end{filecontents*}
 
 
+\label{sec:dataset_exploration}
 \subsection{Dataset Exploration}
+\subsubsection{Features}
 The output data of the bending machine contained 26 features which can be found in the appendix. Out of these features only the standard power and the distance $y_p$ and the force are relevant for calculating the spring back which was described in the last section \ref{sec:measuring_the_spring_back}.
 The final dataset therefore contained 3 features plus the added spring back.
 In total 396 data points where crated using the described approach.
@@ -235,6 +237,47 @@ As shown, the thickness is the most important feature followed by distance and d
 \end{figure}
 
 
+\subsection{Visualizing The Data}
+Figure~\ref{fig:v30_springbacks} shows the spring backs for the $V30$ dataset.
+In general, it can be seen that the spring backs is less for lower thicknesses and higher for higher thicknesses.
+Also, the spring backs for lower thickness tend to go up with increasing punch penetration, while the spring backs for higher thicknesses tend to go down with increasing punch penetration.
+
+The factors for the behavior of the spring back can't be fully understood with the available data, which makes it a good case for machine learning.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{V30_all_springbacks}
+    \caption{Springbacks for $V30$}
+    \label{fig:v30_springbacks}
+\end{figure}
+
+\subsubsection*{\textit{Notes}}
+\begin{itemize}
+    \item \textit{TODO: Add better picture. Ordered by $t$, better colors, scienceplot, punch penetration instead of spring back}
+\end{itemize}
+
+
+\subsubsection{Data Quality}
+The dataset was created in an experimental environment and the samples where carefully measured.
+Therefor the dataset does not contain many outliers and the data quality is high.
+Furthermore, the dataset was continously extended with new data points throughout the project. During this process multiple outliers and wrong measurements where detected and removed.
+
+It has to be noted that therefore the dataset does not model a real-world scenario, where the data quality is not as high as in the experimental environment.
+This has been considers in section~\ref{sec:robustness}~Robustness, where artificial noise is added to the dataset to test the robustness of the models.
+
+
+\subsubsection*{\textit{Notes}}
+
+\begin{itemize}
+    \item \textit{The Figure feature importance was created using a random forest so it does not belong here. Find a different method to visualize the feature importance.}
+    \item \textit{Add example picture of spring back plots}
+    \item \textit{It is not yet decided if artificial noise will be added to the dataset.}
+    \item \textit{Add some data quality measure?}
+\end{itemize}
+
+
+
+
 
 \subsection{Data Preprocessing}
 
@@ -244,6 +287,11 @@ Scaling is only done on the training data, because cross-validation is later use
 How the data was split can be seen in Figure~\ref{fig:train_test_split}.
 
 Because cross-validation is later used to tune and evaluate the models the data was split before the scaling. How the data was split can be seen in Figure~\ref{fig:train_test_split}.
+
+\subsubsection*{\textit{Notes}}
+\begin{itemize}
+    \item \textit{TODO: Outlier handling is not done and mentioned. Is this necessary?}
+\end{itemize}
 
 
 % Pado: This is a little confusing - does the Y axis show the force? Why is the blue line the shape it is? Is it maybe two separate lines, the movement of the punch and the reaction of the metal? 
@@ -368,16 +416,24 @@ All models are trained with the same data set and the same parameters. The only 
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1\textwidth]{test_train_split}
+    \includegraphics[width=0.9\textwidth]{test_train_split}
     \caption{The training and test dataset. (Data especially for V40 is still missing)}
     \label{fig:train_test_split}
 \end{figure}
 
-Notes regarding Figure~\ref*{fig:train_test_split}:
+Additional to the data split shown in Figure~\ref{fig:train_test_split} a random test split was used to train the models. The random 80/20 split was also used to evaluate the performance of the models and to compare them to each other.
+
+The reason for choosing to different methods for the data split is that the first one is used to evaluate the models' ability to generalize on new data. The second one is used to evaluate the models' performance on the data set.
+Also in real-world applications is possible that there is already data for all needed $V-t$-combinations and models could be trained on that data.
+
+It is expected that the models perform better on the random data but the information gain about the models' ability to generalize on new data is less because the random split will most certainly contain data of all $V-t$-combinations.
+
+
+\subsubsection*{\textit{Notes}}
 \begin{itemize}
-    \item V10 $y_p$ 15,20 are measures inaccurate
-    \item V20 $y_p$ 15 (10-20) and $y_p$ 17 is measured inaccurate
+    \item \textit{\textbf{Dataset not yet complete}, data for all missing Vt combinations will be added}
 \end{itemize}
+
 
 \subsection{Random Forest}
 
@@ -460,6 +516,12 @@ boosting leads to a more complex model, which may lead to overfitting. A
 common practice is to fit n estimators depending on the time and
 memory budget, and then search over different learning rates." \cite[p. 88-89]{muller_introductionmachinelearning_2016}
 
+\section{Structure of The Code}
+
+\begin{itemize}
+    \item \textit{The code is available on GitHub: \url{www.github.com/...}}
+    \item \textit{TODO: Short explanation what to do to reproduce the results.}
+\end{itemize}
 
 % \paragraph{Bend deduction:}
 % Measuring the bend deduction is more complex. After a metal sheet is bent, it is hard to measure the flat pattern length because the material is malformed at the bent. 

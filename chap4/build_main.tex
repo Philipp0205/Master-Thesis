@@ -1,51 +1,68 @@
 % NOTES 
 % Wie ich den sprinback gemssen habe 
 
-\chapter{Build}
+\chapter{Build}\label{ch:build}
 
 
-\section{Design Principles}
-The following design principles is a selection of \cite{siebert_constructionqualitymodel_}'s quality parameters for
+\section{Design Principles}\label{sec:design-principles}
+The following design principles is a selection of \cite{siebert_constructionqualitymodel_}'s
+quality parameters for
 \ac{ML} models.
-In this \ac{DSR} work the artifacts are \ac{ML} models therefore these design principles are used to evaluate them.
+In this \ac{DSR} work the artifacts are \ac{ML} models therefore these design principles are used
+to evaluate them.
 
 \subsubsection*{Design Principle 1: Correctness}
-\textit{Does the artifact predict the spring back of a sheet metal with a high accuracy and correctness?}
-With progression in manufacturing there is a growing demand for high-quality products, that means that the meta parts
-needs to be produced with high precision and accuracy. Here the sprin back is an undesired side effect which need to
+\textit{Does the artifact predict the spring back of a sheet metal with a high accuracy and
+correctness?}
+With progression in manufacturing there is a growing demand for high-quality products, that means
+that the meta parts
+needs to be produced with high precision and accuracy. Here the sprin back is an undesired side
+effect which need to
 be mimimized. \cite[p. 1]{baig_machinelearningprediction_2021}
-Sheet metal forming in manufacturing need a high level of quality and precision. Therefore, the spring back of a
+Sheet metal forming in manufacturing need a high level of quality and precision. Therefore, the
+spring back of a
 sheet metal is an important parameter to consider. \cite[p. 1]{cruz_applicationmachinelearning_2021}
-Predicting spring back is important to reduce the number of trial and error cycles in the manufacturing process.
-Also predicting spring back is complex because of many variables and parameters and often not all of them are known.
-Therefore, a machine learning model should predict the spring back of a sheet metal with a high accuracy and
-correctness. When using the \ac{ML} model small errors in the prediction can cause fitting problems in the
+Predicting spring back is important to reduce the number of trial and error cycles in the
+manufacturing process.
+Also predicting spring back is complex because of many variables and parameters and often not all
+of them are known.
+Therefore, a machine learning model should predict the spring back of a sheet metal with a high
+accuracy and
+correctness. When using the \ac{ML} model small errors in the prediction can cause fitting
+problems in the
 manufacturing process.
 
 % Using an analytical model to compare the artifact. (miranda 2018 paper)
 
 \subsubsection*{Design Principle 2: Appropriateness}
 \textit{Is the artifact appropriate for the given problem?}
-While selecting a model it is important that it fits the problem/task and can deal with the given data. \cite[p.
+While selecting a model it is important that it fits the problem/task and can deal with the given
+data. \cite[p.
 16]{siebert_constructionqualitymodel_}
 
 
 \subsubsection*{Design Principle 3: Relevance}
 \textit{Does the artifact achieve a good bias-variance trade-off?}
 
-In addition to measure the correctness it is important to understand "why" the learner has this performance.
+In addition to measure the correctness it is important to understand "why" the learner has this
+performance.
 This is important to understand the limitations of the model and to improve it.
-Therefore, it is important to understand the bias-variance trade-off. \cite[p. 50]{zhou_machinelearning_2021}
-Bias measures the differences between the learnesrs expected prediction and the ground-truth label. This results in
+Therefore, it is important to understand the bias-variance trade-off. \cite[p.
+50]{zhou_machinelearning_2021}
+Bias measures the differences between the learnesrs expected prediction and the ground-truth
+label. This results in
 the fitting ability of the learner.
-Variances measures the change of learning performance of the learner because of changes in the training set. This
+Variances measures the change of learning performance of the learner because of changes in the
+training set. This
 results in the impact of data disturbance on the results. \cite[p. 51]{zhou_machinelearning_2021}
 
 \subsubsection*{Design Principle 4: Robustness}
 \textit{How well does the artifact handle outliers, noise and missing data?}
-Using real-world data noice is a common problem and can have a negative impact on the performance of the learner.
+Using real-world data noice is a common problem and can have a negative impact on the performance
+of the learner.
 Therefore, it is important to measure how good the artifact performs when dealing with impact data.
-\cite{saez_evaluatingclassifierbehavior_2016} proposed a new measure to establish the expected behavior of a learner
+\cite{saez_evaluatingclassifierbehavior_2016} proposed a new measure to establish the expected
+behavior of a learner
 with noisy data trying to minimize the problems: the Equalized Loss of Accuracy (ELA). \cite[p.
 3]{saez_evaluatingclassifierbehavior_2016}
 
@@ -56,8 +73,10 @@ with noisy data trying to minimize the problems: the Equalized Loss of Accuracy 
 \subsubsection*{Design Principle 6: Interpretability}
 \textit{Is the artifact easy to understand and explain?}
 
-It should be noticed, that there are many parameters and variables involved in the sheet metal forming process.
-That makes the process design quite complex, particularly in the production of components which require several
+It should be noticed, that there are many parameters and variables involved in the sheet metal
+forming process.
+That makes the process design quite complex, particularly in the production of components which
+require several
 stages, and thus more than one set of tools. \cite[p. 1]{dib_singleensembleclassifiers_2020}
 A model which allows conclusions how the results where generated is better.
 
@@ -66,14 +85,18 @@ A model which allows conclusions how the results where generated is better.
 
 Conventional processes are often based on empirical trial and error approaches. \cite[p.
 1]{dib_singleensembleclassifiers_2020}
-A common approach is to experimentally create so named 'technology tables' which contain the bending parameters and
+A common approach is to experimentally create so named 'technology tables' which contain the
+bending parameters and
 the resulting spring back. (Quelle: Hochstrate?)
-This process is time and cost intensive and therefore often not suitable for the production of high-volume and
+This process is time and cost intensive and therefore often not suitable for the production of
+high-volume and
 low-cost components.
-Therefore, one of the benefits of using machine learning should be the reduction of the number of trial and error
+Therefore, one of the benefits of using machine learning should be the reduction of the number of
+trial and error
 cycles in the manufacturing process.
 Furthermore, training the model should take not too much time and resources.
-As mentioned before often FEM-simulation are used to virtually try out metal forming processes. However, fully
+As mentioned before often FEM-simulation are used to virtually try out metal forming processes.
+However, fully
 exploring the design space is computationally expensive and often not possible. \cite[p.
 3]{dib_singleensembleclassifiers_2020}
 The number of experiments can be reduced using a meta-model like \ac{ANN}. \cite[p.
@@ -82,10 +105,13 @@ A approach fully based on \ac{ML} should perfor
 
 
 \section{Dataset generation}
-For the dataset generation, bending experiments were performed on metal sheets with different thicknesses.
+For the dataset generation, bending experiments were performed on metal sheets with different
+thicknesses.
 % material
-The material used is cold rolled steel sheets of the norm DIN EN 10130. The thicknesses used were 0.5mm, 1mmm and 2mm.
-The material was used because it is commonly used in bending processes and its high availability. In previous tests,
+The material used is cold rolled steel sheets of the norm DIN EN 10130. The thicknesses used were
+0.5mm, 1mmm and 2mm.
+The material was used because it is commonly used in bending processes and its high availability.
+In previous tests,
 it was observed, that the spring back are well observable with this material.
 Using this material, 200 single bending pieces of the dimension 20×100 mm have been cut.
 Each piece was bend one time using a \textit{Zwick} three-point-bending machine.
@@ -93,24 +119,32 @@ Each piece was bend one time using a \textit{Zwick} three-point-bending machine.
 Python script where developed to covert the output data format from the machine to CSV files.
 The following describes the experimental setup used for the experiments performed.
 
-% Pado: Since the data collection was technically done outside of the thesis period, 4.2.1 (Multiple cycles) can be
+% Pado: Since the data collection was technically done outside of the thesis period, 4.2.1
+% (Multiple cycles) can be
 % omitted. 4.2.2 is needed in order to understand the data set.
 
 \subsection{Preliminary Tests}
-A number of preliminary tests were conducted to determine the influence of the punch penetration on the spring back.
+A number of preliminary tests were conducted to determine the influence of the punch penetration
+on the spring back.
 
 \subsubsection{Multiple Cycles}
 One approach was to test if multiple spring back can be measure using only one sheet.
-Therefore, the machine was programmed to perform multiple cycles in one attempt and bend the metal sheet multiple
-times. The benefit of this approach would have been a faster generation of the dataset because spring backs could be
+Therefore, the machine was programmed to perform multiple cycles in one attempt and bend the
+metal sheet multiple
+times. The benefit of this approach would have been a faster generation of the dataset because
+spring backs could be
 measured in on attempt, also less material would have been used.
 
-Figure~\ref{springback_multiple} shows one of these attempts. The metal sheet was bent 4 times using $y_p$ values
-from 5 to 8. The results show, that 4 different spring backs can be measured, but the spring back does not vary like
-expected. It was observed as well, that the spring backs are different in every attempt, this is shown in
+Figure~\ref{springback_multiple} shows one of these attempts. The metal sheet was bent 4 times
+using $y_p$ values
+from 5 to 8. The results show, that 4 different spring backs can be measured, but the spring back
+does not vary like
+expected. It was observed as well, that the spring backs are different in every attempt, this is
+shown in
 Figure~\ref{springback_multiple_inconsistent_results}.
 Bending 4 different metal sheets each only one time returned very different results.
-A possible explanation could be the cold deformation of the steel, which is not reversible. Because this approach did
+A possible explanation could be the cold deformation of the steel, which is not reversible.
+Because this approach did
 not work, the machine was programmed to perform one cycle at a time.
 
 \captionsetup{width=0.45\textwidth}
@@ -125,66 +159,89 @@ not work, the machine was programmed to perform one cycle at a time.
     \end{minipage}\hfill
     \begin{minipage}[b]{0.5\textwidth}
         \centering
-        \includegraphics[width=1.1\textwidth]{springback_multiple_inconsistent_results.png} % second figure itself
-        \caption{Inconsisten results bending one metal sheet mutliple times. The spread of the results is very large.}
+        \includegraphics[width=1.1\textwidth]{springback_multiple_inconsistent_results.png} %
+        second figure itself
+        \caption{Inconsisten results bending one metal sheet mutliple times. The spread of the
+        results is very large.}
         \label{springback_multiple_inconsistent_results}
     \end{minipage}
     \label{fig:springback_multiple_overview}
 \end{figure}
 
 \subsubsection{Brake Bending Machine}
-Before using the three point bending machine, a brake bending machine was used to test the influence of the bending
-on the spring back. The brake bending machine is a machine used to bend metal sheets. It is a very common machine in
-the industry and is used to bend metal sheets to a specific radius. The brake bending machine used is a
+Before using the three point bending machine, a brake bending machine was used to test the
+influence of the bending
+on the spring back. The brake bending machine is a machine used to bend metal sheets. It is a
+very common machine in
+the industry and is used to bend metal sheets to a specific radius. The brake bending machine
+used is a
 \textit{Bendmaster 1000} from \textit{Bendmaster}.
 
-After a series of bends it was observed, that the spring back values where much higher than expected. The explanation
-for that behavior was, that altering the position the bending beam of that specific machine was not enough to get the
-desired angle. Thus, the machine excluded for the generation of the data and the three point bending machine was used
+After a series of bends it was observed, that the spring back values where much higher than
+expected. The explanation
+for that behavior was, that altering the position the bending beam of that specific machine was
+not enough to get the
+desired angle. Thus, the machine excluded for the generation of the data and the three point
+bending machine was used
 instead.
 
-Despite the inaccurate data, it was later observed, that the distribution of the spring backs was very similar to the
+Despite the inaccurate data, it was later observed, that the distribution of the spring backs was
+very similar to the
 later experiments with the three point bending machine.
 
 \subsection{Experimental setup}
-The setup consists of a three-point-bending machine with a punch and a die with no bottom. The machine used is the
+The setup consists of a three-point-bending machine with a punch and a die with no bottom. The
+machine used is the
 \textit{Zwick MX 25A} material testing machine.
-The machine is equipped with a load cell and a displacement sensor. The load cell is used to measure the force
+The machine is equipped with a load cell and a displacement sensor. The load cell is used to
+measure the force
 applied to the sheet and the displacement sensor is used to measure the displacement of the punch.
-The machine is controlled by a computer and a software called \textit{ZwickRoell TestXpert}. The software is used to
+The machine is controlled by a computer and a software called \textit{ZwickRoell TestXpert}. The
+software is used to
 control the machine and to save the output data.
 
-The experimental setup and the process parameters are shown in Figure~\ref{fig:setup} where $V$ is the die opening,
+The experimental setup and the process parameters are shown in Figure~\ref{fig:setup} where $V$
+is the die opening,
 $y_p$ is the punch penetration which is the distance the punch is moved into the sheet.
-The paramter $t$ is the sheet thickness,  $\alpha$ is the sheet corresponding bending angle. Parameter $r_p$ is the
+The paramter $t$ is the sheet thickness,  $\alpha$ is the sheet corresponding bending angle.
+Parameter $r_p$ is the
 punch radius which is the radius of the tip of the punch and $r_m$ is the die radius.
 
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.6\textwidth]{setup}
-    \caption{Process parameters: Sheet bending angle ($\alpha$), sheet thickness ($t$), punch penetration ($y_p$),
+    \caption{Process parameters: Sheet bending angle ($\alpha$), sheet thickness ($t$), punch
+    penetration ($y_p$),
         die opening ($V$), punch radius ($r_p$), die radius ($r_m$), inside bending radius ($r_i$).}
     \label{fig:setup}
 \end{figure}
 
 In order to get consistent results, a number of constant and variable parameters were chosen.
-The parameters include the punch-and-die tooling made of steel where die punch had a radius ($r_p$) of 5 mm and and
-die radius ($r_m$) of 10 mm. The die opening $V$ was varied between 10 and 50 mm and the punch penetration $y_p$ was
+The parameters include the punch-and-die tooling made of steel where die punch had a radius
+($r_p$) of 5 mm and and
+die radius ($r_m$) of 10 mm. The die opening $V$ was varied between 10 and 50 mm and the punch
+penetration $y_p$ was
 varied between 0 and 20 mm.
-The machine was configured to move the punch with a constant speed of 100 mm/min until it measured a resistance of 1
-N. That meant, that the punch reached the metal plate and the actual bending process can start. After a hold time of
-1 second the punch was moved with a slower speed of 8 mm/min until the specified punch penetration was reached.
-The length and width of the metal sheet was 100 mm and 20 mm respectively. The sheet thickness was varied between 0.5
+The machine was configured to move the punch with a constant speed of 100 mm/min until it
+measured a resistance of 1
+N. That meant, that the punch reached the metal plate and the actual bending process can start.
+After a hold time of
+1 second the punch was moved with a slower speed of 8 mm/min until the specified punch
+penetration was reached.
+The length and width of the metal sheet was 100 mm and 20 mm respectively. The sheet thickness
+was varied between 0.5
 and 3 mm.
-The constant parameters are shown in Table~\ref{tab:constant_parameters} and the varying parameters are shown in
+The constant parameters are shown in Table~\ref{tab:constant_parameters} and the varying
+parameters are shown in
 Table~\ref{tab:varying_parameters}.
 
 \begin{table}[H]
     \centering
     \begin{tabular}{|l|l|l|l|}
         \hline
-        \textbf{Parameter} & \textbf{} & \textbf{Value}                      & \textbf{Unit} \\ \hline
+        \textbf{Parameter} & \textbf{} & \textbf{Value}                      & \textbf{Unit} \\
+        \hline
         Punch penetration  & $y_p$     & 2.5, 5, 7.5, 10, 12.5, 15, 17.5, 20 & mm            \\
         Die opening        & $V$       & 10, 20, 30, 40, 50                  & mm            \\
         Thickness          & $t$       & 0,5, 1, 1.5, 2, 2.5, 3              & mm            \\
@@ -215,18 +272,24 @@ Table~\ref{tab:varying_parameters}.
 \subsection{Measuring The Spring Back} \label{sec:measuring_the_spring_back}
 The output data contained different data points, which were used to calculate the spring back.
 Important parameters for the calculation are the force, punch penetration and testing time.
-As shown in Figure~\ref{fig:springback_measured} at the $y_p$ maximum the punch penetration and the force are
-maximized as well. The punch stays at that position for 1 second and then moves back with a slower speed. This hold
+As shown in Figure~\ref{fig:springback_measured} at the $y_p$ maximum the punch penetration and
+the force are
+maximized as well. The punch stays at that position for 1 second and then moves back with a
+slower speed. This hold
 time a limitation of the machine and can not be changed.
-After the punch is moved back, the force is reduced and the punch penetration is reduced as well, until the punch is
-at the initial position. For a short time after the lift, the load cell still measures a force. That is because the
-metal sheet springs back and the punch is still in contact with the sheet. This was measured using a python script,
+After the punch is moved back, the force is reduced and the punch penetration is reduced as well,
+until the punch is
+at the initial position. For a short time after the lift, the load cell still measures a force.
+That is because the
+metal sheet springs back and the punch is still in contact with the sheet. This was measured
+using a python script,
 the green and the yellow point represent the resulting spring back distance.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.9\textwidth]{springback_measured}
-    \caption{A steel metal sheet was bent with a punch penetration of 5 mm the spring back is 0.37 mm. The blue line
+    \caption{A steel metal sheet was bent with a punch penetration of 5 mm the spring back is 0
+    .37 mm. The blue line
     shows the force and the blue line shows the punch penetration.}
     \label{fig:springback_measured}
 \end{figure}
@@ -240,7 +303,8 @@ the green and the yellow point represent the resulting spring back distance.
 
 
 \begin{filecontents*}{example.dat}
-    Method Pink-1C Pink-AC Green-1C Green-AC Blue-1C Blue-AC Cyan-1C Cyan-AC Red-1C Red-AC Orange-1C Orange-AC
+    Method Pink-1C Pink-AC Green-1C Green-AC Blue-1C Blue-AC Cyan-1C Cyan-AC Red-1C Red-AC
+    Orange-1C Orange-AC
     Square 24.75 4.8 32.28 7.39 32.65 7.53 31.96 7.18 33.57 8 33.19 7.08
 \end{filecontents*}
 
@@ -250,8 +314,10 @@ the green and the yellow point represent the resulting spring back distance.
 \subsection{Dataset Exploration}
 
 \subsubsection{Features}
-The output data of the bending machine contained 26 features which can be found in the appendix. Out of these
-features only the standard power and the distance $y_p$ and the force are relevant for calculating the spring back
+The output data of the bending machine contained 26 features which can be found in the appendix.
+Out of these
+features only the standard power and the distance $y_p$ and the force are relevant for
+calculating the spring back
 which was described in the last section \ref{sec:measuring_the_spring_back}.
 The final dataset therefore contained 3 features plus the added spring back.
 In total 396 data points where crated using the described approach.
@@ -261,12 +327,18 @@ An example of the dataset is shown in Table~\ref{tab:dataset_example}.
     \centering
     \begin{tabular}{|l|l|l|l|l|}
         \hline
-        \textbf{} & \textbf{distance} & \textbf{spring back} & \textbf{thickness} & \textbf{die opening} \\ \hline
-        1         & 5                 & 0.6667               & 2.0                & 50                   \\
-        2         & 15                & 0.9164               & 2.0                & 50                   \\
-        3         & 10                & 0.6829               & 2.0                & 50                   \\
-        ...       & ...               & ...                  & ...                & ...                  \\
-        396       & 5                 & 0.6667               & 3.0                & 10                   \\
+        \textbf{} & \textbf{distance} & \textbf{spring back} & \textbf{thickness} & \textbf{die
+        opening} \\ \hline
+        1 & 5 & 0.6667 & 2.0 & 50
+        \\
+        2 & 15 & 0.9164 & 2.0 & 50
+        \\
+        3 & 10 & 0.6829 & 2.0 & 50
+        \\
+        ... & ... & ... & ... & ...
+        \\
+        396 & 5 & 0.6667 & 3.0 & 10
+        \\
         \hline
     \end{tabular}
     \caption{Features used for the machine learning models}
@@ -278,10 +350,13 @@ An example of the dataset is shown in Table~\ref{tab:dataset_example}.
 \end{itemize}
 
 With 100 estimators in \ac{RF} a \ac{MSE} of 0.15 and \ac{RMSE} 0.39 was achieved.
-Figure~\ref{fig:rf_feature_importance} compares and visualizes the relative importance of the features used for
+Figure~\ref{fig:rf_feature_importance} compares and visualizes the relative importance of the
+features used for
 training the model.
-As shown, the thickness is the most important feature followed by distance and die open. The results show, that all
-three featured are relevant for the outcome and so no feature can be removed from the dataset to get a better
+As shown, the thickness is the most important feature followed by distance and die open. The
+results show, that all
+three featured are relevant for the outcome and so no feature can be removed from the dataset to
+get a better
 performance of the model.
 
 \begin{figure}[H]
@@ -293,11 +368,14 @@ performance of the model.
 
 \subsection{Visualizing The Data}
 Figure~\ref{fig:v30_springbacks} shows the spring backs for the $V30$ dataset.
-In general, it can be seen that the spring backs is less for lower thicknesses and higher for higher thicknesses.
-Also, the spring backs for lower thickness tend to go up with increasing punch penetration, while the spring backs
+In general, it can be seen that the spring backs is less for lower thicknesses and higher for
+higher thicknesses.
+Also, the spring backs for lower thickness tend to go up with increasing punch penetration, while
+the spring backs
 for higher thicknesses tend to go down with increasing punch penetration.
 
-The factors for the behavior of the spring back can't be fully understood with the available data, which makes it a
+The factors for the behavior of the spring back can't be fully understood with the available
+data, which makes it a
 good case for machine learning.
 
 \begin{figure}[H]
@@ -309,7 +387,8 @@ good case for machine learning.
 
 \subsubsection*{\textit{Notes}}
 \begin{itemize}
-    \item \textit{TODO: Add better picture. Ordered by $t$, better colors, scienceplot, punch penetration instead of
+    \item \textit{TODO: Add better picture. Ordered by $t$, better colors, scienceplot, punch
+    penetration instead of
     \item spring back}
 \end{itemize}
 
@@ -317,20 +396,25 @@ good case for machine learning.
 The dataset was created in an experimental environment and the samples where carefully measured.
 Therefor the dataset does not contain many outliers and the data quality is high.
 
-As shown Figure~\ref{fig:train_test_split} data for all possible $V$ and $t$ combinations where collected. Also there
+As shown Figure~\ref{fig:train_test_split} data for all possible $V$ and $t$ combinations where
+collected. Also there
 the $y_p$ values are evenly distributed and always range from 2.5 to 20 mm.
-Furthermore, the dataset was continuously extended with new data points throughout the project. During this process
+Furthermore, the dataset was continuously extended with new data points throughout the project.
+During this process
 multiple outliers and wrong measurements where detected and removed.
 
-It has to be noted that therefore the dataset does not model a real-world scenario, where the data quality is not as
+It has to be noted that therefore the dataset does not model a real-world scenario, where the
+data quality is not as
 high as in the experimental environment.
-This has been considers in section~\ref{sec:robustness}~Robustness, where artificial noise is added to the dataset to
+This has been considers in section~\ref{sec:robustness}~Robustness, where artificial noise is
+added to the dataset to
 test the robustness of the models.
 
 \subsubsection*{\textit{Notes}}
 
 \begin{itemize}
-    \item \textit{The Figure feature importance was created using a random forest so it does not belong here. Find a
+    \item \textit{The Figure feature importance was created using a random forest so it does not
+    belong here. Find a
     \item different method to visualize the feature importance.}
     \item \textit{Add example picture of spring back plots}
     \item \textit{It is not yet decided if artificial noise will be added to the dataset.}
@@ -339,31 +423,43 @@ test the robustness of the models.
 
 \subsection{Data Preprocessing}
 
-The three independent features $y_p$, $V$ and $t$ as well as the dependend feature $spring\_back$ were normalized
-using the \texttt{MinMaxScaler}from the scikit-learn library. The \texttt{MinMaxScaler} scales the data between 0 and
-1. The scaler was fitted on the training data and then used to transform the test data. The scaler was saved to be
+The three independent features $y_p$, $V$ and $t$ as well as the dependend feature $spring\_back$
+were normalized
+using the \texttt{MinMaxScaler}from the scikit-learn library. The \texttt{MinMaxScaler} scales
+the data between 0 and
+1. The scaler was fitted on the training data and then used to transform the test data. The
+scaler was saved to be
 used for the prediction of the spring back of the real world data.
 
-Scaling is only done on the training data, because cross-validation is later used to tune and evaluate the models.
-Scaling the whole data set before the split would lead to data leakage because the min and max values of the test
+Scaling is only done on the training data, because cross-validation is later used to tune and
+evaluate the models.
+Scaling the whole data set before the split would lead to data leakage because the min and max
+values of the test
 data would be used to scale the training data.
 How the data was split can be seen in Figure~\ref{fig:train_test_split}.
 
-Because cross-validation is later used to tune and evaluate the models the data was split before the scaling. How the
+Because cross-validation is later used to tune and evaluate the models the data was split before
+the scaling. How the
 data was split can be seen in Figure~\ref{fig:train_test_split}.
 
 \subsubsection*{\textit{Notes}}
 \begin{itemize}
     \item \textit{TODO: Outlier handling is not done and mentioned. Is this necessary?}
+    \item \textit{TODO: Use more sophisticated scaling methods, not only min-max scaling. For
+    example for V
+    classfication}
 \end{itemize}
 
 
-% Pado: This is a little confusing - does the Y axis show the force? Why is the blue line the shape it is? Is it
+% Pado: This is a little confusing - does the Y axis show the force? Why is the blue line the
+% shape it is? Is it
 % maybe two separate lines, the movement of the punch and the reaction of the metal?
 
 \subsection{Computational Setup}
-For training the machine learning models a ThinkPad X1 Carbon 2019 with an Intel Core i7-10610U CPU @ 1.80GHz and 16
-GB RAM was used. The operating system used is Ubuntu 20.04.2 LTS. The code for the model is written in Python 3.8.5
+For training the machine learning models a ThinkPad X1 Carbon 2019 with an Intel Core i7-10610U
+CPU @ 1.80GHz and 16
+GB RAM was used. The operating system used is Ubuntu 20.04.2 LTS. The code for the model is
+written in Python 3.8.5
 using the IDE PyCharm. The libraries used are mentioned in Table~\ref{table:libraries}.
 
 \captionsetup{width=1\textwidth}
@@ -382,9 +478,12 @@ using the IDE PyCharm. The libraries used are mentioned in Table~\ref{table:libr
     \label{table:libraries}
 \end{table}
 
-Looking at the correlation matrix shown in Figure~\ref*{fig:correlation_matrix} it can be seen, that the distance and
-the spring back are more correlated than the other features. This is expected, because the punch penetration $y_p$ is
-the main factor which influences the spring back. The other features are not correlated with each other, no
+Looking at the correlation matrix shown in Figure~\ref*{fig:correlation_matrix} it can be seen,
+that the distance and
+the spring back are more correlated than the other features. This is expected, because the punch
+penetration $y_p$ is
+the main factor which influences the spring back. The other features are not correlated with each
+other, no
 multicollinearity is present which is good for the machine learning models.
 
 \begin{figure}[H]
@@ -398,21 +497,44 @@ multicollinearity is present which is good for the machine learning models.
 \section{Model Selection}\label{sec:model-selection}
 
 \subsection{Support Vector Regression (SVR)}\label{subsec:support-vector-regression-(svr)}
-Support Vector Machines \ac{SVM} are usually used for classification problems. The \ac{SVM} algorithm is used to find
-a hyperplane in an N-dimensional space (N - the number of features) that distinctly classifies the data points.
+Support Vector Machines \ac{SVM} are usually used for classification problems. The \ac{SVM}
+algorithm is used to find
+a hyperplane in an N-dimensional space (N - the number of features) that distinctly classifies
+the data points.
 \cite[p. 42]{awad_efficientlearningmachines_2015}
-Predicting the spring back is a regression problem, so the \ac{SVM} algorithm need to be generalized of
+Predicting the spring back is a regression problem, so the \ac{SVM} algorithm need to be
+generalized of
 classification problems, where the model returns continuous values instead of finite set of values.
-This is done by using the \ac{SVR} algorithm, which is inspired by  \ac{SVM} and uses the same principles.
-It fits a model to data using only residuals smaller in absolute value than a certain constant called
+This is done by using the \ac{SVR} algorithm, which is inspired by  \ac{SVM} and uses the same
+principles.
+It fits a model to data using only residuals smaller in absolute value than a certain constant
+called
 $\epsilon$-sensitivity
 
-This is done by creating a "tube" of $\epsilon$ width around the data, with points inside the tube not being
-penalized and points outside the tube being penalized based on their distance from the predicted function.
+This is done by creating a "tube" of $\epsilon$ width around the data, with points inside the
+tube not being
+penalized and points outside the tube being penalized based on their distance from the predicted
+function.
 This is done similar to how \ac{SVM}s penalize points in classification.
-Like \ac{SVM}, \ac{SVR} fins a well-fitting hyperplane to a kernel-induced feature space to achieve good
+Like \ac{SVM}, \ac{SVR} fins a well-fitting hyperplane to a kernel-induced feature space to
+achieve good
 generalization performance using the original features.
 \cite[p. 369]{montesinoslopez_supportvectormachines_2022}
+
+\subsubsection*{Kernel Trick}
+
+The kernel trick is a method to transform the data into a higher dimensional space, where the
+data is linearly
+separable.
+This is done by using a kernel function, which is a function that maps the data into a higher
+dimensional space.
+Two methods are usually used for \ac{SVM}s, the polynomial kernel and the radial basis function,
+also known as gaussian kernel.
+\cite[p. 97-98]{muller_introductionmachinelearning_2016}
+In practise the mathematical details behind these kernels are not important, but it is important
+to know that they are used to transform the data into a higher dimensional space, where the data
+is linearly separable.
+
 
 \subsection{Multi Linear Regression}\label{subsec:multi-linear-regression}
 
@@ -422,46 +544,67 @@ generalization performance using the original features.
 
 \subsection{Random Forest Regression}\label{subsec:random-forest-regression}
 % Erst einmal auf decision tree generell eingehen
-A commonly used method in machine learning. The goal is to solve classification or regression problems by predicting
-the value of a output variable by one or multiple input variables. \cite[p. 253]{shaik_briefsurveyrandom_2019}
-To build a \ac{DT} the source dataset represents the root node of the tree this data set is split into leafs
-(children) by using a set of spitting rules until each leaf in the \ac{DT} is "pure" and only contains one target
+A commonly used method in machine learning. The goal is to solve classification or regression
+problems by predicting
+the value of a output variable by one or multiple input variables. \cite[p.
+253]{shaik_briefsurveyrandom_2019}
+To build a \ac{DT} the source dataset represents the root node of the tree this data set is split
+into leafs
+(children) by using a set of spitting rules until each leaf in the \ac{DT} is "pure" and only
+contains one target
 value. Depending on the use cases this is a single class or a single regression value. \cite[p.
 70-72]{muller_introductionmachinelearning_2016}
 % -> Problem von decision tree 
-The main drawbback of \ac{DT}s is the tendency to overfit and poor generalization performance, what makes them not
-paticaly for most use cases. Therefore usualy ensemble methods are used instead of a single \ac{DT}. \cite[p.
+The main drawbback of \ac{DT}s is the tendency to overfit and poor generalization performance,
+what makes them not
+paticaly for most use cases. Therefore usualy ensemble methods are used instead of a single
+\ac{DT}. \cite[p.
 78]{muller_introductionmachinelearning_2016} \cite[p. 251]{liu_newmachinelearning_2012}
 % -> Warum random forst das problem löst 
-Random forest \cite[]{breiman_randomforests_2001} is a type of ensemble learning algorithm in which multiple decision
-trees, which are "weak learners," are trained and combined to produce a more accurate and stable prediction, known as
+Random forest \cite[]{breiman_randomforests_2001} is a type of ensemble learning algorithm in
+which multiple decision
+trees, which are "weak learners," are trained and combined to produce a more accurate and stable
+prediction, known as
 a "strong learner." \cite[p. 24]{awad_efficientlearningmachines_2015}
-The risk of overfitting is mitigated by subset and feature randomization. Each root node uses a unique subset of the
-data and each leaf is split using a random features. This ensures that no single tree sees all of the data, allowing
-the model to focus on general patterns rather than being sensitive to noise. \cite[p. 251]{liu_newmachinelearning_2012}
+The risk of overfitting is mitigated by subset and feature randomization. Each root node uses a
+unique subset of the
+data and each leaf is split using a random features. This ensures that no single tree sees all of
+the data, allowing
+the model to focus on general patterns rather than being sensitive to noise. \cite[p.
+251]{liu_newmachinelearning_2012}
 % -> Beschreibung Random forest / Random foret regression 
 In this supervised learning method,
 %which was influenced by the research of Amit and Geman (1997), Ho (1998), and Dietterich (2000), 
-a "divide and conquer" approach is used. This involves dividing the data into smaller samples, incrementally building
-a randomized tree predictor for each sample, and then combining (aggregating) these predictors together. This
-approach has proven to be effective. Because not only one but multiple classifiers are used the random forest
+a "divide and conquer" approach is used. This involves dividing the data into smaller samples,
+incrementally building
+a randomized tree predictor for each sample, and then combining (aggregating) these predictors
+together. This
+approach has proven to be effective. Because not only one but multiple classifiers are used the
+random forest
 learning is known as ensemble model. \cite[p. 254]{shaik_briefsurveyrandom_2019}
 
 % -> Vorteile / Nachteile Random Forest 
-This mechanism is flexible enough to handle classifications and regression problems, this is one of the reasons that
-random forests count to the most successful \ac{ML} methods. \cite[p. 3-4]{biau_randomforestguided_2016} \cite[p.
+This mechanism is flexible enough to handle classifications and regression problems, this is one
+of the reasons that
+random forests count to the most successful \ac{ML} methods. \cite[p.
+3-4]{biau_randomforestguided_2016} \cite[p.
 25]{breiman_randomforests_2001}
 
 %
 % Advantages
 %
-Random forests are a type of machine learning algorithm that uses bagging and the random selection of features to
-produce accurate results. They are effective at handling noise and can work with both continuous and categorical
+Random forests are a type of machine learning algorithm that uses bagging and the random
+selection of features to
+produce accurate results. They are effective at handling noise and can work with both continuous
+and categorical
 variables. This combination of techniques helps improve the performance of the algorithm. \cite[p.
 259]{liu_newmachinelearning_2012}
-Decision trees have a limitation in their ability to overfit, which is a disadvantage. This is mitigated by the use
-of subset and feature randomization. Specifically, each base model uses a unique subset of the data, and each node in
-the decision tree is split using a random set of features. This ensures that no single tree sees all of the data,
+Decision trees have a limitation in their ability to overfit, which is a disadvantage. This is
+mitigated by the use
+of subset and feature randomization. Specifically, each base model uses a unique subset of the
+data, and each node in
+the decision tree is split using a random set of features. This ensures that no single tree sees
+all of the data,
 allowing the model to focus on general patterns rather than being sensitive to noise. \cite[p.
 259]{liu_newmachinelearning_2012}
 
@@ -473,11 +616,14 @@ allowing the model to focus on general patterns rather than being sensitive to n
 %
 
 % Boosted algos usuallaly outperform Random Forest.
-% RF is not able to extrapolate based on the data. It can only predict within the range of the training data.
-% Random forest regressor is unalbe to discover trens that would enable it in extrapolating values that fall outside
+% RF is not able to extrapolate based on the data. It can only predict within the range of the
+% training data.
+% Random forest regressor is unalbe to discover trens that would enable it in extrapolating
+% values that fall outside
 % of the training set.
 
-%  Extrapolating is the process of estimating or predicting something beyond the range of available data. (chatgpt)
+%  Extrapolating is the process of estimating or predicting something beyond the range of
+%  available data. (chatgpt)
 
 %
 % Alogithm steps 
@@ -501,29 +647,43 @@ allowing the model to focus on general patterns rather than being sensitive to n
 % classiﬁers. \cite[p. 254]{shaik_briefsurveyrandom_2019} 
 
 
-% In a classification random forest, each tree in the forest makes a prediction for the class label of a given
-% example, and the final prediction is made by majority vote, with the class label that receives the most votes being
-% chosen as the prediction. In a regression random forest, each tree in the forest makes a prediction for the
-% continuous value, and the final prediction is made by averaging the predictions of all the trees in the forest.
+% In a classification random forest, each tree in the forest makes a prediction for the class
+% label of a given
+% example, and the final prediction is made by majority vote, with the class label that receives
+% the most votes being
+% chosen as the prediction. In a regression random forest, each tree in the forest makes a
+% prediction for the
+% continuous value, and the final prediction is made by averaging the predictions of all the
+% trees in the forest.
 % (chatgpt)
 
-% In both cases, the random forest model creates a large number of decision trees and trains them on different
-% subsets of the training data. The decision trees are trained using a technique called bagging, which involves
-% randomly selecting a subset of the training examples for each tree and training the tree on that subset. The idea
-% behind bagging is to train each tree on a slightly different subset of the data, which can help to reduce
+% In both cases, the random forest model creates a large number of decision trees and trains them
+% on different
+% subsets of the training data. The decision trees are trained using a technique called bagging,
+% which involves
+% randomly selecting a subset of the training examples for each tree and training the tree on
+% that subset. The idea
+% behind bagging is to train each tree on a slightly different subset of the data, which can help
+% to reduce
 % overfitting and improve the overall performance of the model. (chat gpt)
 
 \subsubsection{Gradient Boosting Regression Tree}
-A gradient boosting regression is a type of ensemble learning algorithm in which multiple decision trees are combines
-to produce a more accurate and stable prediction. Similar to the random forest algorithm gradient boosting combines
+A gradient boosting regression is a type of ensemble learning algorithm in which multiple
+decision trees are combines
+to produce a more accurate and stable prediction. Similar to the random forest algorithm gradient
+boosting combines
 multiple weak learners to create a strong learner.
-The difference to a random forest is, that the trees are trained in a serial manner and each tree corrects the errors
+The difference to a random forest is, that the trees are trained in a serial manner and each tree
+corrects the errors
 of the previous tree. \cite[p. 88-89]{muller_introductionmachinelearning_2016}
-Gradient boosted tree use strong pre-pruning and therefore produce shallow trees with a depth of one to five. This
-brings the advantage of a smaller model which uses less memory and also results in a faster prediction.
+Gradient boosted tree use strong pre-pruning and therefore produce shallow trees with a depth of
+one to five. This
+brings the advantage of a smaller model which uses less memory and also results in a faster
+prediction.
 Usually generating more trees improves the overall performance of the model. \cite[p.
 88-89]{muller_introductionmachinelearning_2016}
-Also the algorithm performs well without scaling the dataset and can handle a mixture of binary and continuous
+Also the algorithm performs well without scaling the dataset and can handle a mixture of binary
+and continuous
 features. \cite[p. 88-89]{muller_introductionmachinelearning_2016}
 Like other tree-based models it does not perform well on high-dimensional data.
 
@@ -535,13 +695,18 @@ Like other tree-based models it does not perform well on high-dimensional data.
 \section{Model Training}
 
 \subsection{Training-Test Split}
-Figure~\ref{fig:train_test_split} shows the data set and which parts of it is used for training and testing the used
-models. Samples with a die opening of 30 are used to test the performance and the remaining part is used for training.
-A different approach would be to us a random test and train split, this would lead to a better performance of the
+Figure~\ref{fig:train_test_split} shows the data set and which parts of it is used for training
+and testing the used
+models. Samples with a die opening of 30 are used to test the performance and the remaining part
+is used for training.
+A different approach would be to us a random test and train split, this would lead to a better
+performance of the
 models but would not evaluate their ability to predict new data of a different die opening.
-The die opening 30 was chosen because it is in the middle of the selected data set and therefore the models should be
+The die opening 30 was chosen because it is in the middle of the selected data set and therefore
+the models should be
 able to predict the data of this die opening.
-All models are trained with the same data set and the same parameters. The only difference is the used algorithm.
+All models are trained with the same data set and the same parameters. The only difference is the
+used algorithm.
 
 
 \begin{figure}[H]
@@ -551,45 +716,69 @@ All models are trained with the same data set and the same parameters. The only 
     \label{fig:train_test_split}
 \end{figure}
 
-Additional to the data split shown in Figure~\ref{fig:train_test_split} a random test split was used to train the
-models. The random 80/20 split was also used to evaluate the performance of the models and to compare them to each
+Additional to the data split shown in Figure~\ref{fig:train_test_split} a random test split was
+used to train the
+models. The random 80/20 split was also used to evaluate the performance of the models and to
+compare them to each
 other.
 
-The reason for choosing to different methods for the data split is that the first one is used to evaluate the models'
-ability to generalize on new data. The second one is used to evaluate the models' performance on the data set.
-Also in real-world applications is possible that there is already data for all needed $V-t$-combinations and models
+The reason for choosing to different methods for the data split is that the first one is used to
+evaluate the models'
+ability to generalize on new data. The second one is used to evaluate the models' performance on
+the data set.
+Also in real-world applications is possible that there is already data for all needed
+$V-t$-combinations and models
 could be trained on that data.
 
-It is expected that the models perform better on the random data but the information gain about the models' ability
-to generalize on new data is less because the random split will most certainly contain data of all $V-t$-combinations.
+It is expected that the models perform better on the random data but the information gain about
+the models' ability
+to generalize on new data is less because the random split will most certainly contain data of
+all $V-t$-combinations.
 
 
 \subsubsection*{\textit{Notes}}
 \begin{itemize}
-    \item \textit{\textbf{Dataset not yet complete}, data for all missing Vt combinations will be added}
-    \item \textit{V10 does differ very much and it might be not good to include in the data set. Maybe add V60 instead}
+    \item \textit{\textbf{Dataset not yet complete}, data for all missing Vt combinations will be
+    added}
+    \item \textit{V10 does differ very much and it might be not good to include in the data set.
+    Maybe add V60 instead}
 \end{itemize}
 
 \subsection{Random Forest}
 
 % TODO: Random forest tunen und dann die Ergebnisse hier einfügen
 \subsubsection*{Hyperparameter Tuning}
-Grid search cross validation was used to find the best hyperparameters for the random forest model using
+Grid search cross validation was used to find the best hyperparameters for the random forest
+model using
 Scikit-Learn's default \texttt{GridSearchCV} function.
 All hyperparameters are summarized in Table~\ref{tab:hyperparameters_rf}.
-The \textit{criterion} hyperparameter was set to \textit{absolute\_error} because the absolute error is the metric
+
+The \textit{criterion} hyperparameter was set to \textit{absolute\_error} because the absolute
+error is the metric
 used to evaluate the model.
-The \textit{n\_estimators} where set to 10 using grid search cross validation, because the model should not be too
+
+The \textit{n\_estimators} where set to 10 using grid search cross validation, because the model
+should not be too
 complex and the number of trees should not be too high.
-The \textit{max\_depth} was set to 10 using grid search cross validation. The default unpruned model did overfit the
-training data and was not able to generalize on the new data well. This is expected behavior of decision trees which
+
+The \textit{max\_depth} was set to 10 using grid search cross validation. The default unpruned
+model did overfit the
+training data and was not able to generalize on the new data well. This is expected behavior of
+decision trees which
 is descriped by \cite[p. 133-136]{muller_introductionmachinelearning_2016} amongst others.
-The \textit{min\_samples\_split} was set to 2 using grid search cross validation. The default value of 2 was chosen
+
+The \textit{min\_samples\_split} was set to 2 using grid search cross validation. The default
+value of 2 was chosen
 because it is the default value of the random forest model in Scikit-Learn.
-The \textit{min\_samples\_leaf} was set to 1 using grid search cross validation. The default value of 1 was chosen
+
+The \textit{min\_samples\_leaf} was set to 1 using grid search cross validation. The default
+value of 1 was chosen
 because it is the default value of the random forest model in Scikit-Learn.
-The \textit{max\_features} was set to \textit{auto} and therefor the models does use all avialble featues. As
-described in Figure~\ref{fig:rf_feature_importance} only limited featues are avaialbe and all of them are important
+
+The \textit{max\_features} was set to \textit{auto} and therefor the models does use all avialble
+featues. As
+described in Figure~\ref{fig:rf_feature_importance} only limited featues are avaialbe and all of
+them are important
 for the depenend variable spring back
 
 \begin{table}[H]
@@ -634,13 +823,14 @@ for the depenend variable spring back
 
 \subsubsection*{Notes}
 \begin{itemize}
-    \item \sout{With a test test split (V30) the models does not achieve a good R2 score. That means that the model
-    \item is not able to generalize well to new data (0.0something).
+    \item \sout{With a test test split (V30) the models does not achieve a good R2 score. That
+    means that the model
+    is not able to generalize well to new data (0.0something).}
     \item \sout{When using a random test train split the R2 score is much better (0.9something).}
     \item  \sout{Look again at spring back calculation}
 \end{itemize}
 
-\subsection{Gradient Boosted Regression Trees}
+\subsection{Gradient Boosted Regression Trees}\label{subsec:gradient-boosted-regression-trees}
 
 \subsubsection*{Hyperparameter Tuning}
 
@@ -654,13 +844,16 @@ correctly." \cite[p. 88-89]{muller_introductionmachinelearning_2016}
 another important parameter of gradient boosting is the learning rate,
 which controls how strongly each tree tries to correct the mistakes of
 the previous trees. A higher learning rate means each tree can make
-stronger corrections, allowing for more complex models. Adding more trees to the ensemble, which can be accomplished
+stronger corrections, allowing for more complex models. Adding more trees to the ensemble, which
+can be accomplished
 by increasing
 n estimators, also increases the model complexity, as the model has
-more chances to correct mistakes on the training set." \cite[p. 88-89]{muller_introductionmachinelearning_2016}
+more chances to correct mistakes on the training set." \cite[p.
+88-89]{muller_introductionmachinelearning_2016}
 
 "The main parameters of gradient boosted tree models are the number
-of trees, n estimators, and the learning rate, which controls the degree to which each tree is allowed to correct the
+of trees, n estimators, and the learning rate, which controls the degree to which each tree is
+allowed to correct the
 mistakes of the previous trees.
 These two parameters are highly interconnected, as a lower
 learning rate means that more trees are needed to build a model of
@@ -668,9 +861,87 @@ similar complexity. In contrast to random forests, where a higher
 n estimators value is always better, increasing n estimators in gradient
 boosting leads to a more complex model, which may lead to overfitting. A
 common practice is to fit n estimators depending on the time and
-memory budget, and then search over different learning rates." \cite[p. 88-89]{muller_introductionmachinelearning_2016}
+memory budget, and then search over different learning rates." \cite[p.
+88-89]{muller_introductionmachinelearning_2016}
 
-\subsecttion{Support Vector Machine}
+
+
+\subsection{Support Vector Machine}\label{subsec:support-vector-machine}
+
+\subsubsection*{Hyperparameter Tuning}
+% "Tuning SVM parameters
+% The gamma parameter is the one shown in the formula given in the previous section,
+% which controls the width of the Gaussian kernel. It determines the scale of what it
+% means for points to be close together. The C parameter is a regularization parameter,
+% similar to that used in the linear models. It limits the importance of each point (or
+% more precisely, their dual_coef_)."
+% \cite[p. 99]{muller_introductionmachinelearning_2016}
+
+"From this plot we can determine that features in the Breast Cancer dataset are of
+completely different orders of magnitude. This can be somewhat of a problem for
+other models (like linear models), but it has devastating effects for the kernel SVM.
+Let’s examine some ways to deal with this issue."
+\cite[p. 101]{muller_introductionmachinelearning_2016}
+
+"One way to resolve this problem is by rescaling each feature so that they are all
+approximately on the same scale. A common rescaling method for kernel SVMs is to
+scale the data such that all features are between 0 and 1. We will see how to do this
+using the MinMaxScaler preprocessing method in Chapter 3, where we’ll give more
+details. For now, let’s do this “by hand”:"
+\cite[p. 102]{muller_introductionmachinelearning_2016}
+
+"Scaling the data made a huge difference! Now we are actually in an underfitting
+regime, where training and test set performance are quite similar but less close to
+100% accuracy. From here, we can try increasing either C or gamma to fit a more com‐
+plex model.
+\cite[p. 103]{muller_introductionmachinelearning_2016}
+
+The \textit{kernel}, \textit{degree}, \texit{gamma} and \textit{epsilon} where set using grid
+search cross validation.
+Gamma controls the width of the gaussian kernel, it determines when points are close or far away.
+The C parameter controls the importance of each point.
+The features of the dataset have different order of magnitude, this is already a problem for other
+models, but big effects on the kernel SVM.
+
+\texit{Insert example here}
+To resolve this problem the data was scaled between 0 and 1.
+
+\subsubsection*{Notes}
+\begin{itemize}
+    \item \textit{Paraphrase parameters better}
+\end{itemize}
+
+\begin{table}[H]
+    \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
+        \sisetup{group-minimum-digits = 4}
+        \centering
+        \label{tab:hyperparameters_svr}
+        \begin{tabular}{llp{9cm}}
+            \toprule
+            \thead{\textbf{Hyperparameter}} & \thead{\textbf{Value}} & \thead{\textbf{Description}}
+            \\
+            %  \unit{(Kcal\per\mole)\squared}}} & \thead{RMSD l.b.} & \thead{RMSD u.b.}  \\
+            \toprule
+            kernel & rbf & Kernel type used in the algorithm.
+            \\
+            \hdashline
+            degree & 1 & Degree of polynomial kernel function.
+            \\
+            \hdashline
+            gamma & 0.1 & Kernel coefficient for rbf, poly and sigmoid kernels.
+            \\
+            \hdashline
+            C & 4000 & "Regularization parameter. The strength of the
+            regularization is inversely proportional to C" \\
+            \hdashline
+            epsilon & 0.001 & "Epsilon in the epsilon-SVR
+            model." \\
+            \bottomrule
+        \end{tabular}
+        \caption{Hyperparameters of the Suport Vector Regressor.}
+    \end{tcolorbox}
+\end{table}
+
 
 \section{Structure of The Code}\label{sec:structure-of-the-code}
 
@@ -681,14 +952,18 @@ memory budget, and then search over different learning rates." \cite[p. 88-89]{m
 
 
 % \paragraph{Bend deduction:}
-% Measuring the bend deduction is more complex. After a metal sheet is bent, it is hard to measure the flat pattern
+% Measuring the bend deduction is more complex. After a metal sheet is bent, it is hard to
+% measure the flat pattern
 % length because the material is malformed at the bent.
-% As a result, the neutral axis is not in the center of the sheet and hard to measure, but it can be calculated using
+% As a result, the neutral axis is not in the center of the sheet and hard to measure, but it can
+% be calculated using
 % different approaches. %quelle und ausführlicher und grunlagen teil
 % There are multiple ways to measure the bend deduction described earlier. 
 % % K-Faktor Muss noch in theorie teil 
-% In this setup, the method described in the DIN6395 was used. This method uses a k-factor which is an approximated
-% value and therefore and therefore it can be inaccurate. (Equation~\ref{eq:kfactor}). % cite DIN norm
+% In this setup, the method described in the DIN6395 was used. This method uses a k-factor which
+% is an approximated
+% value and therefore and therefore it can be inaccurate. (Equation~\ref{eq:kfactor}). % cite DIN
+% norm
 
 % \begin{equation}\label{eq:kfactor}
 %     k=0.65+\frac{1}{2}\log{\frac{r}{s}}
@@ -697,16 +972,19 @@ memory budget, and then search over different learning rates." \cite[p. 88-89]{m
 % \begin{figure}[ht!] % supposedly places it here ...
 % 	\centering
 % 	\includegraphics[width=0.5\linewidth]{k-factor}
-% 	\caption[Graphical representation of the correction factor]{Graphical representation of the correction factor.}
+% 	\caption[Graphical representation of the correction factor]{Graphical representation of the
+% correction factor.}
 % 	\label{fig:test1}
 % \end{figure}
 
-% The DIN 6935 used the formula for the stretched length, $length=a+b+v$ where \textit{a} and \textit{b} are the side
+% The DIN 6935 used the formula for the stretched length, $length=a+b+v$ where \textit{a} and
+% \textit{b} are the side
 % lengths of the sheet and \textit{v} is a correction value for the deduction. \cite{din6935}
 % The stretched length is measured different depending on the bending angle.
 
 % \paragraph{Opening angle $\beta 0^\circ$ to $90^\circ$} 
-% For opening angles between $0^\circ$and $90^\circ$ the side lengths \textit{a} and \textit{b} are dimensioned from
+% For opening angles between $0^\circ$and $90^\circ$ the side lengths \textit{a} and \textit{b}
+% are dimensioned from
 % the tangent of the bend to the edge.
 % To calculate the compensation value \textit{v} (Equation~\ref{eq:v1}) is used
 % \cite{din6935}.
@@ -718,12 +996,14 @@ memory budget, and then search over different learning rates." \cite[p. 88-89]{m
 % \begin{figure}[H]
 % 	\centering
 % 	\includegraphics[width=0.5\linewidth]{bending-angle-90}
-% 	\caption[Opening angles $\beta 0^\circ$ to $90^\circ$]{Opening angles $\beta 0^\circ$ to $90^\circ$ \cite{din6935}}
+% 	\caption[Opening angles $\beta 0^\circ$ to $90^\circ$]{Opening angles $\beta 0^\circ$ to
+% $90^\circ$ \cite{din6935}}
 % 	\label{fig:v1-image}
 % \end{figure}
 
 % \paragraph{Bending angle $\beta90^\circ$ to $165^\circ$} (Equation~\ref{eq:v1})
-% For opening angles between $90^\circ$ and $165^\circ$ the side lengths \textit{a} and \textit{b} are dimensioned
+% For opening angles between $90^\circ$ and $165^\circ$ the side lengths \textit{a} and
+% \textit{b} are dimensioned
 % from the apex to the edge.
 % To calculate the compensation value \textit{v} (Equation~\ref{eq:v1}) is used. 
 % \cite{din6935}
@@ -735,16 +1015,20 @@ memory budget, and then search over different learning rates." \cite[p. 88-89]{m
 % \begin{figure}[!ht]
 % 	\centering
 % 	\includegraphics[width=0.5\linewidth]{bending-angle-165}
-% 	\caption[Opening angles $\beta90^\circ$ to $165^\circ$]{Opening angles $\beta90^\circ$ to $165^\circ$
+% 	\caption[Opening angles $\beta90^\circ$ to $165^\circ$]{Opening angles $\beta90^\circ$ to
+% $165^\circ$
 % \cite{din6935}}
 % 	\label{fig:v2-image}
 % \end{figure}
 
-% For opening angles between $165^\circ$ and $180^\circ$ the compensation value \textit{v} is 0. The values for v
-% would be negligibly small. \cite{din6935} The side lengths \textit{a} and \textit{b} where measured using the
+% For opening angles between $165^\circ$ and $180^\circ$ the compensation value \textit{v} is 0.
+% The values for v
+% would be negligibly small. \cite{din6935} The side lengths \textit{a} and \textit{b} where
+% measured using the
 % software \textit{ImageJ}.
 
-% Edge cracking is not measured for now because the steel used has no high-strength and with machine in usage it was
+% Edge cracking is not measured for now because the steel used has no high-strength and with
+% machine in usage it was
 % not possible to create edge cracking.
 
 % \begin{figure}[!ht]

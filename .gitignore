@@ -243,3 +243,7 @@ TSWLatexianTemp*
 
 # testing stuff
 test.*
+
+# Everything inside out folder excect dissertation_main.pdf
+out/*
+!out/dissertation_main.pdf

@@ -106,9 +106,8 @@
 \begin{document}
 \frontmatter 
     \maketitle
-    %\input{frontmatter/copyright}       
-    %% The originality statement is *NOT* part of the dissertation but submitted separately.
-    %\input{frontmatter/dedication}        % include a dedication.tex file
+    %\input{frontmatter/copyright}
+
     %\input{frontmatter/acknowledgements}   % include an acknowledgements.tex file
     \input{frontmatter/abstract}\if@openright\cleardoublepage\else\clearpage\fi
     \tableofcontents*\if@openright\cleardoublepage\else\clearpage\fi
@@ -149,7 +148,8 @@
     chap2/background_and_lit_overview_biblio,
     chap2/theoretical_foundations_biblio,
     chap3/research_methodology_biblio,
-    chap4/build_biblio
+    chap4/build_biblio,
+       % build_biblio,
     }}
 	\printindex
 }

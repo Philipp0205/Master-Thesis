@@ -135,6 +135,12 @@ For a full overview about the performance all three metrics are sued for the eva
 
 \textit{Explanation of results...}
 
+\subsubsection*{\textit{Notes}}
+
+\begin{itemize}
+    \item \textit{TODO: Compare model against baseline regression model (Cookbook)}
+\end{itemize}
+
 
 \section{Relevance}
 % Does the model achieve a good bias-variance tradeoff? Which means neither overfitting or unterfitting the data.
@@ -243,9 +249,6 @@ The calculation of the loss of accuracy is follows Equation~\ref{eq:mla}, the me
 To calculate the loss off accuracy the models trained with missing $Vt$ combinations were compared to the model trained with all data. 
 The difference between the \ac{MSE} of the models was calculated. The total loss of accuracy was calculated by averaging the difference of the \ac{MSE} of the models.
 
-
-
-
 \subsubsection*{2. Missing values}
 
 \subsubsection*{3. Outliers and wrong data}
@@ -295,6 +298,7 @@ Note: This process of measuring the robustness of the model differs from the app
 \begin{itemize}
     \item \textit{An alternative metric instead of ELA could be the approach of Scher and Trügler. But it would be necessary to implement the metric in Python.}
     \item \textit{Decide if I want to evaluate noise as well or if the rest is enough.}
+    \item \textit{TODO: Visualize effect of training set size (Cookbook)}
 \end{itemize}
 
 

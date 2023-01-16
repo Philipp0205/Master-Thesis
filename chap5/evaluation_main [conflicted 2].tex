@@ -135,6 +135,12 @@ For a full overview about the performance all three metrics are sued for the eva
 
 \textit{Explanation of results...}
 
+\subsubsection*{\textit{Notes}}
+
+\begin{itemize}
+    \item \textit{TODO: Compare model against baseline regression model (Cookbook)}
+\end{itemize}
+
 
 \section{Relevance}
 % Does the model achieve a good bias-variance tradeoff? Which means neither overfitting or unterfitting the data.
@@ -211,24 +217,28 @@ There are a number of ways to evaluate the performance of regression models, inc
 As mentioned in section~\ref{sec:dataset_exploration}~dataset~exploration the dataset has a high quality with no outliers and no missing values.
 Therefore, these data quality issues will be added to the dataset to measure the robustness of the model.
 
-\subsection{Missing values}
+\subsection{Missing Data}
 When applying the model to real-world data, there is a chance that some values are missing. Two possible scenarios are possible:
 
 \begin{enumerate}
-    \item \textbf{Missing $Vt$-combinations}: There is no data available about a metal with a certain thickness and die opening. Reasons could be that the metal is not used in the industry or the data was never measured.
+    \item \textbf{Missing Missing Die Openings}: There is no data available about a metal with a certain thickness and die opening ($Vt$-combination). Reasons could be that the metal is not used in the industry or the data was never measured.
     \item \textbf{Missing values}: There is data for the $Vt$ combination but some values are missing because of general data quality issues.
     \item \textbf{Outliers}: There are values that are not in the range of the dataset. Reasons could be that the data was measured incorrectly.
 \end{enumerate}
 
 To measure all three of these scenarios, three different tests where created. The first test measures the robustness of the model.
 
-\subsubsection*{1. Missing $Vt$-combinations}
-As can be seen Figure~\ref{fig:train_test_split} of the test and training dataset, all possible $Vt$ combinations in the set parameter range where measured.
+\subsubsection*{1. Missing Die Openings}
+As can be seen Figure~\ref{fig:train_test_split} of the test and training dataset, all possible $Vt$ combinations are present in the dataset.
 This is not the case in real-world data. Therefore, the robustness of the model has to be measured with missing $Vt$ combinations.
 
-Therefore, certain $Vt$ combinations were removed from the training dataset. The removed $Vt$ combinations were chosen randomly. The number of removed $Vt$ combinations was 10\% of the total number of $Vt$ combinations in the training dataset.
-Subsequently the model was trained on the training dataset with the removed data and evaluated on the test dataset.
-The performance of the mode is measures against the performance of the model trained with all data. 
+Note: In previous sections all samples with the die opening 30 where used as testing set. This makes sense fore reasons explained in Section~\ref{sec:model-training} but this approach is not feasible for measuring the robustness of the model. 
+
+A robust model should be able to perform well even when certain die openings are not present in the data. To accurately evaluate its ability to generalize to new die openings, it is important to ensure that a specific die opening is not used for both training and testing.
+Therefore, \textit{leave one group out cross-validation} was used.
+The dataset was split into groups, each group contains all samples with the same die opening which results in 5 groups with $V 10, 20, 30, 40$ and $50$. 
+
+For evaluation the mean $R^2$ is calculated for each group. The mean $R^2$ is calculated with the formula~\ref{eq:r2}. 
 
 \subsubsection*{Calculation of the loss of accuracy}
 The process described above was done 100 times, to mitigate the effect of the random selection of the $Vt$ combinations. 
@@ -243,19 +253,41 @@ The calculation of the loss of accuracy is follows Equation~\ref{eq:mla}, the me
 To calculate the loss off accuracy the models trained with missing $Vt$ combinations were compared to the model trained with all data. 
 The difference between the \ac{MSE} of the models was calculated. The total loss of accuracy was calculated by averaging the difference of the \ac{MSE} of the models.
 
-
-
-
 \subsubsection*{2. Missing values}
+Another data quality issue that can occur in real-world data is missing values.
+Different to the missing die openings data quality error here not a whole die opening is missing but some samples of a die opening are missing.  
+
+The most accurate way to measure the robustness of the model to missing values would be \textit{Leave P Out Cross-Validation}, which creates all possible training and test set while removing p samples from the complete set. This means that overlapping tests sets will be created which results in a high number of iterations which is costly.
+Even with the used 380 samples this would result in 380!/(p!(380-p)!) iterations, which is not feasible.
+
+That is the reason \textit{K-Fold Cross Validation} was used with the number of splits being $\frac{number of samples}{p}$
+
+Another interesting questions is, how many samples need to be removed until the accuracy of the model is significantly reduced. The process is repeating for all possible numbers of folds. The minimum number of folds is 2, which means the model is trained with half of the data and tested with half of the data. 
+The maximum number of folds is 380, which means the model is trained with 1 sample and tested with 379 samples. 
+The robustness of the model is measured with the \textit{Equalized Loss of RMSE} (\ac{ELRMSE}) which is calculated with Equation~\ref{eq:qlrmse}, where  $a$ is the initial RMSE value and $b$ is the final RMSE value.
+
+\paragraph*{Equalized Loss of RMSE}
+\begin{equation}
+    \label{eq:qlrmse}
+        ELRMSE = \frac{(b-a)}{a} * 100 %
+\end{equation}
+
+Choosing the lowest possbile number of folds as initial value is not feasible, beceause a model trained with only one sample is not accurate and has a high risk of overfitting.
+Therefore ....
+
+Another approach would be to use the "Drop column" method, where on features gets removed at a time and the model is trained and tested. This would allow to evaluate the impact of a single feature on the model performance. Because of the limited features available in the dataset this approach is not feasible.
+
+Note: Imputations of missing values can be used to equalize the loss of accuracy. This is not done in this thesis because the goal is to measure the robustness of the model to missing values.
+
+\subsubsection*{\textit{Notes}} 
+
+\begin{itemize}
+    \item \textit{Different measure needed. I have the feeling the ELRMSE is not the best measure.}
+\end{itemize}
 
 \subsubsection*{3. Outliers and wrong data}
 To measure the robustness of the model, outliers were added to the data. The outliers were added to the data in the following way:
 
-Outliers where added to the training dataset.
-The model was trained on the training dataset.
-The model was evaluated on the test dataset.
-The outliers where removed from the training dataset.
-The process was repeated 100 times.
 
 \subsubsection*{Noise}
 \textit{Not sure if I want to measure that.}
@@ -295,6 +327,7 @@ Note: This process of measuring the robustness of the model differs from the app
 \begin{itemize}
     \item \textit{An alternative metric instead of ELA could be the approach of Scher and Trügler. But it would be necessary to implement the metric in Python.}
     \item \textit{Decide if I want to evaluate noise as well or if the rest is enough.}
+    \item \textit{TODO: Visualize effect of training set size (Cookbook)}
 \end{itemize}
 
 

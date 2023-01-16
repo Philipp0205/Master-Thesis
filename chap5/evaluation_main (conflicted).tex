@@ -135,6 +135,12 @@ For a full overview about the performance all three metrics are sued for the eva
 
 \textit{Explanation of results...}
 
+\subsubsection*{\textit{Notes}}
+
+\begin{itemize}
+    \item \textit{TODO: Compare model against baseline regression model (Cookbook)}
+\end{itemize}
+
 
 \section{Relevance}
 % Does the model achieve a good bias-variance tradeoff? Which means neither overfitting or unterfitting the data.
@@ -211,51 +217,82 @@ There are a number of ways to evaluate the performance of regression models, inc
 As mentioned in section~\ref{sec:dataset_exploration}~dataset~exploration the dataset has a high quality with no outliers and no missing values.
 Therefore, these data quality issues will be added to the dataset to measure the robustness of the model.
 
-\subsection{Missing values}
+\subsection{Missing Data}
 When applying the model to real-world data, there is a chance that some values are missing. Two possible scenarios are possible:
 
 \begin{enumerate}
-    \item \textbf{Missing $Vt$-combinations}: There is no data available about a metal with a certain thickness and die opening. Reasons could be that the metal is not used in the industry or the data was never measured.
+    \item \textbf{Missing Missing Die Openings}: There is no data available about a metal with a certain thickness and die opening ($Vt$-combination). Reasons could be that the metal is not used in the industry or the data was never measured.
     \item \textbf{Missing values}: There is data for the $Vt$ combination but some values are missing because of general data quality issues.
     \item \textbf{Outliers}: There are values that are not in the range of the dataset. Reasons could be that the data was measured incorrectly.
 \end{enumerate}
 
 To measure all three of these scenarios, three different tests where created. The first test measures the robustness of the model.
 
-\subsubsection*{1. Missing $Vt$-combinations}
-As can be seen Figure~\ref{fig:train_test_split} of the test and training dataset, all possible $Vt$ combinations in the set parameter range where measured.
+\subsubsection*{1. Missing Die Openings}
+As can be seen Figure~\ref{fig:train_test_split} of the test and training dataset, all possible $Vt$ combinations are present in the dataset, also
 This is not the case in real-world data. Therefore, the robustness of the model has to be measured with missing $Vt$ combinations.
 
-Therefore, certain $Vt$ combinations were removed from the training dataset. The removed $Vt$ combinations were chosen randomly. The number of removed $Vt$ combinations was 10\% of the total number of $Vt$ combinations in the training dataset.
-Subsequently the model was trained on the training dataset with the removed data and evaluated on the test dataset.
-The performance of the mode is measures against the performance of the model trained with all data. 
+Note: In previous sections all samples with the die opening 30 where used as testing set. This makes sense fore reasons explained in Section~\ref{sec:model-training} but this approach is not feasible for measuring the robustness of the model.
 
-\subsubsection*{Calculation of the loss of accuracy}
-The process described above was done 100 times, to mitigate the effect of the random selection of the $Vt$ combinations. 
-The calculation of the loss of accuracy is follows Equation~\ref{eq:mla}, the metric is called Mean Loss Of Accuracy (\ac{MLA}).
+A robust model should be able to perform well even when certain die openings are not present in the data. To accurately evaluate its ability to generalize to new die openings, it is important to ensure that a specific die opening is not used for both training and testing.
+Therefore, \textit{leave one group out cross-validation} was used.
+The dataset was split into groups, each group contains all samples with the same die opening which results in 5 groups with $V 10, 20, 30, 40$ and $50$.
 
-\paragraph*{Mean Loss Of Accuracy}
-\begin{equation}
-    \label{eq:mla}
-    \text{MLA} = \frac{1}{100} \sum_{i=1}^{100} \left( \text{MSE}_{all} - \text{MSE}_{missing} \right)
-\end{equation}
+To evaluate the robustness the average loss of accuracy is calculated for each group.
 
-To calculate the loss off accuracy the models trained with missing $Vt$ combinations were compared to the model trained with all data. 
+For evaluation the mean $R^2$ is calculated for each group. The mean $R^2$ is calculated with the formula~\ref{eq:r2}.
+
+
+To calculate the loss off accuracy the models trained with missing $Vt$ combinations were compared to the model trained with all data.
 The difference between the \ac{MSE} of the models was calculated. The total loss of accuracy was calculated by averaging the difference of the \ac{MSE} of the models.
 
-
-
-
 \subsubsection*{2. Missing values}
+Another data quality issue that can occur in real-world data are missing values.
+Different to the missing die openings data quality error here not all data with a certain die opening is missing, but some data points are missing.
+
+In the used dataset each die opening has an evenly distributed punch penetration values, which has a positive impact on the performance of the models.
+
+\subsubsection*{Finding a Method}
+To test the robustness of the model to missing values, iteratively more samples are removed from the dataset and the models are trained and tested with the remaining data.
+
+The most accurate way to do that would be \textit{Leave P Out Cross-Validation}, which creates all possible training and test set while removing p samples from the complete set. This means that overlapping tests sets will be created which results in a high number of iterations which is costly.
+Even with the used 380 samples this would result in to many iterations, which is not feasible.
+
+That is the reason \textit{K-Fold Cross Validation} with an increasing number of folds was used.
+The minimum number of folds is 2, which means that the model is trained with half of the data and tested with half of the data.
+The maximum number of folds is the number of samples in the dataset, which means that the model is trained with only 1 sample and tested with the remaining samples.
+
+To measure the robustness of the model the \textit{Average Loss} (AL) is calculated with Equation~\ref{eq:average_loss}, where $n$ is the number of samples in the dataset.
+
+\subsubsection*{Implementation of the Method}
+The number of folds of the \textit{K-Fold Cross Validation} is iteratively increased from 2 to $n$, which is the number of samples in the dataset.
+For each fold the \ac{RMSE} is calculated and the mean \ac{RMSE} is calculated across all folds.
+
+Afterwards, the mean \ac{RMSE} for each cross-validation was calculated, and the difference between all mean \ac{RMSE} was defined as the loss of accuracy. The total loss of accuracy was calculated by averaging the difference of the \ac{RMSE} of the models.
+
+The difference between all mean \ac{RMSE} was defined as the loss of accuracy. The total loss of accuracy was calculated by averaging the difference of the \ac{RMSE} of the models.
+
+The calculation of the average loss of accuracy is shown in Equation~\ref{eq:average_loss}.
+
+\paragraph*{Average Loss}
+
+\begin{equation}
+    \label{eq:average_loss}
+    AL = \frac{\sum_{k=2}^{n} \frac{loss_{RF} - loss_{SVM}}{loss_{RFj}}}{n-1}
+\end{equation}
+
+Note: Imputations of missing values can be used to equalize the loss of accuracy. This is not done in this thesis because the goal is to measure the robustness of the model to missing values.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{average_loss}
+    \caption{Average Loss Example}
+    \label{fig:average_loss}
+\end{figure}
 
 \subsubsection*{3. Outliers and wrong data}
 To measure the robustness of the model, outliers were added to the data. The outliers were added to the data in the following way:
 
-Outliers where added to the training dataset.
-The model was trained on the training dataset.
-The model was evaluated on the test dataset.
-The outliers where removed from the training dataset.
-The process was repeated 100 times.
 
 \subsubsection*{Noise}
 \textit{Not sure if I want to measure that.}
@@ -271,18 +308,18 @@ Note: This process of measuring the robustness of the model differs from the app
         \centering
         \begin{tabular}{llll}
             \toprule
-            \thead{\textbf{Model Name}} & {\thead{\textbf{Missing $Vt$-combinations}                 \\ \unit{loa}}}
+            \thead{\textbf{Model Name}} & {\thead{\textbf{Missing $V$}                    \\ \unit{loa}}}
 
-                                        & {\thead{\textbf{Missing Values}                            \\ \unit{loa}}}
-                                        & {\thead{\textbf{Outliers}                                  \\ \unit{loa}}}                  \\
+                                        & {\thead{\textbf{Missing Values}                 \\ \unit{al}}}
+                                        & {\thead{\textbf{Outliers}                       \\ \unit{loa}}}                  \\
             \toprule
-            \textbf{Random Forest}      & 0.034                                      & 0.000 & 0.771 \\
+            \textbf{Random Forest}      & 0.034                           & 0.004 & 0.000 \\
             \hdashline
-            \textbf{Boosting}           & 0.000                                      & 0.000 & 0.000 \\
+            \textbf{Boosting}           & 0.000                           & 0.000 & 0.000 \\
             \hdashline
-            \textbf{Linear Regression}  & 0.000                                      & 0.000 & 0.000 \\
+            \textbf{Linear Regression}  & 0.000                           & 0.000 & 0.000 \\
             \hdashline
-            \textbf{Support Vector}     & 0.000                                      & 0.000 & 0.000 \\
+            \textbf{Support Vector}     & 0.000                           & 0.000 & 0.000 \\
             \bottomrule
         \end{tabular}
         \caption{Results of used machine learning models regarding the design principle robustness.}
@@ -295,6 +332,7 @@ Note: This process of measuring the robustness of the model differs from the app
 \begin{itemize}
     \item \textit{An alternative metric instead of ELA could be the approach of Scher and Trügler. But it would be necessary to implement the metric in Python.}
     \item \textit{Decide if I want to evaluate noise as well or if the rest is enough.}
+    \item \textit{TODO: Visualize effect of training set size (Cookbook)}
 \end{itemize}
 
 
@@ -303,7 +341,6 @@ Note: This process of measuring the robustness of the model differs from the app
 % Leave-one-out cross-validation stability 
 Stability is the ability of the model to generate repeatable results when trained on different data. \cite[p. 16]{siebert_constructionqualitymodel_}
 To measure the stability of the model, leave-one-out cross-validation (\ac{LOOCV}) was used.
-\ac{LOOCV} is
 
 
 \paragraph*{Leave-one-out cross-validation \ac{LOOCV}}
@@ -353,10 +390,20 @@ On the other hand, a high variances indicates an unstable model and is a sign of
     \item \textit{Why exactly does the variance of LOOCV measure the robustness and the variance of CV the relevane?}
 \end{itemize}
 
-\section{Interpretability}
+\section{Interpretability and Explainability}
 % How well can the model be explained?
 % Complexity measures (e.g., no. of parameters, depth)
 % R^2 value ???? 
+
+
+
+Interpretability is linked to the model. A model is said to be interpretable if we can interpret directly the impact of its parameters on the outcome. Among interpretable models, one can for example mention : Linear and logistic regression, Lasso and Ridge regressions, Decision trees, etc.
+
+Explainability can be applied to any model, even models that are not interpretable. Explainability is the extent to which we can interpret the outcome and the internal mechanics of an algorithm.
+
+
+
+
 Interpretability refers to the ease with which humans can understand and make sense of the decisions made by a trained machine learning model. \cite[p. 16]{siebert_constructionqualitymodel_} It is the extent to which the inner workings of the model and the reasoning behind its predictions can be understood by human users. Good interpretability is important because it allows users to trust and rely on the model, and it can also help with debugging and improving the model.
 To measure the interpretability of the model, the following metrics are used:
 
@@ -463,3 +510,31 @@ The more storage space required to store the model, the more resources are requi
 
 \section{Summary}
 Using the evaluation metrics described in the previous sections, the following results were achieved.
+
+\subsubsection*{\textit{Notes}}
+
+
+\textbf{Status Evaluation}
+
+\begin{table}[h]
+    \centering
+    \begin{tblr}{
+            colspec = {|c|c|c|c|c|c|c|},
+            cell{2}{1} = {red7},
+            cell{2}{2} = {green7},
+            cell{2}{3} = {green7},
+            cell{2}{4} = {yellow7},
+            cell{2}{5} = {green7},
+            cell{2}{6} = {yellow7},
+            cell{2}{7} = {green7},
+            % row{2} = {purple7},
+            % column{3} = {teal7},
+            % cell{2}{3} = {yellow7},
+        }
+        \hline
+        DP1 (A) & DP2 (C) & DP3 (R) & DP4 (R) & DP5 (S) & DP6 (I) & DP7 (R) \\
+        \hline
+        1   & 0  & 1  & 1  & 0 & 1 & 0  \\
+        \hline
+    \end{tblr}
+\end{table}

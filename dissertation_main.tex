@@ -20,7 +20,7 @@
 %% change accordingly
 
 %\documentclass[twosie]{um}  % custom University of Malta project/dissertation/thesis
-\documentclass[parskip=full]{um}  % custom University of Malta project/dissertation/thesis
+\documentclass[]{um}  % custom University of Malta project/dissertation/thesis
 
 
 %% **************** (Your) Packages (Start) ******************
@@ -48,7 +48,11 @@
 \usepackage{tcolorbox}
 \usepackage{ulem} % to cancel / strikeout text
 \usepackage{arydshln} % hdashlines
+\usepackage{tabu}% http://ctan.org/pkg/tabu
+\usepackage{multirow}
 
+
+\setlength\intextsep{18pt} % space between figures
 
 \setlength\dashlinedash{0.5pt}
 \setlength\dashlinegap{2pt}
@@ -108,8 +112,9 @@
 
 \begin{document}
 
-    % Do not indent paragraphs \setlength{\parindent}{0pt}
-    \parskip = 6pt
+    % Do not indent paragraphs
+    \setlength{\parindent}{0pt}
+    \parskip = 8pt
 
 \frontmatter
     \maketitle

@@ -104,7 +104,7 @@ The number of experiments can be reduced using a meta-model like \ac{ANN}. \cite
 A approach fully based on \ac{ML} should perfor
 
 
-\section{Dataset generation}
+\section{Dataset generation}\label{sec:dataset-generation}
 For the dataset generation, bending experiments were performed on metal sheets with different
 thicknesses.
 % material
@@ -123,98 +123,103 @@ The following describes the experimental setup used for the experiments performe
 % (Multiple cycles) can be
 % omitted. 4.2.2 is needed in order to understand the data set.
 
-\subsection{Preliminary Tests}
-A number of preliminary tests were conducted to determine the influence of the punch penetration
-on the spring back.
+%\subsection{Preliminary Tests}
+%A number of preliminary tests were conducted to determine the influence of the punch penetration
+%on the spring back.
+%
+%\subsubsection{Multiple Cycles}
+%One approach was to test if multiple spring back can be measure using only one sheet.
+%Therefore, the machine was programmed to perform multiple cycles in one attempt and bend the
+%metal sheet multiple
+%times. The benefit of this approach would have been a faster generation of the dataset because
+%spring backs could be
+%measured in on attempt, also less material would have been used.
+%
+%Figure~\ref{springback_multiple} shows one of these attempts. The metal sheet was bent 4 times
+%using $y_p$ values
+%from 5 to 8. The results show, that 4 different spring backs can be measured, but the spring back
+%does not vary like
+%expected. It was observed as well, that the spring backs are different in every attempt, this is
+%shown in
+%Figure~\ref{springback_multiple_inconsistent_results}.
+%Bending 4 different metal sheets each only one time returned very different results.
+%A possible explanation could be the cold deformation of the steel, which is not reversible.
+%Because this approach did
+%not work, the machine was programmed to perform one cycle at a time.
+%
+%\captionsetup{width=0.45\textwidth}
+%
+%\begin{figure}[H]
+%    \centering
+%    \begin{minipage}[b]{0.5\textwidth}
+%        \centering
+%        \includegraphics[width=0.9\textwidth]{springback_multiple.jpg} % first figure itself
+%        \caption{Experiment: Bending one metal sheet multiple times with different $y_p$ values.}
+%        \label{springback_multiple}
+%    \end{minipage}\hfill
+%    \begin{minipage}[b]{0.5\textwidth}
+%        \centering
+%        \includegraphics[width=1.1\textwidth]{springback_multiple_inconsistent_results.png} %
+%        second figure itself
+%        \caption{Inconsisten results bending one metal sheet mutliple times. The spread of the
+%        results is very large.}
+%        \label{springback_multiple_inconsistent_results}
+%    \end{minipage}
+%    \label{fig:springback_multiple_overview}
+%\end{figure}
 
-\subsubsection{Multiple Cycles}
-One approach was to test if multiple spring back can be measure using only one sheet.
-Therefore, the machine was programmed to perform multiple cycles in one attempt and bend the
-metal sheet multiple
-times. The benefit of this approach would have been a faster generation of the dataset because
-spring backs could be
-measured in on attempt, also less material would have been used.
+%\subsubsection{Bending Machine}
+%Before using the three point bending machine, a brake bending machine was used to test the
+%influence of the bending
+%on the spring back. The brake bending machine is a machine used to bend metal sheets. It is a
+%very common machine in
+%the industry and is used to bend metal sheets to a specific radius. The brake bending machine
+%used is a
+%\textit{Bendmaster 1000} from \textit{Bendmaster}.
+%
+%After a series of bends it was observed, that the spring back values where much higher than
+%expected. The explanation
+%for that behavior was, that altering the position the bending beam of that specific machine was
+%not enough to get the
+%desired angle. Thus, the machine excluded for the generation of the data and the three point
+%bending machine was used
+%instead.
+%
+%Despite the inaccurate data, it was later observed, that the distribution of the spring backs was
+%very similar to the
+%later experiments with the three point bending machine.
 
-Figure~\ref{springback_multiple} shows one of these attempts. The metal sheet was bent 4 times
-using $y_p$ values
-from 5 to 8. The results show, that 4 different spring backs can be measured, but the spring back
-does not vary like
-expected. It was observed as well, that the spring backs are different in every attempt, this is
-shown in
-Figure~\ref{springback_multiple_inconsistent_results}.
-Bending 4 different metal sheets each only one time returned very different results.
-A possible explanation could be the cold deformation of the steel, which is not reversible.
-Because this approach did
-not work, the machine was programmed to perform one cycle at a time.
+\subsection{Experimental setup}\label{subsec:experimental-setup}
+The experimental setup comprises of a three-point bending machine, consisting of a punch and
+die, with the latter lacking a bottom, which allows only air bending metal-sheet.
+The material testing machine utilized is the \textit{Zwick MX 25A}, which is equipped with a load
+cell and a displacement sensor.
+The load cell measures the force applied to the sheet (in $N$), while the displacement sensor
+measures the displacement of the punch ($y_p$).
+The punch is mounted on the top of the machine and is stationary, while the die is mounted on the
+bottom and is the part which can be moved.
+The machine is operated via a computer and the \textit{ZwickRöll TestXpert} software, which is
+used for both machine control and data collection.
 
-\captionsetup{width=0.45\textwidth}
+The experimental setup and the process parameters are shown in
+Figure~\ref{fig:process_parameters} where $V$ is the die opening which is the opening between the
+the two points between the sheet metal is placed.
+The parameters $y_p$ is the punch penetration, which is the distance the punch is moved into the
+sheet.
+The parameter $t$ is the thickness of the metal sheet while $\alpha$ is the corresponding
+angle after the bending process..
+Parameter $r_p$ is the punch radius which is the radius of the tip of the punch, which was never
+replaced in all experiments and therefore remains constant.
 
-\begin{figure}[H]
-    \centering
-    \begin{minipage}[b]{0.5\textwidth}
+
+\begin{figure}[h]
+    \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
         \centering
-        \includegraphics[width=0.9\textwidth]{springback_multiple.jpg} % first figure itself
-        \caption{Experiment: Bending one metal sheet multiple times with different $y_p$ values.}
-        \label{springback_multiple}
-    \end{minipage}\hfill
-    \begin{minipage}[b]{0.5\textwidth}
-        \centering
-        \includegraphics[width=1.1\textwidth]{springback_multiple_inconsistent_results.png} %
-        second figure itself
-        \caption{Inconsisten results bending one metal sheet mutliple times. The spread of the
-        results is very large.}
-        \label{springback_multiple_inconsistent_results}
-    \end{minipage}
-    \label{fig:springback_multiple_overview}
-\end{figure}
-
-\subsubsection{Brake Bending Machine}
-Before using the three point bending machine, a brake bending machine was used to test the
-influence of the bending
-on the spring back. The brake bending machine is a machine used to bend metal sheets. It is a
-very common machine in
-the industry and is used to bend metal sheets to a specific radius. The brake bending machine
-used is a
-\textit{Bendmaster 1000} from \textit{Bendmaster}.
-
-After a series of bends it was observed, that the spring back values where much higher than
-expected. The explanation
-for that behavior was, that altering the position the bending beam of that specific machine was
-not enough to get the
-desired angle. Thus, the machine excluded for the generation of the data and the three point
-bending machine was used
-instead.
-
-Despite the inaccurate data, it was later observed, that the distribution of the spring backs was
-very similar to the
-later experiments with the three point bending machine.
-
-\subsection{Experimental setup}
-The setup consists of a three-point-bending machine with a punch and a die with no bottom. The
-machine used is the
-\textit{Zwick MX 25A} material testing machine.
-The machine is equipped with a load cell and a displacement sensor. The load cell is used to
-measure the force
-applied to the sheet and the displacement sensor is used to measure the displacement of the punch.
-The machine is controlled by a computer and a software called \textit{ZwickRoell TestXpert}. The
-software is used to
-control the machine and to save the output data.
-
-The experimental setup and the process parameters are shown in Figure~\ref{fig:setup} where $V$
-is the die opening,
-$y_p$ is the punch penetration which is the distance the punch is moved into the sheet.
-The paramter $t$ is the sheet thickness,  $\alpha$ is the sheet corresponding bending angle.
-Parameter $r_p$ is the
-punch radius which is the radius of the tip of the punch and $r_m$ is the die radius.
-
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.6\textwidth]{setup}
-    \caption{Process parameters: Sheet bending angle ($\alpha$), sheet thickness ($t$), punch
-    penetration ($y_p$),
-        die opening ($V$), punch radius ($r_p$), die radius ($r_m$), inside bending radius ($r_i$).}
-    \label{fig:setup}
+        \includegraphics[trim=left botm right top, width=0.6\textwidth, clip]{process_parameters}
+        \caption{Process parameters: Sheet bending angle ($\alpha$), sheet thickness ($t$), punch
+        penetration ($y_p$), die opening ($V$) and punch radius ($r_p$)}
+        \label{fig:process_parameters}
+    \end{tcolorbox}
 \end{figure}
 
 In order to get consistent results, a number of constant and variable parameters were chosen.
@@ -223,53 +228,98 @@ The parameters include the punch-and-die tooling made of steel where die punch h
 die radius ($r_m$) of 10 mm. The die opening $V$ was varied between 10 and 50 mm and the punch
 penetration $y_p$ was
 varied between 0 and 20 mm.
+
 The machine was configured to move the punch with a constant speed of 100 mm/min until it
-measured a resistance of 1
-N. That meant, that the punch reached the metal plate and the actual bending process can start.
-After a hold time of
-1 second the punch was moved with a slower speed of 8 mm/min until the specified punch
-penetration was reached.
-The length and width of the metal sheet was 100 mm and 20 mm respectively. The sheet thickness
-was varied between 0.5
-and 3 mm.
-The constant parameters are shown in Table~\ref{tab:constant_parameters} and the varying
-parameters are shown in
-Table~\ref{tab:varying_parameters}.
+measured a resistance of 1 N.
+That meant, that the punch reached the metal plate and the actual bending process can start.
+After a hold time of 1 second the punch was moved with a slower speed of 8 mm/min until the
+specified punch penetration was reached.
+The length and width of the metal sheet was 100 mm and 20 mm respectively.
 
-\begin{table}[H]
-    \centering
-    \begin{tabular}{|l|l|l|l|}
-        \hline
-        \textbf{Parameter} & \textbf{} & \textbf{Value}                      & \textbf{Unit} \\
-        \hline
-        Punch penetration  & $y_p$     & 2.5, 5, 7.5, 10, 12.5, 15, 17.5, 20 & mm            \\
-        Die opening        & $V$       & 10, 20, 30, 40, 50                  & mm            \\
-        Thickness          & $t$       & 0,5, 1, 1.5, 2, 2.5, 3              & mm            \\
-        \hline
-    \end{tabular}
-    \caption{Experimental setup varying parameters}
-    \label{tab:varying_parameters}
+Using the \textit{ZwickRöll TestXpert} software, the following parameter where set for the
+experiment, which are summarized in Table~\ref{tab:experimental-setup-constant-parameters}.
+The punch of the machine was never replaced and therefore the radius of the punch remained
+5 mm.
+The width and length of metal sheets where 100 mm and 20 mm respectively.
+The punch speed was set too 80 mm/min and the hold time was set to 1 second, latter is the time
+the punch stays at the end of the metal sheet and has to be a least 1 second which is a limitation
+of the machine.
+After the bending process, the punch was moved back to the starting position with a speed of
+8 mm/min.
+This speed was chosen significantly lower than the speed used for the bending process
+in order to accuratly measure the spring back to avoid any damage to the metal sheet.
+The punch force threshold was set to 1 N, which means, that the punch starts bending the metal a
+soon as it touches the sheet metal.
+
+\begin{table}[htb]
+    \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
+        \sisetup{group-minimum-digits = 4}
+        \centering
+        \label{tab:experimental-setup-constant-parameters}
+        \begin{tabular}{lll}
+            \toprule
+            \thead{\textbf{Parameter}} & \thead{\textbf{Values}} & \thead{\textbf{Unit}}
+            \\
+            \midrule
+            Punch radius & 5 & $mm$
+            \\
+            \hdashline
+            Sheet width & 20 & $mm$
+            \\
+            \hdashline
+            Sheet length & 100 & $mm$
+            \\
+            \hdashline
+            Punch speed & 80 &
+            $mm/min$ \\
+            \hdashline
+            Punch speed up (after bend) & 8 &
+            $mm/min$ \\
+            \hdashline
+            Hold time & 1 & $s$ \\
+            \hdashline
+            Punch force threshold & 1 & $N$
+            \\
+            \bottomrule
+        \end{tabular}
+        \caption{Constant parameters in th eperimental setup}
+    \end{tcolorbox}
 \end{table}
 
-\begin{table}[H]
-    \centering
-    \begin{tabular}{|l|l|l|}
-        \hline
-        \textbf{Parameter}            & \textbf{Value} & \textbf{Unit} \\ \hline
-        Punch radius                  & 5              & mm            \\
-        Die radius                    & 5              & mm            \\
-        Sheet width                   & 20             & mm            \\
-        Sheet length                  & 100            & mm            \\
-        Punch speed                   & 100            & mm/min        \\
-        Punch speed after penetration & 8              & mm/min        \\
-        Punch force                   & 1              & N             \\
-        \hline
-    \end{tabular}
-    \caption{Experimental setup constant parameters}
-    \label{tab:constant_parameters}
+The following parameters where varied in the experiments, which are summarized in
+Table~\ref{tab:experimental-setup-variable-parameters}.
+The die opening $V$ was varied between 10 and 50 mm and the punch penetration $y_p$ was varied
+between 0 and 20 mm.
+The thickness of the metal sheet $t$ was varied between 0.5 and 2 mm.
+Also the punch penetration $y_p$ was varied between 0 and 20 mm.
+
+\begin{table}[htb]
+    \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
+        \sisetup{group-minimum-digits = 4}
+        \centering
+        \label{tab:experimental-setup-variable-parameters}
+        \begin{tabular}{lll}
+            \toprule
+            \thead{\textbf{Parameter}} & \thead{\textbf{Values}} & \thead{\textbf{Unit}}
+            \\
+            \midrule
+            %  \unit{(Kcal\per\mole)\squared}}} & \thead{RMSD l.b.} & \thead{RMSD u.b.}  \\
+            \midrule
+            Punch penetration  $y_p$ & 2.5, 5, 7.5, 10, 12.5, 15, 17.5, 20 &
+            mm \\
+            \hdashline
+            Die opening        $V$ & 10, 20, 30, 40, 50
+            & mm \\
+            \hdashline
+            Thickness          $t$ & 0,5, 1, 1.5, 2, 2.5, 3
+            & mm \\
+            \bottomrule
+        \end{tabular}
+        \caption{Varying parameters in the experimental setup}
+    \end{tcolorbox}
 \end{table}
 
-\subsection{Measuring The Spring Back} \label{sec:measuring_the_spring_back}
+\subsection{Measuring The Spring Back} \label{subsec:measuring_the_spring_back}
 The output data contained different data points, which were used to calculate the spring back.
 Important parameters for the calculation are the force, punch penetration and testing time.
 As shown in Figure~\ref{fig:springback_measured} at the $y_p$ maximum the punch penetration and
@@ -286,12 +336,14 @@ using a python script,
 the green and the yellow point represent the resulting spring back distance.
 
 \begin{figure}[H]
-    \centering
-    \includegraphics[width=0.9\textwidth]{springback_measured}
-    \caption{A steel metal sheet was bent with a punch penetration of 5 mm the spring back is 0
-    .37 mm. The blue line
-    shows the force and the blue line shows the punch penetration.}
-    \label{fig:springback_measured}
+    \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
+        \centering
+        \includegraphics[width=0.9\textwidth]{springback_measured}
+        \caption{A steel metal sheet was bent with a punch penetration of 5 mm the spring back is 0
+        .37 mm. The blue line
+        shows the force and the blue line shows the punch penetration.}
+        \label{fig:springback_measured}
+    \end{tcolorbox}
 \end{figure}
 
 \subsubsection*{\textit{Notes}}
@@ -311,43 +363,43 @@ the green and the yellow point represent the resulting spring back distance.
 
 \label{sec:dataset_exploration}
 
-\subsection{Dataset Exploration}
+\subsection{Dataset Exploration}\label{subsec:dataset-exploration}
 
 \subsubsection{Features}
 The output data of the bending machine contained 26 features which can be found in the appendix.
 Out of these
 features only the standard power and the distance $y_p$ and the force are relevant for
 calculating the spring back
-which was described in the last section \ref{sec:measuring_the_spring_back}.
+which was described in the last section \ref{subsec:measuring_the_spring_back}.
 The final dataset therefore contained 3 features plus the added spring back.
 In total 396 data points where crated using the described approach.
 An example of the dataset is shown in Table~\ref{tab:dataset_example}.
 
-\begin{table}[H]
-    \centering
-    \begin{tabular}{|l|l|l|l|l|}
-        \hline
-        \textbf{} & \textbf{distance} & \textbf{spring back} & \textbf{thickness} & \textbf{die
-        opening} \\ \hline
-        1 & 5 & 0.6667 & 2.0 & 50
-        \\
-        2 & 15 & 0.9164 & 2.0 & 50
-        \\
-        3 & 10 & 0.6829 & 2.0 & 50
-        \\
-        ... & ... & ... & ... & ...
-        \\
-        396 & 5 & 0.6667 & 3.0 & 10
-        \\
-        \hline
-    \end{tabular}
-    \caption{Features used for the machine learning models}
-    \label{tab:dataset_example}
+\begin{table}[htb]
+    \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
+        \sisetup{group-minimum-digits = 4}
+        \centering
+        \label{tab:dataset_example}
+        \begin{tabular}{l|llll}
+            \toprule
+            \thead{\textbf{index}} & \thead{\textbf{Distance}} & \thead{\textbf{Spring Back}} &
+            \thead{\textbf{Thickness}}
+            & \thead{\textbf{Die Opening}}
+            \\
+            1   & 5   & 0.6667 & 2.0 & 50  \\
+            \hdashline
+            2   & 15  & 0.9164 & 2.0 & 50  \\
+            \hdashline
+            3   & 10  & 0.6829 & 2.0 & 50  \\
+            \hdashline
+            ... & ... & ...    & ... & ... \\
+            \hdashline
+            396 & 5   & 0.6667 & 3.0 & 10  \\
+            \bottomrule
+        \end{tabular}
+        \caption{Varying parameters in the experimental setup}
+    \end{tcolorbox}
 \end{table}
-
-\begin{itemize}
-    \item \sout{TODO: Describe Figure~\ref{fig:rf_feature_importance}}
-\end{itemize}
 
 With 100 estimators in \ac{RF} a \ac{MSE} of 0.15 and \ac{RMSE} 0.39 was achieved.
 Figure~\ref{fig:rf_feature_importance} compares and visualizes the relative importance of the
@@ -359,14 +411,16 @@ three featured are relevant for the outcome and so no feature can be removed fro
 get a better
 performance of the model.
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.6\textwidth]{Random_Forest_Regression_importances}
-    \caption{Relative feature importance}
-    \label{fig:rf_feature_importance}
+\begin{figure}[htb]
+    \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
+        \centering
+        \includegraphics[width=0.6\textwidth]{Random_Forest_Regression_importances}
+        \caption{Relative feature importance}
+        \label{fig:rf_feature_importance}
+    \end{tcolorbox}
 \end{figure}
 
-\subsection{Visualizing The Data}
+\subsection{Visualizing The Data}\label{subsec:visualizing-the-data}
 Figure~\ref{fig:v30_springbacks} shows the spring backs for the $V30$ dataset.
 In general, it can be seen that the spring backs is less for lower thicknesses and higher for
 higher thicknesses.
@@ -378,18 +432,20 @@ The factors for the behavior of the spring back can't be fully understood with t
 data, which makes it a
 good case for machine learning.
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.8\textwidth]{V30_all_springbacks}
-    \caption{Springbacks for $V30$}
-    \label{fig:v30_springbacks}
+\begin{figure}[htb]
+    \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
+        \centering
+        \includegraphics[width=0.8\textwidth]{V30_all_springbacks}
+        \caption{Springbacks for $V30$}
+        \label{fig:v30_springbacks}
+    \end{tcolorbox}
 \end{figure}
 
 \subsubsection*{\textit{Notes}}
 \begin{itemize}
     \item \textit{TODO: Add better picture. Ordered by $t$, better colors, scienceplot, punch
-    penetration instead of
-    \item spring back}
+    penetration instead of spring back}
+    \item \textit{Experimental setup methodology like Jonas.}
 \end{itemize}
 
 \subsubsection{Data Quality}
@@ -421,7 +477,7 @@ test the robustness of the models.
     \item \textit{Add some data quality measure?}
 \end{itemize}
 
-\subsection{Data Preprocessing}
+\subsection{Data Preprocessing}\label{subsec:data-preprocessing}
 
 The three independent features $y_p$, $V$ and $t$ as well as the dependend feature $spring\_back$
 were normalized
@@ -464,18 +520,24 @@ using the IDE PyCharm. The libraries used are mentioned in Table~\ref{table:libr
 
 \captionsetup{width=1\textwidth}
 
-\begin{table}[H]
-    \centering
-    \begin{tabular}{|ll|}
-        \hline
-        \textbf{Library} & \textbf{Version} \\
-        \hline
-        numpy            & 1.23.2           \\
-        pandas           & 1.5.1            \\
-        matplotlib       & 3.6.2            \\ \hline
-    \end{tabular}
-    \caption{Libraries used for the machine learning models.}
-    \label{table:libraries}
+\begin{table}[htb]
+    \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
+        \sisetup{group-minimum-digits = 4}
+        \centering
+        \label{table:libraries}
+        \begin{tabular}{ll}
+            \toprule
+            \thead{\textbf{Library}} & \thead{\textbf{Version}} &
+            \toprule
+            numpy & 1.23.2 \\
+            \hdashline
+            pandas & 1.5.1 \\
+            \hdashline
+            matplotlib & 3.6.2 \\ \hline
+            \bottomrule
+        \end{tabular}
+        \caption{Libraries used for the machine learning models.}
+    \end{tcolorbox}
 \end{table}
 
 Looking at the correlation matrix shown in Figure~\ref*{fig:correlation_matrix} it can be seen,
@@ -487,10 +549,12 @@ other, no
 multicollinearity is present which is good for the machine learning models.
 
 \begin{figure}[H]
-    \centering
-    \includegraphics[width=0.9\textwidth]{correlation_matrix}
-    \caption{Correlation matrix}
-    \label{fig:correlation_matrix}
+    \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
+        \centering
+        \includegraphics[width=0.8\textwidth]{correlation_matrix}
+        \caption{Correlation matrix}
+        \label{fig:correlation_matrix}
+    \end{tcolorbox}
 \end{figure}
 
 
@@ -534,7 +598,6 @@ also known as gaussian kernel.
 In practise the mathematical details behind these kernels are not important, but it is important
 to know that they are used to transform the data into a higher dimensional space, where the data
 is linearly separable.
-
 
 \subsection{Multi Linear Regression}\label{subsec:multi-linear-regression}
 
@@ -864,47 +927,18 @@ common practice is to fit n estimators depending on the time and
 memory budget, and then search over different learning rates." \cite[p.
 88-89]{muller_introductionmachinelearning_2016}
 
-
-
 \subsection{Support Vector Machine}\label{subsec:support-vector-machine}
 
 \subsubsection*{Hyperparameter Tuning}
-% "Tuning SVM parameters
-% The gamma parameter is the one shown in the formula given in the previous section,
-% which controls the width of the Gaussian kernel. It determines the scale of what it
-% means for points to be close together. The C parameter is a regularization parameter,
-% similar to that used in the linear models. It limits the importance of each point (or
-% more precisely, their dual_coef_)."
-% \cite[p. 99]{muller_introductionmachinelearning_2016}
-
-"From this plot we can determine that features in the Breast Cancer dataset are of
-completely different orders of magnitude. This can be somewhat of a problem for
-other models (like linear models), but it has devastating effects for the kernel SVM.
-Let’s examine some ways to deal with this issue."
-\cite[p. 101]{muller_introductionmachinelearning_2016}
-
-"One way to resolve this problem is by rescaling each feature so that they are all
-approximately on the same scale. A common rescaling method for kernel SVMs is to
-scale the data such that all features are between 0 and 1. We will see how to do this
-using the MinMaxScaler preprocessing method in Chapter 3, where we’ll give more
-details. For now, let’s do this “by hand”:"
-\cite[p. 102]{muller_introductionmachinelearning_2016}
-
-"Scaling the data made a huge difference! Now we are actually in an underfitting
-regime, where training and test set performance are quite similar but less close to
-100% accuracy. From here, we can try increasing either C or gamma to fit a more com‐
-plex model.
-\cite[p. 103]{muller_introductionmachinelearning_2016}
-
 The \textit{kernel}, \textit{degree}, \texit{gamma} and \textit{epsilon} where set using grid
 search cross validation.
 Gamma controls the width of the gaussian kernel, it determines when points are close or far away.
 The C parameter controls the importance of each point.
-The features of the dataset have different order of magnitude, this is already a problem for other
-models, but big effects on the kernel SVM.
 
-\texit{Insert example here}
-To resolve this problem the data was scaled between 0 and 1.
+The features of the dataset have different order of magnitude, this is already a problem for other
+models, but big effects on the kernel \ac{SVM}.
+To resolve this problem the data was scaled using the \textit{MinMaxScaler} between 0 and 1.
+The model trained on the scaled data performed better than the model trained on the unscaled data.
 
 \subsubsection*{Notes}
 \begin{itemize}
@@ -949,7 +983,6 @@ To resolve this problem the data was scaled between 0 and 1.
     \item \textit{The code is available on GitHub: \url{www.github.com/...}}
     \item \textit{TODO: Short explanation what to do to reproduce the results.}
 \end{itemize}
-
 
 % \paragraph{Bend deduction:}
 % Measuring the bend deduction is more complex. After a metal sheet is bent, it is hard to

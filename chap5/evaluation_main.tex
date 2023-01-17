@@ -1,11 +1,17 @@
 \chapter{Evaluation}
 % take a step back and put your results from 4 into context. 
-This chapter critically examines the machine learning models conceived and partially implemented in the previous chapter.
-Table~\ref*{tab:evaluation_criteria} shows an overview of the evaluated criteria. These are structured according to the Goal-Question-Metric approach.
+This chapter critically examines the machine learning models conceived and partially implemented
+in the previous chapter.
+Table~\ref*{tab:evaluation_criteria} shows an overview of the evaluated criteria. These are
+structured according to the Goal-Question-Metric approach.
 
-The quality metrics are oriented on the quality model from \cite[]{siebert_constructionqualitymodel_}, which is based on the ISO/IEC 9126 standard for the evaluation of software quality. \cite[]{iso9126_softwareproductqualitymodel_}. The standard was changed to fit the requirements of machine learning models.
+The quality metrics are oriented on the quality model from
+\cite[]{siebert_constructionqualitymodel_}, which is based on the ISO/IEC 9126 standard for the
+evaluation of software quality. \cite[]{iso9126_softwareproductqualitymodel_}. The standard was
+changed to fit the requirements of machine learning models.
 
-The metrics of the goal \textit{Robustness} where original only defined for classification models and therefore needed to be changed.
+The metrics of the goal \textit{Robustness} where original only defined for classification models
+and therefore needed to be changed.
 \textit{TODO: Explain what has been changed}
 
 \captionsetup{margin={5pt,5pt}}
@@ -18,31 +24,51 @@ The metrics of the goal \textit{Robustness} where original only defined for clas
         {\renewcommand{\arraystretch}{1}
             \begin{tabular}{p{2cm}p{8cm}p{3cm}}
                 \toprule
-                \thead{\textbf{Goal}}         & \thead{\textbf{Question}}                                                                                       & \thead{\textbf{Metric}}                              \\
+                \thead{\textbf{Goal}} & \thead{\textbf{Question}}
+                & \thead{\textbf{Metric}} \\
 
                 \hdashline
-                \textbf{Appropriat- ness}     & How well does the model type fit the current task?                                                              & Prerequisites for model type                         \\
+                \textbf{Appropriat- ness} & How well does the model type fit the current
+                task? &
+                Prerequisites for model type \\
 
                 \hdashline
-                \textbf{Correctness}          & Ability of the model to perform the current task measured on the development dataset and the runtime dataset    &
-                Precision, Recall, F-score                                                                                                                                                                             \\
+                \textbf{Correctness} & Ability of the model to perform the current task measured
+                on the development dataset and the runtime dataset
+                &
+                Precision, Recall, F-score
+                \\
                 \hdashline
-                \textbf{Relevance}            & Does the model achieve a good bias-variance tradeoff? Which means neither overfitting or unterfitting the data. & Variance of cross-validation and fit                 \\
+                \textbf{Relevance} & Does the model achieve a good bias-variance
+                tradeoff? Which means neither overfitting or unterfitting the data.
+                & Variance of cross-validation and fit
+                \\
 
                 \hdashline
-                \textbf{Robustness}           & Ability of the model to outliers, noise and other data quality issues                                           & Equalized Loss of Accuracy (ELA)                     \\
+                \textbf{Robustness} & Ability of the model to outliers, noise and other
+                data quality issues
+                & Equalized Loss of Accuracy (ELA)
+                \\
 
                 \hdashline
-                \textbf{Stability}            & Does the artifact generate repeatable results when trained on different data?                                   & Leave-one-out-cross validation stability             \\
+                \textbf{Stability} & Does the artifact generate repeatable results
+                when trained on different data?
+                & Leave-one-out-cross validation stability
+                \\
 
                 \hdashline
-                \textbf{Interpret- ability}   & How well can the model be explained?                                                                            & Complexity measures (e.g., no. of parameters, depth) \\
+                \textbf{Interpret- ability} & How well can the model be explained?
+                & Complexity measures (e.g., no. of parameters, depth) \\
 
                 \hdashline
-                \textbf{Resource utilization} & How much resources are required to train and run the model?                                                     & Training time, runtime, storage space                \\
+                \textbf{Resource utilization} & How much resources are required to train and run
+                the model?
+                & Training time, runtime, storage space
+                \\
                 \bottomrule
             \end{tabular}
-            \caption{Overview of the goals, questions and metrics for the evaluation of artifacts following the \ac{GQM} approach.}
+            \caption{Overview of the goals, questions and metrics for the evaluation of artifacts
+            following the \ac{GQM} approach.}
         } % renew command 
     \end{tcolorbox}
 \end{table}
@@ -54,26 +80,30 @@ The metrics of the goal \textit{Robustness} where original only defined for clas
 \end{itemize}
 
 
-\section{DP1: Appropriateness}
+\section{DP1: Appropriateness}\label{sec:dp1:-appropriateness}
 % How well does the model type fit the current task?
 % Prerequisites for model type
 
 
-\section{DP2: Correctness}
-% Ability of the model to perform the current task measured on the development dataset and the runtime dataset
+\section{DP2: Correctness}\label{sec:dp2:-correctness}
+% Ability of the model to perform the current task measured on the development dataset and the
+% runtime dataset
 The model must be able to perform well on the selected task.
 To measure the correctness of the model, the metrics MAE, MSE and RMSE are used.
-In the formulas \ref{eq:mae}, \ref{eq:mse} and \ref{eq:rmse} the variable $e_i$ is the prediction error which is the difference between the predicted value by the model the actual value.
+In the formulas \ref{eq:mae}, \ref{eq:mse} and \ref{eq:rmse} the variable $e_i$ is the prediction
+error which is the difference between the predicted value by the model the actual value.
 $y_i$ is the actual value and $n$ is the number of samples in the testing data set.
 
-The mean absolute error (MAE) and mean squared error (MSE) are the most commonly used metrics for evaluating the performance of regression models. \paragraph*{Mean Absolute Error (MAE)}
+The mean absolute error (MAE) and mean squared error (MSE) are the most commonly used metrics for
+evaluating the performance of regression models. \paragraph*{Mean Absolute Error (MAE)}
 
 \begin{equation}
     \label{eq:mae}
     MAE = \frac{1}{n} \sum_{i=1}^{n} |e_i|
 \end{equation}
 
-The MSE is the average of the squared differences between the predicted and the actual values. The MSE is more sensitive to outliers than the MAE.
+The MSE is the average of the squared differences between the predicted and the actual values.
+The MSE is more sensitive to outliers than the MAE.
 
 \paragraph*{Mean Squared Error (MSE)}
 
@@ -82,9 +112,14 @@ The MSE is the average of the squared differences between the predicted and the 
     MSE = \frac{1}{n} \sum_{i=1}^{n} e^2
 \end{equation}
 
-The RMSE is the square root of the MSE. The RMSE is the most popular metric for evaluating the performance of regression models. The RMSE is interpretable in the same units as the response variable. The RMSE is more sensitive to outliers than the MAE.
+The RMSE is the square root of the MSE. The RMSE is the most popular metric for evaluating the
+performance of regression models. The RMSE is interpretable in the same units as the response
+variable. The RMSE is more sensitive to outliers than the MAE.
 The MAE is the average of the absolute difference between the predicted and actual values.
-Additionally the $R^2$ was added to the overview. The $R^2$ is a statistical measure of how close the data are to the fitted regression line. It is also known as the coefficient of determination, or the coefficient of multiple determination for multiple regression. The value of the $R^2$ is the percentage of the response variable variation that is explained by a linear model.
+Additionally the $R^2$ was added to the overview. The $R^2$ is a statistical measure of how close
+the data are to the fitted regression line. It is also known as the coefficient of determination,
+or the coefficient of multiple determination for multiple regression. The value of the $R^2$ is
+the percentage of the response variable variation that is explained by a linear model.
 
 \paragraph*{Root Mean Squared Error (RMSE)}
 
@@ -97,7 +132,9 @@ For a full overview about the performance all three metrics are sued for the eva
 
 % \subsection{Goal Hierarchy}
 
-% The correctness describes the ability of the model to perform on the selected task. Concrete, the model has to predict the spring back as correct as possible. The goal hierarchy for the correctness is shown in Figure~\ref{fig:goal_hierarchie_correctness}.
+% The correctness describes the ability of the model to perform on the selected task. Concrete,
+% the model has to predict the spring back as correct as possible. The goal hierarchy for the
+% correctness is shown in Figure~\ref{fig:goal_hierarchie_correctness}.
 
 % \begin{figure}[H]
 %     \centering
@@ -106,7 +143,7 @@ For a full overview about the performance all three metrics are sued for the eva
 %     \label{fig:goal_hierarchie_correctness}
 % \end{figure}
 
-\subsection{Results}
+\subsection{Results}\label{subsec:results}
 
 % Table wit hall used machine learning models and their metrics
 \begin{table}[H]
@@ -115,17 +152,14 @@ For a full overview about the performance all three metrics are sued for the eva
         \centering
         \begin{tabular}{llll}
             \toprule
-            \thead{\textbf{Model Name}}         & \thead{\textbf{MAE}}
-                                                & \thead{\textbf{MSE}}
-                                                & \thead{\textbf{RMSE}}               \\
-            \textbf{Random Forest (rand split)} & 0.14                  & 0.05 & 0.22 \\
-            \textbf{Random Forest}              & 0.16                  & 0.04 & 0.21 \\
+            \thead{\textbf{Model Name}} & \thead{\textbf{MAE}}
+            & \thead{\textbf{MSE}}
+            & \thead{\textbf{RMSE}} \\
+            \textbf{Random Forest}              & 0.16 & 0.04 & 0.21 \\
+            \textbf{Random Forest (rand.split)} & 0.14 & 0.05 & 0.22 \\
             \hdashline
-            \textbf{Boosting}                   & 0                     & 0    & 0    \\
-            \hdashline
-            \textbf{Linear Regression}          & 0                     & 0    & 0    \\
-            \hdashline
-            \textbf{Support Vector Regression}  & 0                     & 0    & 0    \\
+            \textbf{Support Vector Machine}     & 0.09 & 0.04 & 0.20 \\
+            \textbf{SVM (rand. split)}          & 0.09 & 0.04 & 0.20 \\
             \bottomrule
         \end{tabular}
         \caption{Overview of the used machine learning models and their metrics.}
@@ -136,36 +170,59 @@ For a full overview about the performance all three metrics are sued for the eva
 \textit{Explanation of results...}
 
 
-\section{Relevance}
-% Does the model achieve a good bias-variance tradeoff? Which means neither overfitting or unterfitting the data.
+\section{Relevance}\label{sec:relevance}
+% Does the model achieve a good bias-variance tradeoff? Which means neither overfitting or
+% unterfitting the data.
 
-% Bias variane trade-off 
+% Bias variane trade-off
+A model is considered relevant when it achieves a balance between bias and variance, avoiding
+both overfitting and underfitting of the training data.
+The relevance of the model can be quantified through the \textit{variance of cross-validation},
+which proves insight into how the model perfoms when trained and evaluated on different subsets
+of data and how generalizes.
 
-The model is relevant if it is able to achieve a good bias-variance tradeoff. This means neither overfitting or unterfitting the data.
-The variance of cross-validation scores gives an idea on how stable the model's performance is when it is trained an evaluated on different subsets of data.
-% Chat GPT 
-If the variance is low, it means that the model's performance is relatively consistent across different folds, and you can have more confidence in the evaluation. On the other hand, if the variance is high, it means that the model's performance can vary significantly depending on which data points are used as the test set, and you should be more cautious when interpreting the results.
+% Explanation interpretation of variance
+A low variance indicates that the model's performance is consistent across different folds,
+suggesting that the model is not overfitting the training data.
+Conversely, a high variance implies that the performance can vary significantly depending on the
+specific data points used the test set, indicating a potential overfitting problem.
 
-If the variance is low, it means that the model's performance is relatively consistent across different folds, and you can have more confidence in the evaluation. On the other hand, if the variance is high, it means that the model's performance can vary significantly depending on which data points are used as the test set, and you should be more cautious when interpreting the results.
+Figure~\ref{fig:variance-of-cv} shows how the variance of cross-validation was calculated.
+The parameter $E$ denotes to the estimator which is used to calculate the \ac{CV} score.
+The parameter $k$ denotes to the number of folds, which was set to 5 in this context.
+As estimator for the trained models $R^2$ was used because this is usually the metric used to
+evaluate the regression models.
 
-\paragraph*{Variance of cross-validation}
+\begin{figure}[h]
+    \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
+        \centering
+        \includegraphics[trim=left botm right top, width=0.9\textwidth, clip]{variance_of_cv}
+        \caption{Variance of cross-validation}
+        \label{fig:variance-of-cv}
+    \end{tcolorbox}
+\end{figure}
 
+For completeness the $R^2$ score is also shown int the table.
+The $R^2$ is a statistical measure of how close the data are to the fitted regression line.
+It returns a score between 0 and 1, where 0 means that the model does not explain any of the
+variance in the response variable around its mean, and 1 means that the model explains all the
+variance in the response variable around its mean.
+Therefore, a high $R^2$ indicated a good model fir and good bias-variance tradeoff.
+\cite[p. 43]{muller_introductionmachinelearning_2016}
 
-
-% \begin{equation}
-%     \label{eq:variance_cross}
-%     Variance_{cross} = \frac{1}{n} \sum_{i=1}^{n} (\hat{y}_i - y_i)^2
-% \end{equation}
-
-\paragraph*{R2}
+\paragraph*{$R^2$}
 
 \begin{equation}
     \label{eq:r2}
-    R^2 = 1 - \frac{Variance_{cross}}{Variance_{fit}}
+    R^2 = \frac{Explained\_variance}{Total\_variance\_targert\_variable}
 \end{equation}
 
-Table~\ref*{tab:ml_models_relevance} shows the variance of cross-validation and the $R^2$ for all used machine learning models.
-To calculate the variance of cross-validation  the variance of Scikit-Learn's \texttt{cross\_val\_score} was calculated. five-fold cross-validation was used to calculate the variance of cross-validation. The $R^2$ was calculated with the formula~\ref{eq:r2}.
+Table~\ref*{tab:ml_models_relevance} shows the variance of cross-validation and the $R^2$ for all
+used machine learning models.
+To calculate the variance of cross-validation the variance of Scikit-Learn's
+\texttt{cross\_val\_score} was calculated.
+Five-fold cross-validation was used to calculate the variance of cross-validation. The $R^2$ was
+calculated with the formula~\ref{eq:r2}.
 
 \begin{table}[H]
     \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
@@ -174,15 +231,13 @@ To calculate the variance of cross-validation  the variance of Scikit-Learn's \t
         \begin{tabular}{lll}
             \toprule
             \thead{\textbf{Model Name}} & \thead{\textbf{Variance of CV}}
-                                        & \thead{\textbf{$R^2$}}                  \\
+            & \thead{\textbf{$R^2$}} \\
             \toprule
-            \textbf{Random Forest}      & 0.034                           & 0.771 \\
+            \textbf{Random Forest}               & 0.034 & 0.771 \\
+            \textbf{Random Forest (rand. split)} & 0.034 & 0.771 \\
             \hdashline
-            \textbf{Boosting}           & 0.000                           & 0.000 \\
-            \hdashline
-            \textbf{Linear Regression}  & 0.000                           & 0.000 \\
-            \hdashline
-            \textbf{Support Vector}     & 0.000                           & 0.000 \\
+            \textbf{Support Vector Machine}      & 0.008 & 0.851 \\
+            \textbf{SVM (rand. split)}           & 0.008 & 0.851 \\
             \bottomrule
         \end{tabular}
         \caption{Overview of the used machine learning models and their metrics.}
@@ -190,12 +245,10 @@ To calculate the variance of cross-validation  the variance of Scikit-Learn's \t
     \end{tcolorbox}
 \end{table}
 
-% Variance of cross-validation and fit
-% -> Fit -> R2
-
-
 \label{sec:robustness}
-\section{Robustness}
+
+
+\section{Robustness}\label{sec:robustness2}
 % Ability of the model to outliers, noise and other data quality issues
 % Variance of cross-validation, fit
 
@@ -203,45 +256,69 @@ To calculate the variance of cross-validation  the variance of Scikit-Learn's \t
 
 % Definition of robustness
 According to \cite{saez_evaluatingclassifierbehavior_2016} robustness "is the capability of an
-algorithm to build models that are insensitive to data corruptions and suffer less from the impact of noise" \cite[p. 2]{saez_evaluatingclassifierbehavior_2016}.
-In this context the metric Equalized Loss of Accuracy (\ac{ELA}) was established to measure the robustness of different machine learning models. But the \ac{ELA} is only usable for classification models, therefore a different metric has to be found.
+algorithm to build models that are insensitive to data corruptions and suffer less from the
+impact of noise" \cite[p. 2]{saez_evaluatingclassifierbehavior_2016}.
+In this context the metric Equalized Loss of Accuracy (\ac{ELA}) was established to measure the
+robustness of different machine learning models. But the \ac{ELA} is only usable for
+classification models, therefore a different metric has to be found.
 
-There are a number of ways to evaluate the performance of regression models, including mean squared error (MSE), mean absolute error (MAE), and root mean squared error (RMSE). You can use these measures to compare the performance of different regression models on a given task. Also the $R^2$ can be used to measure the robustness of the model.
+There are a number of ways to evaluate the performance of regression models, including mean
+squared error (MSE), mean absolute error (MAE), and root mean squared error (RMSE). You can use
+these measures to compare the performance of different regression models on a given task. Also
+the $R^2$ can be used to measure the robustness of the model.
 
-As mentioned in section~\ref{sec:dataset_exploration}~dataset~exploration the dataset has a high quality with no outliers and no missing values.
-Therefore, these data quality issues will be added to the dataset to measure the robustness of the model.
+As mentioned in section~\ref{sec:dataset_exploration}~dataset~exploration the dataset has a high
+quality with no outliers and no missing values.
+Therefore, these data quality issues will be added to the dataset to measure the robustness of
+the model.
 
 \subsection{Missing values}
-When applying the model to real-world data, there is a chance that some values are missing. Two possible scenarios are possible:
+When applying the model to real-world data, there is a chance that some values are missing. Two
+possible scenarios are possible:
 
 \begin{enumerate}
-    \item \textbf{Missing $Vt$-combinations}: There is no data available about a metal with a certain thickness and die opening. Reasons could be that the metal is not used in the industry or the data was never measured.
-    \item \textbf{Missing values}: There is data for the $Vt$ combination but some values are missing because of general data quality issues.
-    \item \textbf{Outliers}: There are values that are not in the range of the dataset. Reasons could be that the data was measured incorrectly.
+    \item \textbf{Missing $Vt$-combinations}: There is no data available about a metal with a
+    certain thickness and die opening. Reasons could be that the metal is not used in the
+    industry or the data was never measured.
+    \item \textbf{Missing values}: There is data for the $Vt$ combination but some values are
+    missing because of general data quality issues.
+    \item \textbf{Outliers}: There are values that are not in the range of the dataset. Reasons
+    could be that the data was measured incorrectly.
 \end{enumerate}
 
-To measure all three of these scenarios, three different tests where created. The first test measures the robustness of the model.
+To measure all three of these scenarios, three different tests where created. The first test
+measures the robustness of the model.
 
 \subsubsection*{1. Missing $Vt$-combinations}
-As can be seen Figure~\ref{fig:train_test_split} of the test and training dataset, all possible $Vt$ combinations in the set parameter range where measured.
-This is not the case in real-world data. Therefore, the robustness of the model has to be measured with missing $Vt$ combinations.
+As can be seen Figure~\ref{fig:train_test_split} of the test and training dataset, all possible
+$Vt$ combinations in the set parameter range where measured.
+This is not the case in real-world data. Therefore, the robustness of the model has to be
+measured with missing $Vt$ combinations.
 
-Therefore, certain $Vt$ combinations were removed from the training dataset. The removed $Vt$ combinations were chosen randomly. The number of removed $Vt$ combinations was 10\% of the total number of $Vt$ combinations in the training dataset.
-Subsequently the model was trained on the training dataset with the removed data and evaluated on the test dataset.
-The performance of the mode is measures against the performance of the model trained with all data. 
+Therefore, certain $Vt$ combinations were removed from the training dataset. The removed $Vt$
+combinations were chosen randomly. The number of removed $Vt$ combinations was 10\% of the total
+number of $Vt$ combinations in the training dataset.
+Subsequently the model was trained on the training dataset with the removed data and evaluated on
+the test dataset.
+The performance of the mode is measures against the performance of the model trained with all data.
 
 \subsubsection*{Calculation of the loss of accuracy}
-The process described above was done 100 times, to mitigate the effect of the random selection of the $Vt$ combinations. 
-The calculation of the loss of accuracy is follows Equation~\ref{eq:mla}, the metric is called Mean Loss Of Accuracy (\ac{MLA}).
+The process described above was done 100 times, to mitigate the effect of the random selection of
+the $Vt$ combinations.
+The calculation of the loss of accuracy is follows Equation~\ref{eq:mla}, the metric is called
+Mean Loss Of Accuracy (\ac{MLA}).
 
 \paragraph*{Mean Loss Of Accuracy}
 \begin{equation}
     \label{eq:mla}
-    \text{MLA} = \frac{1}{100} \sum_{i=1}^{100} \left( \text{MSE}_{all} - \text{MSE}_{missing} \right)
+    \text{MLA} = \frac{1}{100} \sum_{i=1}^{100} \left( \text{MSE}_{all} - \text{MSE}_{missing}
+    \right)
 \end{equation}
 
-To calculate the loss off accuracy the models trained with missing $Vt$ combinations were compared to the model trained with all data. 
-The difference between the \ac{MSE} of the models was calculated. The total loss of accuracy was calculated by averaging the difference of the \ac{MSE} of the models.
+To calculate the loss off accuracy the models trained with missing $Vt$ combinations were
+compared to the model trained with all data.
+The difference between the \ac{MSE} of the models was calculated. The total loss of accuracy was
+calculated by averaging the difference of the \ac{MSE} of the models.
 
 
 
@@ -249,7 +326,8 @@ The difference between the \ac{MSE} of the models was calculated. The total loss
 \subsubsection*{2. Missing values}
 
 \subsubsection*{3. Outliers and wrong data}
-To measure the robustness of the model, outliers were added to the data. The outliers were added to the data in the following way:
+To measure the robustness of the model, outliers were added to the data. The outliers were added
+to the data in the following way:
 
 Outliers where added to the training dataset.
 The model was trained on the training dataset.
@@ -261,7 +339,8 @@ The process was repeated 100 times.
 \textit{Not sure if I want to measure that.}
 
 
-Note: This process of measuring the robustness of the model differs from the approach used by \cite{siebert_constructionqualitymodel_} and \cite{saez_evaluatingclassifierbehavior_2016}.
+Note: This process of measuring the robustness of the model differs from the approach used by
+\cite{siebert_constructionqualitymodel_} and \cite{saez_evaluatingclassifierbehavior_2016}.
 
 \subsection{Results}
 
@@ -271,18 +350,14 @@ Note: This process of measuring the robustness of the model differs from the app
         \centering
         \begin{tabular}{llll}
             \toprule
-            \thead{\textbf{Model Name}} & {\thead{\textbf{Missing $Vt$-combinations}                 \\ \unit{loa}}}
+            \thead{\textbf{Model Name}} & {\thead{\textbf{Missing $Vt$-combinations} \\ \unit{loa}}}
 
-                                        & {\thead{\textbf{Missing Values}                            \\ \unit{loa}}}
-                                        & {\thead{\textbf{Outliers}                                  \\ \unit{loa}}}                  \\
+            & {\thead{\textbf{Missing Values} \\ \unit{loa}}}
+            & {\thead{\textbf{Outliers} \\ \unit{loa}}}          \\
             \toprule
-            \textbf{Random Forest}      & 0.034                                      & 0.000 & 0.771 \\
+            \textbf{Random Forest} & 0.034 & 0.000 & 0.771 \\
             \hdashline
-            \textbf{Boosting}           & 0.000                                      & 0.000 & 0.000 \\
-            \hdashline
-            \textbf{Linear Regression}  & 0.000                                      & 0.000 & 0.000 \\
-            \hdashline
-            \textbf{Support Vector}     & 0.000                                      & 0.000 & 0.000 \\
+            \textbf{Support Vector Machine} & 0.000 & 0.000 & 0.000 \\
             \bottomrule
         \end{tabular}
         \caption{Results of used machine learning models regarding the design principle robustness.}
@@ -293,18 +368,25 @@ Note: This process of measuring the robustness of the model differs from the app
 \subsubsection*{\textit{Notes}}
 
 \begin{itemize}
-    \item \textit{An alternative metric instead of ELA could be the approach of Scher and Trügler. But it would be necessary to implement the metric in Python.}
+    \item \textit{An alternative metric instead of ELA could be the approach of Scher and Trügler
+    . But it would be necessary to implement the metric in Python.}
     \item \textit{Decide if I want to evaluate noise as well or if the rest is enough.}
 \end{itemize}
 
 
-\section{Stability}
+\section{Stability}\label{sec:stability}
 % Does the artifact generate repeatable results when trained on different data?
 % Leave-one-out cross-validation stability 
-Stability is the ability of the model to generate repeatable results when trained on different data. \cite[p. 16]{siebert_constructionqualitymodel_}
-To measure the stability of the model, leave-one-out cross-validation (\ac{LOOCV}) was used.
-\ac{LOOCV} is
+Stability is the ability of the model to generate repeatable results when trained on different
+data. \cite[p. 16]{siebert_constructionqualitymodel_}
+To measure the stability of the model, \ac{LOOCV} was used.
 
+\ac{LOOCV} is a type of \ac{CV} where each fold consists of a single samples.
+
+It can be thought of as a type of k-fold cross-validation where each fold consists of a single
+sample. The method can be very time-consuming, especially for large datasets, but it may provide
+more accurate estimates for small datasets.
+\cite[p. 257-258]{muller_introductionmachinelearning_2016}
 
 \paragraph*{Leave-one-out cross-validation \ac{LOOCV}}
 
@@ -313,14 +395,17 @@ To measure the stability of the model, leave-one-out cross-validation (\ac{LOOCV
     LOO = \frac{1}{n} \sum_{i=1}^{n} \frac{1}{\hat{y}_i} |y_i - \hat{y}_i|
 \end{equation}
 
-\ac{LOOCV} is another method that is commonly used. It can be thought of as a type of k-fold cross-validation where each fold consists of a single sample. During each split, a single data point is selected to be the test set. This method can be very time-consuming, especially for large datasets, but it may provide more accurate estimates for small datasets. \cite[p. 257-258]{muller_introductionmachinelearning_2016}
+The stability the \ac{LOOCV} gives insights into the stability of the model. The stability is
+measured by calculating the variance of all \ac{CV} scores.
 
-The variance of all \ac{CV} scores is calculated with the formula~\ref{eq:variance_cross}.
-A low variance indicates that the model is stable which means that the model's performance is consistent across different training and testing sets. This is generally  a desirable property for a model to have, as it suggest that the model ist not overfitting to the training data and is able to generalize well to unseen data.
+A low variance indicates that the model is stable which means that the model's performance is
+consistent across different training and testing sets.
+This is generally a desirable property for a model to have, as it suggest that the model ist not
+overfitting to the training data and is able to generalize well to unseen data.
+On the other hand, a high variances indicates an unstable model and is a sign of overfitting, as
+the model may be to closely tied to the training data and not generalize well to unseen data.
 
-On the other hand, a high variances indicates an unstable model and is a sign of overfitting, as the model may be to closely tied to the training data and not generalize well to unseen data.
-
-\subsection{Results}
+\subsection{Results}\label{subsec:results-stability}
 
 \begin{table}[H]
     \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
@@ -331,17 +416,15 @@ On the other hand, a high variances indicates an unstable model and is a sign of
             \thead{\textbf{Model Name}} & \thead{\textbf{Variance of \ac{LOOCV}}}
             \\
             \toprule
-            \textbf{\ac{RF}}            & 0.053                                   \\
+            \textbf{Random Forest}               & 0.053 \\
+            \textbf{Random Forest (rand. split)} & 0.053 \\
             \hdashline
-            \textbf{RFB}                & 0.000                                   \\
-            \hdashline
-            \textbf{LR}                 & 0.000                                   \\
-            \hdashline
-            \textbf{\ac{SVM}}           & 0.000                                   \\
+            \textbf{Support Vector Machine}      & 0.000 \\
+            \textbf{SVM (rand. split)}           & 0.000 \\
             \bottomrule
         \end{tabular}
         \caption{Overview of the used machine learning models and their metrics.}
-        \label{tab:ml_models_statbility}
+        \label{tab:results-stability}
     \end{tcolorbox}
 \end{table}
 
@@ -350,14 +433,21 @@ On the other hand, a high variances indicates an unstable model and is a sign of
 \subsubsection*{\textit{Notes}}
 
 \begin{itemize}
-    \item \textit{Why exactly does the variance of LOOCV measure the robustness and the variance of CV the relevane?}
+    \item \textit{Why exactly does the variance of LOOCV measure the robustness and the variance
+    of CV the relevane?}
+    \item \textit{TODO 17.01. Touch up stability section.}
 \end{itemize}
 
-\section{Interpretability}
+\section{Interpretability}\label{sec:interpretability}
 % How well can the model be explained?
 % Complexity measures (e.g., no. of parameters, depth)
 % R^2 value ???? 
-Interpretability refers to the ease with which humans can understand and make sense of the decisions made by a trained machine learning model. \cite[p. 16]{siebert_constructionqualitymodel_} It is the extent to which the inner workings of the model and the reasoning behind its predictions can be understood by human users. Good interpretability is important because it allows users to trust and rely on the model, and it can also help with debugging and improving the model.
+Interpretability refers to the ease with which humans can understand and make sense of the
+decisions made by a trained machine learning model. \cite[p.
+16]{siebert_constructionqualitymodel_} It is the extent to which the inner workings of the model
+and the reasoning behind its predictions can be understood by human users. Good interpretability
+is important because it allows users to trust and rely on the model, and it can also help with
+debugging and improving the model.
 To measure the interpretability of the model, the following metrics are used:
 
 \paragraph*{The number of parameters in the model}
@@ -370,14 +460,23 @@ A model with many layers, is generally more complex than a shallow network with 
 
 \paragraph*{Inference time}
 Measured in milliseconds. Time it takes to make a prediction.
-A model that takes longer to make predictions may be more complex than a model that is able to make predictions more quickly.
+A model that takes longer to make predictions may be more complex than a model that is able to
+make predictions more quickly.
 
 \paragraph*{Level of interpretability}
 \textit{Harder to measure but some ideas: }
 \begin{itemize}
-    \item \textit{Partial dependence plots: These plots show the relationship between a single feature and the model's predictions, holding all other features constant. This can help to identify which features are most important for the model and how they influence the predictions.}
-    \item \textit{LIME (Local Interpretable Model-Agnostic Explanations): This is a method for explaining the predictions of any black-box classifier. It works by training an interpretable model locally around the prediction of interest, and using this local model to explain the prediction of the black-box model.}
-    \item \textit{SHAP (SHapley Additive exPlanations): This is another method for explaining the predictions of black-box models. It works by assigning importance to each feature based on its contribution to the model's prediction.}
+    \item \textit{Partial dependence plots: These plots show the relationship between a single
+    feature and the model's predictions, holding all other features constant. This can help to
+    identify which features are most important for the model and how they influence the
+    predictions.}
+    \item \textit{LIME (Local Interpretable Model-Agnostic Explanations): This is a method for
+    explaining the predictions of any black-box classifier. It works by training an interpretable
+    model locally around the prediction of interest, and using this local model to explain the
+    prediction of the black-box model.}
+    \item \textit{SHAP (SHapley Additive exPlanations): This is another method for explaining the
+    predictions of black-box models. It works by assigning importance to each feature based on
+    its contribution to the model's prediction.}
 
 \end{itemize}
 
@@ -394,17 +493,18 @@ A model that takes longer to make predictions may be more complex than a model t
         \begin{tabular}{lllll}
             \toprule
             \thead{\textbf{Model Name}} & \thead{\textbf{Number Parameters}}
-                                        & \thead{\textbf{Depth}}             & \thead{\textbf{Inference}}
-                                        & \thead{\textbf{Interpretability}}
+            & \thead{\textbf{Depth}}
+            & \thead{\textbf{Inference}}
+            & \thead{\textbf{Interpretability}}
             \\
             \toprule
-            \textbf{\ac{RF}}            & 0.000                              & 0.000                      & 0.000 & 0.000 \\
+            \textbf{\ac{RF}}         & 0.000 & 0.000 & 0.000 & 0.000 \\
             \hdashline
-            \textbf{\ac{RF} Bossing}    & 0.000                              & 0.000                      & 0.000 & 0.000 \\
+            \textbf{\ac{RF} Bossing} & 0.000 & 0.000 & 0.000 & 0.000 \\
             \hdashline
-            \textbf{LR}                 & 0.000                              & 0.000                      & 0.000 & 0.000 \\
+            \textbf{LR}              & 0.000 & 0.000 & 0.000 & 0.000 \\
             \hdashline
-            \textbf{SVM}                & 0.000                              & 0.000                      & 0.000 & 0.000 \\
+            \textbf{SVM}             & 0.000 & 0.000 & 0.000 & 0.000 \\
             \bottomrule
         \end{tabular}
         \caption{Overview of the used machine learning models and their metrics.}
@@ -424,19 +524,28 @@ To measure the resource utilization of the model, the following metrics are used
 % From Copilot
 \paragraph*{Training time}
 Measured in seconds. Refers to the time it takes to train the model.
-Training a model requires resources such as memory, CPU, and GPU, therefore the longer it takes to train a model, the more resources are required. According to resources utilization a shorter training time is desirable.
+Training a model requires resources such as memory, CPU, and GPU, therefore the longer it takes
+to train a model, the more resources are required. According to resources utilization a shorter
+training time is desirable.
 
-The training time is measured using the \texttt{time.time} function in python. The function returns the time in seconds since the epoch. The time is measured before and after the model is fitted. The difference between the two times is the training time.
+The training time is measured using the \texttt{time.time} function in python. The function
+returns the time in seconds since the epoch. The time is measured before and after the model is
+fitted. The difference between the two times is the training time.
 
 \paragraph*{Runtime}
-Measured in milliseconds. It refers to the time it takes to make a prediction on data once it has been trained.
-It is an important measure not only for real-world application but also a faster runtime uses less resources and is therefore more efficient.
+Measured in milliseconds. It refers to the time it takes to make a prediction on data once it has
+been trained.
+It is an important measure not only for real-world application but also a faster runtime uses
+less resources and is therefore more efficient.
 
-The runtime is measured using the \texttt{time.time}  function in python.  On value is picked out of the test set and the time is measured before and after the prediction is made. The difference between the two times is the runtime.
+The runtime is measured using the \texttt{time.time}  function in python. On value is picked out
+of the test set and the time is measured before and after the prediction is made. The difference
+between the two times is the runtime.
 
 \paragraph*{Storage space}
 Measured in kilobytes. It refers to the amount of storage space required to store the model.
-The more storage space required to store the model, the more resources are required to store it. Therefore, a smaller storage space is desirable.
+The more storage space required to store the model, the more resources are required to store it.
+Therefore, a smaller storage space is desirable.
 
 \begin{table}[H]
     \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
@@ -444,15 +553,16 @@ The more storage space required to store the model, the more resources are requi
         \centering
         \begin{tabular}{llll}
             \toprule
-            \thead{\textbf{Model Name}} & {\thead{\textbf{Training time}                  \\ \unit[]{s}}}
-                                        & {\thead{\textbf{Runtime}                        \\ \unit[]{ms}}}       & {\thead{\textbf{Storage space}\\ \unit{kb}}}
+            \thead{\textbf{Model Name}} & {\thead{\textbf{Training time} \\ \unit[]{s}}}
+            & {\thead{\textbf{Runtime} \\ \unit[]{ms}}} & {\thead{\textbf{Storage space} \\
+            \unit{kb}}}
             \\
             \toprule
-            \textbf{\ac{RF}}            & 0.0222                         & 2.0275 & 80.2  \\
+            \textbf{\ac{RF}}     & 0.0222  & 2.0275  & 80.2 \\
             \hdashline
-            \textbf{LR}                 & 0.000                          & 0.000  & 0.000 \\
+            \textbf{LR}     & 0.000  & 0.000  & 0.000 \\
             \hdashline
-            \textbf{SVM}                & 0.000                          & 0.000  & 0.000 \\
+            \textbf{SVM}     & 0.000  & 0.000  & 0.000 \\
             \bottomrule
         \end{tabular}
         \caption{Overview of the used machine learning models and their metrics.}
@@ -460,8 +570,10 @@ The more storage space required to store the model, the more resources are requi
     \end{tcolorbox}
 \end{table}
 
+
 \section{Summary}
-Using the evaluation metrics described in the previous sections, the following results were achieved.
+Using the evaluation metrics described in the previous sections, the following results were
+achieved.
 
 \subsection*{Evaluation SVM (Only Notes)}
 \cite[p. 104]{muller_introductionmachinelearning_2016}

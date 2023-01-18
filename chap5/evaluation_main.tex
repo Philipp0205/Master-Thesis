@@ -377,33 +377,61 @@ Note: This process of measuring the robustness of the model differs from the app
 \section{Stability}\label{sec:stability}
 % Does the artifact generate repeatable results when trained on different data?
 % Leave-one-out cross-validation stability 
-Stability is the ability of the model to generate repeatable results when trained on different
-data. \cite[p. 16]{siebert_constructionqualitymodel_}
-To measure the stability of the model, \ac{LOOCV} was used.
+Stability is defined as the ability of the model to generate repeatable results when trained on
+different data~\cite[p. 16]{siebert_constructionqualitymodel_}.
+One appropriate way to measure the stability of a model is to use \ac{LOOCV}, which is a
+a form of \ac{CV} where one sample is used for validation and the remaining data is
+used for training~\cite[p. 200--201]{gareth2013introduction}.
 
-\ac{LOOCV} is a type of \ac{CV} where each fold consists of a single samples.
+In order to evaluate the model the \ac{LOOCV} was repeated for all samples in the dataset
+resulting in a total of $n$ iterations.
+The stability of the model was determined by calculating the average prediction error across all
+iterations, using the equation provided in Equation~\ref{eq:loocv} which is taken from~\cite[p.
+201]{gareth2013introduction}.
 
-It can be thought of as a type of k-fold cross-validation where each fold consists of a single
-sample. The method can be very time-consuming, especially for large datasets, but it may provide
+\begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
+    \begin{equation}
+        CV_{(n)} = \frac{1}{n} \sum_{i=1}^{n} \text{MSE}_{i}\label{eq:loocv}
+    \end{equation}
+\end{tcolorbox}
+
+The approach provides an unbiased estimate of the model's generalization error
+but this estimate is poor because only one samples is used for validation~\cite[p.
+201]{gareth2013introduction}.
+
+Therefore, it can not be used to make a statement about the generalization error of the model.
+Since the goal is to measure repeatable results, the \ac{LOOCV} is a suitable metric to measure
+the stability of the model.
+
+%\textit{Which formula should I use?}
+%
+%\begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
+%    \begin{equation}
+%        CV_{(n)} = \frac{\sum_{i=1}^{n} \text{MSE}_{i}}{1-n}\label{eq:loocv2}
+%    \end{equation}
+%\end{tcolorbox}
+
+A low $CV_{(n)}$ value indicates a high stability of the model, because the model is able to
+generate repeatable results when trained on different data.
+Note: The method can be very time-consuming, especially for large datasets, but it may provide
 more accurate estimates for small datasets.
-\cite[p. 257-258]{muller_introductionmachinelearning_2016}
 
-\paragraph*{Leave-one-out cross-validation \ac{LOOCV}}
+%The stability the \ac{LOOCV} gives insights into the stability of the model. The stability is
+%measured by calculating the variance of all \ac{CV} scores.
 
-\begin{equation}
-    \label{eq:loo}
-    LOO = \frac{1}{n} \sum_{i=1}^{n} \frac{1}{\hat{y}_i} |y_i - \hat{y}_i|
-\end{equation}
+%\begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
+%    \begin{equation}
+%        var_{(n)} = \frac{1}{n} \sum_{i=1}^{n} \left( \text{CV}_{(n)} - \text{CV}_{i} \right)^2
+%        \label{eq:loocv_variance}
+%    \end{equation}
+%\end{tcolorbox}
 
-The stability the \ac{LOOCV} gives insights into the stability of the model. The stability is
-measured by calculating the variance of all \ac{CV} scores.
-
-A low variance indicates that the model is stable which means that the model's performance is
-consistent across different training and testing sets.
-This is generally a desirable property for a model to have, as it suggest that the model ist not
-overfitting to the training data and is able to generalize well to unseen data.
-On the other hand, a high variances indicates an unstable model and is a sign of overfitting, as
-the model may be to closely tied to the training data and not generalize well to unseen data.
+%A low variance indicates that the model is stable which means that the model's performance is
+%consistent across different training and testing sets.
+%This is generally a desirable property for a model to have, as it suggest that the model ist not
+%overfitting to the training data and is able to generalize well to unseen data.
+%On the other hand, a high variances indicates an unstable model and is a sign of overfitting, as
+%the model may be to closely tied to the training data and not generalize well to unseen data.
 
 \subsection{Results}\label{subsec:results-stability}
 
@@ -413,13 +441,13 @@ the model may be to closely tied to the training data and not generalize well to
         \centering
         \begin{tabular}{ll}
             \toprule
-            \thead{\textbf{Model Name}} & \thead{\textbf{Variance of \ac{LOOCV}}}
+            \thead{\textbf{Model Name}} & \thead{\textbf{$CV_{(n)}$}}
             \\
             \toprule
             \textbf{Random Forest}               & 0.053 \\
             \textbf{Random Forest (rand. split)} & 0.053 \\
             \hdashline
-            \textbf{Support Vector Machine}      & 0.000 \\
+            \textbf{Support Vector Machine}      & 0.051 \\
             \textbf{SVM (rand. split)}           & 0.000 \\
             \bottomrule
         \end{tabular}
@@ -429,14 +457,6 @@ the model may be to closely tied to the training data and not generalize well to
 \end{table}
 
 \textit{Explanation of the results}
-
-\subsubsection*{\textit{Notes}}
-
-\begin{itemize}
-    \item \textit{Why exactly does the variance of LOOCV measure the robustness and the variance
-    of CV the relevane?}
-    \item \textit{TODO 17.01. Touch up stability section.}
-\end{itemize}
 
 \section{Interpretability}\label{sec:interpretability}
 % How well can the model be explained?
@@ -546,7 +566,6 @@ between the two times is the runtime.
 Measured in kilobytes. It refers to the amount of storage space required to store the model.
 The more storage space required to store the model, the more resources are required to store it.
 Therefore, a smaller storage space is desirable.
-
 \begin{table}[H]
     \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
         % \sisetup{group-minimum-digits = 4}
@@ -577,6 +596,7 @@ achieved.
 
 \subsection*{Evaluation SVM (Only Notes)}
 \cite[p. 104]{muller_introductionmachinelearning_2016}
+
 
 
 

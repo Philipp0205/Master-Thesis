@@ -125,17 +125,29 @@ which can then be DPs.
 \cite[p. 6]{koppenhagen_designscienceresearch_2012}
 
 
-\section{Evaluation of Machine Learning Models}
-In the field of software engineering there are already standards that define the quality of
-software systems and its components like ISO/IEC 25010.
-\cite[]{siebert_constructionqualitymodel_} noted, that such standards can not applied directly to
-ML and therefore need to be adapted. Therefore they re-interpreted and extended these existing
-quality models to the ML context. \cite[p. 1]{siebert_constructionqualitymodel_}
-In order to define the Design Principles for the artifacts in this work, the considerations of
-\cite[]{siebert_constructionqualitymodel_} are used. This enables a systematic process in order
-to assess the quality of the developed artifacts.
+\section{Evaluation of Machine Learning Models}\label{sec:evaluation-of-machine-learning-models}
+Evaluating \ac{ML} models is different from evaluating other software artifacts for several reasons.
+One of them is that data-driven software components, like \ac{ML} models, have functionality that
+is not
+completely defined by the developer but is
+instead learned from data.
+Therefore, using machine learning presents new challenges compared to traditional software
+engineering~\cite[p. 2]{siebert2022construction}.
 
-\subsection{Goal Question Metric Approach}
+In the field of software engineering, there are already standards that define the quality of
+software systems and its components.
+Most notable the ISO/IEC 9126 standards, which provide a
+quality model which is widely adapted in software engineering (Source).
+For above mentioned reasons these standards are not suitable to evaluate machine learning models,
+therefore~\cite{siebert2022construction} not that they need to be adapted.
+They re-interpreted and extended these existing quality models to the ML context~\cite[p.
+1]{siebert2022construction}.
+
+In order to define the Design Principles for the artifacts in this work, the considerations of
+\cite[]{siebert2022construction} are used.
+This enables a systematic process in order to assess the quality of the developed models.
+
+\subsection{Goal Question Metric Approach}\label{subsec:goal-question-metric-approach}
 To make the defined quality attributes measurable, the “Goal-Question-Metric”-approach \ac{GQM}
 was chosen in this work. It is one of the most common approaches in DSR and is divided into three
 levels.

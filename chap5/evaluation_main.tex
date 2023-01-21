@@ -2,13 +2,13 @@
 % take a step back and put your results from 4 into context. 
 This chapter critically examines the machine learning models conceived and partially implemented
 in the previous chapter.
-Table~\ref*{tab:evaluation_criteria} shows an overview of the evaluated criteria. These are
+Table~\ref{tab:evaluation_criteria} shows an overview of the evaluated criteria. These are
 structured according to the Goal-Question-Metric approach.
 
 The quality metrics are oriented on the quality model from
-\cite[]{siebert_constructionqualitymodel_}, which is based on the ISO/IEC 9126 standard for the
-evaluation of software quality. \cite[]{iso9126_softwareproductqualitymodel_}. The standard was
-changed to fit the requirements of machine learning models.
+\cite[]{siebert2022construction}, which is based on the ISO/IEC 9126 standard for the
+evaluation of software quality. The standard was changed to fit the requirements of machine
+learning models~\cite{siebert2022construction}.
 
 The metrics of the goal \textit{Robustness} where original only defined for classification models
 and therefore needed to be changed.
@@ -378,7 +378,9 @@ Note: This process of measuring the robustness of the model differs from the app
 % Does the artifact generate repeatable results when trained on different data?
 % Leave-one-out cross-validation stability 
 Stability is defined as the ability of the model to generate repeatable results when trained on
-different data~\cite[p. 16]{siebert_constructionqualitymodel_}.
+different data~\cite[p. 16]{siebert2022construction}.
+
+
 One appropriate way to measure the stability of a model is to use \ac{LOOCV}, which is a
 a form of \ac{CV} where one sample is used for validation and the remaining data is
 used for training~\cite[p. 200--201]{gareth2013introduction}.
@@ -458,53 +460,79 @@ more accurate estimates for small datasets.
 
 \textit{Explanation of the results}
 
+
 \section{Interpretability}\label{sec:interpretability}
 % How well can the model be explained?
 % Complexity measures (e.g., no. of parameters, depth)
-% R^2 value ???? 
 Interpretability refers to the ease with which humans can understand and make sense of the
-decisions made by a trained machine learning model. \cite[p.
-16]{siebert_constructionqualitymodel_} It is the extent to which the inner workings of the model
-and the reasoning behind its predictions can be understood by human users. Good interpretability
-is important because it allows users to trust and rely on the model, and it can also help with
-debugging and improving the model.
-To measure the interpretability of the model, the following metrics are used:
+decisions made by a trained machine learning model~\cite[p. 16]{siebert2022construction}.
+\cite[]{miller2019explanation} define interpretability as the "degree to which a human can
+understand the cause of a decision"~\cite[]{miller2019explanation}.
+Good interpretability is important because it allows users to trust and rely on the model, and it
+can also help with debugging and improving the model (\textit{Source}).
+Therefore no mathematical formula can be used to measure interpretability.
 
-\paragraph*{The number of parameters in the model}
-Measured as integer, representing the total number of parameters in the model.
-Models with more parameters are generally more complex and more prone to overfitting
+According to \cite{molnar2020interpretable} one way to make a model interpretable is to limit the
+choice of algorithms to those that produce interpretable results. Example of such
+algorithms include linear regression, logistic regression and decision trees.~\cite[p.
+35]{molnar2020interpretable}.
 
-\paragraph*{Depth of the model}
-Measured as an integer, representing the number of layers in the model.
+\cite{molnar2020interpretable} defines three properties of interpretable models:
+
+\textbf{Lineraity} A linerar model is one in which the relationship between features and the
+target outcome is represented as a linear equation.
+
+\textbf{Monotonicity} A model with monotonicitiy constraints ensures that there is a consisten
+relationship between a feature and the target out come across the entire range of the feature.
+This can make it easier to understand the relationship. Some
+
+\textbf{Interactions} Some models can automatically include
+interactions between features to improve prediction, while other require manual creation of
+interaction features. However, too many or complex interactions can make the model more
+difficult to interpret.
+
+
+Time complexity is a common way of measuring how fast or slow an algorith will perform for the
+input size (Source). Usually the complextiy is measured with the big-O notation.
+...
+
+The term complexity is an overloaded term, normally complexity is measured with the big-O
+notation and measures the scale in time as the number if inputs increases (Source).
+However, in the context of machine learning, complexity is often used to refer to the
+number of parameters in a model.
+More complex models tend to have more parameters and are therefore more difficult to interpret.
+The number of parameters is calculated using the the \texttt{model.get\_params} function
+in scikit-learn.
+
+Another metric which can be used to evaluate the complexity of a model is the \ac{BIC}
+\cite{schwarz1978estimating},according
+to \cite{bauldry2015structural} it ``favors more parsimonious models over more complex
+models (i.e., it adds a penalty based on the number of
+parameters being estimated in the model)''~\cite[p. 618]{bauldry2015structural}. It can be
+calculated using the following equation~\cite[p. 618]{bauldry2015structural}:
+
+\begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
+    \begin{equation}
+        BIC = T_m - df_m  \ln(N)
+        \label{eq:bic}
+    \end{equation}
+\end{tcolorbox}
+
+% EffiecientnetPaper?
+Note: The Depth of the model could be used as well for the evaluation, but not all models have a
+depth therefore this metric is not suitable.
+The depths is representing the number of layers in the model.
 A model with many layers, is generally more complex than a shallow network with fewer layers.
 
-\paragraph*{Inference time}
-Measured in milliseconds. Time it takes to make a prediction.
-A model that takes longer to make predictions may be more complex than a model that is able to
-make predictions more quickly.
+\subsubsection*{\textit{Notes}}
 
-\paragraph*{Level of interpretability}
-\textit{Harder to measure but some ideas: }
 \begin{itemize}
-    \item \textit{Partial dependence plots: These plots show the relationship between a single
-    feature and the model's predictions, holding all other features constant. This can help to
-    identify which features are most important for the model and how they influence the
-    predictions.}
-    \item \textit{LIME (Local Interpretable Model-Agnostic Explanations): This is a method for
-    explaining the predictions of any black-box classifier. It works by training an interpretable
-    model locally around the prediction of interest, and using this local model to explain the
-    prediction of the black-box model.}
-    \item \textit{SHAP (SHapley Additive exPlanations): This is another method for explaining the
-    predictions of black-box models. It works by assigning importance to each feature based on
-    its contribution to the model's prediction.}
-
+    \item \textit{Space complecity -> How much memeory is needed?}
+    \item \textit{Does using the big O notation make sense?}
+    \item \textit{I think BIC makes no sense}
 \end{itemize}
 
-
-\paragraph*{Amount of training data required}
-\textit{Will be the same for all models so this metric may not be used.}
-
-\subsection{Results}
+\subsection{Results}\label{subsec:results2}
 
 \begin{table}[H]
     \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
@@ -557,6 +585,14 @@ Measured in milliseconds. It refers to the time it takes to make a prediction on
 been trained.
 It is an important measure not only for real-world application but also a faster runtime uses
 less resources and is therefore more efficient.
+
+\texit{Runtime = Inference time?}
+
+\paragraph*{Inference time}
+Measured in milliseconds. Time it takes to make a prediction.
+A model that takes longer to make predictions may be more complex than a model that is able to
+make predictions more quickly.
+
 
 The runtime is measured using the \texttt{time.time}  function in python. On value is picked out
 of the test set and the time is measured before and after the prediction is made. The difference

@@ -155,11 +155,15 @@ For a full overview about the performance all three metrics are sued for the eva
             \thead{\textbf{Model Name}} & \thead{\textbf{MAE}}
             & \thead{\textbf{MSE}}
             & \thead{\textbf{RMSE}} \\
-            \textbf{Random Forest}              & 0.16 & 0.04 & 0.21 \\
-            \textbf{Random Forest (rand.split)} & 0.14 & 0.05 & 0.22 \\
+            \toprule
+            \textbf{Linear Regression}              & 0.199 & 0.092 & 0.303 \\
+            \textbf{Linear Regression (rand.split)} & 0.261 & 0.127 & 0.356 \\
             \hdashline
-            \textbf{Support Vector Machine}     & 0.09 & 0.04 & 0.20 \\
-            \textbf{SVM (rand. split)}          & 0.09 & 0.04 & 0.20 \\
+            \textbf{Random Forest}                  & 0.16  & 0.04  & 0.21  \\
+            \textbf{Random Forest (rand.split)}     & 0.14  & 0.05  & 0.22  \\
+            \hdashline
+            \textbf{Support Vector Machine}         & 0.09  & 0.04  & 0.20  \\
+            \textbf{SVM (rand. split)}              & 0.09  & 0.04  & 0.20  \\
             \bottomrule
         \end{tabular}
         \caption{Overview of the used machine learning models and their metrics.}
@@ -233,14 +237,17 @@ calculated with the formula~\ref{eq:r2}.
             \thead{\textbf{Model Name}} & \thead{\textbf{Variance of CV}}
             & \thead{\textbf{$R^2$}} \\
             \toprule
-            \textbf{Random Forest}               & 0.034 & 0.771 \\
-            \textbf{Random Forest (rand. split)} & 0.034 & 0.771 \\
+            \textbf{Linear Regression}               & 0.051 & 0.644 \\
+            \textbf{Linear Regression (rand. split)} & 0.034 & 0.771 \\
             \hdashline
-            \textbf{Support Vector Machine}      & 0.008 & 0.851 \\
-            \textbf{SVM (rand. split)}           & 0.008 & 0.851 \\
+            \textbf{Random Forest}                   & 0.034 & 0.771 \\
+            \textbf{Random Forest (rand. split)}     & 0.034 & 0.771 \\
+            \hdashline
+            \textbf{Support Vector Machine}          & 0.008 & 0.851 \\
+            \textbf{SVM (rand. split)}               & 0.008 & 0.851 \\
             \bottomrule
         \end{tabular}
-        \caption{Overview of the used machine learning models and their metrics.}
+        \caption{Performance of the used machine learning models according relevance.}
         \label{tab:ml_models_relevance}
     \end{tcolorbox}
 \end{table}
@@ -553,11 +560,13 @@ A model with many layers, is generally more complex than a shallow network with 
             & \thead{\textbf{Parameters}}
             \\
             \toprule
-            \textbf{Decision Trees}      & No & Some & Yes & XX & XX \\
+            \textbf{Linear Regression}   & Yes & Yes  & No  & XX & 0  \\
             \hdashline
-            \textbf{Logistic Regression} & No & Yes  & No  & XX & XX \\
+            \textbf{Decision Trees}      & No  & Some & Yes & XX & XX \\
             \hdashline
-            \textbf{SVM}                 & X  & X    & XX  & XX & 11 \\
+            \textbf{Logistic Regression} & No  & Yes  & No  & XX & XX \\
+            \hdashline
+            \textbf{SVM}                 & X   & X    & XX  & XX & 11 \\
             \hdashline
             \bottomrule
         \end{tabular}
@@ -574,7 +583,7 @@ A model with many layers, is generally more complex than a shallow network with 
 \textit{Explanation of the results}
 
 
-\section{Resource utilization}
+\section{Resource utilization}\label{sec:resource-utilization}
 % How much resources are required to train and run the model?
 % Training time, runtime, storage space
 
@@ -612,6 +621,10 @@ Therefore, a smaller storage space is desirable.
 To measure the memory usage the \texttt{memory\_usage} function from the \texttt{memory\_profiler}
 package is used.
 
+%Training time: 2.6085376739501953 s
+%Inference time: 0.9751319885253906 s
+%Memory usage: 157.4140625 MB
+
 \begin{table}[H]
     \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
         % \sisetup{group-minimum-digits = 4}
@@ -619,19 +632,20 @@ package is used.
         \begin{tabular}{llll}
             \toprule
             \thead{\textbf{Model Name}} & {\thead{\textbf{Training time} \\ \unit[]{ms}}}
-            & {\thead{\textbf{Inference time} \\ \unit[]{ms}}} & {\thead{\textbf{Memory Usage}  \\
+            & {\thead{\textbf{Inference time} \\ \unit[]{ms}}}      & {\thead{\textbf{Memory
+            Usage}   \\
             \unit{kb}}}
             \\
             \toprule
-            \textbf{\ac{RF}}     & 0.0222 & 2.0275  & 80.2 \\
+            \textbf{Linear Regression} & 2.609 & 0.975  & 157.41 \\
             \hdashline
-            \textbf{LR}     & 0.000 & 0.000  & 0.000 \\
+            \textbf{Random Forest} & 0.0222 & 2.0275  & 80.2 \\
             \hdashline
-            \textbf{SVM}     & 289.874 & 2.376  & 156.891 \\
+            \textbf{Support Vector Machine} & 289.874 & 2.376  & 156.891 \\
             \bottomrule
         \end{tabular}
         \caption{Overview of the used machine learning models and their metrics.}
-        \label{tab:ml_models_statbility}
+        \label{tab:resutls_resource_utilization}
     \end{tcolorbox}
 \end{table}
 
@@ -661,9 +675,10 @@ with any model type and provide an overview of the model's behavior.
 
 \subsubsection*{Partial Dependence Plots}
 
+\subsection{Local Model-Specific Methods}\label{subsec:local-model-specific-methods}
 
-\subsection*{Evaluation SVM (Only Notes)}
-\cite[p. 104]{muller_introductionmachinelearning_2016}
+
+
 
 
 

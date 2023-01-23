@@ -363,6 +363,20 @@ the green and the yellow point represent the resulting spring back distance.
 
 \label{sec:dataset_exploration}
 
+\subsection{Adding Features to the Dataset}\label{subsec:adding-features-to-the-dataset}
+The current dataset includes three independent and one dependent feature. These features
+will be discussed in more detail in the following section.
+On goal was it to enhance the dataset with more features, this would improve
+the performance of models and provide greater insight into the bending process.
+
+On potential candidate for a new feature is the tension. A drawing test was carried out for this
+which is described more in detail in the next section...
+
+\subsubsection*{\textit{Notes}}
+\begin{itemize}
+    \item \textit{TODO: Add drawing test}
+\end{itemize}
+
 \subsection{Dataset Exploration}\label{subsec:dataset-exploration}
 
 \subsubsection{Features}
@@ -375,7 +389,7 @@ The final dataset therefore contained 3 features plus the added spring back.
 In total 396 data points where crated using the described approach.
 An example of the dataset is shown in Table~\ref{tab:dataset_example}.
 
-\begin{table}[htb]
+\begin{table}[h]
     \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
         \sisetup{group-minimum-digits = 4}
         \centering
@@ -814,9 +828,34 @@ creating a linear relationship which is easy to understand and interpret~\cite[p
 37]{molnar2020interpretable}.
 
 Linear models can be used to understand the relationship between a target variable y and one or
-more input features x. These relationships are represented as linear equations, and can be
-written for a single data point as $y = b_0 + b_1x_1 + b_2x_2 + ... + b_n*x_n$ where $b_n$
-are the model coefficients.
+more input features x.
+The general formula for predicting in a linear model in regression is shown in
+\ref{eq:linear-regression}~\cite[p. 45]{muller_introductionmachinelearning_2016}.
+In this context, $x[0]$ to $x[p]$ represent the attributes (with p being the number of
+attributes) of
+a specific data point. The parameters $w$ and $b$, which are learned by the model, and the predicted
+output $\hat{y}$, are also included~\cite[p. 45]{muller_introductionmachinelearning_2016}.
+
+\begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
+    \begin{equation}
+        \hat{y} = w[0] * x[0] + w[1] * x[1] + ... + w[p] * x[p] + b
+    \end{equation}
+    \label{eq:linear-regression}
+\end{tcolorbox}
+
+Linear regression has no hyperparameters to tune and therefore no hyperparameter tuning was
+performed.
+
+\subsection{Decision Trees}\label{subsec:decision-trees}
+Linear and logistic regression models are not effective when the relationship between input
+features and output is not linear or when features have interactions with one another.
+
+Decision trees are models are useful when the relationship between features and outcome is
+or when features interact with one another.
+These models split the data multiple times based on certrain cutoff values, resulting in
+different subset of the dataset.
+The final subsets, called leaf nodes are used to predict the outocme by taking the average of the
+training data in that subset~\cite[p. 76]{molnar2020interpretable}.
 
 \subsection{Random Forest}\label{subsec:random-forest}
 
@@ -887,7 +926,7 @@ for the depenend variable spring back
             \hdashline
             max\_leaf\_nodes & X & Grow trees with max\_leaf\_nodes in
             best-first fashion. \\
-            \bottomrule
+            \hdashline
             max\_leaf\_nodes & X & Grow trees with max\_leaf\_nodes in
             best-first fashion. \\
             \bottomrule

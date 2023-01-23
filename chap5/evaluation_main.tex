@@ -557,7 +557,7 @@ A model with many layers, is generally more complex than a shallow network with 
             \hdashline
             \textbf{Logistic Regression} & No & Yes  & No  & XX & XX \\
             \hdashline
-            \textbf{SVM} & X & X  & XX & XX & 11 \\
+            \textbf{SVM}                 & X  & X    & XX  & XX & 11 \\
             \hdashline
             \bottomrule
         \end{tabular}
@@ -591,44 +591,43 @@ The training time is measured using the \texttt{time.time} function in python. T
 returns the time in seconds since the epoch. The time is measured before and after the model is
 fitted. The difference between the two times is the training time.
 
-\paragraph*{Runtime}
+\textbf{Inference time}
 Measured in milliseconds. It refers to the time it takes to make a prediction on data once it has
 been trained.
 It is an important measure not only for real-world application but also a faster runtime uses
 less resources and is therefore more efficient.
 
-\texit{Runtime = Inference time?}
-
-\paragraph*{Inference time}
-Measured in milliseconds. Time it takes to make a prediction.
+\textbf{Inference time}
+Measured in milliseconds. Time it takes to make 100 predictions.
 A model that takes longer to make predictions may be more complex than a model that is able to
 make predictions more quickly.
+Measured using the \texttt{time.time} function in python. 100 valuees are picked out of the teset
+set and the time is measured before and after the prediciton is made.
 
-
-The runtime is measured using the \texttt{time.time}  function in python. On value is picked out
-of the test set and the time is measured before and after the prediction is made. The difference
-between the two times is the runtime.
-
-\paragraph*{Storage space}
-Measured in kilobytes. It refers to the amount of storage space required to store the model.
+\textbf{Memory space}
+Measured in Mb.
+It refers to the amount of memeory required to run the model.
 The more storage space required to store the model, the more resources are required to store it.
 Therefore, a smaller storage space is desirable.
+To measure the memory usage the \texttt{memory\_usage} function from the \texttt{memory\_profiler}
+package is used.
+
 \begin{table}[H]
     \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
         % \sisetup{group-minimum-digits = 4}
         \centering
         \begin{tabular}{llll}
             \toprule
-            \thead{\textbf{Model Name}} & {\thead{\textbf{Training time} \\ \unit[]{s}}}
-            & {\thead{\textbf{Runtime} \\ \unit[]{ms}}} & {\thead{\textbf{Storage space} \\
+            \thead{\textbf{Model Name}} & {\thead{\textbf{Training time} \\ \unit[]{ms}}}
+            & {\thead{\textbf{Inference time} \\ \unit[]{ms}}} & {\thead{\textbf{Memory Usage}  \\
             \unit{kb}}}
             \\
             \toprule
-            \textbf{\ac{RF}}     & 0.0222  & 2.0275  & 80.2 \\
+            \textbf{\ac{RF}}     & 0.0222 & 2.0275  & 80.2 \\
             \hdashline
-            \textbf{LR}     & 0.000  & 0.000  & 0.000 \\
+            \textbf{LR}     & 0.000 & 0.000  & 0.000 \\
             \hdashline
-            \textbf{SVM}     & 0.000  & 0.000  & 0.000 \\
+            \textbf{SVM}     & 289.874 & 2.376  & 156.891 \\
             \bottomrule
         \end{tabular}
         \caption{Overview of the used machine learning models and their metrics.}

@@ -466,31 +466,51 @@ more accurate estimates for small datasets.
 % Complexity measures (e.g., no. of parameters, depth)
 Interpretability refers to the ease with which humans can understand and make sense of the
 decisions made by a trained machine learning model~\cite[p. 16]{siebert2022construction}.
-\cite[]{miller2019explanation} define interpretability as the "degree to which a human can
-understand the cause of a decision"~\cite[]{miller2019explanation}.
+\cite{miller2019explanation} define interpretability as the "degree to which a human can
+understand the cause of a decision"~\cite[p. 1]{miller2019explanation}.
 Good interpretability is important because it allows users to trust and rely on the model, and it
 can also help with debugging and improving the model (\textit{Source}).
-Therefore no mathematical formula can be used to measure interpretability.
 
-According to \cite{molnar2020interpretable} one way to make a model interpretable is to limit the
+Interpretable models will also deliver more insights for this project, as the goal is to
+understand the relationship between the features and the target outcome.
+
+When following the above definitions of interpretability, it is clear that it is not possible to
+measure interpretability in a quantitative way.
+No mathematical formula can be used to measure interpretability, but other methods can be used to
+measure the interpretability of a model.
+Interpretable models allow the usage of global model-agnostic evaluation methods which will be
+used later in the evaluation of the models (see Section~\ref{sec:evaluation}).
+
+In a first steps it has to be defined what makes a model interpretable.
+
+\subsection*{Interpretable Models}
+According to~\cite{molnar2020interpretable} one way to make a model interpretable is to limit the
 choice of algorithms to those that produce interpretable results. Example of such
-algorithms include linear regression, logistic regression and decision trees.~\cite[p.
+algorithms include linear regression, logistic regression and decision trees~\cite[p.
 35]{molnar2020interpretable}.
 
 \cite{molnar2020interpretable} defines three properties of interpretable models:
 
-\textbf{Lineraity} A linerar model is one in which the relationship between features and the
-target outcome is represented as a linear equation.
+\textbf{Linearity} A linear model is one in which the relationship between features and the
+target outcome is represented as a linear equation~\cite[]{molnar2020interpretable}.
 
-\textbf{Monotonicity} A model with monotonicitiy constraints ensures that there is a consisten
+\textbf{Monotonicity} A model with monotonicity constraints ensures that there is a consistent
 relationship between a feature and the target out come across the entire range of the feature.
-This can make it easier to understand the relationship. Some
+This can make it easier to understand the relationship.
 
 \textbf{Interactions} Some models can automatically include
 interactions between features to improve prediction, while other require manual creation of
-interaction features. However, too many or complex interactions can make the model more
+interaction features.
+However, too many or complex interactions can make the model more
 difficult to interpret.
 
+In the model selection for this thesis the focus is on interpretable models, as they are easier to
+understand and explain, therefore mostly models are chosen which fulfill all three
+properties.
+
+Later in the thesis, the interpretability of the models is used to explain the results.
+
+\subsubsection*{Big-O Notation}
 
 Time complexity is a common way of measuring how fast or slow an algorith will perform for the
 input size (Source). Usually the complextiy is measured with the big-O notation.
@@ -500,23 +520,11 @@ The term complexity is an overloaded term, normally complexity is measured with 
 notation and measures the scale in time as the number if inputs increases (Source).
 However, in the context of machine learning, complexity is often used to refer to the
 number of parameters in a model.
+
+\subsubsection*{Number of Parameters}
 More complex models tend to have more parameters and are therefore more difficult to interpret.
 The number of parameters is calculated using the the \texttt{model.get\_params} function
 in scikit-learn.
-
-Another metric which can be used to evaluate the complexity of a model is the \ac{BIC}
-\cite{schwarz1978estimating},according
-to \cite{bauldry2015structural} it ``favors more parsimonious models over more complex
-models (i.e., it adds a penalty based on the number of
-parameters being estimated in the model)''~\cite[p. 618]{bauldry2015structural}. It can be
-calculated using the following equation~\cite[p. 618]{bauldry2015structural}:
-
-\begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
-    \begin{equation}
-        BIC = T_m - df_m  \ln(N)
-        \label{eq:bic}
-    \end{equation}
-\end{tcolorbox}
 
 % EffiecientnetPaper?
 Note: The Depth of the model could be used as well for the evaluation, but not all models have a
@@ -529,7 +537,6 @@ A model with many layers, is generally more complex than a shallow network with 
 \begin{itemize}
     \item \textit{Space complecity -> How much memeory is needed?}
     \item \textit{Does using the big O notation make sense?}
-    \item \textit{I think BIC makes no sense}
 \end{itemize}
 
 \subsection{Results}\label{subsec:results2}
@@ -538,27 +545,31 @@ A model with many layers, is generally more complex than a shallow network with 
     \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
         % \sisetup{group-minimum-digits = 4}
         \centering
-        \begin{tabular}{lllll}
+        \begin{tabular}{llll|ll}
             \toprule
-            \thead{\textbf{Model Name}} & \thead{\textbf{Number Parameters}}
-            & \thead{\textbf{Depth}}
-            & \thead{\textbf{Inference}}
-            & \thead{\textbf{Interpretability}}
+            \thead{\textbf{Model Name}} & \textbf{\thead{Linear}} & \textbf{\thead{Monotone}} &
+            \thead{\textbf{Interaction}}
+            & \thead{\textbf{big-O}}
+            & \thead{\textbf{Parameters}}
             \\
             \toprule
-            \textbf{\ac{RF}}         & 0.000 & 0.000 & 0.000 & 0.000 \\
+            \textbf{Decision Trees}      & No & Some & Yes & XX & XX \\
             \hdashline
-            \textbf{\ac{RF} Bossing} & 0.000 & 0.000 & 0.000 & 0.000 \\
+            \textbf{Logistic Regression} & No & Yes  & No  & XX & XX \\
             \hdashline
-            \textbf{LR}              & 0.000 & 0.000 & 0.000 & 0.000 \\
+            \textbf{SVM} & X & X  & XX & XX & 11 \\
             \hdashline
-            \textbf{SVM}             & 0.000 & 0.000 & 0.000 & 0.000 \\
             \bottomrule
         \end{tabular}
         \caption{Overview of the used machine learning models and their metrics.}
-        \label{tab:ml_models_statbility}
+        \label{tab:interpretable-models}
     \end{tcolorbox}
 \end{table}
+
+\subsubsection*{Notes}
+\begin{itemize}
+    \item \textit{Reasoning for results in table.}
+\end{itemize}
 
 \textit{Explanation of the results}
 
@@ -626,9 +637,31 @@ Therefore, a smaller storage space is desirable.
 \end{table}
 
 
-\section{Summary}
+\section{Interpretation Of Results}
 Using the evaluation metrics described in the previous sections, the following results were
-achieved.
+achieved...
+
+\subsection*{Global Model-Agnostic Methods}
+As already described in section~\ref{sec:interpretability}, only algorithms that are
+interpretable where used for the evaluation.
+
+\cite{molnar2020interpretable} differentiates between
+model-specific and model-agnostic interpretability methods.
+Model-specific methods are methods that are specific to a certain model type, for example,
+decision trees.
+Model-agnostic methods are methods that can be used with any model type, for
+example, permutation importance.
+
+Also \cite{molnar2020interpretable} differentiates between global and local interpretability. Global
+interpretability refers to the ability to understand the overall behavior of the model, while
+local interpretability refers to the ability to understand the behavior of the model for a
+specific instance.
+
+For the purpose of this thesis, the focus is on global model-agnostic methods, as they can be used
+with any model type and provide an overview of the model's behavior.
+
+\subsubsection*{Partial Dependence Plots}
+
 
 \subsection*{Evaluation SVM (Only Notes)}
 \cite[p. 104]{muller_introductionmachinelearning_2016}

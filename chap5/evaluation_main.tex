@@ -26,12 +26,6 @@ and therefore needed to be changed.
                 \toprule
                 \thead{\textbf{Goal}} & \thead{\textbf{Question}}
                 & \thead{\textbf{Metric}} \\
-
-                \hdashline
-                \textbf{Appropriat- ness} & How well does the model type fit the current
-                task? &
-                Prerequisites for model type \\
-
                 \hdashline
                 \textbf{Correctness} & Ability of the model to perform the current task measured
                 on the development dataset and the runtime dataset
@@ -80,12 +74,7 @@ and therefore needed to be changed.
 \end{itemize}
 
 
-\section{DP1: Appropriateness}\label{sec:dp1:-appropriateness}
-% How well does the model type fit the current task?
-% Prerequisites for model type
-
-
-\section{DP2: Correctness}\label{sec:dp2:-correctness}
+\section{DP1: Correctness}\label{sec:dp2:-correctness}
 % Ability of the model to perform the current task measured on the development dataset and the
 % runtime dataset
 The model must be able to perform well on the selected task.
@@ -174,7 +163,7 @@ For a full overview about the performance all three metrics are sued for the eva
 \textit{Explanation of results...}
 
 
-\section{Relevance}\label{sec:relevance}
+\section{DP2: Relevance}\label{sec:relevance}
 % Does the model achieve a good bias-variance tradeoff? Which means neither overfitting or
 % unterfitting the data.
 
@@ -255,7 +244,7 @@ calculated with the formula~\ref{eq:r2}.
 \label{sec:robustness}
 
 
-\section{Robustness}\label{sec:robustness2}
+\section{DP3: Robustness}\label{sec:robustness2}
 % Ability of the model to outliers, noise and other data quality issues
 % Variance of cross-validation, fit
 
@@ -381,7 +370,7 @@ Note: This process of measuring the robustness of the model differs from the app
 \end{itemize}
 
 
-\section{Stability}\label{sec:stability}
+\section{DP4: Stability}\label{sec:stability}
 % Does the artifact generate repeatable results when trained on different data?
 % Leave-one-out cross-validation stability 
 Stability is defined as the ability of the model to generate repeatable results when trained on
@@ -468,7 +457,7 @@ more accurate estimates for small datasets.
 \textit{Explanation of the results}
 
 
-\section{Interpretability}\label{sec:interpretability}
+\section{DP4: Interpretability}\label{sec:interpretability}
 % How well can the model be explained?
 % Complexity measures (e.g., no. of parameters, depth)
 Interpretability refers to the ease with which humans can understand and make sense of the
@@ -583,7 +572,7 @@ A model with many layers, is generally more complex than a shallow network with 
 \textit{Explanation of the results}
 
 
-\section{Resource utilization}\label{sec:resource-utilization}
+\section{DP5: Resource utilization}\label{sec:resource-utilization}
 % How much resources are required to train and run the model?
 % Training time, runtime, storage space
 

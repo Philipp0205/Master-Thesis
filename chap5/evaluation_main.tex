@@ -248,97 +248,129 @@ calculated with the formula~\ref{eq:r2}.
 % Ability of the model to outliers, noise and other data quality issues
 % Variance of cross-validation, fit
 
-% Equalized Loss of Accuracy (ELA) 
-
 % Definition of robustness
-According to \cite{saez_evaluatingclassifierbehavior_2016} robustness "is the capability of an
+According to~\cite{saez_evaluatingclassifierbehavior_2016} robustness ``is the capability of an
 algorithm to build models that are insensitive to data corruptions and suffer less from the
-impact of noise" \cite[p. 2]{saez_evaluatingclassifierbehavior_2016}.
-In this context the metric Equalized Loss of Accuracy (\ac{ELA}) was established to measure the
-robustness of different machine learning models. But the \ac{ELA} is only usable for
-classification models, therefore a different metric has to be found.
+impact of nois'' \cite[p. 2]{saez_evaluatingclassifierbehavior_2016}.
+\cite{siebert2022construction} specifically mentions data quality issued like outliers or noise.
 
-There are a number of ways to evaluate the performance of regression models, including mean
-squared error (MSE), mean absolute error (MAE), and root mean squared error (RMSE). You can use
-these measures to compare the performance of different regression models on a given task. Also
-the $R^2$ can be used to measure the robustness of the model.
+As mentioned in section~\ref{sec:dataset_exploration}~Dataset~Exploration because the data set
+was generated in a controlled environment, not many data quality issues are present.
+In order to evaluate the robustness of the models, the data set was manipulated to introduce
+data quality issues.
 
-As mentioned in section~\ref{sec:dataset_exploration}~dataset~exploration the dataset has a high
-quality with no outliers and no missing values.
-Therefore, these data quality issues will be added to the dataset to measure the robustness of
-the model.
-
-\subsection{Missing values}
-When applying the model to real-world data, there is a chance that some values are missing. Two
-possible scenarios are possible:
+\subsection{Introducing Data Quality Issues}\label{subsec:missing-values}
+When applying the model to real-world data, there is a chance that some values are missing.
+Multiple scenarios are possible:
 
 \begin{enumerate}
-    \item \textbf{Missing $Vt$-combinations}: There is no data available about a metal with a
-    certain thickness and die opening. Reasons could be that the metal is not used in the
-    industry or the data was never measured.
-    \item \textbf{Missing values}: There is data for the $Vt$ combination but some values are
-    missing because of general data quality issues.
-    \item \textbf{Outliers}: There are values that are not in the range of the dataset. Reasons
-    could be that the data was measured incorrectly.
+    \item \textbf{Missing $Vt$-combinations}: No data exists for a metal of a specific
+    thickness or die opening. This could be due to the metal never being used previously or a
+    lack of recorded information.
+    \item \textbf{Missing values}:Although data exists of the desired combination of $Vt$,
+    certain item values may be missing or the dataset may not be fully comprehensive.
+    \item \textbf{Outliers}: Outliers refer to values that fall outside the typical range of a
+    dataset.
+    These values can be caused by various reasons, such as measurement errors, data
+    entry errors or even legitimate extreme observations.
 \end{enumerate}
 
-To measure all three of these scenarios, three different tests where created. The first test
-measures the robustness of the model.
+To measure all three of these scenarios, three different tests where conducted:
 
-\subsubsection*{1. Missing $Vt$-combinations}
-As can be seen Figure~\ref{fig:train_test_split} of the test and training dataset, all possible
-$Vt$ combinations in the set parameter range where measured.
-This is not the case in real-world data. Therefore, the robustness of the model has to be
-measured with missing $Vt$ combinations.
+\subsubsection*{1. Missing $Vt$-pairs}
+As demonstrated in Figure~\ref{fig:train_test_split}, the test and training dataset inlcude all
+metal thicknesses paired with all die openings.
+In real-world scenario it is unlikely to be the case.
 
-Therefore, certain $Vt$ combinations were removed from the training dataset. The removed $Vt$
-combinations were chosen randomly. The number of removed $Vt$ combinations was 10\% of the total
-number of $Vt$ combinations in the training dataset.
-Subsequently the model was trained on the training dataset with the removed data and evaluated on
-the test dataset.
-The performance of the mode is measures against the performance of the model trained with all data.
+As previously outlined in Section~\ref{subsec:training-test-split}, as initial data split samples
+with a die opening of 30 mm were utilized as test data.
+To further evaluate the model's robustness all samples associated with a specific die opening
+where removed from the training data.
+This was done for each die opening, resulting in the creation of 5 distinct training and test datasets.
 
-\subsubsection*{Calculation of the loss of accuracy}
+The approach allows for an assessment of the model's ability to handling missing data and its
+potential for generalization to real-world scenarios where not all $Vt$ combinations may be
+present.
+
 The process described above was done 100 times, to mitigate the effect of the random selection of
 the $Vt$ combinations.
 The calculation of the loss of accuracy is follows Equation~\ref{eq:mla}, the metric is called
 Mean Loss Of Accuracy (\ac{MLA}).
 
-\paragraph*{Mean Loss Of Accuracy}
-\begin{equation}
-    \label{eq:mla}
-    \text{MLA} = \frac{1}{100} \sum_{i=1}^{100} \left( \text{MSE}_{all} - \text{MSE}_{missing}
-    \right)
-\end{equation}
+\begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
+    \begin{equation}
+        \label{eq:mla}
+        \text{MLA} = \frac{1}{100} \sum_{i=1}^{100} \left( \text{MSE}_{all} - \text{MSE}_{missing}
+        \right)
+    \end{equation}
+\end{tcolorbox}
 
-To calculate the loss off accuracy the models trained with missing $Vt$ combinations were
-compared to the model trained with all data.
-The difference between the \ac{MSE} of the models was calculated. The total loss of accuracy was
-calculated by averaging the difference of the \ac{MSE} of the models.
-
-
-
+The difference between the \ac{MSE} of the models was calculated.
+The total loss of accuracy was calculated by averaging the difference of the \ac{MSE} of the models.
 
 \subsubsection*{2. Missing values}
+%It is crucial to evaluate the robustness of the model by testing it with missing
+%$Vt$-pairs to ensure its performance handling incomplete data.
+
+In order to investigate the model's capability to handle missing data, a controlled manipulation
+of the dataset was performed.
+However, instead of removing entire thickness-die opening combinations, only a random subset of
+the data for each combination was removed.
+This approach allows for an evaluation of the model's performance when only a portion of the data
+is missing rather than all of it.
+This simulates scenarios where data may be missing due to various reasons such as measurement
+errors or missing data points.
+
+The most accurate method would be \textit{LOOCV}, which generates all possible training and test
+sets by removing $p$ samples from the complete dataset.
+This approach creates overlapping test sets, resuting in a large number of iterations, which is
+computationally expensive.
+Due to limitaions in computing power, this method could not be used in this thesis and therefore
+is only mentioned for completeness.
+
+The alternative approach chosen is to use regular cross-validation with an increasing
+number of folds.
+The minimum number of folds is 2, and the maximum number of folds is the total number of samples.
+This approach allows for a gradual increase in the amount of missing data, simulating secnarios
+where data may be missing due to various reasons such as measurement errors or missing data points.
+It is expected that the
+model's performance will improve with fewer folds and decrease with more folds, as the model is
+trained on less data with more folds.
+
+This approach provides a more computationally efficient
+evaluation of the model's performance under conditions of missing data while still providing a
+robust evaluation of the model's performance.
+
+For each iteration of the cross-validation, the \ac{RMSE} of the model was
+calculated.
+The mean RMSE for each cross-validation was then calculated and the difference
+between all mean RMSEs was defined as the loss of accuracy.
+The total loss of accuracy was calculated by averaging the difference of the RMSE of the models
+for each fold of the
+cross-validation.
+An average loss function was introduced to measure the performance of the model under different
+levels of missing data.
+
+To measure the performance an average loss function is introduced as follows:
+%  AL = \frac{\sum_{k=2}^{n} \frac{loss_{RF} - loss_{SVM}}{loss_{RFj}}}{n-1}
+
+\begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
+    \begin{equation}
+        \label{eq:average_loss}
+        \text{Loss of Accuracy} = \frac{1}{N} \sum_{i=1}^{N} |\text{RMSE}i - \text{RMSE}{avg}|
+    \end{equation}
+\end{tcolorbox}
+
+Where $N$ is the toal number of folds, $i$ is the index of the current folds.
+
+Note: Imputations of missing values can be used to equalize the loss of accuracy. This is not
+done in this thesis because the goal is to measure the robustness of the model to missing values.
 
 \subsubsection*{3. Outliers and wrong data}
 To measure the robustness of the model, outliers were added to the data. The outliers were added
 to the data in the following way:
 
-Outliers where added to the training dataset.
-The model was trained on the training dataset.
-The model was evaluated on the test dataset.
-The outliers where removed from the training dataset.
-The process was repeated 100 times.
-
-\subsubsection*{Noise}
-\textit{Not sure if I want to measure that.}
-
-
-Note: This process of measuring the robustness of the model differs from the approach used by
-\cite{siebert_constructionqualitymodel_} and \cite{saez_evaluatingclassifierbehavior_2016}.
-
-\subsection{Results}
+\subsection{Results}\label{subsec:results-robustness}
 
 \begin{table}[H]
     \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
@@ -351,7 +383,7 @@ Note: This process of measuring the robustness of the model differs from the app
             & {\thead{\textbf{Missing Values} \\ \unit{loa}}}
             & {\thead{\textbf{Outliers} \\ \unit{loa}}}          \\
             \toprule
-            \textbf{Random Forest} & 0.034 & 0.000 & 0.771 \\
+            \textbf{Random Forest} & 0.034 & 0.000 & 0.000 \\
             \hdashline
             \textbf{Support Vector Machine} & 0.000 & 0.000 & 0.000 \\
             \bottomrule
@@ -366,7 +398,6 @@ Note: This process of measuring the robustness of the model differs from the app
 \begin{itemize}
     \item \textit{An alternative metric instead of ELA could be the approach of Scher and Trügler
     . But it would be necessary to implement the metric in Python.}
-    \item \textit{Decide if I want to evaluate noise as well or if the rest is enough.}
 \end{itemize}
 
 
@@ -621,12 +652,12 @@ package is used.
         \begin{tabular}{llll}
             \toprule
             \thead{\textbf{Model Name}} & {\thead{\textbf{Training time} \\ \unit[]{ms}}}
-            & {\thead{\textbf{Inference time} \\ \unit[]{ms}}}      & {\thead{\textbf{Memory
-            Usage}   \\
+            & {\thead{\textbf{Inference time} \\ \unit[]{ms}}} & {\thead{\textbf{Memory
+            Usage} \\
             \unit{kb}}}
             \\
             \toprule
-            \textbf{Linear Regression} & 2.609 & 0.975  & 157.41 \\
+            \textbf{Linear Regression}          & 2.609  & 0.975 & 157.41    \\
             \hdashline
             \textbf{Random Forest} & 0.0222 & 2.0275  & 80.2 \\
             \hdashline

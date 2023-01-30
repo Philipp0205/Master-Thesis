@@ -1,4 +1,4 @@
-\chapter{Evaluation}
+\chapter{Evaluation}\label{ch:evaluation}
 % take a step back and put your results from 4 into context. 
 This chapter critically examines the machine learning models conceived and partially implemented
 in the previous chapter.
@@ -7,8 +7,9 @@ structured according to the Goal-Question-Metric approach.
 
 The quality metrics are oriented on the quality model from
 \cite[]{siebert2022construction}, which is based on the ISO/IEC 9126 standard for the
-evaluation of software quality. The standard was changed to fit the requirements of machine
-learning models~\cite{siebert2022construction}.
+evaluation of software quality.
+The standard was changed to fit the requirements of machine learning
+models~\cite{siebert2022construction}.
 
 The metrics of the goal \textit{Robustness} where original only defined for classification models
 and therefore needed to be changed.
@@ -254,17 +255,27 @@ calculated with the formula~\ref{eq:r2}.
 % Variance of cross-validation, fit
 
 % Definition of robustness
-According to~\cite{saez_evaluatingclassifierbehavior_2016} robustness ``is the capability of an
-algorithm to build models that are insensitive to data corruptions and suffer less from the
-impact of nois''~\cite[p. 2]{saez_evaluatingclassifierbehavior_2016}.
-\cite{siebert2022construction} specifically mentions data quality issued like outliers or noise.
+The IEEE standard glossary of software engineering terminology describe robustness as ``The degree
+to which a system or component can function correctly in the presence of invalid inputs or
+stressful environmental conditions''~\cite[p. 64]{terminology1990ieee}.
+\cite{saez2016evaluating} extend this definition to fit machine learning models and describe it
+as the ``capability of an algorithm to build models that are insensitive to data corruptions and
+suffer less from the impact of noise''~\cite[p. 2]{saez_evaluatingclassifierbehavior_2016}.
+\cite{siebert2022construction} specifically mention data quality issued like outliers or
+noise~\cite[p. 16]{siebert2022construction}.
+
+Unlike DP1 Correctness(\ref{sec:dp2:-correctness}), robustness is a non-functional characteristic
+of a \ac{ML} model.
+A way to evaluate the robustness is to check the correctness of the model wit
+added noise to the data~\cite[p. 18]{zhou_machinelearning_2021}, if the model is still able to
+predict the correct values, it is considered robust.
 
 As mentioned in section~\ref{sec:dataset_exploration} the data set
-was generated in a controlled environment does not contain many data quality issues.
-In order to evaluate the robustness of the models, the data set was manipulated to introduce
-data quality issues.
+was generated in a controlled environment does not contain many data quality issues and noise.
+This offers the opportunity to test the robustness of the models by manipulating the data set
+to introduce the data quality issues missing values and noise.
 
-\subsection{Introducing Data Quality Issues}\label{subsec:missing-values}
+\subsection{Missing Data}\label{subsec:missing-data}
 When applying the model to real-world data, it is possible that some values are missing.
 Looking at the available dataset two scenarios or missing data can occur: Missing $Vt$-pairings
 and missing values.
@@ -274,7 +285,6 @@ opening, which can be due to the die opening was never being used before or a la
 information.
 In the second scenario, while data may exist for the desired $Vt$ combination, certain values may
 be missing or the dataset may not be complete.
-
 
 
 To address these scenarios, the following tests were conducted:
@@ -386,6 +396,39 @@ However, this approach was not used in this thesis as the goal
 was to measure the robustness of the model to missing values specifically, rather than to
 artificially improve its performance through imputation techniques.
 
+\subsection{Noise}\label{subsec:noise}
+A common practise in \ac{ML} is to add noise to the training data to improve the model's
+generalization abilities.
+In this sturdy adding Gaussian Noise will be added to evaluate the robustness of the model.
+
+There is no standard approach to adding noise to the data. The approach chosen in this thesis
+is to add noise to the training data, while the test data remains unchanged.
+To add the noise, \textit{numpy.random.normal} function was used, which generated random numbers
+with a Gaussian distribution.
+The mean and standard deviation of each feature were calculated based on the original data, and
+the function was used to generate noisey values for each feature.
+
+To study the model's reaction to increasing amounts of noise, the noise added to the training
+data was gradually increased starting from 1\% to 50\%, which means that the last iteration
+contains as many noisy as``clean'' samples.
+
+The difference between all \ac{RMSE}'s between iterations was defined as loss.
+The total loss was cacluclated by averaging the difference of these values as shown in
+Equation~\ref{eq:noise}.
+
+\begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
+    \begin{equation}
+        \text{Average Loss} = \frac{1}{N} \sum_{i=1}^{N} |\text{RMSE}i - \text{RMSE}{avg}|\label
+        {eq:noise}
+    \end{equation}
+\end{tcolorbox}
+
+\subsubsection*{\textit{Notes}}
+
+\begin{itemize}
+    \item \textit{Does the calculation of the loss make sense?}
+\end{itemize}
+
 \subsection{Results}\label{subsec:results-robustness}
 
 \begin{table}[H]
@@ -394,9 +437,8 @@ artificially improve its performance through imputation techniques.
         \centering
         \begin{tabular}{llll}
             \toprule
-            \thead{\textbf{Model Name}} & {\thead{\textbf{Missing $Vt$-combinations} \\
-            \unit{loa}}} & \thead{  ßVariance of CV} \\
-            & {\thead{\textbf{Missing Values} \\ \unit{loa}}}          \\
+            \thead{\textbf{Model Name}} & {\thead{\textbf{Missing Values} \\
+            \unit{loa}}} & {\thead{\textbf{Noise} \\ \unit{loa}}}          \\
             \toprule
             \textbf{Random Forest} & 0.034 & 0.000 \\
             \hdashline

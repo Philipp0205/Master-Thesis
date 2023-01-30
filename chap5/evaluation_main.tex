@@ -84,22 +84,27 @@ error which is the difference between the predicted value by the model the actua
 $y_i$ is the actual value and $n$ is the number of samples in the testing data set.
 
 The mean absolute error (MAE) and mean squared error (MSE) are the most commonly used metrics for
-evaluating the performance of regression models. \paragraph*{Mean Absolute Error (MAE)}
+evaluating the performance of regression models.
 
-\begin{equation}
-    \label{eq:mae}
-    MAE = \frac{1}{n} \sum_{i=1}^{n} |e_i|
-\end{equation}
+\textbf{Mean Absolute Error (MAE)}
+\begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
+    \begin{equation}
+        \label{eq:mae}
+        MAE = \frac{1}{n} \sum_{i=1}^{n} |e_i|
+    \end{equation}
+\end{tcolorbox}
 
 The MSE is the average of the squared differences between the predicted and the actual values.
 The MSE is more sensitive to outliers than the MAE.
 
-\paragraph*{Mean Squared Error (MSE)}
+\textbf{Mean Squared Error (MSE)}
 
-\begin{equation}
-    \label{eq:mse}
-    MSE = \frac{1}{n} \sum_{i=1}^{n} e^2
-\end{equation}
+\begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
+    \begin{equation}
+        \label{eq:mse}
+        MSE = \frac{1}{n} \sum_{i=1}^{n} e^2
+    \end{equation}
+\end{tcolorbox}
 
 The RMSE is the square root of the MSE. The RMSE is the most popular metric for evaluating the
 performance of regression models. The RMSE is interpretable in the same units as the response
@@ -110,12 +115,14 @@ the data are to the fitted regression line. It is also known as the coefficient 
 or the coefficient of multiple determination for multiple regression. The value of the $R^2$ is
 the percentage of the response variable variation that is explained by a linear model.
 
-\paragraph*{Root Mean Squared Error (RMSE)}
+\textbf{Root Mean Squared Error (RMSE)}
 
-\begin{equation}
-    \label{eq:rmse}
-    RMSE = \sqrt{MSE}
-\end{equation}
+\begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
+    \begin{equation}
+        \label{eq:rmse}
+        RMSE = \sqrt{MSE}
+    \end{equation}
+\end{tcolorbox}
 
 For a full overview about the performance all three metrics are sued for the evaluation.
 
@@ -241,109 +248,119 @@ calculated with the formula~\ref{eq:r2}.
     \end{tcolorbox}
 \end{table}
 
-\label{sec:robustness}
 
-
-\section{DP3: Robustness}\label{sec:robustness2}
+\section{DP3: Robustness}\label{sec:robustness}
 % Ability of the model to outliers, noise and other data quality issues
 % Variance of cross-validation, fit
 
 % Definition of robustness
 According to~\cite{saez_evaluatingclassifierbehavior_2016} robustness ``is the capability of an
 algorithm to build models that are insensitive to data corruptions and suffer less from the
-impact of nois'' \cite[p. 2]{saez_evaluatingclassifierbehavior_2016}.
+impact of nois''~\cite[p. 2]{saez_evaluatingclassifierbehavior_2016}.
 \cite{siebert2022construction} specifically mentions data quality issued like outliers or noise.
 
-As mentioned in section~\ref{sec:dataset_exploration}~Dataset~Exploration because the data set
-was generated in a controlled environment, not many data quality issues are present.
+As mentioned in section~\ref{sec:dataset_exploration} the data set
+was generated in a controlled environment does not contain many data quality issues.
 In order to evaluate the robustness of the models, the data set was manipulated to introduce
 data quality issues.
 
 \subsection{Introducing Data Quality Issues}\label{subsec:missing-values}
-When applying the model to real-world data, there is a chance that some values are missing.
-Multiple scenarios are possible:
+When applying the model to real-world data, it is possible that some values are missing.
+Looking at the available dataset two scenarios or missing data can occur: Missing $Vt$-pairings
+and missing values.
 
-\begin{enumerate}
-    \item \textbf{Missing $Vt$-combinations}: No data exists for a metal of a specific
-    thickness or die opening. This could be due to the metal never being used previously or a
-    lack of recorded information.
-    \item \textbf{Missing values}:Although data exists of the desired combination of $Vt$,
-    certain item values may be missing or the dataset may not be fully comprehensive.
-    \item \textbf{Outliers}: Outliers refer to values that fall outside the typical range of a
-    dataset.
-    These values can be caused by various reasons, such as measurement errors, data
-    entry errors or even legitimate extreme observations.
-\end{enumerate}
+In the first scenario, there may be no data available for a specific die
+opening, which can be due to the die opening was never being used before or a lack of recorded
+information.
+In the second scenario, while data may exist for the desired $Vt$ combination, certain values may
+be missing or the dataset may not be complete.
 
-To measure all three of these scenarios, three different tests where conducted:
 
-\subsubsection*{1. Missing $Vt$-pairs}
-As demonstrated in Figure~\ref{fig:train_test_split}, the test and training dataset inlcude all
+
+To address these scenarios, the following tests were conducted:
+
+\subsubsection*{1. Missing $Vt$-pairings}
+
+As demonstrated in Figure~\ref{fig:train_test_split}, the test and training dataset include all
 metal thicknesses paired with all die openings.
 In real-world scenario it is unlikely to be the case.
-
-As previously outlined in Section~\ref{subsec:training-test-split}, as initial data split samples
-with a die opening of 30 mm were utilized as test data.
-To further evaluate the model's robustness all samples associated with a specific die opening
+%As previously outlined in Section~\ref{subsec:training-test-split}, as initial data split samples
+%with a die opening of 30 mm were utilized as test data.
+To evaluate the model's robustness all samples associated with a specific die opening
 where removed from the training data.
-This was done for each die opening, resulting in the creation of 5 distinct training and test datasets.
+This was done for all present die openings, resulting in the creation of 5 distinct training and
+test sets.
 
 The approach allows for an assessment of the model's ability to handling missing data and its
-potential for generalization to real-world scenarios where not all $Vt$ combinations may be
-present.
+potential for generalization to real-world scenarios where not all die opening or thicknesses
+may be present.
 
-The process described above was done 100 times, to mitigate the effect of the random selection of
-the $Vt$ combinations.
-The calculation of the loss of accuracy is follows Equation~\ref{eq:mla}, the metric is called
-Mean Loss Of Accuracy (\ac{MLA}).
+To evaluate the performance of the models, the \ac{MSE} was calculated for each of the 5 models.
+The overall MSE was then determined by averaging the \ac{MSE} of the models.
+A lower overall MSE indicates, that the model was able to generalize better even though some
+data was missing. The calculation of the overall MSE is shown in Equation~\ref{eq:robustness}.
 
 \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
     \begin{equation}
-        \label{eq:mla}
-        \text{MLA} = \frac{1}{100} \sum_{i=1}^{100} \left( \text{MSE}_{all} - \text{MSE}_{missing}
-        \right)
+        \frac{1}{5}\sum_{i=1}^{5} MSE_i
+        \label{eq:robustness}
     \end{equation}
 \end{tcolorbox}
 
-The difference between the \ac{MSE} of the models was calculated.
-The total loss of accuracy was calculated by averaging the difference of the \ac{MSE} of the models.
+Where, $MSE_{total}$ is the overall mean squared error, $MSE_i$ is the mean squared error of the
+i-th model and 5 is the total number of models.
+
+The results can be found in Table~\ref{tab:results_robustness}.
+
+%The calculation of the loss of accuracy is follows Equation~\ref{eq:mla}, the metric is called
+%Mean Loss Of Accuracy (\ac{MLA}).
+%
+%\begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
+%    \begin{equation}
+%        \label{eq:mla}
+%        \text{MLA} = \frac{1}{n} \sum_{i=1}^{n} \left( \text{MSE}_{i}
+%        \right)
+%    \end{equation}
+%\end{tcolorbox}
+
+%The difference between the \ac{MSE} of the models was calculated.
+%The total loss of accuracy was calculated by averaging the difference of the \ac{MSE} of the
+%models.
 
 \subsubsection*{2. Missing values}
-%It is crucial to evaluate the robustness of the model by testing it with missing
-%$Vt$-pairs to ensure its performance handling incomplete data.
 
 In order to investigate the model's capability to handle missing data, a controlled manipulation
 of the dataset was performed.
-However, instead of removing entire thickness-die opening combinations, only a random subset of
+However, instead of removing entire die openings from the dataset, only a random subset of
 the data for each combination was removed.
 This approach allows for an evaluation of the model's performance when only a portion of the data
 is missing rather than all of it.
 This simulates scenarios where data may be missing due to various reasons such as measurement
 errors or missing data points.
 
-The most accurate method would be \textit{LOOCV}, which generates all possible training and test
+The most accurate method would be \ac{LPOCV}, which generates all possible training and test
 sets by removing $p$ samples from the complete dataset.
-This approach creates overlapping test sets, resuting in a large number of iterations, which is
+This approach creates overlapping test sets, resulting in a large number of iterations, which is
 computationally expensive.
-Due to limitaions in computing power, this method could not be used in this thesis and therefore
+Due to limitations in computing power, this method could not be used in this thesis and therefore
 is only mentioned for completeness.
 
-The alternative approach chosen is to use regular cross-validation with an increasing
+The alternative approach chosen is to a regular \ac{CV} approach, with an increasing
 number of folds.
-The minimum number of folds is 2, and the maximum number of folds is the total number of samples.
+The minimum number of folds used in this approach was 2, while the maximum number of folds was
+the total number of samples in the dataset. This means that each sample was used as a test sample
+once.
 This approach allows for a gradual increase in the amount of missing data, simulating secnarios
 where data may be missing due to various reasons such as measurement errors or missing data points.
 It is expected that the
-model's performance will improve with fewer folds and decrease with more folds, as the model is
-trained on less data with more folds.
+model's performance will improve with fewer folds, as the model will be trained to more data.
 
-This approach provides a more computationally efficient
-evaluation of the model's performance under conditions of missing data while still providing a
-robust evaluation of the model's performance.
+This approach provides a more computationally efficient evaluation of the model's robustness
+under conditions of missing data.
 
 For each iteration of the cross-validation, the \ac{RMSE} of the model was
 calculated.
-The mean RMSE for each cross-validation was then calculated and the difference
+The mean \ac{RMSE} for each cross-validation was then calculated and the difference
 between all mean RMSEs was defined as the loss of accuracy.
 The total loss of accuracy was calculated by averaging the difference of the RMSE of the models
 for each fold of the
@@ -363,12 +380,11 @@ To measure the performance an average loss function is introduced as follows:
 
 Where $N$ is the toal number of folds, $i$ is the index of the current folds.
 
-Note: Imputations of missing values can be used to equalize the loss of accuracy. This is not
-done in this thesis because the goal is to measure the robustness of the model to missing values.
-
-\subsubsection*{3. Outliers and wrong data}
-To measure the robustness of the model, outliers were added to the data. The outliers were added
-to the data in the following way:
+It is worth noting that imputations of missing values can be used to mitigate the loss
+caused by missing data.
+However, this approach was not used in this thesis as the goal
+was to measure the robustness of the model to missing values specifically, rather than to
+artificially improve its performance through imputation techniques.
 
 \subsection{Results}\label{subsec:results-robustness}
 
@@ -378,14 +394,13 @@ to the data in the following way:
         \centering
         \begin{tabular}{llll}
             \toprule
-            \thead{\textbf{Model Name}} & {\thead{\textbf{Missing $Vt$-combinations} \\ \unit{loa}}}
-
-            & {\thead{\textbf{Missing Values} \\ \unit{loa}}}
-            & {\thead{\textbf{Outliers} \\ \unit{loa}}}          \\
+            \thead{\textbf{Model Name}} & {\thead{\textbf{Missing $Vt$-combinations} \\
+            \unit{loa}}} & \thead{  ßVariance of CV} \\
+            & {\thead{\textbf{Missing Values} \\ \unit{loa}}}          \\
             \toprule
-            \textbf{Random Forest} & 0.034 & 0.000 & 0.000 \\
+            \textbf{Random Forest} & 0.034 & 0.000 \\
             \hdashline
-            \textbf{Support Vector Machine} & 0.000 & 0.000 & 0.000 \\
+            \textbf{Support Vector Machine} & 0.000 & 0.000 \\
             \bottomrule
         \end{tabular}
         \caption{Results of used machine learning models regarding the design principle robustness.}
@@ -393,20 +408,12 @@ to the data in the following way:
     \end{tcolorbox}
 \end{table}
 
-\subsubsection*{\textit{Notes}}
-
-\begin{itemize}
-    \item \textit{An alternative metric instead of ELA could be the approach of Scher and Trügler
-    . But it would be necessary to implement the metric in Python.}
-\end{itemize}
-
 
 \section{DP4: Stability}\label{sec:stability}
 % Does the artifact generate repeatable results when trained on different data?
 % Leave-one-out cross-validation stability 
 Stability is defined as the ability of the model to generate repeatable results when trained on
 different data~\cite[p. 16]{siebert2022construction}.
-
 
 One appropriate way to measure the stability of a model is to use \ac{LOOCV}, which is a
 a form of \ac{CV} where one sample is used for validation and the remaining data is
@@ -427,7 +434,6 @@ iterations, using the equation provided in Equation~\ref{eq:loocv} which is take
 The approach provides an unbiased estimate of the model's generalization error
 but this estimate is poor because only one samples is used for validation~\cite[p.
 201]{gareth2013introduction}.
-
 Therefore, it can not be used to make a statement about the generalization error of the model.
 Since the goal is to measure repeatable results, the \ac{LOOCV} is a suitable metric to measure
 the stability of the model.
@@ -563,7 +569,6 @@ A model with many layers, is generally more complex than a shallow network with 
 
 \begin{itemize}
     \item \textit{Space complecity -> How much memeory is needed?}
-    \item \textit{Does using the big O notation make sense?}
 \end{itemize}
 
 \subsection{Results}\label{subsec:results2}

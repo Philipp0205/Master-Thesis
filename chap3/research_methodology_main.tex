@@ -136,18 +136,32 @@ engineering~\cite[p. 2]{siebert2022construction}.
 
 In the field of software engineering, there are already standards that define the quality of
 software systems and its components.
-Most notable the ISO/IEC 9126 standards, which provide a
-quality model which is widely adapted in software engineering (Source).
-For above mentioned reasons these standards are not suitable to evaluate machine learning models,
-therefore~\cite{siebert2022construction} not that they need to be adapted.
+Most notable the ISO/IEC 9126 standards, which provide a quality model which is widely adapted in
+software engineering (Source).
+For above-mentioned reasons these standards are not suitable to evaluate machine learning models,
+therefore~\cite{siebert2022construction} note that they need to be adapted.
 They re-interpreted and extended these existing quality models to the ML context~\cite[p.
 1]{siebert2022construction}.
 
-In order to define the Design Principles for the artifacts in this work, the considerations of
-\cite[]{siebert2022construction} are used.
+In order to define the Design Principles for the \ac{ML} models this work, the
+considerations of~\cite[]{siebert2022construction} are used.
 This enables a systematic process in order to assess the quality of the developed models.
 
-\subsection{Goal Question Metric Approach}\label{subsec:goal-question-metric-approach}
+In the work of~\cite{siebert2022construction}, several quality attributes are considered, including
+Correctness, Relevance, Robustness, Stability, Interpretability and Resource
+Utilization.
+Alongside these attributes, the authors also provide a set of quality measures to evaluate the
+models, but these are nor complete and are only used as a starting point for the evaluation of the
+models in this work, further evaluation is described in Chapter~\ref{ch:evaluation}.
+
+It is important to note, that the mentioned quality attributes and measures should
+not be seen as a complete set of quality attributes and measures for \ac{ML} models.
+Other studies, such as ~\cite{zhang2020machine} have proposed additional sets of quality attributes.
+These additional perspectives will also be considered in the evaluation of the models, but only
+as a supplementary means of evaluating model performance.
+
+
+\section{Goal Question Metric Approach}\label{subsec:goal-question-metric-approach}
 To make the defined quality attributes measurable, the “Goal-Question-Metric”-approach \ac{GQM}
 was chosen in this work. It is one of the most common approaches in DSR and is divided into three
 levels.
@@ -180,7 +194,3 @@ Objectives, questions and metrics can be presented in a hierarchical structure.
         \label{fig:gqm}
     \end{tcolorbox}
 \end{figure}
-
-
-
-

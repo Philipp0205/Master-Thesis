@@ -771,7 +771,7 @@ Like other tree-based models it does not perform well on high-dimensional data.
 
 \section{Model Training}
 
-\subsection{Training-Test Split}
+\subsection{Training-Test Split}\label{subsec:training-test-split}
 Figure~\ref{fig:train_test_split} shows the data set and which parts of it is used for training
 and testing the used
 models. Samples with a die opening of 30 are used to test the performance and the remaining part
@@ -782,13 +782,18 @@ models but would not evaluate their ability to predict new data of a different d
 The die opening 30 was chosen because it is in the middle of the selected data set and therefore
 the models should be
 able to predict the data of this die opening.
+It is expected that this approach will lead to improved model performance as the data removed
+lies in the middle of the parameter space.
+This should result in the model generalizing better on that specific range of data as it has not
+been over-exposed to it during the training process.
+
 All models are trained with the same data set and the same parameters. The only difference is the
 used algorithm.
 
 \begin{figure}[H]
     \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
         \centering
-        \includegraphics[width=0.7\textwidth]{test_train_split}
+        \includegraphics[width=0.8\textwidth]{test_train_split}
         \caption{The training and test dataset. (Data especially for V40 is still missing)}
         \label{fig:train_test_split}
     \end{tcolorbox}

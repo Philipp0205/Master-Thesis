@@ -782,6 +782,11 @@ models but would not evaluate their ability to predict new data of a different d
 The die opening 30 was chosen because it is in the middle of the selected data set and therefore
 the models should be
 able to predict the data of this die opening.
+It is expected that this approach will lead to improved model performance as the data removed
+lies in the middle of the parameter space.
+This should result in the model generalizing better on that specific range of data as it has not
+been over-exposed to it during the training process.
+
 All models are trained with the same data set and the same parameters. The only difference is the
 used algorithm.
 

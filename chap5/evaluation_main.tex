@@ -289,60 +289,9 @@ be missing or the dataset may not be complete.
 
 To address these scenarios, the following tests were conducted:
 
-\subsubsection*{1. Missing $Vt$-pairings}
-
-As demonstrated in Figure~\ref{fig:train_test_split}, the test and training dataset include all
-metal thicknesses paired with all die openings.
-In real-world scenario it is unlikely to be the case.
-%As previously outlined in Section~\ref{subsec:training-test-split}, as initial data split samples
-%with a die opening of 30 mm were utilized as test data.
-To evaluate the model's robustness all samples associated with a specific die opening
-where removed from the training data.
-This was done for all present die openings, resulting in the creation of 5 distinct training and
-test sets.
-
-The approach allows for an assessment of the model's ability to handling missing data and its
-potential for generalization to real-world scenarios where not all die opening or thicknesses
-may be present.
-
-To evaluate the performance of the models, the \ac{MSE} was calculated for each of the 5 models.
-The overall MSE was then determined by averaging the \ac{MSE} of the models.
-A lower overall MSE indicates, that the model was able to generalize better even though some
-data was missing. The calculation of the overall MSE is shown in Equation~\ref{eq:robustness}.
-
-\begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
-    \begin{equation}
-        \frac{1}{5}\sum_{i=1}^{5} MSE_i
-        \label{eq:robustness}
-    \end{equation}
-\end{tcolorbox}
-
-Where, $MSE_{total}$ is the overall mean squared error, $MSE_i$ is the mean squared error of the
-i-th model and 5 is the total number of models.
-
-The results can be found in Table~\ref{tab:results_robustness}.
-
-%The calculation of the loss of accuracy is follows Equation~\ref{eq:mla}, the metric is called
-%Mean Loss Of Accuracy (\ac{MLA}).
-%
-%\begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
-%    \begin{equation}
-%        \label{eq:mla}
-%        \text{MLA} = \frac{1}{n} \sum_{i=1}^{n} \left( \text{MSE}_{i}
-%        \right)
-%    \end{equation}
-%\end{tcolorbox}
-
-%The difference between the \ac{MSE} of the models was calculated.
-%The total loss of accuracy was calculated by averaging the difference of the \ac{MSE} of the
-%models.
-
 \subsubsection*{2. Missing values}
-
-In order to investigate the model's capability to handle missing data, a controlled manipulation
-of the dataset was performed.
-However, instead of removing entire die openings from the dataset, only a random subset of
-the data for each combination was removed.
+To study the model's ability to handle missing data, a controlled manipulation
+of the dataset was performed by removing a random subset of the data.
 This approach allows for an evaluation of the model's performance when only a portion of the data
 is missing rather than all of it.
 This simulates scenarios where data may be missing due to various reasons such as measurement
@@ -449,7 +398,6 @@ Equation~\ref{eq:noise}.
         \label{tab:results_robustness}
     \end{tcolorbox}
 \end{table}
-
 
 \section{DP4: Stability}\label{sec:stability}
 % Does the artifact generate repeatable results when trained on different data?

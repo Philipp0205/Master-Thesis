@@ -387,17 +387,23 @@ Equation~\ref{eq:noise}.
         \begin{tabular}{llll}
             \toprule
             \thead{\textbf{Model Name}} & {\thead{\textbf{Missing Values} \\
-            \unit{loa}}} & {\thead{\textbf{Noise} \\ \unit{loa}}}          \\
+            \unit{loa}}} & {\thead{\textbf{Noise} \\ \unit{loa}}}               \\
             \toprule
-            \textbf{Random Forest} & 0.034 & 0.000 \\
+            \textbf{Linear Regression} & 0.070 & 0.251 \\
+            \textbf{Linear Regression (rand. split)}                   & 0.071 & 0.224 \\
             \hdashline
-            \textbf{Support Vector Machine} & 0.000 & 0.000 \\
+            \textbf{Random Forest}     & 0.071 & 0.224 \\
+            \textbf{Random Forest (rand. split)}                             & 0.067 & 0.233 \\
+            \hdashline
+            \textbf{SVM}               & 0.070 & 0.251 \\
+            \textbf{SVM (rand. split)}               & 0.071 & 0.224 \\
             \bottomrule
         \end{tabular}
         \caption{Results of used machine learning models regarding the design principle robustness.}
         \label{tab:results_robustness}
     \end{tcolorbox}
 \end{table}
+
 
 \section{DP4: Stability}\label{sec:stability}
 % Does the artifact generate repeatable results when trained on different data?

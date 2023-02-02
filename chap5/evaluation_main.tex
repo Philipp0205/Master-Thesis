@@ -161,6 +161,9 @@ For a full overview about the performance all three metrics are sued for the eva
             \hdashline
             \textbf{Support Vector Machine}         & 0.09  & 0.04  & 0.20  \\
             \textbf{SVM (rand. split)}              & 0.09  & 0.04  & 0.20  \\
+            \hdashline
+            \textbf{MLP}         & 0.13  & 0.06  & 0.236  \\
+            \textbf{MLP (rand. split)}              & 0.161  & 0.051  & 0.225  \\
             \bottomrule
         \end{tabular}
         \caption{Overview of the used machine learning models and their metrics.}
@@ -539,17 +542,6 @@ properties.
 
 Later in the thesis, the interpretability of the models is used to explain the results.
 
-\subsubsection*{Big-O Notation}
-
-Time complexity is a common way of measuring how fast or slow an algorith will perform for the
-input size (Source). Usually the complextiy is measured with the big-O notation.
-...
-
-The term complexity is an overloaded term, normally complexity is measured with the big-O
-notation and measures the scale in time as the number if inputs increases (Source).
-However, in the context of machine learning, complexity is often used to refer to the
-number of parameters in a model.
-
 \subsubsection*{Number of Parameters}
 More complex models tend to have more parameters and are therefore more difficult to interpret.
 The number of parameters is calculated using the the \texttt{model.get\_params} function
@@ -567,27 +559,37 @@ A model with many layers, is generally more complex than a shallow network with 
     \item \textit{Space complecity -> How much memeory is needed?}
 \end{itemize}
 
+\subsubsection*{Linear Regression}
+Linear regression is a linear model as it models the relationship between the features and the
+target as a linear equation.
+
+This linearity usually does mean that the relationship between the feature and the target goes in
+the same direction over the entire range of the feature. Therefore \ac{LR} is monotonic.
+
+\ac{LR} models do not include interaction features by default.
+To capture interaction effects in \ac{LR}, interaction features need to be created and added to
+the model manually. This was not done in this work.
+
 \subsection{Results}\label{subsec:results2}
 
 \begin{table}[H]
     \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
         % \sisetup{group-minimum-digits = 4}
         \centering
-        \begin{tabular}{llll|ll}
+        \begin{tabular}{llll|l}
             \toprule
             \thead{\textbf{Model Name}} & \textbf{\thead{Linear}} & \textbf{\thead{Monotone}} &
             \thead{\textbf{Interaction}}
-            & \thead{\textbf{big-O}}
-            & \thead{\textbf{Parameters}}
+            & \thead{\textbf{Param.}}
             \\
             \toprule
-            \textbf{Linear Regression}   & Yes & Yes  & No  & XX & 0  \\
+            \textbf{Linear Regression}   & Yes & Yes  & No  & 4  \\
             \hdashline
-            \textbf{Decision Trees}      & No  & Some & Yes & XX & XX \\
+            \textbf{Decision Trees}      & No  & Some & Yes & 17 \\
             \hdashline
-            \textbf{Logistic Regression} & No  & Yes  & No  & XX & XX \\
+            \textbf{Logistic Regression} & No  & Yes  & No  & XX \\
             \hdashline
-            \textbf{SVM}                 & X   & X    & XX  & XX & 11 \\
+            \textbf{SVM}                 & X   & X    & XX  & 11 \\
             \hdashline
             \bottomrule
         \end{tabular}

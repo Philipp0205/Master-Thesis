@@ -218,7 +218,19 @@ Both, high variance and high bias are undesirable properties for a model. The go
 model with low bias and low variance. This is called the bias-variance trade off. \cite[p.
 9]{neal_biasvariancetradeofftextbooks_2019}
 
-\subsection{Ensemble Learning}
+% Regularization
+\subsubsection*{Regularization}
+Regularization refers to a group of techniques that force a model to be simpler.
+this usually results in a slight increase in bias but a substantial decrease in variance~\cite[p.
+12]{burkov2019hundred}.
+
+The regularization method used in this thesis and in general the most popular are L1 and L2
+regularization.
+In order to construct a regularized model, the objective function is altered by including a
+penalizing term that increases the value as the model becomes more complex~\cite[p.
+12]{burkov2019hundred}
+
+\subsection{Ensemble Learning}\label{subsec:ensemble-learning}
 Ensemble techniques in machine learning to involve the construction of multiple models, called
 "learners," for a given task. The primary goal of these methods is to improve the accuracy and
 performance of the model by combining the predictions of multiple learners. Ensemble techniques

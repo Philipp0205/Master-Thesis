@@ -1,1 +1,0 @@
-{"rule":"ENGLISH_WORD_REPEAT_BEGINNING_RULE","sentence":"^\\QThis mechanism is flexible enough to handle classifications and regression problems, this is one of the reasons that random forests count to the most successful \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q methods.\\E$"}

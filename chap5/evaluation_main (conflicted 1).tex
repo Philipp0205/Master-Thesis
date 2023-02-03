@@ -184,14 +184,11 @@ evaluation.
             \textbf{Linear Regression}              & 0.199 & 0.092 & 0.303 \\
             \textbf{Linear Regression (rand.split)} & 0.261 & 0.127 & 0.356 \\
             \hdashline
-            \textbf{Decision Tree}                  & 0.193 & 0.076 & 0.266 \\
-            \textbf{Decision Tree (rand. split)}    & 0.212 & 0.119 & 0.346 \\
+            \textbf{Decision Tree}                  & 0.194 & 0.070 & 0.263 \\
+            \textbf{Decision Tree (rand. split)}    & 0.162 & 0.062 & 0.250 \\
             \hdashline
             \textbf{Random Forest}                  & 0.16  & 0.04  & 0.21  \\
             \textbf{Random Forest (rand.split)}     & 0.14  & 0.05  & 0.22  \\
-            \hdashline
-            \textbf{Extra Trees}                    & 0.126 & 0.040 & 0.201 \\
-            \textbf{Extra Trees (rand. split)}      & 0.134 & 0.041 & 0.202 \\
             \hdashline
             \textbf{Support Vector Machine}         & 0.09  & 0.04  & 0.20  \\
             \textbf{SVM (rand. split)}              & 0.09  & 0.04  & 0.20  \\
@@ -247,7 +244,7 @@ evaluate the regression models.
     \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
         \centering
         \includegraphics[trim=left botm right top, width=0.9\textwidth,
-            clip]{cross_validation}
+            clip]{variance_of_cv}
         \caption{Variance of cross-validation}
         \label{fig:variance-of-cv}
     \end{tcolorbox}
@@ -292,9 +289,6 @@ calculated with the formula~\ref{eq:r2}.
             \toprule
             \textbf{Linear Regression}               & 0.051 & 0.644 \\
             \textbf{Linear Regression (rand. split)} & 0.034 & 0.771 \\
-            \hdashline
-            \textbf{Decision Tree}                   & 0.042 & 0.806 \\
-            \textbf{Decision Tree (rand. split)}     & 0.068 & 0.784 \\
             \hdashline
             \textbf{Random Forest}                   & 0.034 & 0.771 \\
             \textbf{Random Forest (rand. split)}     & 0.034 & 0.771 \\
@@ -492,15 +486,15 @@ Equation~\ref{eq:noise}.
             \\
             \toprule
             \textbf{Linear Regression} & 0.070 & 0.251 \\
-            \textbf{Linear Regression (rand. split)}     & 0
+            \textbf{Linear Regression (rand. split)}                   & 0
             .071 & 0.224 \\
             \hdashline
-            \textbf{Random Forest}                           & 0.071 & 0.224 \\
+            \textbf{Random Forest}     & 0.071 & 0.224 \\
             \textbf{Random Forest (rand. split)}
             & 0.067 & 0.233 \\
             \hdashline
-            \textbf{SVM} & 0.070 & 0.251 \\
-            \textbf{SVM (rand. split)} & 0.071 & 0.224 \\
+            \textbf{SVM}               & 0.070 & 0.251 \\
+            \textbf{SVM (rand. split)}               & 0.071 & 0.224 \\
             \bottomrule
         \end{tabular}
         \caption{Results of used machine learning models regarding the design
@@ -599,9 +593,6 @@ more accurate estimates for small datasets.
             \toprule
             \textbf{Random Forest}               & 0.053 \\
             \textbf{Random Forest (rand. split)} & 0.053 \\
-            \hdashline
-            \textbf{Decision Tree}               & 0.086 \\
-            \textbf{Decision Tree (rand. split)} & 0.062 \\
             \hdashline
             \textbf{Support Vector Machine}      & 0.051 \\
             \textbf{SVM (rand. split)}           & 0.000 \\
@@ -736,9 +727,7 @@ the model manually. This was not done in this work.
             \toprule
             \textbf{Linear Regression}   & Yes & Yes  & No  & 4  \\
             \hdashline
-            \textbf{Decision Tree}       & No  & Some & Yes & 11 \\
-            \hdashline
-            \textbf{Random Forest}       & No  & Some & Yes & 17 \\
+            \textbf{Decision Trees}      & No  & Some & Yes & 17 \\
             \hdashline
             \textbf{Logistic Regression} & No  & Yes  & No  & XX \\
             \hdashline
@@ -809,6 +798,9 @@ To measure the memory usage the \texttt{memory\_usage} function from the
 \texttt{memory\_profiler}
 package is used.
 
+%Training time: 2.6085376739501953 s
+%Inference time: 0.9751319885253906 s
+%Memory usage: 157.4140625 MB
 
 \begin{table}[H]
     \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
@@ -824,9 +816,7 @@ package is used.
             \unit{kb}}}
             \\
             \toprule
-            \textbf{Linear Regression}          & 2.609   & 0.975  & 157.41 \\
-            \hdashline
-            \textbf{Decision Tree}          & 2.600  & 1.055 & 155.734    \\
+            \textbf{Linear Regression}          & 2.609  & 0.975 & 157.41    \\
             \hdashline
             \textbf{Random Forest} & 0.0222 & 2.0275  & 80.2 \\
             \hdashline
@@ -849,6 +839,7 @@ achieved...
 Methods}\label{subsec:model-specific-interpretability
 -methods}
 
+
 To attain interpretability, the simplest approach is to select algorithms
 that generate
 interpretable models.
@@ -859,35 +850,16 @@ The following section looks at the generated and uses model specific
 interpretability methods to
 interpret the results.
 
-\subsubsection{Feature Importance}
-
 \subsubsection{Linear Regression}\label{subsubsec:linear-regression}
 The linearity of the relationship between the inputs make the mode
 interpretable as elaborated in section~\ref{subsec:linear-regression}.
 
-In a \ac{LR} model, the significance of a feature can be quantified using the
-absolut value of its t-statistic. The t-statistic represents the scaling of
-the estimated weight with its standard error~\cite[p.
-40]{molnar2020interpretable}.
+The importance of a feature in a \ac{LR} model can
 
-\textit{Feature importance table here}
 
-Also it is possible to create visual interpretations of the model using
-a weight plot or effect plot.
-
-\textit{Weight and effect plot here}
-
-And also Lasso
-
-\textit{Lasso plot here}
 
 \subsubsection{Decision Trees}\label{subsubsec:decision-trees}
 
-\textit{Feature Importance Plot possible as well}
-
-\textit{OneR algorithm}
-
-\textit{Baysan Rule List }
 
 
 \subsection*{Global Model-Agnostic Methods}
@@ -920,14 +892,9 @@ with any model type and provide an overview of the model's behavior.
 \subsection{Local Model-Specific
 Methods}\label{subsec:local-model-specific-methods}
 
-\section[]{Discussion}\label{sec:discussion}
 
 
-\begin{itemize}
-    \item \textit{Data set had only limited features, but there are many more factors
-    influencing
-    the spring back}
-\end{itemize}
+
 
 
 

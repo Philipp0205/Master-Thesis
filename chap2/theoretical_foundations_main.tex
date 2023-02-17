@@ -1,75 +1,49 @@
 \chapter{Theoretical Foundations}\label{ch:theoretical-foundations}
 
 
-\section{Sheet Metal Bending}\label{sec:sheet-metal-bending}
-% Definitoin sheet metal bending
-The process of sheet metal bending involves using force to shape sheet metal into a
-desired form.
-It is usually used to produce large quantities of components at a low cost in various
-industries.
-\cite[p. 1]{dib_singleensembleclassifiers_2020}
-% Complexity sheet metal bending
-One aspect which makes the the process of sheet metal forming complex is that it is
-characterized
-by highly non-linear behavior due to large deformations of the metal sheet and is
-therefore hard
-to predict.
-As a result, traditional methods often rely on trail and error approaches, \cite[p.
-1]{dib_singleensembleclassifiers_2020}, such as creating 'technology tables' which contain
-bending parameters and resulting spring back data. These tables are created by
-performing a lot
-of different experiments with different bending angles and metal sheets.
-This process is time and cost intensive and therefore often not suitable for the
-production of
-high-volume and low-cost components.
-
-\subsection{Sheet Metal}\label{subsec:sheet-metal}
+\section{Sheet Metal}\label{sec:sheet-metal}
 % Definition
-Sheet metal is any form of metal that has a relatively large length to thickness ratio
-, their
-thicknesses are typically from 0.4 mm to 6 mm. Above is considered to be plate and
-below is
-considered to be foil. Sheet metal is usually manufactured by flat rolling.
-% Material 
+Sheet metal is a type of metal usually manufacturey by flat rolling and characterized by
+its high
+length
+to thickness ratio,
+typically ranging from 0.4 mm to 6mm.
+Above this range, its is considered to be a plate and blow it, it is considered to be
+foil~
+\cite[p. 405]{groover_fundamentalsmodernmanufacturing_2020}.
+% Material
 Low-carbon steel is the most commonly used type of sheet metal. Its low cost and has a
-good
-formability as well as its sufficient strength for most applications.
+good form ability as well as its sufficient strength for most applications.
 \cite[p. 405]{groover_fundamentalsmodernmanufacturing_2020}
-Therefore it is used in this work as well.
-% Commercial importance 
+% Commercial importance
 Sheet metals play a vital role in many industries. A significant number of consumer and
 industrial products such as automobiles contain sheet metal parts.
 % Manufacturing methods
-Most sheet metal forming operations are performed on machines called presses and these
-operations
-are known as pressworking. These presses usually use tooling called punch and die or
-stamping die
-. Three main processes are categorize the sheet metal forming processes: cutting,
-bending and
-drawing, where bending is the the most common and only relevant process for this thesis
-. Bending
-and drawing are used to shape sheet metal parts into their required forms.
-\cite[p. 405]{groover_fundamentalsmodernmanufacturing_2020}
+The majority of sheet metal forming operations are conducted using presses and are
+known as press working.
+These presses employ tooling such as punch and die or stamping
+die.
+The sheet metal forming processes can be classified into three main categories:
+cutting, bending, and drawing, with bending being the most common and only relevant
+process for this thesis.
+Bending and drawing are employed to shape sheet metal parts
+into their required forms~
+\cite[p. 405]{groover_fundamentalsmodernmanufacturing_2020}.
 
-% TODO: Hier habe ich beim überarbeiten das letze mal aufgehört. 
-% 30.12. 18:03 
-
-\subsubsection{Bending}
+\subsection{Bending}
 % Bending definition and description
 Bending is a forming operation that is used to change the shape of a sheet metal by
-apply a load
-to it.
+apply a load to it.
 The load is applied in way that exceeds the yield strength of the metal, but is below its
 ultimate tensile strength, which allows the metal to bet permanently deformed into a
-new shape.
-\cite[p. 1]{baig_machinelearningprediction_2021}
+new shape~
+\cite[p. 1]{baig_machinelearningprediction_2021}.
 
-% Bendin process
+% Bending process
 During the bending process, the metal on the outside of the neural plane (the plane
-that is
-perpendicular to the bending axis) is stretched, while the metal, while the metal on
-the inside
-is compressed.
+that is perpendicular to the bending axis) is stretched, while the metal, while the
+metal on the inside is compressed.
+
 This results in a curvature of the sheet metal in the direction of the applied load.
 \cite[p. 3]{baig_machinelearningprediction_2021}
 % How curvature is achieved 
@@ -100,6 +74,15 @@ The arrows show where the metal was stretched and where it was compressed.
     3]{baig_machinelearningprediction_2021}}
     \label{fig:neutral-plane}
 \end{figure}
+
+
+\section{Sheet Metal Bending}\label{sec:sheet-metal-bending}
+% Definitoin sheet metal bending
+The process of sheet metal bending involves using force to shape sheet metal into a
+desired form.
+It is usually used to produce large quantities of components at a low cost in various
+industries
+\cite[p. 1]{dib_singleensembleclassifiers_2020}.
 
 \subsubsection{Air Bending}
 % Definition
@@ -151,7 +134,7 @@ interrelationships. \cite[p. 3]{miranda_formingspringbackprediction_2018}
 % affected
 % measures?
 
-\subsubsection{Spring Back}
+\subsubsection{Spring Back}\label{sec:spring-back}
 % How the spring back is created
 When the punch and therefore the bending pressure is removed at the end of the deformation
 operation, elastic energy remains in the bent part. This elastic energy is released,
@@ -346,21 +329,46 @@ performance.
 \cite[p. 260-275]{muller_introductionmachinelearning_2016}
 
 
-\section{State of research}
-% “Recently, there has been an increasing use of machine learning (ML) algorithms in
-% various
-% applications related to sheet metal forming to improve decision making and achieve
-% cost-effective, defect-free, and optimal manufacturing quality [17,18]. The ML
-% algorithms can
-% be divided mainly in three categories: supervised learning, unsupervised learning
-% [19], and
-% reinforcement learning [20]. Generally, supervised learning is preferred and is used in
-% classification or regression problems, encompassing support vector machine (SVM)
-% algorithms,
-% naive Bayes classifier, decision tree, the K-nearest neighbor (KNN) algorithm and
-% artificial
-% neural networks (ANN).”
-% \cite{cruz_applicationmachinelearning_2021}
+\section{State of research}\label{sec:state-of-research}
+In recent years, there has been a growing adoption of \ac{ML} in various applications
+related to sheet metal forming. With goal to achieve optimal manufacturing quality.
+Three main types of \ac{ML} algorithms are used in sheet metal forming applications,
+namely supervised learning, unsupervised learning, and reinforcement learning~
+\cite[p. 2]{cruz_applicationmachinelearning_2021}.
+
+Sheet metals have a high ratio of yields strength to elastic modulus, which results in
+significant spring back, which can compromise the accuracy of the final product.
+As a result, extensive research has been carried to estimate the spring back behavior
+in sheet metal forming processes~\cite[p. 565]{liu2021deep}.
+
+Current research on mitigating the spring back in sheet metal forming is primarily
+focused on compensations methods through numerical simulations, most notably finite
+element analysis (FEA)~\cite[p. 565]{liu2021deep}
+\cite{lingbeek2005development}  present two methods for compensating spring back in the
+deep drawing process, but more reliable simulations is needed of industrial applications.
+
+Also traditional supervised learning methods where used in metal forming applications.
+
+Liu et al. used a \ac{SVM} to predict the spring back in a micro W-bending process,
+demonstratring high prediciotn accuracy and generalization performance in comparison to
+experimental results~\cite[p. 1]{liu_springbackpredictionforming_2019}
+Dib et al. evaluated several \ac{ML} algorithms for predicting the spring back in a
+maximum thinning in U-channel and square cup forming processes. The \ac{MLP} found to
+be the best model~\cite{dib_singleensembleclassifiers_2020}.
+Similarly Abdessalem et al. compared the performance of a quadratic response surface
+metod (RSM) and two \ac{SVM} models for determinig the best surrogate model for
+probalistic strucutre oprimization of hydrofomred sheet metals. Both \ac{SVM} models
+outperformed the RSM model~\cite[]{abdessalem2015probabilistic}.
+
+It has to be noted that most of the research including \ac{ML} relies on FEA to
+generate the data for training and testing the models.
+This is due to the fact that it is time consuming to obtain enough experimental data for
+sheet metal forming processes.
+\cite{dib_singleensembleclassifiers_2020} not that the implementations of virtual
+tryout still heavily relies on human expertise to make critical decisions.
+Also the use of FEM does not necessarily eliminated unexpected defects due to variations
+in material properties, tool geometry and process parameters~\cite[p. 2]{
+    dib_singleensembleclassifiers_2020}.
 
 % The authors of [21] used SVM to estimate the springback of a micro W-bending process
 % with high
@@ -516,8 +524,6 @@ further studies of ML regressions models and kriging regression models. \cite[p.
 
 
 % Baig
-
-
 % \section{Bending allowance and k-factor}
 % "As always, real-world materials do not behave as simply as our models. After the
 % material has

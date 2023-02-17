@@ -38,7 +38,7 @@
 \usepackage{multirow} %% for multirow tables
 \usepackage{pgfplotstable,filecontents} %% for tables
 \usepackage{pgfplots} %% for plots
-\usepackage{tikz} %% for plots
+%\usepackage{tikz} %% for plots
 \usepackage{cancel} %% Cancel test
 \usepackage{tabularx} %% for tables
 \usepackage{caption}
@@ -50,7 +50,7 @@
 \usepackage{arydshln} % hdashlines
 \usepackage{tabu}% http://ctan.org/pkg/tabu
 \usepackage{subcaption}
-\usepackage{graphicx}
+%\usepackage{graphicx}
 
 % Captions for queations
 \DeclareCaptionType{equ}[][]
@@ -69,13 +69,13 @@
 
 \title{Utilizing Supervised Learning for the Prediction of Bending Parameters}
 % use \\ here otherwise you get a justified title
-                                     % note capitalization of the title (only common 
+                                     % note capitalization of the title (only common
                                      % words in lower case)
 \tagline{some hyped-up tagline}      % tag line
 \author{Philipp Kurrle}            % your full name
 \authorID{123456}                   % your University Identifier
 \supervisor{Prof. Dr. Ulrike Pado}              % your supervisor(s) name - no . in Dr
-\cosupervisor{Peter Lange}                % your cosupervisor(s) name - no . in Dr *OPTIONAL* 
+\cosupervisor{Peter Lange}                % your cosupervisor(s) name - no . in Dr *OPTIONAL*
 \university{Hochschule für Technik}
 
                                      % simply comment out the above line if absent
@@ -135,23 +135,19 @@
 %% Note: always use \input as you cannot nest \includes (amongst other things)
 \pagestyle{umpage}
 \floatpagestyle{umpage}
-\mainmatter 
+\mainmatter
 %%	\part{Your First Part} %% PhDs may require this parts idea as well.
     \input{chap1/introduction_main}
-    %\input{chap2/background_and_lit_overview_main}
     \input{chap2/theoretical_foundations_main}
     \input{chap3/research_methodology_main}
     \input{chap4/build_main}
-    %input{chap3/materials_and_methods_main}
-    %\input{chap3/research_methodology_main}
-    %\input{chap4/results_and_discussion_main}
 %%	\part{Your Second Part}
     \input{chap5/evaluation_main}
     \input{chap6/conclusions_main}
     \appendix
         % \input{appA/appendix_a_main}     % these are just test names as I didn't know what you'd want
-        % \input{appB/appendix_b_main}    
-        % \input{appC/appendix_c_main} 
+        % \input{appB/appendix_b_main}
+        % \input{appC/appendix_c_main}
 
 \pagestyle{umpageback}
 {\backmatter

@@ -77,7 +77,7 @@ This is elaborated in each individual quality metric section.
 \end{table}
 
 
-\section{DP1: Correctness}\label{sec:dp2:-correctness}
+\section{DP1: Correctness}\label{sec:dp1:-correctness}
 % Ability of the model to perform the current task measured on the
 % development dataset and the
 % runtime dataset
@@ -94,10 +94,10 @@ the class of a sample, these metrics are not applicable.
 
 Therefore measure the correctness of the model, the metrics MAE, MSE and RMSE are used.
 In the formulas~\ref{eq:mae},~\ref{eq:mse} and~\ref{eq:rmse} the variable
-$e_i$ is the prediction
+\(e_i\) is the prediction
 error which is the difference between the predicted value by the model the
 actual value.
-$y_i$ is the actual value and $n$ is the number of samples in the testing
+\(y_i\)is the actual value and n is the number of samples in the testing
 data set.
 
 The mean absolute error (MAE) and mean squared error (MSE) are the most
@@ -107,10 +107,10 @@ evaluating the performance of regression models.
 \textbf{Mean Absolute Error (MAE)}
 
 \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
-\begin{equation}
-MAE = \frac{1}{n} \sum_{i=1}^{n} |e_i|
-\label{eq:mae}
-\end{equation}
+    \begin{equation}
+        MAE = \frac{1}{n} \sum_{i=1}^{n} |e_i|
+        \label{eq:mae}
+    \end{equation}
 \end{tcolorbox}
 
 The MSE is the average of the squared differences between the predicted and
@@ -120,10 +120,10 @@ The MSE is more sensitive to outliers than the MAE.
 \textbf{Mean Squared Error (MSE)}
 
 \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
-\begin{equation}
-\label{eq:mse}
-MSE = \frac{1}{n} \sum_{i=1}^{n} e^2
-\end{equation}
+    \begin{equation}
+        \label{eq:mse}
+        MSE = \frac{1}{n} \sum_{i=1}^{n} e^2
+    \end{equation}
 \end{tcolorbox}
 
 The RMSE is the square root of the MSE. The RMSE is the most popular metric
@@ -133,22 +133,22 @@ as the response
 variable. The RMSE is more sensitive to outliers than the MAE.
 The MAE is the average of the absolute difference between the predicted and
 actual values.
-Additionally the $R^2$ was added to the overview. The $R^2$ is a statistical
+Additionally the \(R^2\) was added to the overview. The \(R^2\) is a statistical
 measure of how close
 the data are to the fitted regression line. It is also known as the
 coefficient of determination,
 or the coefficient of multiple determination for multiple regression. The
-value of the $R^2$ is
+value of the \(R^2\) is
 the percentage of the response variable variation that is explained by a
 linear model.
 
 \textbf{Root Mean Squared Error (RMSE)}
 
 \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
-\begin{equation}
-\label{eq:rmse}
-RMSE = \sqrt{MSE}
-\end{equation}
+    \begin{equation}
+        \label{eq:rmse}
+        RMSE = \sqrt{MSE}
+    \end{equation}
 \end{tcolorbox}
 
 For a full overview about the performance all three metrics are sued for the
@@ -174,48 +174,49 @@ evaluation.
 
 % Table wit hall used machine learning models and their metrics
 \begin{table}[H]
-\begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
+    \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
 % \sisetup{group-minimum-digits = 4}
-\centering
-\begin{tabular}{llll}
-\toprule
-\thead{\textbf{Model Name}} & \thead{\textbf{MAE}}
-& \thead{\textbf{MSE}}
-& \thead{\textbf{RMSE}} \\
-\toprule
-\textbf{Linear Regression}              & 0.199 & 0.092 & 0.303 \\
-\textbf{Linear Regression (rand.split)} & 0.261 & 0.127 & 0.356 \\
-\hdashline
-\textbf{Decision Tree}                  & 0.193 & 0.076 & 0.266 \\
-\textbf{Decision Tree (rand. split)}    & 0.212 & 0.119 & 0.346 \\
-\hdashline
-\textbf{Random Forest}                  & 0.183 & 0.060 & 0.244 \\
-\textbf{Random Forest (rand.split)}     & 0.134 & 0.041 & 0.202 \\
-\hdashline
-\textbf{Extra Trees}                    & 0.126 & 0.040 & 0.201 \\
-\textbf{Extra Trees (rand. split)}      & 0.134 & 0.041 & 0.202 \\
-\hdashline
-\textbf{Support Vector Machine}         & 0.09  & 0.04  & 0.20  \\
-\textbf{SVM (rand. split)}              & 0.09  & 0.04  & 0.20  \\
-\hdashline
-\textbf{MLP}                            & 0.13  & 0.06  & 0.236 \\
-\textbf{MLP (rand. split)}              & 0.161 & 0.051 & 0.225 \\
-\bottomrule
-\end{tabular}
-\caption{Overview of the used machine learning models and their
-metrics.}
-\label{tab:ml_models}
-\end{tcolorbox}
+        \centering
+        \begin{tabular}{llll}
+            \toprule
+            \thead{\textbf{Model Name}} & \thead{\textbf{MAE}}
+            & \thead{\textbf{MSE}}
+            & \thead{\textbf{RMSE}} \\
+            \toprule
+            \textbf{Linear Regression}              & 0.199 & 0.092 & 0.303 \\
+            \textbf{Linear Regression (rand.split)} & 0.261 & 0.127 & 0.356 \\
+            \hdashline
+            \textbf{Decision Tree}                  & 0.193 & 0.076 & 0.266 \\
+            \textbf{Decision Tree (rand. split)}    & 0.212 & 0.119 & 0.346 \\
+            \hdashline
+            \textbf{Random Forest}                  & 0.183 & 0.060 & 0.244 \\
+            \textbf{Random Forest (rand.split)}     & 0.134 & 0.041 & 0.202 \\
+            \hdashline
+            \textbf{Extra Trees}                    & 0.126 & 0.040 & 0.201 \\
+            \textbf{Extra Trees (rand. split)}      & 0.134 & 0.041 & 0.202 \\
+            \hdashline
+            \textbf{Support Vector Machine}         & 0.09  & 0.04  & 0.20  \\
+            \textbf{SVM (rand. split)}              & 0.09  & 0.04  & 0.20  \\
+            \hdashline
+            \textbf{MLP}                            & 0.114 & 0.041 & 0.201 \\
+            \textbf{MLP (rand. split)}              & 0.121 & 0.040 & 0.199 \\
+            \bottomrule
+        \end{tabular}
+        \caption{Overview of the used machine learning models and their
+        metrics.}
+        \label{tab:result-correctness}
+    \end{tcolorbox}
 \end{table}
 
-"The \ac{RF}, \ac{ET}, and \ac{SVM} models are the top performers, showing relatively
-equal performance. Among them, the \ac{ET} model boasts the best results, with an \ac{
-RMSE} of 0.201.
+The \ac{RF}, \ac{ET}, and \ac{SVM} models are the top performers, showing relatively
+equal performance.
+Among them, the \ac{ET} model boasts the best results, with an \ac{
+    RMSE} of 0.201.
 It's worth mentioning that the \ac{SVM} model has a slightly better \ac{MSE}, while
 still maintaining a comparable \ac{MSE} compared to the other models. This could be due
 to the fact that the errors made by the \ac{SVM} are evenly distributed across
 instances, or that the errors made by the other models are large for a few instances
-but smaller for the rest."
+but smaller for the rest.
 
 %"The MAE metric measures the average magnitude of the errors, while the MSE metric is
 %more sensitive to the magnitude of individual errors and penalizes large errors more
@@ -230,6 +231,9 @@ and reduced predictive power (Source).
 Also they are pron to instability, both problems are mitigates by usng ensemble method
 like \ac{RF} and gradient boosting which can overcome the limiations of indiviual
 decision trees.
+
+Because the the simple \ac{DR} as well as the \ac{LR} are not able to predict the
+spring back correctly, they are not considered for the next steps of the evaluation.
 
 
 \section{DP2: Relevance}\label{sec:relevance}
@@ -258,78 +262,78 @@ problem.
 
 Figure~\ref{fig:variance-of-cv} shows how the variance of cross-validation
 was calculated.
-The parameter $E$ denotes to the estimator which is used to calculate the
+The parameter \(E\) denotes to the estimator which is used to calculate the
 \ac{CV} score.
-The parameter $k$ denotes to the number of folds, which was set to 5 in this
+The parameter \(k\) denotes to the number of folds, which was set to 5 in this
 context.
-As estimator for the trained models $R^2$ was used because this is usually
+As estimator for the trained models \(R^2\) was used because this is usually
 the metric used to
 evaluate the regression models.
 
 \begin{figure}[h]
-\begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
-\centering
-\includegraphics[trim=left botm right top, width=0.9\textwidth,
-clip]{cross_validation}
-\caption{Variance of cross-validation}
-\label{fig:variance-of-cv}
-\end{tcolorbox}
+    \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
+        \centering
+        \includegraphics[trim=left botm right top, width=0.9\textwidth,
+            clip]{cross_validation}
+        \caption{Variance of cross-validation}
+        \label{fig:variance-of-cv}
+    \end{tcolorbox}
 \end{figure}
 
-For completeness the $R^2$ score is also shown int the table.
-The $R^2$ is a statistical measure of how close the data are to the fitted
+For completeness the \(R^2\) score is also shown int the table.
+The \(R^2\) is a statistical measure of how close the data are to the fitted
 regression line.
 It returns a score between 0 and 1, where 0 means that the model does not
 explain any of the
 variance in the response variable around its mean, and 1 means that the model
 explains all the
 variance in the response variable around its mean.
-Therefore, a high $R^2$ indicated a good model fir and good bias-variance
+Therefore, a high \(R^2\) indicated a good model fir and good bias-variance
 tradeoff.
 \cite[p. 43]{muller_introductionmachinelearning_2016}
 
-\paragraph*{$R^2$}
+\paragraph*{\(R^2\)}
 
 \begin{equation}
-\label{eq:r2}
-R^2 = \frac{Explained\_variance}{Total\_variance\_targert\_variable}
+    \label{eq:r2}
+    R^2 = \frac{Explained\_variance}{Total\_variance\_targert\_variable}
 \end{equation}
 
 Table~\ref*{tab:ml_models_relevance} shows the variance of cross-validation
-and the $R^2$ for all
+and the \(R^2\) for all
 used machine learning models.
 To calculate the variance of cross-validation the variance of Scikit-Learn's
 \texttt{cross\_val\_score} was calculated.
 Five-fold cross-validation was used to calculate the variance of
-cross-validation. The $R^2$ was
+cross-validation. The \(R^2\) was
 calculated with the formula~\ref{eq:r2}.
 
 \begin{table}[H]
-\begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
+    \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
 % \sisetup{group-minimum-digits = 4}
-\centering
-\begin{tabular}{lll}
-\toprule
-\thead{\textbf{Model Name}} & \thead{\textbf{Variance of CV}}
-& \thead{\textbf{$R^2$}} \\
-\toprule
-\textbf{Linear Regression}               & 0.051 & 0.644 \\
-\textbf{Linear Regression (rand. split)} & 0.034 & 0.771 \\
-\hdashline
-\textbf{Decision Tree}                   & 0.042 & 0.806 \\
-\textbf{Decision Tree (rand. split)}     & 0.068 & 0.784 \\
-\hdashline
-\textbf{Random Forest}                   & 0.034 & 0.771 \\
-\textbf{Random Forest (rand. split)}     & 0.034 & 0.771 \\
-\hdashline
-\textbf{Support Vector Machine}          & 0.008 & 0.851 \\
-\textbf{SVM (rand. split)}               & 0.008 & 0.851 \\
-\bottomrule
-\end{tabular}
-\caption{Performance of the used machine learning models according
-relevance.}
-\label{tab:ml_models_relevance}
-\end{tcolorbox}
+        \centering
+        \begin{tabular}{lll}
+            \toprule
+            \thead{\textbf{Model Name}} & \thead{\textbf{Variance of CV}}
+            & \thead{\textbf{\(R^2\)}} \\
+            \toprule
+            \textbf{Linear Regression}               & 0.051 & 0.644 \\
+            \textbf{Linear Regression (rand. split)} & 0.034 & 0.771 \\
+            \hdashline
+            \textbf{Decision Tree}                   & 0.042 & 0.806 \\
+            \textbf{Decision Tree (rand. split)}     & 0.068 & 0.784 \\
+            \hdashline
+            \textbf{Random Forest}                   & 0.034 & 0.771 \\
+            \textbf{Random Forest (rand. split)}     & 0.034 & 0.771 \\
+            \hdashline
+            \textbf{Support Vector Machine}          & 0.008 & 0.851 \\
+            \textbf{SVM (rand. split)}               & 0.008 & 0.851 \\
+            \bottomrule
+        \end{tabular}
+        \caption{Performance of the used machine learning models according
+        relevance.}
+        \label{tab:ml_models_relevance}
+    \end{tcolorbox}
 \end{table}
 
 
@@ -381,93 +385,89 @@ to introduce the data quality issues missing values and noise.
 When applying the model to real-world data, it is possible that some values
 are missing.
 Looking at the available dataset two scenarios or missing data can occur:
-Missing $Vt$-pairings
+Missing \(Vt\)-pairings
 and missing values.
 
 In the first scenario, there may be no data available for a specific die
 opening, which can be due to the die opening was never being used before or a
 lack of recorded
 information.
-In the second scenario, while data may exist for the desired $Vt$
+In the second scenario, while data may exist for the desired \(Vt\)
 combination, certain values may
 be missing or the dataset may not be complete.
 
-
 To address these scenarios, the following tests were conducted:
 
-\subsubsection*{2. Missing values}
-To study the model's ability to handle missing data, a controlled manipulation
-of the dataset was performed by removing a random subset of the data.
-This approach allows for an evaluation of the model's performance when only a
-portion of the data
-is missing rather than all of it.
-This simulates scenarios where data may be missing due to various reasons
-such as measurement
-errors or missing data points.
+\subsubsection{Missing values}
+To assess the ability of the model to handle missing data, three experiments were
+conducted.
 
-The most accurate method would be \ac{LPOCV}, which generates all possible
-training and test
-sets by removing $p$ samples from the complete dataset.
-This approach creates overlapping test sets, resulting in a large number of
-iterations, which is
-computationally expensive.
-Due to limitations in computing power, this method could not be used in this
-thesis and therefore
-is only mentioned for completeness.
+Initially, the use of the \ac{LPOCV} method was considered. However, this approach was
+omitted due to computational
+constraints, as it generates all possible training and test sets by removing \(p\)
+samples from the complete dataset, resulting in a large number of overlapping test sets
+and a high computational cost.
 
-The alternative approach chosen is to a regular \ac{CV} approach, with an
-increasing
-number of folds.
-The minimum number of folds used in this approach was 2, while the maximum
-number of folds was
-the total number of samples in the dataset. This means that each sample was
-used as a test sample
-once.
-This approach allows for a gradual increase in the amount of missing data,
-simulating secnarios
-where data may be missing due to various reasons such as measurement errors
-or missing data points.
-It is expected that the
-model's performance will improve with fewer folds, as the model will be
-trained to more data.
+As an alternative, regular \ac{CV} was applied, with an increasing number
+of folds.
+The minimum number of folds was 2 and the maximum was equal to the total
+number of samples in the dataset.
+However, this experiment did not provide distinguishable results and was therefore not
+included in the results.
 
-This approach provides a more computationally efficient evaluation of the
-model's robustness
-under conditions of missing data.
+The third and final experiment, which involved random sampling to create different
+train-test data compositions, provided meaningful results and was used to evaluate the
+model's handling of missing data.
+The selected split ratios were 80:20, 50:50, and 20:80.
+This approach was used by  \cite[p. 570-574]{liu2021deep} and taken as a reference for
+this thesis.
 
-For each iteration of the cross-validation, the \ac{RMSE} of the model was
-calculated.
-The mean \ac{RMSE} for each cross-validation was then calculated and the
-difference
-between all mean RMSEs was defined as the loss of accuracy.
-The total loss of accuracy was calculated by averaging the difference of the
-RMSE of the models
-for each fold of the
-cross-validation.
-An average loss function was introduced to measure the performance of the
-model under different
-levels of missing data.
 
-To measure the performance an average loss function is introduced as follows:
-%  AL = \frac{\sum_{k=2}^{n} \frac{loss_{RF} - loss_{SVM}}{loss_{RFj}}}{n-1}
+\begin{table}[H]
+    \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
+% \sisetup{group-minimum-digits = 4}
+        \centering
+        \begin{tabular}{llll}
+            \toprule
+            \thead{\textbf{Model }} & \thead{\textbf{80\% train}} & \thead{\textbf{50\%
+            train}} & \thead{\textbf{20\% train}} \\
+            \toprule
+            \textbf{Random Forest} & 0.04 & 0
+            .058 & 0.068 \\
+            \hdashline
+            \textbf{Extra Trees} & 0.044 & 0
+            .053 & 0.083 \\
+            \hdashline
+            \textbf{Support Vector Machine} & 0.045 & 0
+            .05 & 0.078 \\
+            \hdashline
+            \textbf{MLP} & 0.042 & 0.045 & 0.11 \\
+            \bottomrule
+        \end{tabular}
+        \caption{Performance of the used machine learning models according
+        relevance.}
+        \label{tab:ml_models_relevance}
+    \end{tcolorbox}
+\end{table}
 
-\begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
-\begin{equation}
-\label{eq:average_loss}
-\text{Loss of Accuracy} = \frac{1}{N} \sum_{i=1}^{N} |\text{RMSE}i -
-\text{RMSE}{avg}|
-\end{equation}
-\end{tcolorbox}
 
-Where $N$ is the toal number of folds, $i$ is the index of the current folds.
+%\begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
+%    \begin{equation}
+%        \label{eq:average_loss}
+%        \text{Loss of Accuracy} = \frac{1}{N} \sum_{i=1}^{N} |\text{RMSE}i -
+%        \text{RMSE}{avg}|
+%    \end{equation}
+%\end{tcolorbox}
 
-It is worth noting that imputations of missing values can be used to mitigate
-the loss
-caused by missing data.
-However, this approach was not used in this thesis as the goal
-was to measure the robustness of the model to missing values specifically,
-rather than to
-artificially improve its performance through imputation techniques.
+%Where \(N\) is the toal number of folds, \(i\) is the index of the current folds.
+%
+%It is worth noting that imputations of missing values can be used to mitigate
+%the loss
+%caused by missing data.
+%However, this approach was not used in this thesis as the goal
+%was to measure the robustness of the model to missing values specifically,
+%rather than to
+%artificially improve its performance through imputation techniques.
 
 \subsection{Noise}\label{subsec:noise}
 A common practise in \ac{ML} is to add noise to the training data to improve
@@ -498,47 +498,47 @@ shown in
 Equation~\ref{eq:noise}.
 
 \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
-\begin{equation}
-\text{Average Loss} = \frac{1}{N} \sum_{i=1}^{N} |\text{RMSE}i -
-\text{RMSE}{avg}|\label
-{eq:noise}
-\end{equation}
+    \begin{equation}
+        \text{Average Loss} = \frac{1}{N} \sum_{i=1}^{N} |\text{RMSE}i -
+        \text{RMSE}{avg}|\label
+        {eq:noise}
+    \end{equation}
 \end{tcolorbox}
 
 \subsubsection*{\textit{Notes}}
 
 \begin{itemize}
-\item \textit{Does the calculation of the loss make sense?}
+    \item \textit{Does the calculation of the loss make sense?}
 \end{itemize}
 
 \subsection{Results}\label{subsec:results-robustness}
 
 \begin{table}[H]
-\begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
+    \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
 % \sisetup{group-minimum-digits = 4}
-\centering
-\begin{tabular}{llll}
-\toprule
-\thead{\textbf{Model Name}} & {\thead{\textbf{Missing Values} \\
-\unit{loa}}} & {\thead{\textbf{Noise} \\ \unit{loa}}}
-\\
-\toprule
-\textbf{Linear Regression} & 0.070 & 0.251 \\
-\textbf{Linear Regression (rand. split)}     & 0
-.071 & 0.224 \\
-\hdashline
-\textbf{Random Forest}                           & 0.071 & 0.224 \\
-\textbf{Random Forest (rand. split)}
-& 0.067 & 0.233 \\
-\hdashline
-\textbf{SVM} & 0.070 & 0.251 \\
-\textbf{SVM (rand. split)} & 0.071 & 0.224 \\
-\bottomrule
-\end{tabular}
-\caption{Results of used machine learning models regarding the design
-principle robustness.}
-\label{tab:results_robustness}
-\end{tcolorbox}
+        \centering
+        \begin{tabular}{llll}
+            \toprule
+            \thead{\textbf{Model Name}} & {\thead{\textbf{Missing Values} \\
+            \unit{loa}}} & {\thead{\textbf{Noise} \\ \unit{loa}}}
+            \\
+            \toprule
+            \textbf{Linear Regression} & 0.070 & 0.251 \\
+            \textbf{Linear Regression (rand. split)}     & 0
+            .071 & 0.224 \\
+            \hdashline
+            \textbf{Random Forest}                           & 0.071 & 0.224 \\
+            \textbf{Random Forest (rand. split)}
+            & 0.067 & 0.233 \\
+            \hdashline
+            \textbf{SVM} & 0.070 & 0.251 \\
+            \textbf{SVM (rand. split)} & 0.071 & 0.224 \\
+            \bottomrule
+        \end{tabular}
+        \caption{Results of used machine learning models regarding the design
+        principle robustness.}
+        \label{tab:results_robustness}
+    \end{tcolorbox}
 \end{table}
 
 
@@ -557,7 +557,7 @@ used for training~\cite[p. 200--201]{gareth2013introduction}.
 
 In order to evaluate the model the \ac{LOOCV} was repeated for all samples in
 the dataset
-resulting in a total of $n$ iterations.
+resulting in a total of \(n\) iterations.
 The stability of the model was determined by calculating the average
 prediction error across all
 iterations, using the equation provided in Equation~\ref{eq:loocv} which is
@@ -565,9 +565,9 @@ taken from~\cite[p.
 201]{gareth2013introduction}.
 
 \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
-\begin{equation}
-CV_{(n)} = \frac{1}{n} \sum_{i=1}^{n} \text{MSE}_{i}\label{eq:loocv}
-\end{equation}
+    \begin{equation}
+        CV_{(n)} = \frac{1}{n} \sum_{i=1}^{n} \text{MSE}_{i}\label{eq:loocv}
+    \end{equation}
 \end{tcolorbox}
 
 The approach provides an unbiased estimate of the model's generalization error
@@ -588,7 +588,7 @@ the stability of the model.
 %    \end{equation}
 %\end{tcolorbox}
 
-A low $CV_{(n)}$ value indicates a high stability of the model, because the
+A low \(CV_{(n)}\) value indicates a high stability of the model, because the
 model is able to
 generate repeatable results when trained on different data.
 Note: The method can be very time-consuming, especially for large datasets,
@@ -621,28 +621,28 @@ more accurate estimates for small datasets.
 \subsection{Results}\label{subsec:results-stability}
 
 \begin{table}[H]
-\begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
+    \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
 % \sisetup{group-minimum-digits = 4}
-\centering
-\begin{tabular}{ll}
-\toprule
-\thead{\textbf{Model Name}} & \thead{\textbf{$CV_{(n)}$}}
-\\
-\toprule
-\textbf{Random Forest}               & 0.053 \\
-\textbf{Random Forest (rand. split)} & 0.053 \\
-\hdashline
-\textbf{Decision Tree}               & 0.086 \\
-\textbf{Decision Tree (rand. split)} & 0.062 \\
-\hdashline
-\textbf{Support Vector Machine}      & 0.051 \\
-\textbf{SVM (rand. split)}           & 0.000 \\
-\bottomrule
-\end{tabular}
-\caption{Overview of the used machine learning models and their
-metrics.}
-\label{tab:results-stability}
-\end{tcolorbox}
+        \centering
+        \begin{tabular}{ll}
+            \toprule
+            \thead{\textbf{Model Name}} & \thead{\textbf{\(CV_{(n)}\)}}
+            \\
+            \toprule
+            \textbf{Random Forest}               & 0.053 \\
+            \textbf{Random Forest (rand. split)} & 0.053 \\
+            \hdashline
+            \textbf{Decision Tree}               & 0.086 \\
+            \textbf{Decision Tree (rand. split)} & 0.062 \\
+            \hdashline
+            \textbf{Support Vector Machine}      & 0.051 \\
+            \textbf{SVM (rand. split)}           & 0.000 \\
+            \bottomrule
+        \end{tabular}
+        \caption{Overview of the used machine learning models and their
+        metrics.}
+        \label{tab:results-stability}
+    \end{tcolorbox}
 \end{table}
 
 \textit{Explanation of the results}
@@ -652,28 +652,14 @@ metrics.}
 % How well can the model be explained?
 % Complexity measures (e.g., no. of parameters, depth)
 
-
 % Sieber et al used
 % %
 %& Complexity measures (e.g., no. of parameters, depth) \\
 % These metrics where changed
 
-Interpretability refers to the ease with which humans can understand and make
-sense of the
-decisions made by a trained machine learning model~\cite[p.
-16]{siebert2022construction}.
-\cite{miller2019explanation} define interpretability as the "degree to which
-a human can
-understand the cause of a decision"~\cite[p. 1]{miller2019explanation}.
-Good interpretability is important because it allows users to trust and rely
-on the model, and it
-can also help with debugging and improving the model (\textit{Source}).
 
-Interpretable models will also deliver more insights for this project, as the
-goal is to
-understand the relationship between the features and the target outcome.
-
-When following the above definitions of interpretability, it is clear that it
+When following definitions of interpretability used in section~\ref{sec:objectives-of-a-
+solution}, it is clear that it
 is not possible to
 measure interpretability in a quantitative way.
 No mathematical formula can be used to measure interpretability, but other
@@ -741,7 +727,7 @@ with fewer layers.
 \subsubsection*{\textit{Notes}}
 
 \begin{itemize}
-\item \textit{Space complecity -> How much memeory is needed?}
+    \item \textit{Space complecity -> How much memeory is needed?}
 \end{itemize}
 
 \subsubsection*{Linear Regression}
@@ -762,38 +748,38 @@ the model manually. This was not done in this work.
 \subsection{Results}\label{subsec:results2}
 
 \begin{table}[H]
-\begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
+    \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
 % \sisetup{group-minimum-digits = 4}
-\centering
-\begin{tabular}{llll|l}
-\toprule
-\thead{\textbf{Model Name}} & \textbf{\thead{Linear}} &
-\textbf{\thead{Monotone}} &
-\thead{\textbf{Interaction}}
-& \thead{\textbf{Param.}}
-\\
-\toprule
-\textbf{Linear Regression}   & Yes & Yes  & No  & 4  \\
-\hdashline
-\textbf{Decision Tree}       & No  & Some & Yes & 11 \\
-\hdashline
-\textbf{Random Forest}       & No  & Some & Yes & 17 \\
-\hdashline
-\textbf{Logistic Regression} & No  & Yes  & No  & XX \\
-\hdashline
-\textbf{SVM}                 & X   & X    & XX  & 11 \\
-\hdashline
-\bottomrule
-\end{tabular}
-\caption{Overview of the used machine learning models and their
-metrics.}
-\label{tab:interpretable-models}
-\end{tcolorbox}
+        \centering
+        \begin{tabular}{llll|l}
+            \toprule
+            \thead{\textbf{Model Name}} & \textbf{\thead{Linear}} &
+            \textbf{\thead{Monotone}} &
+            \thead{\textbf{Interaction}}
+            & \thead{\textbf{Param.}}
+            \\
+            \toprule
+            \textbf{Linear Regression}   & Yes & Yes  & No  & 4  \\
+            \hdashline
+            \textbf{Decision Tree}       & No  & Some & Yes & 11 \\
+            \hdashline
+            \textbf{Random Forest}       & No  & Some & Yes & 17 \\
+            \hdashline
+            \textbf{Logistic Regression} & No  & Yes  & No  & XX \\
+            \hdashline
+            \textbf{SVM}                 & X   & X    & XX  & 11 \\
+            \hdashline
+            \bottomrule
+        \end{tabular}
+        \caption{Overview of the used machine learning models and their
+        metrics.}
+        \label{tab:interpretable-models}
+    \end{tcolorbox}
 \end{table}
 
 \subsubsection*{Notes}
 \begin{itemize}
-\item \textit{Reasoning for results in table.}
+    \item \textit{Reasoning for results in table.}
 \end{itemize}
 
 \textit{Explanation of the results}
@@ -850,32 +836,32 @@ package is used.
 
 
 \begin{table}[H]
-\begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
+    \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
 % \sisetup{group-minimum-digits = 4}
-\centering
-\begin{tabular}{llll}
-\toprule
-\thead{\textbf{Model Name}} & {\thead{\textbf{Training time} \\
-\unit[]{ms}}}
-& {\thead{\textbf{Inference time} \\ \unit[]{ms}}} &
-{\thead{\textbf{Memory
-Usage} \\
-\unit{kb}}}
-\\
-\toprule
-\textbf{Linear Regression}          & 2.609   & 0.975  & 157.41 \\
-\hdashline
-\textbf{Decision Tree}          & 2.600  & 1.055 & 155.734    \\
-\hdashline
-\textbf{Random Forest} & 0.0222 & 2.0275  & 80.2 \\
-\hdashline
-\textbf{Support Vector Machine} & 289.874 & 2.376  & 156.891 \\
-\bottomrule
-\end{tabular}
-\caption{Overview of the used machine learning models and their
-metrics.}
-\label{tab:resutls_resource_utilization}
-\end{tcolorbox}
+        \centering
+        \begin{tabular}{llll}
+            \toprule
+            \thead{\textbf{Model Name}} & {\thead{\textbf{Training time} \\
+            \unit[]{ms}}}
+            & {\thead{\textbf{Inference time} \\ \unit[]{ms}}} &
+                {\thead{\textbf{Memory
+            Usage} \\
+            \unit{kb}}}
+            \\
+            \toprule
+            \textbf{Linear Regression}          & 2.609   & 0.975  & 157.41 \\
+            \hdashline
+            \textbf{Decision Tree}          & 2.600  & 1.055 & 155.734    \\
+            \hdashline
+            \textbf{Random Forest} & 0.0222 & 2.0275  & 80.2 \\
+            \hdashline
+            \textbf{Support Vector Machine} & 289.874 & 2.376  & 156.891 \\
+            \bottomrule
+        \end{tabular}
+        \caption{Overview of the used machine learning models and their
+        metrics.}
+        \label{tab:resutls_resource_utilization}
+    \end{tcolorbox}
 \end{table}
 
 
@@ -886,9 +872,9 @@ achieved...
 
 \textit{What are cruz et al. doing?}
 \begin{itemize}
-\item They have two different data devision methods, DD1 and DD2.
-\item Also they use a validation set and a test set.
-\item
+    \item They have two different data devision methods, DD1 and DD2.
+    \item Also they use a validation set and a test set.
+    \item
 \end{itemize}
 
 The results in Figure~\ref{fig:performance-plot} show that the random forest
@@ -902,17 +888,17 @@ evaluated using different metrics.
 In order to evaluate the results of this problem in more detail, three test cases are used
 in this analysis.
 The V/t ratio is used to determine the bending conditions of the test cases. In the
-dataset used in ranged from 3.3 ($V$ 50 and $t$ 3)to 100 ($V$50 $t$ 0.5)and the test
+dataset used in ranged from 3.3 (\(V 50\)and \(t 3\))to 100 (V50 t 0.5)and the test
 cases are chosen to represent the different bending conditions.
 
-Recommended $V/t$ ratios in industrial practices are between 6 and 10~\cite[p.7]{
-cruz_applicationmachinelearning_2021}.
+Recommended V/t ratios in industrial practices are between 6 and 10~\cite[p.7]{
+    cruz_applicationmachinelearning_2021}.
 Bending operations performed outside of this range of recommended ratios may result in
 high spring back.
 
 Case A is chosen, so that is is below the recommended ration, case B is chosen to be
 within the recommended ratios and case C is chosen to be above the recommended ratios.
-As can be seen, case $A $ features a significant spring back while the other cases do not.
+As can be seen, case A features a significant spring back while the other cases do not.
 
 In order to evalute the model's performance without bias, each test case where removed
 from
@@ -926,53 +912,53 @@ This results in a small but notable performance decrease in the test cases.
 %    \item V50 t0.5 (100)
 %\end{itemize}
 
-Case \ref{fig:performance-20-1} with a $V/t$-ratio of 20 demonstrates the models'
+Case \ref{fig:performance-20-1} with a V/t-ratio of 20 demonstrates the models'
 ability to predict the spring with high accuracy.
-However, the performance decreases in case b)\ref{fig:performance-20-3} with a $V/t$-ratio
+However, the performance decreases in case b)\ref{fig:performance-20-3} with a V/t-ratio
 of 6.6, particularly when predicting the spring backs.
-It is likely that there is a measurement error at $V = 7.5$ in case
+It is likely that there is a measurement error at V = 7.5 in case
 b)~\ref{fig:performance-20-3}, causing some models to potentially predict the correct
 spring back.
 
 \begin{figure}[H]
-\begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
-\begin{subfigure}{0.5\textwidth}
-\includegraphics[width=\textwidth]{performance_20_1}
-\caption{$V$: 20, $t$: 1}
-\label{fig:performance-20-1}
-\end{subfigure}
-\hfill
-\begin{subfigure}{0.5\textwidth}
-\includegraphics[width=\textwidth]{performance_20_3}
-\caption{$V$: 20, $t$: 3}
-\label{fig:performance-20-3}
-\end{subfigure}
-\end{tcolorbox}
-\label{fig:performance-case-a}
-\caption{Performance plots for case A}
+    \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
+        \begin{subfigure}{0.5\textwidth}
+            \includegraphics[width=\textwidth]{performance_20_1}
+            \caption{V: 20, t: 1}
+            \label{fig:performance-20-1}
+        \end{subfigure}
+        \hfill
+        \begin{subfigure}{0.5\textwidth}
+            \includegraphics[width=\textwidth]{performance_20_3}
+            \caption{V: 20, t: 3}
+            \label{fig:performance-20-3}
+        \end{subfigure}
+    \end{tcolorbox}
+    \label{fig:performance-case-a}
+    \caption{Performance plots for case A}
 \end{figure}
 
 As seen in Figure~\ref{fig:performance-case-b}, the performance in case B is similar.
 The models exhibit high accuracy in predicting the spring back in case a)~\ref{fig
-:performance-30_1.5} with a $V/t$-ratio of 15. Additionally, the spring backs at the
+:performance-30_1.5} with a V/t-ratio of 15. Additionally, the spring backs at the
 higher end are also predicted with high accuracy.
 
 \begin{figure}[H]
-\begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
-\begin{subfigure}{0.5\textwidth}
-\includegraphics[width=\textwidth]{performance_30_1.5}
-\caption{$V$: 30, $t$: 1.5}
-\label{fig:performance-30_1.5}
-\end{subfigure}
-\hfill
-\begin{subfigure}{0.5\textwidth}
-\includegraphics[width=\textwidth]{performance_30_2.0}
-\caption{$V$: 30, $t$: 2}
-\label{fig:performance-30_2.0}
-\end{subfigure}
-\end{tcolorbox}
-\caption{Performance plots for case B}
-\label{fig:performance-case-b}
+    \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
+        \begin{subfigure}{0.5\textwidth}
+            \includegraphics[width=\textwidth]{performance_30_1.5}
+            \caption{V: 30, t: 1.5}
+            \label{fig:performance-30_1.5}
+        \end{subfigure}
+        \hfill
+        \begin{subfigure}{0.5\textwidth}
+            \includegraphics[width=\textwidth]{performance_30_2.0}
+            \caption{V: 30, t: 2}
+            \label{fig:performance-30_2.0}
+        \end{subfigure}
+    \end{tcolorbox}
+    \caption{Performance plots for case B}
+    \label{fig:performance-case-b}
 \end{figure}
 
 In case C as seen in Figure~\ref{fig:performance-case-c} the models performance is
@@ -981,29 +967,29 @@ getting worse.
 Reasons for that? ...
 
 \begin{figure}[H]
-\begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
-\begin{subfigure}{0.5\textwidth}
-\includegraphics[width=\textwidth]{performance_50_0.5}
-\caption{$V$: 30, $t$: 1.5}
-\label{fig:performance-30_1.5}
-\end{subfigure}
-\hfill
-\begin{subfigure}{0.5\textwidth}
-\includegraphics[width=\textwidth]{performance_50_1}
-\caption{$V$: 30, $t$: 2}
-\label{fig:performance-30_2.0}
-\end{subfigure}
-\end{tcolorbox}
-\caption{Performance plots for case C}
-\label{fig:performance-case-c}
+    \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
+        \begin{subfigure}{0.5\textwidth}
+            \includegraphics[width=\textwidth]{performance_50_0.5}
+            \caption{V: 30, t: 1.5}
+            \label{fig:performance-30_1.5}
+        \end{subfigure}
+        \hfill
+        \begin{subfigure}{0.5\textwidth}
+            \includegraphics[width=\textwidth]{performance_50_1}
+            \caption{V: 30, t: 2}
+            \label{fig:performance-30_2.0}
+        \end{subfigure}
+    \end{tcolorbox}
+    \caption{Performance plots for case C}
+    \label{fig:performance-case-c}
 \end{figure}
 
 
 The best performing model is the \ac{SVM} model with an \ac{RMSE} of 0.2.
-Therefore the cases $A$, $B$  and $C$ are predicted using the \ac{SVM} model.
+Therefore the cases A, B and C are predicted using the \ac{SVM} model.
 
 As seen in Figure~\ref{fig:default}, the model performs consistent across all thee
-scenarios, indicating that it can effectively handle a broad range of $V/t$ ratios also
+scenarios, indicating that it can effectively handle a broad range of V/t ratios also
 outside the recommended industry guidelines range.
 
 
@@ -1033,6 +1019,31 @@ absolut value of its t-statistic. The t-statistic represents the scaling of
 the estimated weight with its standard error~\cite[p.
 40]{molnar2020interpretable}.
 
+With 100 estimators in \ac{RF} a \ac{MSE} of 0.15 and \ac{RMSE} 0.39 was
+achieved.
+Figure~\ref{fig:rf_feature_importance} compares and visualizes the relative
+importance of the
+features used for
+training the model.
+As shown, the thickness is the most important feature followed by distance
+and die open. The
+results show, that all
+three featured are relevant for the outcome and so no feature can be removed
+from the dataset to
+get a better
+performance of the model.
+
+\begin{figure}[htb]
+    \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
+        \centering
+        \includegraphics[width=0
+        .6\textwidth]{Random_Forest_Regression_importances}
+        \caption{Relative feature importance}
+        \label{fig:rf_feature_importance}
+    \end{tcolorbox}
+\end{figure}
+
+
 \textit{Feature importance table here}
 
 Also it is possible to create visual interpretations of the model using
@@ -1060,8 +1071,7 @@ interpretable where used for the evaluation.
 
 \cite{molnar2020interpretable} differentiates between
 model-specific and model-agnostic interpretability methods.
-Model-specific methods are methods that are specific to a certain model type,
-for example,
+Model-specific methods are methods that are specific to a certain model type, for example,
 decision trees.
 Model-agnostic methods are methods that can be used with any model type, for
 example, permutation importance.
@@ -1087,8 +1097,8 @@ Methods}\label{subsec:local-model-specific-methods}
 
 
 \begin{itemize}
-\item \textit{Data set had only limited features, but there are many more factors
-influencing
-the spring back}
+    \item \textit{Data set had only limited features, but there are many more factors
+    influencing
+    the spring back}
 \end{itemize}
 

@@ -2,159 +2,174 @@
 % Wie ich den sprinback gemssen habe 
 
 \chapter{Build}\label{ch:build}
+This chapter outlines the steps of the \ac{DSR} process, which are
+summarized under the ``Build'' phase, as described chapter~\ref{ch:research-methodology}
+resarch methodology.
+The first step in this phase is to identify the problem that need to be addressed,
+this step leads to the formulation of \ac{DP}, which are later used to evaluate
+the effectiveness of the artefact.
+The \ac{DP} are derived from the requirements of the overall models and are based on
+the work of~\cite{siebert2022construction}.
+
+The Build phase involves the creation of machine learning models, which serve as
+artifacts.
+By implementing these steps, the DSR process establishes a rigourous and methodical
+approach for creating new artifacts.
 
 
-\section{Design Principles}\label{sec:design-principles}
-The following design principles is a selection of
-\cite{siebert_constructionqualitymodel_}'s
-quality parameters for
-\ac{ML} models.
-In this \ac{DSR} work the artifacts are \ac{ML} models therefore these design
-principles are used
-to evaluate them.
+\section{Problem Identification and Motivation}\label{sec:problem-identification-and-
+motivation}
+
+For several decades, researchers have been conducting extensive research on sheet metal
+forming technologies in response to the growing demand for lightweight metal components.
+One of the challenges is the phenomenon of spring back, as discuess in~\ref{sec:spring-
+back}.
+As a result, various efforts have been made to devise methods for compensation~\cite[p.1]{
+    liu_newmachinelearning_2012}.
+
+Sheet metal forming is a complex process due to non-linear behavior caused by
+deformations of the metal sheet, making the spring back difficult to predict.
+Consequently, conventional methods often employ trail and error approaches~
+\cite[p. 1]{dib_singleensembleclassifiers_2020}.
+Through speaking with experts of the field of sheet metal forming, it was found that
+a usual trial and error approach is the creation of so called``technology tables'' that
+contain the bending parameters and resulting spring back data.
+These tables are produced by conducting numerous experiments with varying bending
+angles and metal sheets.
+However, this process is time-consuming and costly, making it
+unsuitable for the production of high-volume and low-cost components.
+
+\textit{SOURCE: Peter and Dr. Hochstrate but only while talking to them. Find a proper
+source}
+
+
+\section{Objectives of a Solution}\label{sec:objectives-of-a-solution}
+The design principles used to evaluate the machine learning (ML) models in \ac{DSR}
+process and form the objectives of the solutoin.
+work are based on a selection of quality parameters proposed by
+Siebert et al.~\cite{siebert2022construction}.
+These quality parameters have been tailored specifically for the evaluation of ML
+models and are thus well-suited to the evaluation of the models developed in this
+thesis.
 
 \subsubsection*{Design Principle 1: Correctness}
-\textit{Does the artifact predict the spring back of a sheet metal with a
+\textit{"Does the artifact predict the spring back of a sheet metal with a
 high accuracy and
-correctness?}
-With progression in manufacturing there is a growing demand for high-quality
-products, that means
-that the meta parts
-needs to be produced with high precision and accuracy. Here the sprin back is
-an undesired side
-effect which need to
-be mimimized. \cite[p. 1]{baig_machinelearningprediction_2021}
-Sheet metal forming in manufacturing need a high level of quality and
-precision. Therefore, the
-spring back of a
-sheet metal is an important parameter to consider. \cite[p.
-1]{cruz_applicationmachinelearning_2021}
-Predicting spring back is important to reduce the number of trial and error
-cycles in the
-manufacturing process.
-Also predicting spring back is complex because of many variables and
-parameters and often not all
-of them are known.
-Therefore, a machine learning model should predict the spring back of a sheet
-metal with a high
-accuracy and
-correctness. When using the \ac{ML} model small errors in the prediction can
-cause fitting
-problems in the
+correctness?"}~\cite[p. 16]{siebert2022construction}
+
+The demand for high-quality products is a driving force in the manufacturing industry,
+as consumers and businesses alike demand products that meet stringent standard of
+precision and accuracy.
+This is particularly true in the case of sheet metal forming, where even small
+deviations from the desired dimensions can cause significant implications for the final
+product.
+Therefore, metal parts need to be produced with high precision and accuracy and
+spring back is an undesired side effect which needs to be minimized~\cite[p.1]{
+    cruz_applicationmachinelearning_2021}.
+
+\ac{ML} has emerged as a powerful tool for predicting the spring back in other bending
+methods as shown in section~\ref{sec:state-of-research}~state of research.
+A \ac{ML} model should predict the spring back with a high degree of accuracy and
+correctness, as even small errors in the prediction will cause fitting problem in the
 manufacturing process.
 
-% Using an analytical model to compare the artifact. (miranda 2018 paper)
+\subsubsection*{Design Principle 2: Relevance}
+In addition to measure the correctness it is important to understand ``why''
+the learner has this performance.
+A model is considered relevant when it is able to accurately predict the outcomes of
+new unseen data, that were not used during training.
+A relevant model should have a low error rate on both the training data and the test
+data and achieve a good bias-variance trade-off~\cite[p. 16]{siebert2022construction}.
 
-\subsubsection*{Design Principle 2: Appropriateness}
-\textit{Is the artifact appropriate for the given problem?}
-While selecting a model it is important that it fits the problem/task and can
-deal with the given
-data. \cite[p.
-16]{siebert_constructionqualitymodel_}
+Understanding the bias-variance trade-off is crucial in developing \ac{ML} models that
+generalize well to unseen data~\cite[p. 49--51]{zhou_machinelearning_2021}.
+In machine learning (\ac{ML}), achieving a good bias-variance balance is essential.
+This means that a model can accurately capture the underlying patterns in the data
+without overfitting or underfitting.
 
+A good bias-variance is essential a \ac{ML} it means that a model can
+accurately capture the underlying patterns without overfitting or underfitting to the
+data~\cite[p. 49--51]{zhou_machinelearning_2021}.
 
-\subsubsection*{Design Principle 3: Relevance}
-\textit{Does the artifact achieve a good bias-variance trade-off?}
+\subsubsection*{Design Principle 3: Robustness}
 
-In addition to measure the correctness it is important to understand "why"
-the learner has this
-performance.
-This is important to understand the limitations of the model and to improve it.
-Therefore, it is important to understand the bias-variance trade-off. \cite[p.
-50]{zhou_machinelearning_2021}
-Bias measures the differences between the learnesrs expected prediction and
-the ground-truth
-label. This results in
-the fitting ability of the learner.
-Variances measures the change of learning performance of the learner because
-of changes in the
-training set. This
-results in the impact of data disturbance on the results. \cite[p.
-51]{zhou_machinelearning_2021}
+When working with real-world data, quality issues such as outliers, missing data, and
+noise are common problems. These issues can have a negative impact on the performance
+of the model, making it challenging to produce accurate predictions. To overcome these
+challenges, a robust model must be able to handle data quality issues and still produce
+accurate predictions~\cite[p. 16]{siebert2022construction}.
 
-\subsubsection*{Design Principle 4: Robustness}
-\textit{How well does the artifact handle outliers, noise and missing data?}
-Using real-world data noice is a common problem and can have a negative
-impact on the performance
-of the learner.
-Therefore, it is important to measure how good the artifact performs when
-dealing with impact data.
-\cite{saez_evaluatingclassifierbehavior_2016} proposed a new measure to
-establish the expected
-behavior of a learner
-with noisy data trying to minimize the problems: the Equalized Loss of
-Accuracy (ELA). \cite[p.
-3]{saez_evaluatingclassifierbehavior_2016}
+\cite{saez_evaluatingclassifierbehavior_2016} proposed a new measure called Equalized
+Loss of Accuracy to evaluate classifications models for robustness.
+Because regressions algorithms are used in this new metrics have to be found~\cite[p.
+3]{saez_evaluatingclassifierbehavior_2016}.
 
-\subsubsection*{Design Principle 5: Stability}
-\textit{Does the artifact generate repeatable results when trained on
-different datasets?}
+\subsubsection*{Design Principle 4: Stability}
 
+The stability of a model is an important quality parameter, as it is essential that
+the model produces the same results when trained on different datasets.
+This is particularly important in the case of \ac{ML} models, as the training data
+is often limited and the model is trained on a small subset of the available data.
+Therefore, it is important that the model is able to generalize well to unseen data and
+produce repeatable results when trained on different datasets~\cite[p. 16]{
+    siebert2022construction}.
 
-\subsubsection*{Design Principle 6: Interpretability}
-\textit{Is the artifact easy to understand and explain?}
+\subsubsection*{Design Principle 5: Interpretability}
 
-It should be noticed, that there are many parameters and variables involved
-in the sheet metal
-forming process.
+Interpretability refers to the ease with which humans can understand and make
+sense of the decisions made by a trained machine learning model~\cite[p. 13]{
+    molnar2020interpretable}.
+\cite{miller2019explanation} define interpretability as the ``degree to which
+a human can understand the cause of a decisio''~\cite[p. 1]{miller2019explanation}.
+Good interpretability is important because it allows users to trust and rely
+on the model, and it can also help with debugging and improving the model (\textit{
+    Source}).
+
+Interpretable models will also deliver more insights for this project, as the
+goal is to understand the relationship between the features and the target outcome.
+
+As mentioned in chapter~\ref{ch:theoretical-foundations} there are many parameters
+and variables involved in the sheet metal forming process.
 That makes the process design quite complex, particularly in the production
-of components which
-require several
-stages, and thus more than one set of tools. \cite[p.
-1]{dib_singleensembleclassifiers_2020}
-A model which allows conclusions how the results where generated is better.
+of components which require several stages, and thus more than one set of tools~\cite[p.
+1]{dib_singleensembleclassifiers_2020}.
+A interpretable model which allows conclusions how the results where generated is better.
 
-\subsection*{Design Principle 7: Resource utilization}
-\textit{How many resources does the artifact need to train and predict?}
+\subsection*{Design Principle 6: Resource utilization}
+One of the main objectives of using machine learning to predict spring back is to
+minimize the number of trial-and-error cycles in the manufacturing process and save
+resources (see Section \ref{sec:problem-identification-and-motivation}). However, it is
+important to consider that creating an ML model also requires resources.
 
-Conventional processes are often based on empirical trial and error
-approaches. \cite[p.
-1]{dib_singleensembleclassifiers_2020}
-A common approach is to experimentally create so named 'technology tables'
-which contain the
-bending parameters and
-the resulting spring back. (Quelle: Hochstrate?)
-This process is time and cost intensive and therefore often not suitable for
-the production of
-high-volume and
-low-cost components.
-Therefore, one of the benefits of using machine learning should be the
-reduction of the number of
-trial and error
-cycles in the manufacturing process.
-Furthermore, training the model should take not too much time and resources.
-As mentioned before often FEM-simulation are used to virtually try out metal
-forming processes.
-However, fully
-exploring the design space is computationally expensive and often not
-possible. \cite[p.
-3]{dib_singleensembleclassifiers_2020}
-The number of experiments can be reduced using a meta-model like \ac{ANN}.
-\cite[p.
-3]{dib_singleensembleclassifiers_2020}
-A approach fully based on \ac{ML} should perfor
+Therefore, it
+is crucial to take into account the resources needed to train and make predictions with
+the model~\cite[p. 16]{siebert2022construction}.
 
 
 \section{Dataset generation}\label{sec:dataset-generation}
-For the dataset generation, bending experiments were performed on metal
-sheets with different
-thicknesses.
-% material
-The material used is cold rolled steel sheets of the norm DIN EN 10130. The
-thicknesses used were
-0.5mm, 1mmm and 2mm.
-The material was used because it is commonly used in bending processes and
-its high availability.
-In previous tests,
-it was observed, that the spring back are well observable with this material.
-Using this material, 200 single bending pieces of the dimension 20×100 mm
-have been cut.
-Each piece was bend one time using a \textit{Zwick} three-point-bending machine.
 
+To generate the dataset, bending experiments on metal sheets of varying
+thicknesses where conducted.
+Specifically, cold rolled steel sheets that conform to the DIN EN
+10130 with thicknesses raning from 0.5 mm to 3 mm where used.
+The material was selected because it is commonly used in bending processes and widely
+available.
+To create the dataset, pieces of the material were cut into 20×100 mm pieced each piece
+was bent using a Zwick three-point-bending machine.
+It was paid attention to ensure that each metal sheet was bent in the same
+rolling direction as preliminary tests showed that the spring back differed depending
+on the rolling direction.
+
+The dataset consisted of 384 \texttt{.tra} files which is a proprietary format used by
+the machine.
 Python script where developed to covert the output data format from the
 machine to CSV files.
+
 The following describes the experimental setup used for the experiments
 performed.
+The data collection was done outside of the thesis period and originally consited of 384
+samples. \texttt{X} samples where added later to the dataset to fill gaps present in
+the dataset.
 
 % Pado: Since the data collection was technically done outside of the thesis
 % period, 4.2.1
@@ -249,92 +264,54 @@ performed.
 
 \subsection{Experimental setup}\label{subsec:experimental-setup}
 The experimental setup comprises of a three-point bending machine, consisting
-of a punch and
-die, with the latter lacking a bottom, which allows only air bending
-metal-sheet.
+of a punch and die, with the latter lacking a bottom, which allows only air bending.
+
 The material testing machine utilized is the \textit{Zwick MX 25A}, which is
-equipped with a load
-cell and a displacement sensor.
-The load cell measures the force applied to the sheet (in $N$), while the
-displacement sensor
-measures the displacement of the punch ($y_p$).
+equipped with a load cell and a displacement sensor.
+The load cell measures the force applied to the sheet measured in $N$), while the
+displacement sensor measures the displacement of the punch, denoted as $y_p$.
 The punch is mounted on the top of the machine and is stationary, while the
-die is mounted on the
-bottom and is the part which can be moved.
-The machine is operated via a computer and the \textit{ZwickRöll TestXpert}
-software, which is
-used for both machine control and data collection.
+die is mounted on the bottom and is the part which can be moved.
+The die opening of the machine is adjustable with from 10mm to 100 mm.
+The machine is operated via a computer and the \textit{ZwickRöll TestXpert} software,
+which is used for both machine control and data collection.
 
 The experimental setup and the process parameters are shown in
 Figure~\ref{fig:process_parameters} where $V$ is the die opening which is the
-opening between the
-the two points between the sheet metal is placed.
-The parameters $y_p$ is the punch penetration, which is the distance the
-punch is moved into the
-sheet.
-The parameter $t$ is the thickness of the metal sheet while $\alpha$ is the
-corresponding
-angle after the bending process..
-Parameter $r_p$ is the punch radius which is the radius of the tip of the
-punch, which was never
-replaced in all experiments and therefore remains constant.
-
+opening of the two contact points on which the sheet metal is placed.
+The parameter $y_p$ is the punch penetration, which is the distance the punch is moved
+into the sheet.
+The metal sheet thickness is donated as $t$ and the bending angle as $\alpha$.
+The parameter $r_p$ is the radius which of the tip of the punch, which was never
+replaced in the experimental setup and therefore remains constant.
 
 \begin{figure}[h]
     \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
         \centering
         \includegraphics[trim=left botm right top, width=0.6\textwidth,
             clip]{process_parameters}
-        \caption{Process parameters: Sheet bending angle ($\alpha$), sheet
+        \caption{\textbf{Process parameters:} Sheet bending angle ($\alpha$), sheet
         thickness ($t$), punch
         penetration ($y_p$), die opening ($V$) and punch radius ($r_p$)}
         \label{fig:process_parameters}
     \end{tcolorbox}
 \end{figure}
 
-In order to get consistent results, a number of constant and variable
-parameters were chosen.
-The parameters include the punch-and-die tooling made of steel where die
-punch had a radius
-($r_p$) of 5 mm and and
-die radius ($r_m$) of 10 mm. The die opening $V$ was varied between 10 and 50
-mm and the punch
-penetration $y_p$ was
-varied between 0 and 20 mm.
 
-The machine was configured to move the punch with a constant speed of 100
-mm/min until it
-measured a resistance of 1 N.
-That meant, that the punch reached the metal plate and the actual bending
-process can start.
-After a hold time of 1 second the punch was moved with a slower speed of 8
-mm/min until the
-specified punch penetration was reached.
-The length and width of the metal sheet was 100 mm and 20 mm respectively.
+To ensure consistent results, a set of constant and variable parameters were selected.
+The constant parameters consisted of the punch-and-die tooling made of steel, which
+included the die punch radius (r_p), as well as the length and width of the
+metal sheet. Additionally, the punch travel speed, hold time, and punch force threshold
+were also considered constant.
 
-Using the \textit{ZwickRöll TestXpert} software, the following parameter
-where set for the
-experiment, which are summarized in
-Table~\ref{tab:experimental-setup-constant-parameters}.
-The punch of the machine was never replaced and therefore the radius of the
-punch remained
-5 mm.
-The width and length of metal sheets where 100 mm and 20 mm respectively.
-The punch speed was set too 80 mm/min and the hold time was set to 1 second,
-latter is the time
-the punch stays at the end of the metal sheet and has to be a least 1 second
-which is a limitation
-of the machine.
-After the bending process, the punch was moved back to the starting position
-with a speed of
-8 mm/min.
-This speed was chosen significantly lower than the speed used for the bending
-process
-in order to accuratly measure the spring back to avoid any damage to the
-metal sheet.
-The punch force threshold was set to 1 N, which means, that the punch starts
-bending the metal a
-soon as it touches the sheet metal.
+All metal sheets used in the setup were standardized with a length of 80 mm and a width
+of 20 mm.
+The hold time, which refers to the duration that the punch remains stationary
+after reaching the maximum displacement ($y_p_{\max}$), was set to a minimum of 1 second.
+The punch force threshold was set to 1 N, meaning that the punch was initially moved at
+a higher speed until the force reached 1 N, and then moved at a slower speed of 80 mm
+/min until the $y_p_{\max}$ was reached.
+
 
 \begin{table}[htb]
     \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
@@ -372,14 +349,13 @@ soon as it touches the sheet metal.
     \end{tcolorbox}
 \end{table}
 
-The following parameters where varied in the experiments, which are
-summarized in
-Table~\ref{tab:experimental-setup-variable-parameters}.
-The die opening $V$ was varied between 10 and 50 mm and the punch penetration
-$y_p$ was varied
-between 0 and 20 mm.
-The thickness of the metal sheet $t$ was varied between 0.5 and 2 mm.
-Also the punch penetration $y_p$ was varied between 0 and 20 mm.
+The experiment involved varying three parameters: the die opening ($V$), the maximum
+punch penetration ($y_p$), and the thickness of the metal sheet ($t$). The die opening
+was varied from 10 mm to 50 mm, while the maximum punch penetration was varied from 2
+.5 mm to 20 mm. The thickness of the metal sheet was also varied, with values ranging
+from 0.5 mm to 2 mm.
+These parameters and their values can be seen in Table~\ref{tab:experimental-setup-
+variable-parameters}.
 
 \begin{table}[htb]
     \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
@@ -410,247 +386,41 @@ Also the punch penetration $y_p$ was varied between 0 and 20 mm.
 \end{table}
 
 \subsection{Measuring The Spring Back} \label{subsec:measuring_the_spring_back}
-The output data contained different data points, which were used to calculate
-the spring back.
-Important parameters for the calculation are the force, punch penetration and
-testing time.
-As shown in Figure~\ref{fig:springback_measured} at the $y_p$ maximum the
-punch penetration and
-the force are
-maximized as well. The punch stays at that position for 1 second and then
-moves back with a
-slower speed. This hold
-time a limitation of the machine and can not be changed.
-After the punch is moved back, the force is reduced and the punch penetration
-is reduced as well,
-until the punch is
-at the initial position. For a short time after the lift, the load cell still
-measures a force.
-That is because the
-metal sheet springs back and the punch is still in contact with the sheet.
-This was measured
-using a python script,
-the green and the yellow point represent the resulting spring back distance.
+The output data included various data points that were used to calculate the spring back.
+Key parameters for this calculation were the force (``Standardkraft''), punch penetration
+(``Standardweg''), and time (``Testzeit'').
+Figure~\ref{fig:springback_measured}
+illustrates these three parameters, with the blue line representing the force and the
+gray line representing the punch travel.
+
+
+In Figure~\ref{fig:springback_measured} it can be seen that the force jumps to around 10 N
+as soon as the punch touches the metal.
+This is the case because the travel speed of the punch is 80 mm/min which relatively fast.
+It was set to that speed in order to reduce the time of the experiments.
+
+The wait time at of 1 second $y_p_{max}$ is a limitation of the machine and can not be
+changed and therefore is always a part of the experimental setup.
+
+\textit{Explain the dip}
+
+For a short time after the lift, the load cell still measures a force.
+That is because the metal sheet springs back and the punch is still in contact with the
+sheet.
+This was measured using a python script,the green and the yellow point represent the
+resulting spring back distance.
 
 \begin{figure}[H]
     \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
         \centering
         \includegraphics[width=0.9\textwidth]{springback_measured}
-        \caption{A steel metal sheet was bent with a punch penetration of 5
-        mm the spring back is 0
-        .37 mm. The blue line
-        shows the force and the blue line shows the punch penetration.}
-        \label{fig:springback_measured}
     \end{tcolorbox}
+    \caption{A steel metal sheet was bent with a punch penetration of 5
+    mm the spring back is 0
+    .37 mm. The blue line
+    shows the force and the blue line shows the punch penetration.}
+    \label{fig:springback_measured}
 \end{figure}
-
-\subsubsection*{\textit{Notes}}
-\begin{itemize}
-    \item \textit{Why is an initial force measured before the punch is moved?}
-    \item \textit{TODO: Add legend for grey line (punch penetration) and blue
-    line (force))}
-    \item \textit{TODO: More dpi for the image}
-\end{itemize}
-
-
-\begin{filecontents*}{example.dat}
-    Method Pink-1C Pink-AC Green-1C Green-AC Blue-1C Blue-AC Cyan-1C Cyan-AC
-    Red-1C Red-AC
-    Orange-1C Orange-AC
-    Square 24.75 4.8 32.28 7.39 32.65 7.53 31.96 7.18 33.57 8 33.19 7.08
-\end{filecontents*}
-
-
-\label{sec:dataset_exploration}
-
-\subsection{Adding Features to the
-Dataset}\label{subsec:adding-features-to-the-dataset}
-The current dataset includes three independent and one dependent feature.
-These features
-will be discussed in more detail in the following section.
-On goal was it to enhance the dataset with more features, this would improve
-the performance of models and provide greater insight into the bending process.
-
-On potential candidate for a new feature is the tension. A drawing test was
-carried out for this
-which is described more in detail in the next section...
-
-\subsubsection*{\textit{Notes}}
-\begin{itemize}
-    \item \textit{TODO: Add drawing test}
-\end{itemize}
-
-\subsection{Dataset Exploration}\label{subsec:dataset-exploration}
-
-\subsubsection{Features}
-The output data of the bending machine contained 26 features which can be
-found in the appendix.
-Out of these
-features only the standard power and the distance $y_p$ and the force are
-relevant for
-calculating the spring back
-which was described in the last section \ref{subsec:measuring_the_spring_back}.
-The final dataset therefore contained 3 features plus the added spring back.
-In total 396 data points where crated using the described approach.
-An example of the dataset is shown in Table~\ref{tab:dataset_example}.
-
-\begin{table}[h]
-    \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
-        \sisetup{group-minimum-digits = 4}
-        \centering
-        \label{tab:dataset_example}
-        \begin{tabular}{l|llll}
-            \toprule
-            \thead{\textbf{index}} & \thead{\textbf{Distance}} &
-            \thead{\textbf{Spring Back}} &
-            \thead{\textbf{Thickness}}
-            & \thead{\textbf{Die Opening}}
-            \\
-            1   & 5   & 0.6667 & 2.0 & 50  \\
-            \hdashline
-            2   & 15  & 0.9164 & 2.0 & 50  \\
-            \hdashline
-            3   & 10  & 0.6829 & 2.0 & 50  \\
-            \hdashline
-            ... & ... & ...    & ... & ... \\
-            \hdashline
-            396 & 5   & 0.6667 & 3.0 & 10  \\
-            \bottomrule
-        \end{tabular}
-        \caption{Varying parameters in the experimental setup}
-    \end{tcolorbox}
-\end{table}
-
-With 100 estimators in \ac{RF} a \ac{MSE} of 0.15 and \ac{RMSE} 0.39 was
-achieved.
-Figure~\ref{fig:rf_feature_importance} compares and visualizes the relative
-importance of the
-features used for
-training the model.
-As shown, the thickness is the most important feature followed by distance
-and die open. The
-results show, that all
-three featured are relevant for the outcome and so no feature can be removed
-from the dataset to
-get a better
-performance of the model.
-
-\begin{figure}[htb]
-    \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
-        \centering
-        \includegraphics[width=0
-        .6\textwidth]{Random_Forest_Regression_importances}
-        \caption{Relative feature importance}
-        \label{fig:rf_feature_importance}
-    \end{tcolorbox}
-\end{figure}
-
-\subsection{Visualizing The Data}\label{subsec:visualizing-the-data}
-Figure~\ref{fig:v30_springbacks} shows the spring backs for the $V30$ dataset.
-In general, it can be seen that the spring backs is less for lower
-thicknesses and higher for
-higher thicknesses.
-Also, the spring backs for lower thickness tend to go up with increasing
-punch penetration, while
-the spring backs
-for higher thicknesses tend to go down with increasing punch penetration.
-
-The factors for the behavior of the spring back can't be fully understood
-with the available
-data, which makes it a
-good case for machine learning.
-
-\begin{figure}[htb]
-    \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
-        \centering
-        \includegraphics[width=0.8\textwidth]{V30_all_springbacks}
-        \caption{Springbacks for $V30$}
-        \label{fig:v30_springbacks}
-    \end{tcolorbox}
-\end{figure}
-
-\subsubsection*{\textit{Notes}}
-\begin{itemize}
-    \item \textit{TODO: Add better picture. Ordered by $t$, better colors,
-        scienceplot, punch
-        penetration instead of spring back}
-    \item \textit{Experimental setup methodology like Jonas.}
-\end{itemize}
-
-\subsubsection{Data Quality}
-The dataset was created in an experimental environment and the samples where
-carefully measured.
-Therefor the dataset does not contain many outliers and the data quality is
-high.
-
-As shown Figure~\ref{fig:train_test_split} data for all possible $V$ and $t$
-combinations where
-collected. Also there
-the $y_p$ values are evenly distributed and always range from 2.5 to 20 mm.
-Furthermore, the dataset was continuously extended with new data points
-throughout the project.
-During this process
-multiple outliers and wrong measurements where detected and removed.
-
-It has to be noted that therefore the dataset does not model a real-world
-scenario, where the
-data quality is not as
-high as in the experimental environment.
-This has been considers in section~\ref{sec:robustness}~Robustness, where
-artificial noise is
-added to the dataset to
-test the robustness of the models.
-
-\subsubsection*{\textit{Notes}}
-
-\begin{itemize}
-    \item \textit{The Figure feature importance was created using a random
-    forest so it does not
-    belong here. Find a
-    \item different method to visualize the feature importance.}
-    \item \textit{Add example picture of spring back plots}
-    \item \textit{It is not yet decided if artificial noise will be added to
-    the dataset.}
-    \item \textit{Add some data quality measure?}
-\end{itemize}
-
-\subsection{Data Preprocessing}\label{subsec:data-preprocessing}
-
-The three independent features $y_p$, $V$ and $t$ as well as the dependend
-feature $spring\_back$
-were normalized
-using the \texttt{MinMaxScaler}from the scikit-learn library. The
-\texttt{MinMaxScaler} scales
-the data between 0 and
-1. The scaler was fitted on the training data and then used to transform the
-test data. The
-scaler was saved to be
-used for the prediction of the spring back of the real world data.
-
-Scaling is only done on the training data, because cross-validation is later
-used to tune and
-evaluate the models.
-Scaling the whole data set before the split would lead to data leakage
-because the min and max
-values of the test
-data would be used to scale the training data.
-How the data was split can be seen in Figure~\ref{fig:train_test_split}.
-
-Because cross-validation is later used to tune and evaluate the models the
-data was split before
-the scaling. How the
-data was split can be seen in Figure~\ref{fig:train_test_split}.
-
-\subsubsection*{\textit{Notes}}
-\begin{itemize}
-    \item \textit{TODO: Outlier handling is not done and mentioned. Is this
-    necessary?}
-    \item \textit{TODO: Use more sophisticated scaling methods, not only
-    min-max scaling. For
-    example for V
-    classfication}
-\end{itemize}
-
 
 % Pado: This is a little confusing - does the Y axis show the force? Why is
 % the blue line the
@@ -658,15 +428,118 @@ data was split can be seen in Figure~\ref{fig:train_test_split}.
 % maybe two separate lines, the movement of the punch and the reaction of the
 % metal?
 
-\subsection{Computational Setup}
+\subsection{Dataset Exploration}\label{subsec:dataset-exploration}
+The dataset was explored using the python library \textit{pandas}~\cite{mckinney-proc-
+scipy-2010} and the
+\textit{matplotlib}~\cite{Hunter:2007} library.
+
+The goal of this section is to give the reader an overview of the dataset and
+to show the relationship between the features and the dependent variable.
+
+\subsubsection{Features}
+The output data of the bending machine consisted of 26 features, which are listed in
+the appendix.
+However, only three features - force, distance $y_p$, and time- are relevant for
+calculating the spring back, as described in the previous section (
+Section~\ref{subsec:measuring_the_spring_back}).
+These three features were combined with the calculated spring back to form the final
+dataset, which contained a total of
+396 data points generated using the method described earlier.
+An example of the dataset is presented in Table~\ref{tab:dataset_example}.
+
+\begin{table}[H]
+    \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
+        \sisetup{group-minimum-digits = 4}
+        \centering
+        \begin{tabular}{l|llll}
+            \toprule
+            \thead{\textbf{index}} & \thead{\textbf{Distance}} &
+            \thead{\textbf{Spring Back}} &
+            \thead{\textbf{Thickness}}
+            & \thead{\textbf{Die Opening}}
+            \\
+            1   & 5.0  & 0.6667 & 2.0 & 50  \\
+            \hdashline
+            2   & 15.0 & 0.9164 & 2.0 & 50  \\
+            \hdashline
+            3   & 10.0 & 0.6829 & 2.0 & 50  \\
+            \hdashline
+            ... & ...  & ...    & ... & ... \\
+            \hdashline
+            396 & 5.0  & 0.6667 & 3.0 & 10  \\
+            \bottomrule
+        \end{tabular}
+    \end{tcolorbox}
+    \caption{Varying parameters in the experimental setup}
+    \label{tab:dataset_example}
+\end{table}
+
+Figure~\ref{fig:v30_springbacks} illustrates the spring backs observed in the $V30$
+dataset.
+Two general trends are evident.
+First, a lower thickness of the metal sheet results in a higher spring back.
+Second, a higher punch penetration results in a higher spring back.
+Also it non-linear relationship between the punch penetration and the spring back can
+be observed.
+
+In the chosen example it chan be observed that the spring back of the metal sheets with $t = 0.5$
+are significantly higher then the other thicknesses.
+Despite the availability of data, the factors underlying the spring back behavior
+remain incompletely understood.
+Because too many factors are involved in the bending process.
+
+\begin{figure}[htb]
+    \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
+        \centering
+        \includegraphics[width=0.7\textwidth]{all-springbacks-consolidated.png}
+        \caption{Springbacks for $V30$}
+        \label{fig:v30_springbacks}
+    \end{tcolorbox}
+\end{figure}
+
+\subsubsection{Data Quality}
+The dataset was created in a controlled experimental environment, where
+was given to ensure that the samples were measured with precision and accuracy.
+This results in a dataset that contains a minimal number of outliers and a
+high level of data quality, which is an essential requirement for reliable machine
+learning models.
+
+As depicted in Figure~\ref{fig:train_test_split}, the dataset covers all possible
+combinations of the process parameters, $V$, $t$ and $y_p$.
+The $y_p$ values in the dataset are uniformly distributed and always range between 2.5
+and 20 mm.
+The dataset was continuously expanded with new data points throughout the project to
+increase its size and diversity.
+
+During the data collection and expansion process, several outliers and incorrect
+measurements were identified and removed from the dataset to ensure its high quality.
+Although this dataset has been developed in a controlled environment, it may not
+accurately represent real-world scenarios, where the data quality is often affected by
+a range of factors such as measurement errors, noise, and bias.
+This will be taken into account in later sections, where data quality issues will be
+added in order to evaluate the robustness of the models.
+
+\subsection{Data Preprocessing}\label{subsec:data-preprocessing}
+The three independent features $y_p$, $V$ and $t$ as well as the dependent
+feature $spring\_back$ were normalized using the \texttt{MinMaxScaler} or in some cases
+the \texttt{StandardScaler} from the \texttt{scikit-learn}\cite{scikit-learn}.
+The\texttt{MinMaxScaler} scales the data between 0 and 1.
+The scaler was fitted on the training data and then used to transform the test data.
+The scaler was saved to be used for the prediction of the spring back of the real world
+data.
+
+Scaling is only done on the training data, because cross-validation is later used to
+tune and evaluate the models.
+Scaling the whole data set before the split would lead to data leakage because the
+minimum and maximum values of the test data would be used to scale the training data.
+How the data was split can be seen in Figure~\ref{fig:train_test_split}.
+
+\subsection{Computational Setup}\label{subsec:computational-setup}
 For training the machine learning models a ThinkPad X1 Carbon 2019 with an
-Intel Core i7-10610U
-CPU @ 1.80GHz and 16
-GB RAM was used. The operating system used is Ubuntu 20.04.2 LTS. The code
-for the model is
-written in Python 3.8.5
-using the IDE PyCharm. The libraries used are mentioned in
-Table~\ref{table:libraries}.
+Intel Core i7-10610U CPU @ 1.80GHz and 16 GB RAM was used.
+The operating system used is Ubuntu 20.04.2 LTS. The code for the model is
+written in Python 3.8.5 using the IDE PyCharm.
+The libraries used are mentioned in Table~\ref{table:libraries}.
 
 \captionsetup{width=1\textwidth}
 
@@ -674,37 +547,36 @@ Table~\ref{table:libraries}.
     \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
         \sisetup{group-minimum-digits = 4}
         \centering
-        \label{table:libraries}
         \begin{tabular}{ll}
             \toprule
             \thead{\textbf{Library}} & \thead{\textbf{Version}} &
             \toprule
-            numpy & 1.23.2 \\
+            numpy~\cite{harris2020array} & 1.23.2 \\
             \hdashline
-            pandas & 1.5.1 \\
+            pandas~\cite{mckinney-proc-scipy-2010} & 1.5.1 \\
             \hdashline
-            matplotlib & 3.6.2 \\ \hline
+            matplotlib~\cite{Hunter:2007} & 3.6.2 \\ \hline
+            \hdashline
+            scienceplots~\cite{SciencePlots} & 2.0.1 \\
             \bottomrule
         \end{tabular}
         \caption{Libraries used for the machine learning models.}
+        \label{table:libraries}
     \end{tcolorbox}
 \end{table}
 
-Looking at the correlation matrix shown in
-Figure~\ref*{fig:correlation_matrix} it can be seen,
-that the distance and
-the spring back are more correlated than the other features. This is
-expected, because the punch
-penetration $y_p$ is
-the main factor which influences the spring back. The other features are not
-correlated with each
-other, no
-multicollinearity is present which is good for the machine learning models.
+Upon examining the correlation matrix depicted in Figure~\ref{fig:correlation_matrix},
+it is evident that the distance and spring back features exhibit a stronger correlation
+than the other features.
+This correlation is to be expected since punch penetration $y_p$ is the primary factor
+that influences the amount of spring back.
+It is noteworthy that the other features are not correlated with each other, indicating
+the absence of multicollinearity, which is a desirable trait for machine learning models.
 
 \begin{figure}[H]
     \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
         \centering
-        \includegraphics[width=0.8\textwidth]{correlation_matrix}
+        \includegraphics[width=0.7\textwidth]{correlation_matrix}
         \caption{Correlation matrix}
         \label{fig:correlation_matrix}
     \end{tcolorbox}
@@ -713,15 +585,11 @@ multicollinearity is present which is good for the machine learning models.
 
 \section{Model Selection}\label{sec:model-selection}
 
-\subsection{Support Vector Regression (SVR)
-}\label{subsec:support-vector-regression-(svr)}
-Support Vector Machines \ac{SVM} are usually used for classification problems
-. The \ac{SVM}
-algorithm is used to find
-a hyperplane in an N-dimensional space (N - the number of features) that
-distinctly classifies
-the data points.
-\cite[p. 42]{awad_efficientlearningmachines_2015}
+\subsection{Support Vector Regression (SVR)}\label{subsec:support-vector-regression-(svr)}
+Support Vector Machines \ac{SVM} are usually used for classification problems.
+The \ac{SVM}algorithm is used to find a hyperplane in an N-dimensional space (N - the
+number of features) that distinctly classifies the data points~\cite[p. 42]{
+    awad_efficientlearningmachines_2015}.
 Predicting the spring back is a regression problem, so the \ac{SVM} algorithm
 need to be
 generalized of

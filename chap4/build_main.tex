@@ -429,19 +429,17 @@ resulting spring back distance.
 % metal?
 
 \subsection{Dataset Exploration}\label{subsec:dataset-exploration}
-The dataset was explored using the python library \textit{pandas}~\cite{mckinney-proc-
-scipy-2010} and the
-\textit{matplotlib}~\cite{Hunter:2007} library.
-
+The dataset was explored using the python library \textit{pandas}
+\cite{mckinney-proc-scipy-2010} and the \textit{matplotlib}~\cite{Hunter:2007} library.
 The goal of this section is to give the reader an overview of the dataset and
 to show the relationship between the features and the dependent variable.
 
 \subsubsection{Features}
 The output data of the bending machine consisted of 26 features, which are listed in
 the appendix.
-However, only three features - force, distance $y_p$, and time- are relevant for
-calculating the spring back, as described in the previous section (
-Section~\ref{subsec:measuring_the_spring_back}).
+Only three features - force, distance $y_p$, and time - are relevant for
+calculating the spring back, as described in the previous section (Section
+\ref{subsec:measuring_the_spring_back}).
 These three features were combined with the calculated spring back to form the final
 dataset, which contained a total of
 396 data points generated using the method described earlier.
@@ -491,7 +489,7 @@ Because too many factors are involved in the bending process.
 \begin{figure}[htb]
     \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
         \centering
-        \includegraphics[width=0.7\textwidth]{all-springbacks-consolidated.png}
+        \includegraphics[width=0.9\textwidth]{all-springbacks-consolidated.png}
         \caption{Springbacks for $V30$}
         \label{fig:v30_springbacks}
     \end{tcolorbox}
@@ -522,7 +520,7 @@ added in order to evaluate the robustness of the models.
 \subsection{Data Preprocessing}\label{subsec:data-preprocessing}
 The three independent features $y_p$, $V$ and $t$ as well as the dependent
 feature $spring\_back$ were normalized using the \texttt{MinMaxScaler} or in some cases
-the \texttt{StandardScaler} from the \texttt{scikit-learn}\cite{scikit-learn}.
+the \texttt{StandardScaler} from the \texttt{scikit-learn}\cite{scikit-learn} library.
 The\texttt{MinMaxScaler} scales the data between 0 and 1.
 The scaler was fitted on the training data and then used to transform the test data.
 The scaler was saved to be used for the prediction of the spring back of the real world
@@ -555,7 +553,7 @@ The libraries used are mentioned in Table~\ref{table:libraries}.
             \hdashline
             pandas~\cite{mckinney-proc-scipy-2010} & 1.5.1 \\
             \hdashline
-            matplotlib~\cite{Hunter:2007} & 3.6.2 \\ \hline
+            matplotlib~\cite{Hunter:2007} & 3.6.2 \\
             \hdashline
             scienceplots~\cite{SciencePlots} & 2.0.1 \\
             \bottomrule
@@ -584,170 +582,212 @@ the absence of multicollinearity, which is a desirable trait for machine learnin
 
 
 \section{Model Selection}\label{sec:model-selection}
+This thesis focuses on the utilization of supervised machine learning models to predict
+spring back.
+Therefore, a selection of the most common machine learning models where used, based on
+the systematic literature review of~\cite{
+    dridi2021supervised}.
+The author of the paper divided supervised learning approaches into five categories:
+Logic-based learning, instance-based learning, static-based learning, Deep learning and
+Support vector machines~\cite[p. 8]{dridi2021supervised}.
+
+\subsection{Baseline Model}\label{subsec:regression-models}
+A linear regression model is used as baseline model in this thesis.
+Linear regression is a simple and widely used model that is used to predict a
+continuous value.
+The model is based on the assumption that the relationship between the independent
+variables and the dependent variable is linear.
+The model is trained by minimizing the sum of squared errors between the predicted
+values and the actual values~\cite[p. 47--68]{muller_introductionmachinelearning_2016}.
+
+Since in the section~\ref{subsec:dataset-exploration} it has already been stated that the
+relationship between the independent variables and the dependent variable is not linear
+it is not expected that the linear regression model will perform well.
+The linear regression model is used to compare the performance of the other models.
+
+\subsubsection{Linear Regression}\label{subsec:linear-regression}
+A liner regression model uses the feature inputs to make prediction about the
+target by creating a linear relationship which is easy to understand and
+interpret~\cite[p. 37]{molnar2020interpretable}.
+
+Linear models can be used to understand the relationship between a target variable y
+and one or more input features x.
+The general formula for predicting in a linear model in regression is shown in
+\ref{eq:linear-regression}~\cite[p.
+45]{muller_introductionmachinelearning_2016}.
+In this context, $x[0]$ to $x[p]$ represent the attributes (with p being the number of
+attributes) of a specific data point.
+The parameters $w$ and $b$, which are learned by the model, and the predicted output $\hat{y}$,
+are also included~\cite[p. 45]{muller_introductionmachinelearning_2016}.
+
+\begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
+    \begin{equation}
+        \hat{y} = w[0] * x[0] + w[1] * x[1] + ... + w[p] * x[p] + b
+        \label{eq:linear-regression}
+    \end{equation}
+\end{tcolorbox}
+
+\ac{LR} models estimate the target value as linear combinations of the feature inputs.
+The linearity of the relationship between the inputs and the target makes the
+interpretation of the model straightforward~\cite[p. 37]{molnar2020interpretable}.
+
+Linear regression has no hyperparameters to tune and therefore no
+hyperparameter tuning was performed.
+
+\subsection{Statistics Based Learning}\label{subsec:statistics-based-learning}
+
+The approach that relies on statistics and uses distributive statistics to make the
+problem more manageable.
+It predicts based on the distribution structure. Learning through statistics involves
+utilizing the Naïve Bayes Algorithm~\cite[p. 8]{dridi2021supervised}.
+
+\subsubsection{Naive Bayes}
+
+...
 
 \subsection{Support Vector Regression (SVR)}\label{subsec:support-vector-regression-(svr)}
-Support Vector Machines \ac{SVM} are usually used for classification problems.
-The \ac{SVM}algorithm is used to find a hyperplane in an N-dimensional space (N - the
-number of features) that distinctly classifies the data points~\cite[p. 42]{
-    awad_efficientlearningmachines_2015}.
-Predicting the spring back is a regression problem, so the \ac{SVM} algorithm
-need to be
-generalized of
-classification problems, where the model returns continuous values instead of
-finite set of values.
-This is done by using the \ac{SVR} algorithm, which is inspired by  \ac{SVM}
-and uses the same
-principles.
-It fits a model to data using only residuals smaller in absolute value than a
-certain constant
-called
-$\epsilon$-sensitivity
+Support Vector Machines (\ac{SVM}) are a popular approach for solving classification
+problems.
+The algorithm seeks to identify a hyperplane in an N-dimensional space, where N
+represents the number of features, to effectively separate and classify data
+points~\cite[p. 42]{awad_efficientlearningmachines_2015}.
 
-This is done by creating a "tube" of $\epsilon$ width around the data, with
-points inside the
-tube not being
-penalized and points outside the tube being penalized based on their distance
-from the predicted
-function.
-This is done similar to how \ac{SVM}s penalize points in classification.
-Like \ac{SVM}, \ac{SVR} fins a well-fitting hyperplane to a kernel-induced
-feature space to
-achieve good
-generalization performance using the original features.
-\cite[p. 369]{montesinoslopez_supportvectormachines_2022}
+However, for regression problems such as predicting spring back, the \ac{SVM} algorithm
+needs to be adapted to provide continuous values instead of a finite set of values.
+To address this, the \ac{SVR} algorithm was developed, which draws inspiration from the
+\ac{SVM} algorithm and leverages similar principles.
+\ac{SVR} fits a model to data by only considering residuals smaller in absolute value
+than a designated constant known as $\epsilon$-sensitivity.
+By doing so, \ac{SVR} can accurately model and predict continuous values, making it a
+suitable approach for regression problems.
 
-\subsubsection*{Kernel Trick}
-
+To enable the \ac{SVR} algorithm to generate continuous predictions, it creates a ``tube''
+while the points outside the tube are penalized based on their distance from the
+predicted function.
+This approach is similar to how \ac{SVM}s penalize points in classification
+problems~\cite[p. 369]{montesinoslopez_supportvectormachines_2022}.
+% Kernel trick
 The kernel trick is a method to transform the data into a higher dimensional
-space, where the
-data is linearly
-separable.
-This is done by using a kernel function, which is a function that maps the
-data into a higher
+space, where the data is linearly separable.
+This is done by using a kernel function, which is a function that maps the data into a
+higher
 dimensional space.
-Two methods are usually used for \ac{SVM}s, the polynomial kernel and the
-radial basis function,
-also known as gaussian kernel.
-\cite[p. 97-98]{muller_introductionmachinelearning_2016}
-In practise the mathematical details behind these kernels are not important,
-but it is important
-to know that they are used to transform the data into a higher dimensional
-space, where the data
-is linearly separable.
+Two methods are usually used for \ac{SVM}s, the polynomial kernel and the radial basis
+function,also known as gaussian kernel~\cite[p. 97-98]{
+    muller_introductionmachinelearning_2016}.
 
-\subsection{Multi Linear Regression}\label{subsec:multi-linear-regression}
+Like \ac{SVM}, the \ac{SVR} algorithm finds a well-fitting hyperplane to a kernel-
+induced feature space to achieve good generalization performance using the original
+features. This is detailed in \cite[p. 369]{montesinoslopez_supportvectormachines_2022}.
 
-\subsection{Polynomial Regression}\label{subsec:polynomial-regression}
+\subsection{Logic-based learning}\label{subsec:logic-based-learning}
 
-\subsection{Decision Trees}\label{subsec:decision-tree-regression}
-\ac{DT}s are a commonly utilized type of model for categorizing and
-predicting outcomes.
-They construct hierarchy if rules to solve classification or regression
-problems~\cite[p.
-70]{muller_introductionmachinelearning_2016}.
+Logic-based algorithms solve problems by applying logical functions sequentially or
+incrementally. An example of such an algorithm is a decision tree, which is commonly
+used as a classification and regression model~\cite[p. 10]{dridi2021supervised}.
 
-In \ac{DT} models, the data is divided into multiple segments based on
-specific feature values.
-This division creates various subsets of the dataset, with each sample being
-a part of one subset.
-The last subsets are referred to as terminal or leave nodes while the
-intermediary subsets are
-known as internal nodes or split nodes.
-To predict the outcome in a particular leaf node, the mean outcome of the
-training data present
-in that nodes is taken into account~\cite[p. 76]{molnar2020interpretable}.
+\subsubsection{Decision Trees}
+% -> Problem von decision tree
+Decision Trees (\ac{DT}s) are a widely used type of model for both classification and
+regression problems. These models construct a hierarchy of rules to predict outcomes
+based on the data~\cite[p. 70]{muller_introductionmachinelearning_2016}~\cite[p. 253]{
+    shaik_briefsurveyrandom_2019}.
+In \ac{DT} models, the data is split into multiple segments based on specific feature
+values.
+This division creates various subsets of the dataset, with each sample
+belonging to one subset.
+The final subsets are called terminal or leaf nodes, while the intermediate subsets are
+known as internal or split nodes.
+To predict the outcome in a specific leaf node, the mean outcome of the training data
+in that leaf node is used~\cite[p. 70-72]{muller_introductionmachinelearning_2016}.
 
-\subsection{Random Forest Regression}\label{subsec:random-forest-regression}
-% Erst einmal auf decision tree generell eingehen
-A commonly used method in machine learning. The goal is to solve
-classification or regression
-problems by predicting
-the value of a output variable by one or multiple input variables. \cite[p.
-253]{shaik_briefsurveyrandom_2019}
-To build a \ac{DT} the source dataset represents the root node of the tree
-this data set is split
-into leafs
-(children) by using a set of spitting rules until each leaf in the \ac{DT} is
-"pure" and only
-contains one target
-value. Depending on the use cases this is a single class or a single
-regression value. \cite[p.
-70-72]{muller_introductionmachinelearning_2016}
-% -> Problem von decision tree 
-The main drawbback of \ac{DT}s is the tendency to overfit and poor
-generalization performance,
-what makes them not
-paticaly for most use cases. Therefore usualy ensemble methods are used
-instead of a single
-\ac{DT}. \cite[p.
-78]{muller_introductionmachinelearning_2016} \cite[p.
-251]{liu_newmachinelearning_2012}
-% -> Warum random forst das problem löst 
-Random forest \cite[]{breiman_randomforests_2001} is a type of ensemble
-learning algorithm in
-which multiple decision
-trees, which are "weak learners," are trained and combined to produce a more
-accurate and stable
-prediction, known as
-a "strong learner." \cite[p. 24]{awad_efficientlearningmachines_2015}
-The risk of overfitting is mitigated by subset and feature randomization.
-Each root node uses a
-unique subset of the
-data and each leaf is split using a random features. This ensures that no
-single tree sees all of
-the data, allowing
-the model to focus on general patterns rather than being sensitive to noise.
-\cite[p.
-251]{liu_newmachinelearning_2012}
-% -> Beschreibung Random forest / Random foret regression 
-In this supervised learning method,
-%which was influenced by the research of Amit and Geman (1997), Ho (1998),
-%and Dietterich (2000),
-a "divide and conquer" approach is used. This involves dividing the data into
-smaller samples,
-incrementally building
-a randomized tree predictor for each sample, and then combining (aggregating)
-these predictors
-together. This
-approach has proven to be effective. Because not only one but multiple
-classifiers are used the
-random forest
-learning is known as ensemble model. \cite[p. 254]{shaik_briefsurveyrandom_2019}
+Decision trees are models are useful when the relationship between features
+and outcome is
+or when features interact with one another.
+These models split the data multiple times based on certrain cutoff values,
+resulting in different subset of the dataset.
+The final subsets, called leaf nodes are used to predict the outocme by
+taking the average of the training data in that subset~\cite[p. 76]{
+    molnar2020interpretable}.
 
-% -> Vorteile / Nachteile Random Forest 
-This mechanism is flexible enough to handle classifications and regression
-problems, this is one
-of the reasons that
-random forests count to the most successful \ac{ML} methods. \cite[p.
-3-4]{biau_randomforestguided_2016} \cite[p.
-25]{breiman_randomforests_2001}
+\subsubsection*{Decision Tree Hyperparamters}
+Grid search cross validation was used to find the best hyperparameters for
+the decision tree.
+All hyperparameters are summarized in Table~\ref{tab:hyperparameters_dt}.
+
+\begin{table}[H]
+    \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
+        \sisetup{group-minimum-digits = 4}
+        \centering
+        \caption{Hyperparameters of the random forest model.}
+        \label{tab:hyperparameters_decision_tree}
+        \begin{tabular}{ll}
+            \toprule
+            \thead{\textbf{Hyperparameter}} & \thead{\textbf{Value}} &
+            \thead{\textbf{Description}}
+            \\
+            \toprule
+            criterion & absolute\_error
+            \hdashline
+            max\_depth & 30 \\
+            \hdashline
+            min\_samples\_split & 4 \\
+            \hdashline
+            min\_weight\_fraction\_leaf & 0. \\
+            \hdashline
+            splitter & random \\
+            \hdashline
+            ccp_alpha & 0.0 \\
+            \bottomrule
+        \end{tabular}
+    \end{tcolorbox}
+\end{table}
+
+\subsubsection{Random Forest}\label{subsubsec:random-forest-regression}
+The main problem with \ac{DT} is their tendency to overfit and have poor
+generalization performance, making them unsuitable for most use cases.
+To address this, ensemble methods are typically used instead of a single DT~\cite[p. 78]{
+    muller_introductionmachinelearning_2016}~\cite[p. 251]{liu_newmachinelearning_2012}.
+% -> Warum random forst das problem löst
+One popular ensemble learning algorithm is the \ac{RF}~\cite[]{
+    breiman_randomforests_2001}, which combines multiple decision trees (weak learners
+) to create a more accurate and stable prediction (strong learner)~\cite[p. 24]{
+    awad_efficientlearningmachines_2015}.
+Because the data is divided into smaller subsets, and a randomized tree predictor is
+build for each subset this aproach is also called ``divide and conquer'' approach.
+% -> Beschreibung Random forest / Random foret regression
+The risk of overfitting is mitigated by using subset and feature randomization.
+Each root node uses a unique subset of the data, and
+each leaf is split using a random set of features.
+This ensures that no single tree sees all of the data, allowing the model to focus on
+general patterns rather than being
+sensitive to noise~\cite[p. 251]{liu_newmachinelearning_2012}.
+
+% -> Vorteile / Nachteile Random Forest
+This mechanism is flexible enough to handle classifications and regression problems,
+this is one of the reasons that random forests count to the most successful \ac{ML}
+methods~\cite[p.
+3-4]{biau_randomforestguided_2016}~\cite[p. 25]{breiman_randomforests_2001}.
 
 %
 % Advantages
 %
-Random forests are a type of machine learning algorithm that uses bagging and
-the random
-selection of features to
-produce accurate results. They are effective at handling noise and can work
-with both continuous
-and categorical
-variables. This combination of techniques helps improve the performance of
-the algorithm. \cite[p.
-259]{liu_newmachinelearning_2012}
+Random forests are a type of machine learning algorithm that uses bagging and the
+random selection of features to produce accurate results.
+They are effective at handling noise and can work with both continuous and categorical
+variables.
+This combination of techniques helps improve the performance of the algorithm~\cite[p.
+259]{liu_newmachinelearning_2012}.
 Decision trees have a limitation in their ability to overfit, which is a
-disadvantage. This is
-mitigated by the use
-of subset and feature randomization. Specifically, each base model uses a
-unique subset of the
-data, and each node in
-the decision tree is split using a random set of features. This ensures that
-no single tree sees
-all of the data,
-allowing the model to focus on general patterns rather than being sensitive
-to noise. \cite[p.
-259]{liu_newmachinelearning_2012}
+disadvantage.
+his is mitigated by the use of subset and feature randomization.
+Specifically, each base model uses a unique subset of the data, and each node in
+the decision tree is split using a random set of features.
+This ensures that no single tree sees all of the data, allowing the model to focus on
+general patterns rather than being sensitive to noise~\cite[p. 259]{
+    liu_newmachinelearning_2012}.
 
-% Bagging technique helps the algorithms performance. 
+% Bagging technique helps the algorithms performance.
 % Works well out of the box with no hyperparameter tuning.
 % Fast, robust, and can show feature importances which can be quite useful.
 
@@ -768,7 +808,7 @@ to noise. \cite[p.
 %  available data. (chatgpt)
 
 %
-% Alogithm steps 
+% Alogithm steps
 %
 
 % The following Random Forest Algorithm [9] gives the steps in constructing the
@@ -790,7 +830,7 @@ to noise. \cite[p.
 % A random forest does not require any cross veriﬁcation and it is not
 % over-ﬁtting [8]. The
 % Random forest uses Adaboost and Bootstrapping techniques to construct multiple
-% classiﬁers. \cite[p. 254]{shaik_briefsurveyrandom_2019} 
+% classiﬁers. \cite[p. 254]{shaik_briefsurveyrandom_2019}
 
 
 % In a classification random forest, each tree in the forest makes a
@@ -820,215 +860,6 @@ to noise. \cite[p.
 % data, which can help
 % to reduce
 % overfitting and improve the overall performance of the model. (chat gpt)
-
-\subsubsection{Gradient Boosting Regression Tree}
-A gradient boosting regression is a type of ensemble learning 2algorithm in
-which multiple
-decision trees are combines
-to produce a more accurate and stable prediction. Similar to the random
-forest algorithm gradient
-boosting combines
-multiple weak learners to create a strong learner.
-The difference to a random forest is, that the trees are trained in a serial
-manner and each tree
-corrects the errors
-of the previous tree. \cite[p. 88-89]{muller_introductionmachinelearning_2016}
-Gradient boosted tree use strong pre-pruning and therefore produce shallow
-trees with a depth of
-one to five. This
-brings the advantage of a smaller model which uses less memory and also
-results in a faster
-prediction.
-Usually generating more trees improves the overall performance of the model.
-\cite[p.
-88-89]{muller_introductionmachinelearning_2016}
-Also the algorithm performs well without scaling the dataset and can handle a
-mixture of binary
-and continuous
-features. \cite[p. 88-89]{muller_introductionmachinelearning_2016}
-Like other tree-based models it does not perform well on high-dimensional data.
-
-\subsubsection{Multi-layer Perceptron}
-
-\textit{Should I a MLP or will it be out of scope?}
-
-\subsubsection*{Results}
-
-
-\section{Model Training}\label{sec:model-training}
-
-\subsection{Training-Test Split}\label{subsec:training-test-split}
-Figure~\ref{fig:train_test_split} shows the data set and which parts of it is
-used for training
-and testing the used
-models. Samples with a die opening of 30 are used to test the performance and
-the remaining part
-is used for training.
-A different approach would be to us a random test and train split, this would
-lead to a better
-performance of the
-models but would not evaluate their ability to predict new data of a
-different die opening.
-The die opening 30 was chosen because it is in the middle of the selected
-data set and therefore
-the models should be
-able to predict the data of this die opening.
-It is expected that this approach will lead to improved model performance as
-the data removed
-lies in the middle of the parameter space.
-This should result in the model generalizing better on that specific range of
-data as it has not
-been over-exposed to it during the training process.
-
-All models are trained with the same data set and the same parameters. The
-only difference is the
-used algorithm.
-
-\begin{figure}[H]
-    \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
-        \centering
-        \includegraphics[width=0.8\textwidth]{test_train_split}
-        \caption{The training and test dataset. (Data especially for V40 is
-        still missing)}
-        \label{fig:train_test_split}
-    \end{tcolorbox}
-\end{figure}
-
-Additional to the data split shown in Figure~\ref{fig:train_test_split} a
-random test split was
-used to train the
-models. The random 80/20 split was also used to evaluate the performance of
-the models and to
-compare them to each
-other.
-
-The reason for choosing to different methods for the data split is that the
-first one is used to
-evaluate the models'
-ability to generalize on new data. The second one is used to evaluate the
-models' performance on
-the data set.
-Also in real-world applications is possible that there is already data for
-all needed
-$V-t$-combinations and models
-could be trained on that data.
-
-It is expected that the models perform better on the random data but the
-information gain about
-the models' ability
-to generalize on new data is less because the random split will most
-certainly contain data of
-all $V-t$-combinations.
-
-\subsubsection*{\textit{Notes}}
-\begin{itemize}
-    \item \textit{\textbf{Dataset not yet complete}, data for all missing Vt
-    combinations will be
-    added}
-    \item \textit{V10 does differ very much and it might be not good to
-    include in the data set.
-    Maybe add V60 instead}
-\end{itemize}
-
-\subsection{Linear Regression}\label{subsec:linear-regression}
-A liner regression model uses the feature inputs to make prediction about the
-target by
-creating a linear relationship which is easy to understand and
-interpret~\cite[p.
-37]{molnar2020interpretable}.
-
-Linear models can be used to understand the relationship between a target
-variable y and one or
-more input features x.
-The general formula for predicting in a linear model in regression is shown in
-\ref{eq:linear-regression}~\cite[p.
-45]{muller_introductionmachinelearning_2016}.
-In this context, $x[0]$ to $x[p]$ represent the attributes (with p being the
-number of
-attributes) of
-a specific data point. The parameters $w$ and $b$, which are learned by the
-model, and the predicted
-output $\hat{y}$, are also included~\cite[p.
-45]{muller_introductionmachinelearning_2016}.
-
-\begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
-    \begin{equation}
-        \hat{y} = w[0] * x[0] + w[1] * x[1] + ... + w[p] * x[p] + b
-    \end{equation}
-    \label{eq:linear-regression}
-\end{tcolorbox}
-
-\ac{LR} models estimate the target value as linear combinations of the
-feature inputs.
-The linearity of the relationship between the inputs and the target makes the
-interpretation of the model straightforward~\cite[p.
-37]{molnar2020interpretable}.
-
-
-Linear regression has no hyperparameters to tune and therefore no
-hyperparameter tuning was
-performed.
-
-\subsection{Decision Trees}\label{subsec:decision-trees}
-Linear and logistic regression models are not effective when the relationship
-between input
-features and output is not linear or when features have interactions with one
-another.
-
-Decision trees are models are useful when the relationship between features
-and outcome is
-or when features interact with one another.
-These models split the data multiple times based on certrain cutoff values,
-resulting in
-different subset of the dataset.
-The final subsets, called leaf nodes are used to predict the outocme by
-taking the average of the
-training data in that subset~\cite[p. 76]{molnar2020interpretable}.
-
-\subsection{Decision Tree}\label{subsec:decision-tree}
-Grid search cross validation was used to find the best hyperparameters for
-the decision tree.
-All hyperparameters are summarized in Table~\ref{tab:hyperparameters_dt}.
-
-\begin{table}[H]
-    \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
-        \sisetup{group-minimum-digits = 4}
-        \centering
-        \caption{Hyperparameters of the random forest model.}
-        \label{tab:hyperparameters_decision_tree}
-        \begin{tabular}{llp{7cm}}
-            \toprule
-            \thead{\textbf{Hyperparameter}} & \thead{\textbf{Value}} &
-            \thead{\textbf{Description}}
-            \\
-            %  \unit{(Kcal\per\mole)\squared}}} & \thead{RMSD l.b.} &
-            %  \thead{RMSD u.b.}  \\
-            \toprule
-            criterion & absolute\_error & The function to measure the quality
-            of a
-            split. \\
-            \hdashline
-            max\_depth & 30 & The maximum depth of the tree
-            . \\
-            \hdashline
-            min\_samples\_split & 4 & The minimum number of samples required to
-            split an internal node. \\
-            \hdashline
-            min\_weight\_fraction\_leaf & 0.0 & The minimum weighted fraction
-            of the
-            sum total of weights (of all the input samples) required to be at
-            a leaf node. \\
-            \hdashline
-            splitter & random & The strategy used to choose
-            the split at each node. \\
-            \hdashline
-            ccp_alpha & 0.0 & Complexity parameter used for Minimal Cost
-            \bottomrule
-        \end{tabular}
-    \end{tcolorbox}
-\end{table}
-
-\subsection{Random Forest}\label{subsec:random-forest}
 
 \subsubsection*{Hyperparameter Tuning}
 Grid search cross validation was used to find the best hyperparameters for
@@ -1080,7 +911,7 @@ for the depenend variable spring back
         \centering
         \caption{Hyperparameters of the random forest model.}
         \label{tab:hyperparameters_rf}
-        \begin{tabular}{llp{7cm}}
+        \begin{tabular}{ll}
             \toprule
             \thead{\textbf{Hyperparameter}} & \thead{\textbf{Value}} &
             \thead{\textbf{Description}}
@@ -1091,32 +922,44 @@ for the depenend variable spring back
             n\_estimators & 10 & The number of trees in the forest.
             \\
             \hdashline
-            criterion & absolute\_error & The function to measure the quality
-            of a
-            split. \\
+            criterion & absolute\_error \\
             \hdashline
-            max\_depth & 30 & The maximum depth of the tree.
-            \\
+            max\_depth & 30 \\
             \hdashline
-            min\_samples\_split & 4 & The minimum number of samples required to
-            split an internal node. \\
+            min\_samples\_split & 4 \\
             \hdashline
-            min\_samples\_leaf & 2 & The minimum number of samples required
-            to be
-            at a leaf node. \\
+            min\_samples\_leaf & 2 \\
             \hdashline
-            max\_features & auto & The number of features to consider when
-            looking for the best split. \\
+            max\_features & auto  \\
             \hdashline
-            max\_leaf\_nodes & X & Grow trees with max\_leaf\_nodes in
-            best-first fashion. \\
+            max\_leaf\_nodes & X  \\
             \hdashline
-            max\_leaf\_nodes & X & Grow trees with max\_leaf\_nodes in
-            best-first fashion. \\
+            max\_leaf\_nodes & X  \\
             \bottomrule
         \end{tabular}
     \end{tcolorbox}
 \end{table}
+
+\subsubsection{Gradient Boosting Regression Tree}
+A gradient boosting regression is a type of ensemble learning algorithm in
+which multiple decision trees are combines to produce a more accurate and stable
+prediction.
+Similar to the \ac{RF} gradient boosting combines multiple weak learners to create a
+strong learner.
+The difference to a \ac{RF} is, that the trees are trained in a serial manner and
+each tree corrects the errors of the previous tree~\cite[p. 88--89]{
+    muller_introductionmachinelearning_2016}.
+
+Gradient boosted tree use strong pre-pruning and therefore produce shallow
+trees with a depth of one to five.
+This brings the advantage of a smaller model which uses less memory and also results in
+a faster prediction.
+Usually generating more trees improves the overall performance of the model~\cite[p.
+88-89]{muller_introductionmachinelearning_2016}.
+Also the algorithm performs well without scaling the dataset and can handle a mixture
+of binary and continuous features~\cite[p. 88-89]{
+    muller_introductionmachinelearning_2016}.
+Like other tree-based models it does not perform well on high-dimensional data.
 
 \subsection{Gradient Boosted Regression
 Trees}\label{subsec:gradient-boosted-regression-trees}
@@ -1155,7 +998,6 @@ common practice is to fit n estimators depending on the time and
 memory budget, and then search over different learning rates." \cite[p.
 88-89]{muller_introductionmachinelearning_2016}
 
-\subsection{Support Vector Machine}\label{subsec:support-vector-machine}
 
 \subsubsection*{Hyperparameter Tuning}
 The \textit{kernel}, \textit{degree}, \texit{gamma} and \textit{epsilon}
@@ -1172,6 +1014,99 @@ To resolve this problem the data was scaled using the \textit{MinMaxScaler}
 between 0 and 1.
 The model trained on the scaled data performed better than the model trained
 on the unscaled data.
+
+\subsubsection{Extra Trees}\label{subsubsec:extra-trees}
+When developing a tree within a random forest, only a portion of the features are
+assessed for splitting at each node, which was previously explained in section~\ref{
+    subsubsec:random-forest-regression}.
+To further increase the randomness of the trees,
+it is possible to utilize random thresholds for each feature rather than determining the
+most optimal thresholds like traditional \ac{DT} do~\cite[p. 351]{geron2022hands}.
+
+An ensemble of this kind highly arbitrary trees is known as an extra-trees (or extremely
+randomized trees) ensemble.
+This approach exchanges more bias for a lower variance.
+Furthermore, the use of \ac{ET} classifiers makes the training process faster
+compared to conventional random forests since one of the most time-intensive aspects of
+tree development is determining the optimal threshold for each feature at
+each node~\cite[p. 351]{geron2022hands}.
+
+\subsection{Neural Networks }\label{subsec:neural-networks}
+Another method for supervised learning involves the utilization of Neural Netowrks to
+perform classification and regression tasks.
+Neural Network models consist of multiple layers, and it is trained through a layer-by-
+layer approach~\cite[p. 11]{
+    dridi2021supervised}.
+
+While this thesis does not delve into the use of Deep Learning for predicting spring
+back, it does employ a simple multi-layer perceptron as a baseline model. Although not
+the main focus, the results from this model can provide insights into the potential of
+neural networks for this task and for guiding future research.
+
+\subsubsection{Multi-layer Perceptron}
+The multi-layer perceptron (MLP), which is the most widely used type of artificial
+neural network, has to be found producing generalizable models in various fields~\cite[
+    p.451]{taud2018multilayer}.
+
+The MLP is a feedforward neural network that is organized into layers, with information
+moving in one direction from the input layer tough the hidden layers to the output
+layer~\cite{bishop1995neural}.
+Each connection between neurons has a weight and perceptrons within the same layer
+share the same activations function which is typically a sigmoid function in hidden
+layers.
+The backpropagation algorithm is typically used to train \ac{MLP} models, by
+propagating errors backwards from the output layer to the input layer in order to adjust
+the weights~\cite[p. 454]{taud2018multilayer}.
+
+
+\section{Model Training}\label{sec:model-training}
+
+\subsection{Training-Test Split}\label{subsec:training-test-split}
+Figure~\ref{fig:train_test_split} displays the dataset partitioned into training and
+testing sets for the models used in this study.
+Specifically, the samples with a die
+opening of 30 were reserved for testing, while the remaining data was used for training .
+While a random train-test split can often yield better model performance, this
+approach may not evaluate the model's ability to predict new data with a different die
+opening.
+
+The decision to use a die opening of 30 was based on its central location within the
+selected dataset, allowing the models to predict this value accurately.
+Furthermore,removing data from the middle of the parameter space during training is
+expected to improve model performance and promote generalization to new data.
+
+All models were trained with the same dataset and parameters, differing only in the
+chosen algorithm.
+
+
+\begin{figure}[H]
+    \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
+        \centering
+        \includegraphics[width=0.8\textwidth]{test_train_split}
+        \caption{The training and test dataset. (Data especially for V40 is
+        still missing)}
+        \label{fig:train_test_split}
+    \end{tcolorbox}
+\end{figure}
+
+
+In addition to the data split shown in Figure~\ref{fig:train_test_split}, a random 80
+/20 split was used to train and evaluate the models. This split was employed to assess
+model performance and compare results.
+
+Using two different methods for data splitting serves two distinct purposes.
+The first method evaluates the models' ability to generalize on new data.
+The second method assesses the models' performance on the dataset.
+In real-world applications, it may be possible to train models on pre-existing data
+that encompasses all necessary $V-t$-
+combinations.
+
+While the models are expected to perform better on the random data, less information
+can be gained about their ability to generalize to new data because the random split
+will most likely contain data from all $V-t$-combinations.
+
+
+
 
 \subsubsection*{Notes}
 \begin{itemize}

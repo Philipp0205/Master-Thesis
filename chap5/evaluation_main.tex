@@ -419,7 +419,7 @@ The third and final experiment, which involved random sampling to create differe
 train-test data compositions, provided meaningful results and was used to evaluate the
 model's handling of missing data.
 The selected split ratios were 80:20, 50:50, and 20:80.
-This approach was used by  \cite[p. 570-574]{liu2021deep} and taken as a reference for
+This approach was used by~\cite[p. 570-574]{liu2021deep} and taken as a reference for
 this thesis.
 
 
@@ -839,9 +839,11 @@ package is used.
     \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
 % \sisetup{group-minimum-digits = 4}
         \centering
-        \begin{tabular}{llll}
+        \begin{tabular}{lllll}
             \toprule
-            \thead{\textbf{Model Name}} & {\thead{\textbf{Training time} \\
+            \thead{\textbf{Model Name}} & {\thead{\textbf{rs}}} & {\thead{\textbf{
+                Training
+                time} \\
             \unit[]{ms}}}
             & {\thead{\textbf{Inference time} \\ \unit[]{ms}}} &
                 {\thead{\textbf{Memory
@@ -849,13 +851,23 @@ package is used.
             \unit{kb}}}
             \\
             \toprule
-            \textbf{Linear Regression}          & 2.609   & 0.975  & 157.41 \\
+            \textbf{LR} & - & 3.14 & 0.982 & 269.887 \\
+            \textbf{LR} & x & 3.558 & 1.157 & 269.887 \\
             \hdashline
-            \textbf{Decision Tree}          & 2.600  & 1.055 & 155.734    \\
+            \textbf{DT} & - & 2.743 & 1.136 & 174.0 \\
+            \textbf{DT} & - & 3.455 & 1.212 & 174.008 \\
             \hdashline
-            \textbf{Random Forest} & 0.0222 & 2.0275  & 80.2 \\
+            \textbf{RF} & - & 25.205 & 2.886 & 173.219 \\
+            \textbf{RF} & x & 26.821 & 2.269 & 173.266 \\
             \hdashline
-            \textbf{Support Vector Machine} & 289.874 & 2.376  & 156.891 \\
+            \textbf{ET} & - & 19.62 & 1.725 & 173.121 \\
+            \textbf{ET} & x & 20.854 & 1.887 & 173.156 \\
+            \hdashline
+            \textbf{SVM} & - & 309.721 & 2.789 & 195.734 \\
+            \textbf{SVM} & x & 310.018 & 2.793 & 195.746 \\
+            \hdashline
+            \textbf{MLP} & - & 19100.697 & 11.663 & 180.949 \\
+            \textbf{MLP} & x & - & 19100.697 & 11.663 & 180.949 \\
             \bottomrule
         \end{tabular}
         \caption{Overview of the used machine learning models and their
@@ -863,6 +875,24 @@ package is used.
         \label{tab:resutls_resource_utilization}
     \end{tcolorbox}
 \end{table}
+
+As can be seen in Table~\ref{tab:resutls_resource_utilization}, the \ac{ET} is faster
+than to th conventional \ac{RF}.
+This expected since the most-time intensive part of the \ac{RF} is the splitting of the
+nodes with determining the optimal threshold for each feature at each node
+(see section~\ref{subsubsec:extra-trees}).
+It has been observed, that this advantage is lost when the \texttt{n\_estimators}
+parameter is set above 10.
+
+The \ac{MLP} is the slowest model to train and to make predictions.
+Most certainly this is because an \ac{MLP} typically has more parameters to learn and
+has a deeper architecture, which means that it requires mor computations to train and
+predict.
+Also the training algorithm used is backpropagation, wich can be more computationally
+intensive.
+Also an \ac{MLP} trains all data at once and therefore cant parallelize the process.
+It has to be noted, that tuning the hyperparameters is a time-consuming steps and the
+chosen parameters might not be the optimal ones.
 
 
 \section{Results}\label{sec:overall-results}
@@ -1033,18 +1063,14 @@ from the dataset to
 get a better
 performance of the model.
 
-\begin{figure}[htb]
+\begin{figure}[H]
     \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
         \centering
-        \includegraphics[width=0
-        .6\textwidth]{Random_Forest_Regression_importances}
+        \includegraphics[width=0.6\textwidth]{Random_Forest_Regression_importances}
         \caption{Relative feature importance}
         \label{fig:rf_feature_importance}
     \end{tcolorbox}
 \end{figure}
-
-
-\textit{Feature importance table here}
 
 Also it is possible to create visual interpretations of the model using
 a weight plot or effect plot.
@@ -1094,6 +1120,7 @@ with any model type and provide an overview of the model's behavior.
 Methods}\label{subsec:local-model-specific-methods}
 
 \section[]{Discussion}\label{sec:discussion}
+
 
 
 \begin{itemize}

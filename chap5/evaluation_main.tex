@@ -3,22 +3,28 @@
 This chapter conducts a comprehensive analysis of the \ac{ML} models implemented in
 the preceding chapter.
 An overview of the quality metrics used for the evaluation is presented in
-Table~\ref{tab:evaluation_criteria}. The quality metrics have been structures based on
-the \ac{GQM}
-approach mentioned in subsection~\ref{subsec:goal-question-metric-approach}.
+Table~\ref{tab:evaluation_criteria}.
+The quality metrics have been structures based on
+the \ac{GQM}approach mentioned in subsection~\ref{subsec:goal-question-metric-approach}.
 
-The quality metrics are aligned with the quality model from \cite{
-    siebert2022construction}, which is based on the ISO/IEC 9126 standard for software
-quality evaluation. The standard has been adapted to meet the specific requirements of
-machine learning models, as described in
-section~\ref{sec:evaluation-of-machine-learning-models}.
+The quality metrics are aligned with the quality model from~\cite{
+    siebert2022construction}, which in turn is based on the ISO/IEC 9126 standard for
+software quality evaluation.
+The standard has been adapted by \cite{siebert2022construction} to meet the specific
+requirements of machine learning models, as described in section~\ref{sec:evaluation-of
+-machine-learning-models}.
 
 As~\cite{siebert2022construction} mostly focuses on the evaluation of classification
 models, the quality metrics have been adapted to fit the requirements of the regression
 models implemented in this thesis.
 This is elaborated in each individual quality metric section.
 
-\textit{Todo: Mention further changes}
+Table~\ref{tab:evaluation_criteria} shows the quality metrics used for the evaluation
+of the \ac{ML} models.
+The \ac{GQM} approach is used to structure the evaluation of the \ac{ML} models.
+To each goal a question or one or more metrics where assigned.
+The following subsections follow this structure and describe the quality metrics in more
+detail.
 
 \captionsetup{margin={5pt,5pt}}
 \begin{table}[H]
@@ -30,10 +36,10 @@ This is elaborated in each individual quality metric section.
                 \toprule
                 \thead{\textbf{Goal}} & \thead{\textbf{Question}}
                 & \thead{\textbf{Metric}} \\
-                \hdashline
+                \toprule
                 \textbf{Correctness} & Ability of the model to perform the
-                current task measured
-                on the development dataset and the runtime dataset
+                current task measured on the development dataset and the runtime dataset
+                \cite[p. 16]{siebert2022construction}
                 &
                 MAE, \newline MSE, \newline RMSE
                 \\
@@ -41,29 +47,32 @@ This is elaborated in each individual quality metric section.
                 \textbf{Relevance} & Does the model achieve a good bias-variance
                 tradeoff? Which means neither overfitting or unterfitting the
                 data.
-                & Variance \ac{CV}, \newline $R^2
+                \cite[p. 16]{siebert2022construction}
+                & Variance of CV, \newline $R^2
                 \\
                 \hdashline
                 \textbf{Robustness} & Ability of the model to outliers, noise
-                and other
-                data quality issues
+                and other data quality issues
+                \cite[p. 16]{siebert2022construction}
                 & Loss of Accuracy, \newline Average Loss
                 \\
                 \hdashline
                 \textbf{Stability} & Does the artifact generate repeatable
-                results
-                when trained on different data?
+                results when trained on different data?
+                \cite[p. 16]{siebert2022construction}
                 & LOOCV stability
                 \\
                 \hdashline
                 \textbf{Interpret- ability} & How well can the model be
                 explained?
+                \cite[p. 16]{siebert2022construction}
                 & Linearity, \newline monotonicity, \newline  interaction
                 \\
                 \hdashline
                 \textbf{Resource utilization} & How much resources are
                 required to train and run
                 the model?
+                \cite[p. 16]{siebert2022construction}
                 & Training time, \newline runtime, \newline storage space
                 \\
                 \bottomrule
@@ -82,27 +91,22 @@ This is elaborated in each individual quality metric section.
 % development dataset and the
 % runtime dataset
 
-% Sieber et a luse
-%Precision, Recall and F-score
-% These where changed
-
 The model must be able to perform well on the selected task.
-\cite{siebert2022construction} used the metrics precision, recall and F-score
-to evaluate the correctness of the classification models.
+\cite{siebert2022construction} used the classification metrics precision, recall and F-
+score to evaluate the correctness models.
 As the regression models implemented in this thesis are not able to predict
 the class of a sample, these metrics are not applicable.
 
-Therefore measure the correctness of the model, the metrics MAE, MSE and RMSE are used.
-In the formulas~\ref{eq:mae},~\ref{eq:mse} and~\ref{eq:rmse} the variable
-\(e_i\) is the prediction
-error which is the difference between the predicted value by the model the
-actual value.
-\(y_i\)is the actual value and n is the number of samples in the testing
-data set.
+Commonly used metrics for regression models are the mean absolute error \ac{MAE},
+\ac{MSE} and \ac{RMSE}.
+Their formal description is given in~\ref{eq:mae},~\ref{eq:mse} and~\ref{eq:rmse} where
+\(e_i\) being the prediction error which is the difference between the predicted value
+by the model and the acutal value.
+\(y_i\) is the actual value and \(n\) is the number of samples in the testing data set.
 
-The mean absolute error (MAE) and mean squared error (MSE) are the most
-commonly used metrics for
-evaluating the performance of regression models.
+For the evaluatoins the \texttt{sci-kit learn}~(\cite{scikit-learn}) implementation of
+these metric was
+used.
 
 \textbf{Mean Absolute Error (MAE)}
 
@@ -133,14 +137,6 @@ as the response
 variable. The RMSE is more sensitive to outliers than the MAE.
 The MAE is the average of the absolute difference between the predicted and
 actual values.
-Additionally the \(R^2\) was added to the overview. The \(R^2\) is a statistical
-measure of how close
-the data are to the fitted regression line. It is also known as the
-coefficient of determination,
-or the coefficient of multiple determination for multiple regression. The
-value of the \(R^2\) is
-the percentage of the response variable variation that is explained by a
-linear model.
 
 \textbf{Root Mean Squared Error (RMSE)}
 
@@ -170,70 +166,72 @@ evaluation.
 % \end{figure}
 
 \subsection{Results}\label{subsec:results}
+The Table~\ref{tab:results-correctness} shows the results of the
+evaluation of the models for the correctness.
 
+Looking at the \ac{RMSE} all models except the \ac{LR} and \ac{DC} models show a
+relatively equal performance.
+The \ac{MLP} has a slight advantage over the other models, with an \ac{RMSE} of 0.201.
+Therefore it could be interesting to investigate the performance of neural networks /
+deep learning in the future.
+
+It's worth mentioning that the \ac{SVM} model has a slightly better \ac{MAE}, while
+still maintaining a comparable \ac{MSE} compared to the other models.
+This could be due to the fact that the errors made by the \ac{SVM} are evenly
+distributed across instances, or that the errors made by the other models are large for
+a few instances but smaller for the rest.
+
+The algorithms \ac{LR} does perform worse than the other models.
+A likely reason is, that the relationship between the independent and dependent
+variables is not linear.
+This cna result in an inadequate fit and reduced predictive power (Source).
+
+\ac{DT} on the other hand, can perform poorely when they overfit the training data.
+Also, they are pron to instability, both problems are mitigates by using ensemble methods
+like \ac{RF} and \ac{GBT} which can overcome the limitations of individual
+decision trees.
+
+Because the simple \ac{DT} as well as the \ac{LR} are not able to predict the
+spring back correctly, they are not considered for the next steps of the evaluation.
 
 % Table wit hall used machine learning models and their metrics
 \begin{table}[H]
     \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
 % \sisetup{group-minimum-digits = 4}
         \centering
-        \begin{tabular}{llll}
+        \begin{tabular}{lllll}
             \toprule
-            \thead{\textbf{Model Name}} & \thead{\textbf{MAE}}
+            \thead{\textbf{Model Name}} & rs & \thead{\textbf{MAE}}
             & \thead{\textbf{MSE}}
             & \thead{\textbf{RMSE}} \\
             \toprule
-            \textbf{Linear Regression}              & 0.199 & 0.092 & 0.303 \\
-            \textbf{Linear Regression (rand.split)} & 0.261 & 0.127 & 0.356 \\
+            \textbf{LR}  & - & 0.199 & 0.092 & 0.303 \\
+            \textbf{LR}  & x & 0.261 & 0.127 & 0.356 \\
             \hdashline
-            \textbf{Decision Tree}                  & 0.193 & 0.076 & 0.266 \\
-            \textbf{Decision Tree (rand. split)}    & 0.212 & 0.119 & 0.346 \\
+            \textbf{DT}  & - & 0.193 & 0.076 & 0.266 \\
+            \textbf{DT}  & x & 0.212 & 0.119 & 0.346 \\
             \hdashline
-            \textbf{Random Forest}                  & 0.183 & 0.060 & 0.244 \\
-            \textbf{Random Forest (rand.split)}     & 0.134 & 0.041 & 0.202 \\
+            \textbf{RF}  & - & 0.183 & 0.060 & 0.244 \\
+            \textbf{RF}  & x & 0.134 & 0.041 & 0.202 \\
             \hdashline
-            \textbf{Extra Trees}                    & 0.126 & 0.040 & 0.201 \\
-            \textbf{Extra Trees (rand. split)}      & 0.134 & 0.041 & 0.202 \\
+            \textbf{ET}  & - & 0.126 & 0.040 & 0.201 \\
+            \textbf{ET}  & x & 0.134 & 0.041 & 0.202 \\
             \hdashline
-            \textbf{Support Vector Machine}         & 0.09  & 0.04  & 0.20  \\
-            \textbf{SVM (rand. split)}              & 0.09  & 0.04  & 0.20  \\
+            \textbf{GBT} & - & 0.189 & 0.058 & 0.242 \\
+            \textbf{GBT} & x & 0.143 & 0.085 & 0.292 \\
             \hdashline
-            \textbf{MLP}                            & 0.114 & 0.041 & 0.201 \\
-            \textbf{MLP (rand. split)}              & 0.121 & 0.040 & 0.199 \\
+            \textbf{SVM} & - & 0.09  & 0.04  & 0.20  \\
+            \textbf{SVM} & x & 0.09  & 0.04  & 0.20  \\
+            \hdashline
+            \textbf{MLP} & - & 0.114 & 0.041 & 0.201 \\
+            \textbf{MLP} & x & 0.121 & 0.040 & 0.199 \\
             \bottomrule
         \end{tabular}
         \caption{Overview of the used machine learning models and their
         metrics.}
-        \label{tab:result-correctness}
+        \label{tab:results-correctness}
     \end{tcolorbox}
 \end{table}
-
-The \ac{RF}, \ac{ET}, and \ac{SVM} models are the top performers, showing relatively
-equal performance.
-Among them, the \ac{ET} model boasts the best results, with an \ac{
-    RMSE} of 0.201.
-It's worth mentioning that the \ac{SVM} model has a slightly better \ac{MSE}, while
-still maintaining a comparable \ac{MSE} compared to the other models. This could be due
-to the fact that the errors made by the \ac{SVM} are evenly distributed across
-instances, or that the errors made by the other models are large for a few instances
-but smaller for the rest.
-
-%"The MAE metric measures the average magnitude of the errors, while the MSE metric is
-%more sensitive to the magnitude of individual errors and penalizes large errors more
-%heavily."
-
-The algorithms \ac{LR} and {DC} do perform worse than the other models.
-A likely reason for the \ac{LR} not perfoming good is that the relationship between the
-independent and dependent variables is not linear. This cna result in an inadequate fit
-and reduced predictive power (Source).
-
-\ac{DR} on the other hand, can perform poorely when tey overfit the training data.
-Also they are pron to instability, both problems are mitigates by usng ensemble method
-like \ac{RF} and gradient boosting which can overcome the limiations of indiviual
-decision trees.
-
-Because the the simple \ac{DR} as well as the \ac{LR} are not able to predict the
-spring back correctly, they are not considered for the next steps of the evaluation.
 
 
 \section{DP2: Relevance}\label{sec:relevance}
@@ -243,22 +241,17 @@ spring back correctly, they are not considered for the next steps of the evaluat
 
 % Bias variane trade-off
 A model is considered relevant when it achieves a balance between bias and
-variance, avoiding
-both overfitting and underfitting of the training data.
+variance, avoiding both overfitting and underfitting of the training data.
 The relevance of the model can be quantified through the \textit{variance of
-cross-validation},
-which proves insight into how the model perfoms when trained and evaluated on
-different subsets
-of data and how generalizes.
+cross-validation}, which proves insight into how the model performs when trained and
+evaluated on different subsets of data and how generalizes.
 
 % Explanation interpretation of variance
 A low variance indicates that the model's performance is consistent across
-different folds,
-suggesting that the model is not overfitting the training data.
-Conversely, a high variance implies that the performance can vary
-significantly depending on the
-specific data points used the test set, indicating a potential overfitting
-problem.
+different folds,suggesting that the model is not overfitting the training data.
+Conversely, a high variance implies that the performance can vary significantly
+depending on the specific data points used the test set, indicating a potential
+overfitting problem.
 
 Figure~\ref{fig:variance-of-cv} shows how the variance of cross-validation
 was calculated.
@@ -266,9 +259,9 @@ The parameter \(E\) denotes to the estimator which is used to calculate the
 \ac{CV} score.
 The parameter \(k\) denotes to the number of folds, which was set to 5 in this
 context.
-As estimator for the trained models \(R^2\) was used because this is usually
-the metric used to
-evaluate the regression models.
+As estimator for the trained models \(R^2\) was used.
+The \(R^2\) is a statistical measure of how close the data are to the fitted regression
+line.
 
 \begin{figure}[h]
     \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
@@ -280,59 +273,88 @@ evaluate the regression models.
     \end{tcolorbox}
 \end{figure}
 
-For completeness the \(R^2\) score is also shown int the table.
-The \(R^2\) is a statistical measure of how close the data are to the fitted
-regression line.
-It returns a score between 0 and 1, where 0 means that the model does not
-explain any of the
-variance in the response variable around its mean, and 1 means that the model
-explains all the
-variance in the response variable around its mean.
-Therefore, a high \(R^2\) indicated a good model fir and good bias-variance
-tradeoff.
-\cite[p. 43]{muller_introductionmachinelearning_2016}
-
-\paragraph*{\(R^2\)}
-
 \begin{equation}
     \label{eq:r2}
     R^2 = \frac{Explained\_variance}{Total\_variance\_targert\_variable}
 \end{equation}
 
-Table~\ref*{tab:ml_models_relevance} shows the variance of cross-validation
-and the \(R^2\) for all
-used machine learning models.
+The value of the \(R^2\) is the percentage of the response variable variation that is
+explained by a linear model.
+It returns a score between 0 and 1, where 0 means that the model does not
+explain any of the variance in the response variable around its mean, and 1 means that
+the model explains all the variance in the response variable around its mean~\cite[p.
+43]{muller_introductionmachinelearning_2016}.
+Special in sci-kit learns implementations is that the score can be negative if the model
+performs poorly. If a model always predicts the expected value of y, regardless of the
+input features, it would receive an R^2 score of 0.0~\cite{_sklearnmetricsr2_}.
+
+Therefore, a high \(R^2\) indicated a good model fir and good bias-variance
+tradeoff\cite[p. 43]{muller_introductionmachinelearning_2016}.
+
+\subsection{Results}\label{subsec:results3}
+
+Table~\ref*{tab:results_relevance} shows the variance of cross-validation
+and the \(R^2\) for all used machine learning models.
 To calculate the variance of cross-validation the variance of Scikit-Learn's
 \texttt{cross\_val\_score} was calculated.
 Five-fold cross-validation was used to calculate the variance of
-cross-validation. The \(R^2\) was
-calculated with the formula~\ref{eq:r2}.
+cross-validation.
+The \(R^2\) was calculated with the formula~\ref{eq:r2}.
+
+It can be observed that most of the models have relatively low variance, indicating
+consistent performance across different folds, however, two models stand out - \ac{GBT}
+and ac{MLP}.
+
+For the \ac{GBT} model, the variance is high, which implies that its performance
+fluctuates significantly across different folds.
+This inconsistency is a typical sign of overfitting, where the model is overly complex
+and has learned the noise in the data rather than the underlying pattern.
+The individual cross-validation scores for the GBT model also confirm this assumption,
+with a negative score on the first fold and relatively high scores on the subsequent
+folds.
+Given this poor performance, the GBT model cannot be considered relevant for the given
+task.
+
+Similarly, the \ac{MLP} model has a relatively high variance score, which suggests that
+its performance also fluctuates across different folds. The individual scores for the MLP
+model show that it performs poorly on a few folds.
+
+This performance inconsistency could be due to either overfitting or high variability
+in the data.
+
+Overall, it's important to consider the cross-validation scores in conjunction with
+the other other metrics to get a more complete picture of how well your model is
+performing.
+This will be done in later sections.
 
 \begin{table}[H]
     \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
 % \sisetup{group-minimum-digits = 4}
         \centering
-        \begin{tabular}{lll}
+        \begin{tabular}{llll}
             \toprule
-            \thead{\textbf{Model Name}} & \thead{\textbf{Variance of CV}}
+            \thead{\textbf{Model Name}} & rs & \thead{\textbf{Variance of CV}}
             & \thead{\textbf{\(R^2\)}} \\
             \toprule
-            \textbf{Linear Regression}               & 0.051 & 0.644 \\
-            \textbf{Linear Regression (rand. split)} & 0.034 & 0.771 \\
+            \textbf{RF}  & - & 0.068 & 0.8   \\
+            \textbf{RF}  & x & 0.071 & 0.805 \\
             \hdashline
-            \textbf{Decision Tree}                   & 0.042 & 0.806 \\
-            \textbf{Decision Tree (rand. split)}     & 0.068 & 0.784 \\
+            \textbf{ET}  & - & 0.064 & 0.832 \\
+            \textbf{ET}  & x & 0.352 & 0.82  \\
             \hdashline
-            \textbf{Random Forest}                   & 0.034 & 0.771 \\
-            \textbf{Random Forest (rand. split)}     & 0.034 & 0.771 \\
+            \textbf{GBT} & - & 0.425 & 0.775 \\
+            \textbf{GBT} & x & 0.426 & 0.866 \\
             \hdashline
-            \textbf{Support Vector Machine}          & 0.008 & 0.851 \\
-            \textbf{SVM (rand. split)}               & 0.008 & 0.851 \\
+            \textbf{SVM} & - & 0.061 & 0.838 \\
+            \textbf{SVM} & x & 0.061 & 0.798 \\
+            \hdashline
+            \textbf{MLP} & - & 0.146 & 0.839 \\
+            \textbf{MLP} & x & 0.146 & 0.871 \\
             \bottomrule
         \end{tabular}
         \caption{Performance of the used machine learning models according
         relevance.}
-        \label{tab:ml_models_relevance}
+        \label{tab:results_relevance}
     \end{tcolorbox}
 \end{table}
 
@@ -363,30 +385,25 @@ data corruptions and
 suffer less from the impact of noise''~\cite[p.
 2]{saez_evaluatingclassifierbehavior_2016}.
 \cite{siebert2022construction} specifically mention data quality issued like
-outliers or
-noise~\cite[p. 16]{siebert2022construction}.
+outliers or noise~\cite[p. 16]{siebert2022construction}.
 
-Unlike DP1 Correctness(\ref{sec:dp2:-correctness}), robustness is a
-non-functional characteristic
-of a \ac{ML} model.
-A way to evaluate the robustness is to check the correctness of the model wit
+Unlike \ac{DP} Correctness(\ref{sec:dp1:-correctness}), robustness is a
+non-functional characteristic of a \ac{ML} model.
+A way to evaluate the robustness is to check the correctness of the model with
 added noise to the data~\cite[p. 18]{zhou_machinelearning_2021}, if the model
-is still able to
-predict the correct values, it is considered robust.
+is still able to predict the correct values, it is considered robust.
 
-As mentioned in section~\ref{sec:dataset_exploration} the data set
+As mentioned in section~\ref{subsec:dataset-exploration} the data set
 was generated in a controlled environment does not contain many data quality
 issues and noise.
-This offers the opportunity to test the robustness of the models by
-manipulating the data set
-to introduce the data quality issues missing values and noise.
+This offers the opportunity to test the robustness of the models by manipulating the
+data set to introduce the data quality issues missing values and noise.
 
 \subsection{Missing Data}\label{subsec:missing-data}
 When applying the model to real-world data, it is possible that some values
 are missing.
 Looking at the available dataset two scenarios or missing data can occur:
-Missing \(Vt\)-pairings
-and missing values.
+Missing \(Vt\)-pairings and missing values.
 
 In the first scenario, there may be no data available for a specific die
 opening, which can be due to the die opening was never being used before or a
@@ -399,56 +416,120 @@ be missing or the dataset may not be complete.
 To address these scenarios, the following tests were conducted:
 
 \subsubsection{Missing values}
-To assess the ability of the model to handle missing data, three experiments were
-conducted.
+%To assess the ability of the model to handle missing data, three experiments were
+%conducted.
 
-Initially, the use of the \ac{LPOCV} method was considered. However, this approach was
-omitted due to computational
-constraints, as it generates all possible training and test sets by removing \(p\)
-samples from the complete dataset, resulting in a large number of overlapping test sets
-and a high computational cost.
+Initially, the use of the \ac{LPOCV} method was considered.
+However, this approach was omitted due to computational constraints, as it generates all possible
+training and test sets by removing \(p\)samples from the complete dataset, resulting in a large
+number of overlapping test sets and a high computational cost.
 
-As an alternative, regular \ac{CV} was applied, with an increasing number
-of folds.
-The minimum number of folds was 2 and the maximum was equal to the total
-number of samples in the dataset.
+As an alternative, regular \ac{CV} was applied, with an increasing number of folds.
+The minimum number of folds was 2 and the maximum was equal to the total number of samples in the
+dataset.
 However, this experiment did not provide distinguishable results and was therefore not
 included in the results.
 
-The third and final experiment, which involved random sampling to create different
-train-test data compositions, provided meaningful results and was used to evaluate the
-model's handling of missing data.
-The selected split ratios were 80:20, 50:50, and 20:80.
-This approach was used by~\cite[p. 570-574]{liu2021deep} and taken as a reference for
-this thesis.
+The third and final experiment utilized random sampling to create different train-
+test data compositions, allowing for the evaluation of the model's handling of missing data.
+Split rations from 90:10 to 10:90 were used, with a step size of 10. This approach was inspired by a
+similar method used in a previous study~\cite[p. 570--574]{liu2021deep}  which used thee different
+split ratios to evaluate the performance of a deep learning model.
 
 
-\begin{table}[H]
+The results of this experiment provided valuable insights into the model's performance under
+different data compositions, particularly when dealing with missing
+data, and were used in conjunction with other metrics to gain a comprehensive understanding of
+the model's overall performance.
+
+%\begin{table}[H]
+%    \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
+%% \sisetup{group-minimum-digits = 4}
+%        \centering
+%        \begin{tabular}{lllll}
+%            \toprule
+%            \thead{\textbf{Model }} & rp &
+%                {\thead{\textbf{80\% train} \\ \unit{MSE}}} &
+%                {\thead{\textbf{50\%train} \\ \unit{MSE}}} &
+%                {\thead{\textbf{20\%train} \\ \unit{MSE}}}
+%            \\
+%            \toprule
+%            \textbf{RF} & - & 0.106 & 0
+%            .099 & 0.012 \\
+%            \textbf{RF} & x & 0.064 & 0
+%            .089 & 0.114 \\
+%            \hdashline
+%            \textbf{ET} & - & 0.75 & 0
+%            .116 & 0.094 \\
+%            \textbf{ET} & x & 0.059 & 0
+%            .093 & 0.079 \\
+%            \hdashline
+%            \textbf{GBT} & - & 0.045 & 0
+%            .055 & 0.069 \\
+%            \textbf{GBT} & x & 0.045 & 0
+%            .055 & 0.069 \\
+%            \hdashline
+%            \textbf{SVM} & - & 0.071 & 0
+%            .086 & 0.074 \\
+%            \textbf{SVM} & x & 0.071 & 0
+%            .086 & 0.074 \\
+%            \hdashline
+%            \textbf{MLP} & - & 0.053 & 0.057 & 0.45 \\
+%            \textbf{MLP} & x & 0.053 & 0.057 & 0.54 \\
+%            \bottomrule
+%        \end{tabular}
+%        \label{tab:ml_models_relevance}
+%    \end{tcolorbox}
+%    \caption{Performance of the used machine learning models according
+%    relevance.}
+%\end{table}
+
+Figure~\ref{fig:results-missing-values} shows how the models performed when trained on
+continuously less data.
+
+It can be seen that all models perform well when trained with on 90\% of the data.
+However, when trained on 50\% of the data, the \ac{MLP}  and \ac{GBT} models start to perform better than the
+other models.
+When trained on 20\% of the data and less all models significantly underperform.
+Also the \ac{ET} model stays relatively stable when trained on less data.
+
+Looking at the variances the the \ac{SVM} and \ac{MLP} models perform the and seem to be the most
+robust models when trained on less data.
+It has to be noted, that as seen in sub-figure (a) the most variances comes from training on
+below 20\% of the data.
+
+Overall the \ac{MLP} model seems to be the most robust model, as it performs well on all data
+compositions and has the lowest variance.
+
+%\begin{figure}[H]
+%    \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
+%        \centering
+%        \includegraphics[width=0.9\textwidth]{missing_values_plot}
+%        \caption{Comparison of performance on less data}
+%        \label{fig:results-missing-values}
+%    \end{tcolorbox}
+%\end{figure}
+
+\begin{figure}[H]
     \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
-% \sisetup{group-minimum-digits = 4}
         \centering
-        \begin{tabular}{llll}
-            \toprule
-            \thead{\textbf{Model }} & \thead{\textbf{80\% train}} & \thead{\textbf{50\%
-            train}} & \thead{\textbf{20\% train}} \\
-            \toprule
-            \textbf{Random Forest} & 0.04 & 0
-            .058 & 0.068 \\
-            \hdashline
-            \textbf{Extra Trees} & 0.044 & 0
-            .053 & 0.083 \\
-            \hdashline
-            \textbf{Support Vector Machine} & 0.045 & 0
-            .05 & 0.078 \\
-            \hdashline
-            \textbf{MLP} & 0.042 & 0.045 & 0.11 \\
-            \bottomrule
-        \end{tabular}
-        \caption{Performance of the used machine learning models according
-        relevance.}
-        \label{tab:ml_models_relevance}
+        \begin{subfigure}{0.4\textwidth}
+            \includegraphics[width=\textwidth]{missing_values_plot}
+            \caption{}
+            \label{fig:first}
+        \end{subfigure}
+        \hfill
+        \begin{subfigure}{0.4\textwidth}
+            \includegraphics[width=\textwidth]{variance_missing_values}
+            \caption{}
+            \label{fig:second}
+        \end{subfigure}
+        \hfill
+        \caption{Figure (a) shows the comparison of performance on less data. Figure (b) shows the
+        variance of the models when trained on less data.}
+        \label{fig:results-missing-values}
     \end{tcolorbox}
-\end{table}
+\end{figure}
 
 
 %\begin{tcolorbox}[arc=0pt,boxrule=0.5pt]

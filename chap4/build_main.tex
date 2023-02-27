@@ -642,7 +642,6 @@ It predicts based on the distribution structure. Learning through statistics inv
 utilizing the Naïve Bayes Algorithm~\cite[p. 8]{dridi2021supervised}.
 
 \subsubsection{Naive Bayes}
-
 ...
 
 \subsection{Support Vector Regression (SVR)}\label{subsec:support-vector-regression-(svr)}
@@ -680,6 +679,40 @@ Like \ac{SVM}, the \ac{SVR} algorithm finds a well-fitting hyperplane to a kerne
 induced feature space to achieve good generalization performance using the original
 features. This is detailed in \cite[p. 369]{montesinoslopez_supportvectormachines_2022}.
 
+The hyperparameters of the \ac{SVR} algorithm are listed in table~\ref{tab
+:hyperparameters_svr}.
+
+\begin{table}[H]
+    \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
+        \sisetup{group-minimum-digits = 4}
+        \centering
+        \label{tab:hyperparameters_svr}
+        \begin{tabular}{ll}
+            \toprule
+            \thead{\textbf{Hyperparameter}} & \thead{\textbf{Value}} &
+            \thead{\textbf{Description}}
+            \\
+            %  \unit{(Kcal\per\mole)\squared}}} & \thead{RMSD l.b.} &
+            %  \thead{RMSD u.b.}  \\
+            \toprule
+            kernel & rbf
+            \\
+            \hdashline
+            degree & 1
+            \\
+            \hdashline
+            gamma & 0.1
+            \\
+            \hdashline
+            C & 4000 \\
+            \hdashline
+            epsilon & 0.001 \\
+            \bottomrule
+        \end{tabular}
+        \caption{Hyperparameters of the \ac{SVR} model}
+    \end{tcolorbox}
+\end{table}
+
 \subsection{Logic-based learning}\label{subsec:logic-based-learning}
 
 Logic-based algorithms solve problems by applying logical functions sequentially or
@@ -710,7 +743,6 @@ The final subsets, called leaf nodes are used to predict the outocme by
 taking the average of the training data in that subset~\cite[p. 76]{
     molnar2020interpretable}.
 
-\subsubsection*{Decision Tree Hyperparamters}
 Grid search cross validation was used to find the best hyperparameters for
 the decision tree.
 All hyperparameters are summarized in Table~\ref{tab:hyperparameters_dt}.
@@ -719,8 +751,6 @@ All hyperparameters are summarized in Table~\ref{tab:hyperparameters_dt}.
     \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
         \sisetup{group-minimum-digits = 4}
         \centering
-        \caption{Hyperparameters of the random forest model.}
-        \label{tab:hyperparameters_decision_tree}
         \begin{tabular}{ll}
             \toprule
             \thead{\textbf{Hyperparameter}} & \thead{\textbf{Value}} &
@@ -740,6 +770,8 @@ All hyperparameters are summarized in Table~\ref{tab:hyperparameters_dt}.
             ccp_alpha & 0.0 \\
             \bottomrule
         \end{tabular}
+        \caption{Hyperparameters of \ac{DT} model.}
+        \label{tab:hyperparameters_decision_tree}
     \end{tcolorbox}
 \end{table}
 
@@ -833,84 +865,24 @@ general patterns rather than being sensitive to noise~\cite[p. 259]{
 % classiﬁers. \cite[p. 254]{shaik_briefsurveyrandom_2019}
 
 
-% In a classification random forest, each tree in the forest makes a
-% prediction for the class
-% label of a given
-% example, and the final prediction is made by majority vote, with the class
-% label that receives
-% the most votes being
-% chosen as the prediction. In a regression random forest, each tree in the
-% forest makes a
-% prediction for the
-% continuous value, and the final prediction is made by averaging the
-% predictions of all the
-% trees in the forest.
-% (chatgpt)
-
-% In both cases, the random forest model creates a large number of decision
-% trees and trains them
-% on different
-% subsets of the training data. The decision trees are trained using a
-% technique called bagging,
-% which involves
-% randomly selecting a subset of the training examples for each tree and
-% training the tree on
-% that subset. The idea
-% behind bagging is to train each tree on a slightly different subset of the
-% data, which can help
-% to reduce
-% overfitting and improve the overall performance of the model. (chat gpt)
-
 \subsubsection*{Hyperparameter Tuning}
 Grid search cross validation was used to find the best hyperparameters for
-the random forest
-model using
-Scikit-Learn's default \texttt{GridSearchCV} function.
+the random forest model using Scikit-Learn's default \texttt{GridSearchCV} function.
 All hyperparameters are summarized in Table~\ref{tab:hyperparameters_rf}.
 
-The \textit{criterion} hyperparameter was set to \textit{absolute\_error}
-because the absolute
-error is the metric
-used to evaluate the model.
-
-The \textit{n\_estimators} where set to 10 using grid search cross
-validation, because the model
-should not be too
-complex and the number of trees should not be too high.
-
-The \textit{max\_depth} was set to 10 using grid search cross validation. The
-default unpruned
-model did overfit the
-training data and was not able to generalize on the new data well. This is
-expected behavior of
-decision trees which
-is descriped by \cite[p. 133-136]{muller_introductionmachinelearning_2016}
-amongst others.
-
-The \textit{min\_samples\_split} was set to 2 using grid search cross
-validation. The default
-value of 2 was chosen
-because it is the default value of the random forest model in Scikit-Learn.
-
-The \textit{min\_samples\_leaf} was set to 1 using grid search cross
-validation. The default
-value of 1 was chosen
-because it is the default value of the random forest model in Scikit-Learn.
-
 The \textit{max\_features} was set to \textit{auto} and therefor the models
-does use all avialble
-featues. As
-described in Figure~\ref{fig:rf_feature_importance} only limited featues are
-avaialbe and all of
-them are important
-for the depenend variable spring back
+does use all available features.
+As described in Figure~\ref{fig:rf_feature_importance} only limited features are
+available and all of them are important for the dependent variable spring back
+The default unpruned model did overfit the training data and therefore was not able to
+generlaize well on new data (as decvitbed by \cite[p. 133-136]{
+    muller_introductionmachinelearning_2016}).
+There it was set to 10 using \texttt{GridSearchCV}.
 
 \begin{table}[H]
     \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
         \sisetup{group-minimum-digits = 4}
         \centering
-        \caption{Hyperparameters of the random forest model.}
-        \label{tab:hyperparameters_rf}
         \begin{tabular}{ll}
             \toprule
             \thead{\textbf{Hyperparameter}} & \thead{\textbf{Value}} &
@@ -930,13 +902,15 @@ for the depenend variable spring back
             \hdashline
             min\_samples\_leaf & 2 \\
             \hdashline
-            max\_features & auto  \\
+            max\_features & auto \\
             \hdashline
-            max\_leaf\_nodes & X  \\
+            max\_leaf\_nodes & X \\
             \hdashline
-            max\_leaf\_nodes & X  \\
+            max\_leaf\_nodes & X \\
             \bottomrule
         \end{tabular}
+        \caption{Hyperparameters of the \ac{RF} model.}
+        \label{tab:hyperparameters_rf}
     \end{tcolorbox}
 \end{table}
 
@@ -955,17 +929,13 @@ trees with a depth of one to five.
 This brings the advantage of a smaller model which uses less memory and also results in
 a faster prediction.
 Usually generating more trees improves the overall performance of the model~\cite[p.
-88-89]{muller_introductionmachinelearning_2016}.
+88--89]{muller_introductionmachinelearning_2016}.
 Also the algorithm performs well without scaling the dataset and can handle a mixture
-of binary and continuous features~\cite[p. 88-89]{
+of binary and continuous features~\cite[p. 88--89]{
     muller_introductionmachinelearning_2016}.
 Like other tree-based models it does not perform well on high-dimensional data.
 
-\subsection{Gradient Boosted Regression
-Trees}\label{subsec:gradient-boosted-regression-trees}
-
-\subsubsection*{Hyperparameter Tuning}
-
+\ac{GBT} are more sen
 "Gradient boosted trees are frequently the winning entries in machine
 learning competitions, and are widely used in industry. They are
 generally a bit more sensitive to parameter settings than random
@@ -1058,6 +1028,36 @@ The backpropagation algorithm is typically used to train \ac{MLP} models, by
 propagating errors backwards from the output layer to the input layer in order to adjust
 the weights~\cite[p. 454]{taud2018multilayer}.
 
+\begin{table}[H]
+    \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
+        \sisetup{group-minimum-digits = 4}
+        \centering
+        \begin{tabular}{ll}
+            \toprule
+            \thead{\textbf{Hyperparameter}} & \thead{\textbf{Value}} &
+            \thead{\textbf{Description}}
+            \\
+            %  \unit{(Kcal\per\mole)\squared}}} & \thead{RMSD l.b.} &
+            %  \thead{RMSD u.b.}  \\
+            \toprule
+            random\_state & 1 \\
+            \hdashline
+            solver & lbfgs \\
+            \hdashline
+            max\_iter & 5000 \\
+            \hdashline
+            alpha & 0.01 \\
+            \hdashline
+            hidden\_layer\_sizes & (100, 100) \\
+            \hdashline
+            learning\_rate & constant \\
+            \bottomrule
+        \end{tabular}
+        \caption{Hyperparameters of the \ac{MLP} model.}
+        \label{tab:hyperparameters_mlp}
+    \end{tcolorbox}
+\end{table}
+
 
 \section{Model Training}\label{sec:model-training}
 
@@ -1089,10 +1089,9 @@ chosen algorithm.
     \end{tcolorbox}
 \end{figure}
 
-
 In addition to the data split shown in Figure~\ref{fig:train_test_split}, a random 80
-/20 split was used to train and evaluate the models. This split was employed to assess
-model performance and compare results.
+/20 split was used to train and evaluate the models.
+This split was employed to assess model performance and compare results.
 
 Using two different methods for data splitting serves two distinct purposes.
 The first method evaluates the models' ability to generalize on new data.
@@ -1106,53 +1105,14 @@ can be gained about their ability to generalize to new data because the random s
 will most likely contain data from all $V-t$-combinations.
 
 
-
-
-\subsubsection*{Notes}
-\begin{itemize}
-    \item \textit{Paraphrase parameters better}
-\end{itemize}
-
-\begin{table}[H]
-    \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
-        \sisetup{group-minimum-digits = 4}
-        \centering
-        \label{tab:hyperparameters_svr}
-        \begin{tabular}{llp{9cm}}
-            \toprule
-            \thead{\textbf{Hyperparameter}} & \thead{\textbf{Value}} &
-            \thead{\textbf{Description}}
-            \\
-            %  \unit{(Kcal\per\mole)\squared}}} & \thead{RMSD l.b.} &
-            %  \thead{RMSD u.b.}  \\
-            \toprule
-            kernel & rbf & Kernel type used in the algorithm.
-            \\
-            \hdashline
-            degree & 1 & Degree of polynomial kernel function.
-            \\
-            \hdashline
-            gamma & 0.1 & Kernel coefficient for rbf, poly and sigmoid kernels.
-            \\
-            \hdashline
-            C & 4000 & "Regularization parameter. The strength of the
-            regularization is inversely proportional to C" \\
-            \hdashline
-            epsilon & 0.001 & "Epsilon in the epsilon-SVR
-            model." \\
-            \bottomrule
-        \end{tabular}
-        \caption{Hyperparameters of the Suport Vector Regressor.}
-    \end{tcolorbox}
-\end{table}
-
-
 \section{Structure of The Code}\label{sec:structure-of-the-code}
+The code is available on GitHub: \url{https://github.com/Philipp0205/Master-Thesis-Code}
 
-\begin{itemize}
-    \item \textit{The code is available on GitHub: \url{www.github.com/...}}
-    \item \textit{TODO: Short explanation what to do to reproduce the results.}
-\end{itemize}
+The dataset can be found under the \texttt{data/dataset} folder.
+All the used models are in the \texttt{learner} folder. Each learner class has a
+\texttt{main} function which can be used to run the model.
+Also the reports-array can be used to generate a specific report for the model.
+The implementation of all reports can be found in the \texttt{reports} folder.
 
 % \paragraph{Bend deduction:}
 % Measuring the bend deduction is more complex. After a metal sheet is bent,

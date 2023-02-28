@@ -3,37 +3,22 @@
 The research method used in this thesis follows the design science research (DSR) approach
 \cite[p. 17]{rennenkampff_managementitagilitaetentwicklung_2015}.
 DSR is a research paradigm in which the designer tries to create artifacts to answer questions
-for problems.
+for problems~\cite[p. 10]{hevner_designscienceresearch_2010}.
 
-% Pado: This still seems a little redundant and unclear - I feel your sources are not being very
-% informative and you are unsure yourself of what they are trying to say.
-% I would stick with the example from the literature  to explain what DSR is.
-
-DSR is a research paradigm in which the designer creates artifacts and uses them to answer
-questions for problems and generate new scientific knowledge.
-The designed artifacts are both useful and fundamental to understanding the problem \cite[p.
-10]{hevner_designscienceresearch_2010}
-
-Design, according to Peffers et al. (2007), is the creation of an applicable solution to a
-problem \cite[p.47]{peffers_designscienceresearch_2007}
-
-According to Hevner et al. (2010)
-design" is both a process ("a set of activities") and a product ("artifactt"). \cite[p
-.78]{hevner_designscienceresearch_2010}
+``Design'', according to Peffers et al. (2007), is the creation of an applicable solution to a
+problem~\cite[p.47]{peffers_designscienceresearch_2007}.
 The design-oriented research approach as a methodological framework seems well suited to answer
 the research questions.
 Predicting spring back and bend deduction is a relevant problem in business practice.
 Also, the conception and implementation of machine learning models is a design activity.
 
-% Pado: Ah, this is where „Build“ comes from! I see. In that case, maybe quickly introduce DSR
-% and its high-level phases in the Introduction to explain the naming choices in the thesis.
-
-The term artifacts is intentionally broad and can take on different forms. In this work, the
-artifact is different machine leaning models which are applied on the generated data.
-DSR can be implemented in various ways, a prominent example is provided by Peffers et al. and
-shown in Figure \ref{fig:dsr_process}
-The approach comprises six steps, which are dived into the superordinate phases "Build" and
-"Evaluate". This thesis follows these phases.
+The term artifacts is intentionally broad and can take on different forms.
+In this work, the artifacts are machine leaning models which are applied on the generated
+data.
+DSR can be implemented in various ways, a prominent example is provided by~\cite{
+    peffers_designscienceresearch_2007} and shown in Figure~\ref{fig:dsr_process}
+The approach comprises six steps, which are dived into the superordinate phases ``Build'' and
+``Evaluate''. This thesis follows these phases.
 
 \begin{figure}[H]
     \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
@@ -57,10 +42,13 @@ The approach comprises six steps, which are dived into the superordinate phases 
 
 \paragraph{Activity 1 - Problem identification and motivation}
 This activity includes defining a specific research problem and the value of a potential solution.
-The problem is used for the development of the artifact. To reduce complexity, the problem should
-be divided into sub-problems. For problem-solving, explicit methods such as system requirements
-gathering or an implicit method such as programming and/or data analysis.
-\cite[p. 52]{peffers_designscienceresearch_2007}
+The problem is used for the development of the artifact.
+To reduce complexity, the problem should be divided into sub-problems.
+For problem-solving, explicit methods such as system requirements
+gathering or an implicit method such as programming and/or data analysis
+\cite[p. 52]{peffers_designscienceresearch_2007}.
+
+
 
 \paragraph{Activity 2: Define the objectives for a solution}
 The goals of a solution are derived from the problem definition. These are derived in the context
@@ -128,9 +116,7 @@ which can then be DPs.
 \section{Evaluation of Machine Learning Models}\label{sec:evaluation-of-machine-learning-models}
 Evaluating \ac{ML} models is different from evaluating other software artifacts for several reasons.
 One of them is that data-driven software components, like \ac{ML} models, have functionality that
-is not
-completely defined by the developer but is
-instead learned from data.
+is not completely defined by the developer but is instead learned from data.
 Therefore, using machine learning presents new challenges compared to traditional software
 engineering~\cite[p. 2]{siebert2022construction}.
 
@@ -159,9 +145,12 @@ not be seen as a complete set of quality attributes and measures for \ac{ML} mod
 Other studies, such as ~\cite{zhang2020machine} have proposed additional sets of quality attributes.
 These additional perspectives will also be considered in the evaluation of the models, but only
 as a supplementary means of evaluating model performance.
-
-Attributes like Security, Fairness and Privacy~\cite[p. 3]{zhang2020machine} are not considered in
-this work, as they are difficult to measure and my not be relevant for the use case of this work.
+In+\cite{zhang2020machine}, the authors describe ``testing properties'' and identify attributes
+such as correctness, relevance, robustness, and interpretability, which are similar to those
+mentioned in~\cite{siebert2022construction}.
+However, this work does not consider attributes such as Security, Fairness, and Privacy~\cite[p.
+3]{zhang2020machine}, as they may be difficult to measure and in the context of sheet metal
+bending they are not relevant for this work.
 
 
 \section{Goal Question Metric Approach}\label{subsec:goal-question-metric-approach}

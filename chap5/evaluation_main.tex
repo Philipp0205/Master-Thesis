@@ -488,7 +488,8 @@ Figure~\ref{fig:results-missing-values} shows how the models performed when trai
 continuously less data.
 
 It can be seen that all models perform well when trained with on 90\% of the data.
-However, when trained on 50\% of the data, the \ac{MLP}  and \ac{GBT} models start to perform better than the
+However, when trained on 50\% of the data, the \ac{MLP}  and \ac{GBT} models start to perform
+better than the
 other models.
 When trained on 20\% of the data and less all models significantly underperform.
 Also the \ac{ET} model stays relatively stable when trained on less data.
@@ -500,15 +501,6 @@ below 20\% of the data.
 
 Overall the \ac{MLP} model seems to be the most robust model, as it performs well on all data
 compositions and has the lowest variance.
-
-%\begin{figure}[H]
-%    \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
-%        \centering
-%        \includegraphics[width=0.9\textwidth]{missing_values_plot}
-%        \caption{Comparison of performance on less data}
-%        \label{fig:results-missing-values}
-%    \end{tcolorbox}
-%\end{figure}
 
 \begin{figure}[H]
     \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
@@ -525,12 +517,11 @@ compositions and has the lowest variance.
             \label{fig:second}
         \end{subfigure}
         \hfill
-        \caption{Figure (a) shows the comparison of performance on less data. Figure (b) shows the
-        variance of the models when trained on less data.}
         \label{fig:results-missing-values}
     \end{tcolorbox}
+    \caption{Figure (a) shows the comparison of performance on less data. Figure (b) shows the
+    variance of the models when trained on less data.}
 \end{figure}
-
 
 %\begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
 %    \begin{equation}
@@ -552,31 +543,24 @@ compositions and has the lowest variance.
 
 \subsection{Noise}\label{subsec:noise}
 A common practise in \ac{ML} is to add noise to the training data to improve
-the model's
-generalization abilities.
-In this sturdy adding Gaussian Noise will be added to evaluate the robustness
+the model's generalization abilities.
+In the following section Gaussian Noise will be added to the data set to evaluate the robustness
 of the model.
 
-There is no standard approach to adding noise to the data. The approach
-chosen in this thesis
-is to add noise to the training data, while the test data remains unchanged.
+There is no standard approach to adding noise to the data.
+In this thesis, the noise was added to the training data only.
+
 To add the noise, \textit{numpy.random.normal} function was used, which
-generated random numbers
-with a Gaussian distribution.
+generate random numbers with a Gaussian distribution~\cite{scikit-learn}.
 The mean and standard deviation of each feature were calculated based on the
-original data, and
-the function was used to generate noisey values for each feature.
+original data, and the function was used to generate noisy values for each feature.
 
 To study the model's reaction to increasing amounts of noise, the noise added
-to the training
-data was gradually increased starting from 1\% to 50\%, which means that the
-last iteration
-contains as many noisy as``clean'' samples.
+to the training data was gradually increased starting from 1\% to 50\%, which means that the
+last iteration contains as many noisy as ``clean'' samples.
 
-The difference between all \ac{RMSE}'s between iterations was defined as loss.
-The total loss was cacluclated by averaging the difference of these values as
-shown in
-Equation~\ref{eq:noise}.
+The difference between all \ac{RMSE} between iterations was defined as loss.
+The total loss was calculated by averaging the difference of these values as shown in Equation~\ref{eq:noise}.
 
 \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
     \begin{equation}
@@ -585,8 +569,6 @@ Equation~\ref{eq:noise}.
         {eq:noise}
     \end{equation}
 \end{tcolorbox}
-
-\subsubsection*{\textit{Notes}}
 
 \begin{itemize}
     \item \textit{Does the calculation of the loss make sense?}
@@ -600,20 +582,17 @@ Equation~\ref{eq:noise}.
         \centering
         \begin{tabular}{llll}
             \toprule
-            \thead{\textbf{Model Name}} & {\thead{\textbf{Missing Values} \\
-            \unit{loa}}} & {\thead{\textbf{Noise} \\ \unit{loa}}}
+            \thead{\textbf{Model Name}} & rs & {\thead{\textbf{Noise} \\ \unit{loa}}}
             \\
             \toprule
-            \textbf{Linear Regression} & 0.070 & 0.251 \\
-            \textbf{Linear Regression (rand. split)}     & 0
+            \textbf{LR} & - & 0.070 & 0.251 \\
             .071 & 0.224 \\
             \hdashline
-            \textbf{Random Forest}                           & 0.071 & 0.224 \\
-            \textbf{Random Forest (rand. split)}
-            & 0.067 & 0.233 \\
+            \textbf{Random Forest} & x & 0.241 \\
             \hdashline
-            \textbf{SVM} & 0.070 & 0.251 \\
-            \textbf{SVM (rand. split)} & 0.071 & 0.224 \\
+            \textbf{SVM} & - & 0.251 \\
+            \hdashline
+            \textbf{MLP} & - & 0.451 \\
             \bottomrule
         \end{tabular}
         \caption{Results of used machine learning models regarding the design

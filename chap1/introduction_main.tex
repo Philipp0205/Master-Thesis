@@ -1,40 +1,48 @@
-\chapter{Introduction}
+\chapter{Introduction}\label{ch:introduction}
+% Ausgangssituation & Themendarstellung
 
-Sheet metal forming has been used for centuries in different manufacturing industries
-to create a wide range of products for different applications.
-Sheet metal bending and stamping can be considered as the most important variants in
-the forming industry. \cite[p. 1]{cruz_applicationmachinelearning_2021}
-Therefore these have been continuously improved in recent decades to meet the growing
-demand especially in automotive and aircraft industries with the goal to reduce energy
-efficiency and emissions. \cite[p. 4]{zheng_reviewformingtechniques_2018}
+% Relevanz des Themas
+Sheet metal forming has been an integral part of manufacturing industries for centuries, creating
+diverse range of products used in different applications.
+From automobiles to airplanes, sheet metal bending and stamping are the go-to methods for
+crafting intricate parts and components~\cite[p. 1]{cruz_applicationmachinelearning_2021}.
+But, as the demand for greater efficiency and reduced emissions grows, the need to improve these
+processes becomes even more crucial~\cite[p. 4]{zheng_reviewformingtechniques_2018}.
 
-Sprinback is a common phenomenon in sheet metal forming processes. It is a deformation
-of the sheet metal that occurs when the sheet metal is bent. Therefore, predicting the
-spring back is important to reduce the number of trial and error cycles in the
-manufacturing process. \cite[p. 1]{cruz_applicationmachinelearning_2021}
+% Problembeschreibung und thematische Abgrenzung
+Spring back is a common phenomenon that occurs when sheet metal is bent.
+It is a deformation that can derail the entire manufacturing process and lead to more trial and
+error cycles~\cite[p. 1]{cruz_applicationmachinelearning_2021}.
 Sheet metal forming is a complex process that involves a large number of variables and
 parameters Therefore, it is difficult to predict the spring back accurately, which
 makes it an interesting case for machine learning.
 
-In order to predict springback with minimium errors, this thesis build and evaluates
-different machine learning models to predict the springback of a sheet metal. The
-models are evaluated based on the mean absolute error (MAE) and the root mean squared
-error (RMSE). The best model is then used to predict the springback of a sheet metal
-with different parameters.
+% Relevance & Motivation
+The current focus of research is on the application of \ac{ML} to datasets generated via
+simulation and other bending techniques.
+However, limited attention has been paid to the use of real-world data and the air-bending method.
+As a result, this study aims to address these gaps by exclusively utilizing a three-point bending
+machine to generate a complete dataset.
+This research aims to enhance the relevance and motivation for applying \ac{ML} to real-world
+scenarios using air bending.
 
+% Goal
+The objective of this project is to accurately predict spring back and develop machine learning
+models that satisfy essential quality attributes.
+To assess the performance of the \ac{ML} models, six key quality attributes have been identified
+: correctness, relevance, robustness, stability
+, interpretability, and resource utilization.
+The aim is to create models that perform well in each of these areas and ensure that the predictions
+are as precise as possible.
 
+% Methode
+The research methodology employed in this thesis is Design Science Research (DSR), which is a
+research approach that emphasizes the development and assessment of innovative solutions to real-
+world problems.
+DSR aims to generate new knowledge by creating, implementing, and evaluating new artifacts or
+solutions.
 
-
-%"There are two major types of supervised machine learning problems,
-%called classification and regression." \cite[p. 34]{muller_introductionmachine_2016}
-%
-%"For regression tasks, the goal is to predict a continuous number, or a
-%floating-point number in programming terms (or real number in
-%mathematical terms). Predicting a person’s annual income from their
-%education, their age, and where they live is an example of a regression
-%task. When predicting income, the predicted value is an amount, and
-%can be any number in a given range. Another example of a regression task
-%is predicting the yield of a corn farm given attributes such as
-%previous yields, weather, and number of employees working on the farm.
-%The yield again can be an arbitrary number." \cite[p. 34]{
-%    muller_introductionmachinelearning_2016}
+% Aufbau der Bachelorarbeit
+The thesis follows a two-phase process of ``build'' and ``evaluate'' within the DSR approach.
+The research methodology chapter (\ref{ch:research-methodology}) elaborates on how this approach is
+utilized throughout the thesis.

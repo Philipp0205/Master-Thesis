@@ -199,32 +199,27 @@ spring back correctly, they are not considered for the next steps of the evaluat
     \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
 % \sisetup{group-minimum-digits = 4}
         \centering
-        \begin{tabular}{lllll}
+        \begin{tabular}{llll}
             \toprule
-            \thead{\textbf{Model Name}} & rs & \thead{\textbf{MAE}}
+            \thead{\textbf{Model Name}} & \thead{\textbf{MAE}}
             & \thead{\textbf{MSE}}
             & \thead{\textbf{RMSE}} \\
             \toprule
-            \textbf{LR}  & - & 0.199 & 0.092 & 0.303 \\
-            \textbf{LR}  & x & 0.261 & 0.127 & 0.356 \\
+            \textbf{LR}  & 0.199 & 0.092 & 0.303 \\
             \hdashline
-            \textbf{DT}  & - & 0.193 & 0.076 & 0.266 \\
-            \textbf{DT}  & x & 0.212 & 0.119 & 0.346 \\
+            \textbf{DT}  & 0.193 & 0.076 & 0.266 \\
             \hdashline
-            \textbf{RF}  & - & 0.183 & 0.060 & 0.244 \\
-            \textbf{RF}  & x & 0.134 & 0.041 & 0.202 \\
+            \textbf{RF}  & 0.183 & 0.060 & 0.244 \\
             \hdashline
-            \textbf{ET}  & - & 0.126 & 0.040 & 0.201 \\
-            \textbf{ET}  & x & 0.134 & 0.041 & 0.202 \\
+            \textbf{ET}  & 0.126 & 0.040 & 0.201 \\
             \hdashline
-            \textbf{GBT} & - & 0.189 & 0.058 & 0.242 \\
-            \textbf{GBT} & x & 0.143 & 0.085 & 0.292 \\
+            \textbf{AB}  & 0.163 & 0.040 & 0.209 \\
             \hdashline
-            \textbf{SVM} & - & 0.09  & 0.04  & 0.20  \\
-            \textbf{SVM} & x & 0.09  & 0.04  & 0.20  \\
+            \textbf{GBT} & 0.189 & 0.058 & 0.242 \\
             \hdashline
-            \textbf{MLP} & - & 0.114 & 0.041 & 0.201 \\
-            \textbf{MLP} & x & 0.121 & 0.040 & 0.199 \\
+            \textbf{SVM} & 0.09  & 0.04  & 0.20  \\
+            \hdashline
+            \textbf{MLP} & 0.114 & 0.041 & 0.201 \\
             \bottomrule
         \end{tabular}
         \caption{Overview of the used machine learning models and their
@@ -606,22 +601,19 @@ The total loss was calculated by averaging the difference of these values as sho
 % Does the artifact generate repeatable results when trained on different data?
 % Leave-one-out cross-validation stability 
 Stability is defined as the ability of the model to generate repeatable
-results when trained on
-different data~\cite[p. 16]{siebert2022construction}.
+results when trained on different data~\cite[p. 16]{siebert2022construction}.
 
 One appropriate way to measure the stability of a model is to use \ac{LOOCV},
-which is a
-a form of \ac{CV} where one sample is used for validation and the remaining
-data is
-used for training~\cite[p. 200--201]{gareth2013introduction}.
+which is a a form of \ac{CV} where one sample is used for validation and the remaining
+data is used for training~\cite[p. 200--201]{gareth2013introduction}.
+LOOCV is a technique where the observation set is divided into two parts, but instead of having
+two subsets of comparable size, one sample is used for validation, while the rest form the
+training set.
 
 In order to evaluate the model the \ac{LOOCV} was repeated for all samples in
-the dataset
-resulting in a total of \(n\) iterations.
-The stability of the model was determined by calculating the average
-prediction error across all
-iterations, using the equation provided in Equation~\ref{eq:loocv} which is
-taken from~\cite[p.
+the dataset resulting in a total of \(n\) iterations.
+The stability of the model was determined by calculating the average prediction error across all
+iterations, using the equation provided in Equation~\ref{eq:loocv} which is taken from~\cite[p.
 201]{gareth2013introduction}.
 
 \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
@@ -630,53 +622,34 @@ taken from~\cite[p.
     \end{equation}
 \end{tcolorbox}
 
-The approach provides an unbiased estimate of the model's generalization error
-but this estimate is poor because only one samples is used for
-validation~\cite[p.
-201]{gareth2013introduction}.
-Therefore, it can not be used to make a statement about the generalization
-error of the model.
-Since the goal is to measure repeatable results, the \ac{LOOCV} is a suitable
-metric to measure
-the stability of the model.
+The resulting \ac{MSE} is a poor estimate of the model's generalization error because only one
+sample is used for validation~\cite[p. 201]{gareth2013introduction}, but it can be used to make a
+statement about the stability.
 
-%\textit{Which formula should I use?}
-%
-%\begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
-%    \begin{equation}
-%        CV_{(n)} = \frac{\sum_{i=1}^{n} \text{MSE}_{i}}{1-n}\label{eq:loocv2}
-%    \end{equation}
-%\end{tcolorbox}
+The stability of the model can be evaluated by examining the standard derivation of the cross
+validations scores.
+A low standard derivation across all folds indicated that the model can generated consitent
+results when trained on different datasets, suggesting are more sable model.
 
-A low \(CV_{(n)}\) value indicates a high stability of the model, because the
-model is able to
-generate repeatable results when trained on different data.
-Note: The method can be very time-consuming, especially for large datasets,
-but it may provide
-more accurate estimates for small datasets.
+It is important to note that there are many different ways to measure the modelstability.
+In this work LOOCV was chosen for three reasons.
+%Another common approach is to use regular Cross-Validatoin, there are three reasons why LOOCV was
+%chosen for this work.
+Firstly, \ac{LOOCV} uses nearly all available data for training, while K-fold CV resevers a
+portion o f the data for testing.
+as the dataset used is relatfively small, it is an advantage to use all data for training.
+Secondly, \ac{LOOCV} tends to have a lower bias due to the larger training set.
+Lastly, multiple approaches have been tried to measure the model stabilty, and LOOCV delivered
+he most stable and interpretable results.
+The main drawback of the chose method is that it is computationally expensive as it required n
+iterations.
 
-%The stability the \ac{LOOCV} gives insights into the stability of the model.
-%The stability is
-%measured by calculating the variance of all \ac{CV} scores.
+Table~\ref{subsec:results-stability} shows the cross-validation score and the standard derivation
+of each model. The focus relied more on the standard derivation, as it is a better indicator of
+the stability of the model. As already mentioned the \ac{CV} score with using LOOCV is a poor
+estimator.
 
-%\begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
-%    \begin{equation}
-%        var_{(n)} = \frac{1}{n} \sum_{i=1}^{n} \left( \text{CV}_{(n)} -
-%\text{CV}_{i} \right)^2
-%        \label{eq:loocv_variance}
-%    \end{equation}
-%\end{tcolorbox}
-
-%A low variance indicates that the model is stable which means that the
-%model's performance is
-%consistent across different training and testing sets.
-%This is generally a desirable property for a model to have, as it suggest
-%that the model ist not
-%overfitting to the training data and is able to generalize well to unseen data.
-%On the other hand, a high variances indicates an unstable model and is a
-%sign of overfitting, as
-%the model may be to closely tied to the training data and not generalize
-%well to unseen data.
+---
 
 \subsection{Results}\label{subsec:results-stability}
 
@@ -686,164 +659,27 @@ more accurate estimates for small datasets.
         \centering
         \begin{tabular}{ll}
             \toprule
-            \thead{\textbf{Model Name}} & \thead{\textbf{\(CV_{(n)}\)}}
+            \thead{\textbf{Model Name}} & \thead{\textbf{std of CV scores (MSE)}}
             \\
             \toprule
-            \textbf{Random Forest}               & 0.053 \\
-            \textbf{Random Forest (rand. split)} & 0.053 \\
+            \textbf{Random Forest}          & 0.047 (0.891) \\
+            \textbf{Random Forest}          & 0.200 (0.047) \\
             \hdashline
-            \textbf{Decision Tree}               & 0.086 \\
-            \textbf{Decision Tree (rand. split)} & 0.062 \\
+            \textbf{Gradient Boosting}      & 0.044 (0.922) \\
+            \textbf{Gradient Boosting}      & 0.190 (0.039) \\
             \hdashline
-            \textbf{Support Vector Machine}      & 0.051 \\
-            \textbf{SVM (rand. split)}           & 0.000 \\
-            \bottomrule
-        \end{tabular}
-        \caption{Overview of the used machine learning models and their
-        metrics.}
-        \label{tab:results-stability}
-    \end{tcolorbox}
-\end{table}
-
-\textit{Explanation of the results}
-
-
-\section{DP4: Interpretability}\label{sec:interpretability}
-% How well can the model be explained?
-% Complexity measures (e.g., no. of parameters, depth)
-
-% Sieber et al used
-% %
-%& Complexity measures (e.g., no. of parameters, depth) \\
-% These metrics where changed
-
-
-When following definitions of interpretability used in section~\ref{sec:objectives-of-a-
-solution}, it is clear that it
-is not possible to
-measure interpretability in a quantitative way.
-No mathematical formula can be used to measure interpretability, but other
-methods can be used to
-measure the interpretability of a model.
-Interpretable models allow the usage of global model-agnostic evaluation
-methods which will be
-used later in the evaluation of the models (see Section~\ref{sec:evaluation}).
-
-In a first steps it has to be defined what makes a model interpretable.
-
-\subsection*{Interpretable Models}
-According to~\cite{molnar2020interpretable} one way to make a model
-interpretable is to limit the
-choice of algorithms to those that produce interpretable results. Example of
-such
-algorithms include linear regression, logistic regression and decision
-trees~\cite[p.
-35]{molnar2020interpretable}.
-
-\cite{molnar2020interpretable} defines three properties of interpretable models:
-
-\textbf{Linearity} A linear model is one in which the relationship between
-features and the
-target outcome is represented as a linear
-equation~\cite[]{molnar2020interpretable}.
-
-\textbf{Monotonicity} A model with monotonicity constraints ensures that
-there is a consistent
-relationship between a feature and the target out come across the entire
-range of the feature.
-This can make it easier to understand the relationship.
-
-\textbf{Interactions} Some models can automatically include
-interactions between features to improve prediction, while other require
-manual creation of
-interaction features.
-However, too many or complex interactions can make the model more
-difficult to interpret.
-
-In the model selection for this thesis the focus is on interpretable models,
-as they are easier to
-understand and explain, therefore mostly models are chosen which fulfill all
-three
-properties.
-
-Later in the thesis, the interpretability of the models is used to explain
-the results.
-
-\subsubsection*{Number of Parameters}
-More complex models tend to have more parameters and are therefore more
-difficult to interpret.
-The number of parameters is calculated using the the \texttt{model
-.get\_params} function
-in scikit-learn.
-
-% EffiecientnetPaper?
-Note: The Depth of the model could be used as well for the evaluation, but
-not all models have a
-depth therefore this metric is not suitable.
-The depths is representing the number of layers in the model.
-A model with many layers, is generally more complex than a shallow network
-with fewer layers.
-
-\subsubsection*{\textit{Notes}}
-
-\begin{itemize}
-    \item \textit{Space complecity -> How much memeory is needed?}
-\end{itemize}
-
-\subsubsection*{Linear Regression}
-Linear regression is a linear model as it models the relationship between the
-features and the
-target as a linear equation.
-
-This linearity usually does mean that the relationship between the feature
-and the target goes in
-the same direction over the entire range of the feature. Therefore \ac{LR} is
-monotonic.
-
-\ac{LR} models do not include interaction features by default.
-To capture interaction effects in \ac{LR}, interaction features need to be
-created and added to
-the model manually. This was not done in this work.
-
-\subsection{Results}\label{subsec:results2}
-
-\begin{table}[H]
-    \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
-% \sisetup{group-minimum-digits = 4}
-        \centering
-        \begin{tabular}{llll|l}
-            \toprule
-            \thead{\textbf{Model Name}} & \textbf{\thead{Linear}} &
-            \textbf{\thead{Monotone}} &
-            \thead{\textbf{Interaction}}
-            & \thead{\textbf{Param.}}
-            \\
-            \toprule
-            \textbf{Linear Regression}   & Yes & Yes  & No  & 4  \\
+            \textbf{Extra Trees}            & 0.46  (0.877)   \\
+            \textbf{Extra Trees}            & 0.199 (0.053) \\
             \hdashline
-            \textbf{Decision Tree}       & No  & Some & Yes & 11 \\
-            \hdashline
-            \textbf{Random Forest}       & No  & Some & Yes & 17 \\
-            \hdashline
-            \textbf{Logistic Regression} & No  & Yes  & No  & XX \\
-            \hdashline
-            \textbf{SVM}                 & X   & X    & XX  & 11 \\
+            \textbf{Support Vector Machine} & 0.050 (0.853) \\
+            \textbf{Support Vector Machine} & 0.266 (0.061) \\
             \hdashline
             \bottomrule
         \end{tabular}
-        \caption{Overview of the used machine learning models and their
-        metrics.}
-        \label{tab:interpretable-models}
     \end{tcolorbox}
+    \caption{Results of the stability of the models.}
+    \label{tab:results-stability}
 \end{table}
-
-\subsubsection*{Notes}
-\begin{itemize}
-    \item \textit{Reasoning for results in table.}
-\end{itemize}
-
-\textit{Explanation of the results}
-
 
 \section{DP5: Resource utilization}\label{sec:resource-utilization}
 % How much resources are required to train and run the model?
@@ -953,6 +789,123 @@ intensive.
 Also an \ac{MLP} trains all data at once and therefore cant parallelize the process.
 It has to be noted, that tuning the hyperparameters is a time-consuming steps and the
 chosen parameters might not be the optimal ones.
+
+
+\section{DP6: Interpretability}\label{sec:interpretability}
+% How well can the model be explained?
+% Complexity measures (e.g., no. of parameters, depth)
+
+% Sieber et al used
+% %
+%& Complexity measures (e.g., no. of parameters, depth) \\
+% These metrics where changed
+When following definitions of interpretability used in
+section~\ref{sec:objectives-of-a-solution}, it is clear that it is not possible to
+measure interpretability in a quantitative way, but other metohds can beu sed to measure the
+interpretability of a model.
+%Interpretable models allow the usage of global model-agnostic evaluation
+%methods which will be used later in the evaluation of the models (see
+%Section~\ref{sec:evaluation}).
+
+
+
+According to~\cite{molnar2020interpretable} one way to make a model interpretable is to limit the
+choice of algorithms to those that produce interpretable results.
+Example of such algorithms include linear regression, logistic regression and decision
+trees~\cite[p. 35]{molnar2020interpretable}.
+
+\cite{molnar2020interpretable} defines three properties of interpretable models: linearity,
+monotonicity and interactions.
+A linear model expresses the relationship between features and the target outcome aa a linerar
+equation~\cite[]{molnar2020interpretable}.
+Monotonocitiy constraints ensure that there is a consistent relationship between a feature and
+the target outcome across the etnire renage of the feature. This can make it easier to understand
+the relationship.
+Some models automatically include interactions between features to improve prediciotn, while
+other require the manual creation of interaction features. However, inlcuding too many or complex
+interactions can make the model more difficult to interpret~\cite{molnar2020interpretable}.
+
+In the model selection for this thesis the focuses mostly on interpretable models,
+as they are easier to understand and explain, therefore mostly models are chosen which fulfill
+all three properties.
+
+Later in the thesis, the interpretability of the models is used to explain
+the results.
+
+%\subsubsection*{Number of Parameters}
+%More complex models tend to have more parameters and are therefore more
+%difficult to interpret.
+%The number of parameters is calculated using the the \texttt{model
+%.get\_params} function
+%in scikit-learn.
+%
+%% EffiecientnetPaper?
+%Note: The Depth of the model could be used as well for the evaluation, but
+%not all models have a
+%depth therefore this metric is not suitable.
+%The depths is representing the number of layers in the model.
+%A model with many layers, is generally more complex than a shallow network
+%with fewer layers.
+%
+%\subsubsection*{\textit{Notes}}
+%
+%\begin{itemize}
+%    \item \textit{Space complecity -> How much memeory is needed?}
+%\end{itemize}
+%
+%\subsubsection*{Linear Regression}
+%Linear regression is a linear model as it models the relationship between the
+%features and the
+%target as a linear equation.
+%
+%This linearity usually does mean that the relationship between the feature
+%and the target goes in
+%the same direction over the entire range of the feature. Therefore \ac{LR} is
+%monotonic.
+%
+%\ac{LR} models do not include interaction features by default.
+%To capture interaction effects in \ac{LR}, interaction features need to be
+%created and added to
+%the model manually. This was not done in this work.
+%
+%\subsection{Results}\label{subsec:results2}
+%
+%\begin{table}[H]
+%    \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
+%% \sisetup{group-minimum-digits = 4}
+%        \centering
+%        \begin{tabular}{llll|l}
+%            \toprule
+%            \thead{\textbf{Model Name}} & \textbf{\thead{Linear}} &
+%            \textbf{\thead{Monotone}} &
+%            \thead{\textbf{Interaction}}
+%            & \thead{\textbf{Param.}}
+%            \\
+%            \toprule
+%            \textbf{Linear Regression}   & Yes & Yes  & No  & 4  \\
+%            \hdashline
+%            \textbf{Decision Tree}       & No  & Some & Yes & 11 \\
+%            \hdashline
+%            \textbf{Random Forest}       & No  & Some & Yes & 17 \\
+%            \hdashline
+%            \textbf{Logistic Regression} & No  & Yes  & No  & XX \\
+%            \hdashline
+%            \textbf{SVM}                 & X   & X    & XX  & 11 \\
+%            \hdashline
+%            \bottomrule
+%        \end{tabular}
+%        \caption{Overview of the used machine learning models and their
+%        metrics.}
+%        \label{tab:interpretable-models}
+%    \end{tcolorbox}
+%\end{table}
+%
+%\subsubsection*{Notes}
+%\begin{itemize}
+%    \item \textit{Reasoning for results in table.}
+%\end{itemize}
+
+\textit{Explanation of the results}
 
 
 \section{Results}\label{sec:overall-results}

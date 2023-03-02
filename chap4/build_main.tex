@@ -22,8 +22,7 @@ motivation}
 
 For several decades, researchers have been conducting extensive research on sheet metal
 forming technologies in response to the growing demand for lightweight metal components.
-One of the challenges is the phenomenon of spring back, as discuess in~\ref{sec:spring-
-back}.
+One of the challenges is the phenomenon of spring back, as discuessed in~\ref{sec:spring-back}.
 As a result, various efforts have been made to devise methods for compensation~\cite[p.1]{
     liu_newmachinelearning_2012}.
 
@@ -32,15 +31,17 @@ deformations of the metal sheet, making the spring back difficult to predict.
 Consequently, conventional methods often employ trail and error approaches~
 \cite[p. 1]{dib_singleensembleclassifiers_2020}.
 Through speaking with experts of the field of sheet metal forming, it was found that
-a usual trial and error approach is the creation of so called``technology tables'' that
-contain the bending parameters and resulting spring back data.
+a usual trial and error approach is the creation of so called ``technology tables'' that
+contain the bending parameters and resulting spring back data. An example of a table can be seen
+in the appendix~\ref{sec:technology-table}.
 These tables are produced by conducting numerous experiments with varying bending
 angles and metal sheets.
 However, this process is time-consuming and costly, making it
-unsuitable for the production of high-volume and low-cost components.
+unsuitable for the production of high-volume and low-cost components (personal communication, Dr
+. Wolfram Hochstrate and M. Sc. Peter Lange).
 
-\textit{SOURCE: Peter and Dr. Hochstrate but only while talking to them. Find a proper
-source}
+In conclusion, the findings suggest the necessity of a \ac{ML} model to predict spring
+back accurately.
 
 
 \section{Objectives of a Solution}\label{sec:objectives-of-a-solution}
@@ -85,11 +86,7 @@ Understanding the bias-variance trade-off is crucial in developing \ac{ML} model
 generalize well to unseen data~\cite[p. 49--51]{zhou_machinelearning_2021}.
 In machine learning (\ac{ML}), achieving a good bias-variance balance is essential.
 This means that a model can accurately capture the underlying patterns in the data
-without overfitting or underfitting.
-
-A good bias-variance is essential a \ac{ML} it means that a model can
-accurately capture the underlying patterns without overfitting or underfitting to the
-data~\cite[p. 49--51]{zhou_machinelearning_2021}.
+without overfitting or underfitting~\cite[p. 49--51]{zhou_machinelearning_2021}.
 
 \subsubsection*{Design Principle 3: Robustness}
 
@@ -136,14 +133,28 @@ of components which require several stages, and thus more than one set of tools~
 A interpretable model which allows conclusions how the results where generated is better.
 
 \subsection*{Design Principle 6: Resource utilization}
-One of the main objectives of using machine learning to predict spring back is to
-minimize the number of trial-and-error cycles in the manufacturing process and save
-resources (see Section \ref{sec:problem-identification-and-motivation}). However, it is
-important to consider that creating an ML model also requires resources.
+One of the primary objectives of utilizing machine learning for predicting spring back is to
+reduce the number of trial-and-error cycles during the manufacturing process, thus saving
+valuable resources such as material and labor (refer to Section~\ref{sec:problem-identification-
+and-motivation}).
+Typically, a technology table requires 11 or more bends in a single sheet of metal, all with the
+same thickness.
+Unfortunately, these metal sheets cannot be repurposed due to their specific angles,
+resulting in wasted materials and manual labor.
+Moreover, the machines used for bending the metal
+are often occupied around the clock, further adding to the inefficiency of the process (
+personal communication, Dr. Wolfram Hochstrate).
 
-Therefore, it
-is crucial to take into account the resources needed to train and make predictions with
-the model~\cite[p. 16]{siebert2022construction}.
+Nevertheless, it is crucial to acknowledge that developing an ML model also entails resource
+consumption.
+Training \ac{ML} models can be a labor-intensive process, as it often requires significant
+computing power and the generation of large amounts of training data, depending on the algorithm
+used.
+Furthermore, making predictions using an \ac{ML} model also requires computing power.
+Therefore, it is crucial to carefully consider the resources needed to train and use the model
+effectively~\cite[p. 16]{siebert2022construction}.
+What resources are used and evaluated is described in more detail in~\ref{sec:resource-
+utilization}.
 
 
 \section{Dataset generation}\label{sec:dataset-generation}
@@ -266,7 +277,7 @@ the dataset.
 The experimental setup comprises of a three-point bending machine, consisting
 of a punch and die, with the latter lacking a bottom, which allows only air bending.
 
-The material testing machine utilized is the \textit{Zwick MX 25A}, which is
+The material testing machine utilized is the \textit{Zwick 1454MO}, which is
 equipped with a load cell and a displacement sensor.
 The load cell measures the force applied to the sheet measured in $N$), while the
 displacement sensor measures the displacement of the punch, denoted as $y_p$.
@@ -401,14 +412,8 @@ It was set to that speed in order to reduce the time of the experiments.
 
 The wait time at of 1 second $y_p_{max}$ is a limitation of the machine and can not be
 changed and therefore is always a part of the experimental setup.
-
-\textit{Explain the dip}
-
-For a short time after the lift, the load cell still measures a force.
-That is because the metal sheet springs back and the punch is still in contact with the
-sheet.
-This was measured using a python script,the green and the yellow point represent the
-resulting spring back distance.
+At $y_p_{max}$ force decrease bee seen in figure~\ref{fig:springback_measured}, which is most
+likely due to released friction (personal communications with ...).
 
 \begin{figure}[H]
     \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
@@ -416,17 +421,11 @@ resulting spring back distance.
         \includegraphics[width=0.9\textwidth]{springback_measured}
     \end{tcolorbox}
     \caption{A steel metal sheet was bent with a punch penetration of 5
-    mm the spring back is 0
-    .37 mm. The blue line
-    shows the force and the blue line shows the punch penetration.}
+    mm the spring back is 0 .37 mm. The blue line
+    shows the force and the blue line shows the punch penetration.
+    The distance between the green and the red point repesents the spring back distance.}
     \label{fig:springback_measured}
 \end{figure}
-
-% Pado: This is a little confusing - does the Y axis show the force? Why is
-% the blue line the
-% shape it is? Is it
-% maybe two separate lines, the movement of the punch and the reaction of the
-% metal?
 
 \subsection{Dataset Exploration}\label{subsec:dataset-exploration}
 The dataset was explored using the python library \textit{pandas}
@@ -480,11 +479,11 @@ Second, a higher punch penetration results in a higher spring back.
 Also it non-linear relationship between the punch penetration and the spring back can
 be observed.
 
-In the chosen example it chan be observed that the spring back of the metal sheets with $t = 0.5$
-are significantly higher then the other thicknesses.
-Despite the availability of data, the factors underlying the spring back behavior
-remain incompletely understood.
-Because too many factors are involved in the bending process.
+%In the chosen example it chan be observed that the spring back of the metal sheets with $t = 0.5$
+%are significantly higher then the other thicknesses.
+%Despite the availability of data, the factors underlying the spring back behavior
+%remain incompletely understood.
+%Because too many factors are involved in the bending process.
 
 \begin{figure}[htb]
     \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
@@ -587,34 +586,51 @@ spring back.
 Therefore, a selection of the most common machine learning models where used, based on
 the systematic literature review of~\cite{
     dridi2021supervised}.
-The author of the paper divided supervised learning approaches into five categories:
+In the paper, the author defines eight widely used supervised machine learning models: Logistic
+Regression, Support Vector Machines, Decision Trees, Random Forests, AdaBoost, Naive Bayes, and K
+-Nearest Neighbors~\cite[p. 8]{dridi2021supervised}.
+However, Naive Bayes and K-Nearest Neighbors are not used in this thesis since they are typically
+utilized for classification problems.
+Furthermore, in order to compare the performance of the other models, a Linear Regression model
+and a \ac{MLP} were also employed. The models can be classified into five categories: Logic-based
+learning, instance-based learning, Deep learning, and Support Vector
+Machines~\cite[p. 8]{dridi2021supervised}.
+
+The author of the paper defines 8 widely used supervised machine learning models:
+Logistic Regression, Support Vector Machines, Decision Trees, Random Forests, AdaBoost, Naive
+Bayes and K-Nearest Neighbors~\cite[p. 8]{dridi2021supervised}.
+Naive Bayes and K-Nearest Neighbors are not used in this thesis, because they are
+generally used for classification problems.
+Additionally a \ac{MLP} and Linear Regression model where are used to compare the performance of
+the other models.
+The models can be divided into five categories:
 Logic-based learning, instance-based learning, static-based learning, Deep learning and
 Support vector machines~\cite[p. 8]{dridi2021supervised}.
 
 \subsection{Baseline Model}\label{subsec:regression-models}
-A linear regression model is used as baseline model in this thesis.
-Linear regression is a simple and widely used model that is used to predict a
-continuous value.
+In this thesis, a linear regression model is employed as the baseline model.
+Linear regression is a straightforward and widely used method that is utilized for predicting
+continuous values.
+The model utilizes the feature inputs to generate a linear relationship that is both easy to
+understand and interpret~\cite[p. 37]{molnar2020interpretable}.
+
+To train the linear regression model, the sum of squared errors between the predicted values and
+the actual values is minimized.
+The mean squared error is determined by summing the squared differences between the predicted
+values and the true values~\cite[p. 47--68]{muller_introductionmachinelearning_2016}.
+
 The model is based on the assumption that the relationship between the independent
 variables and the dependent variable is linear.
-The model is trained by minimizing the sum of squared errors between the predicted
-values and the actual values~\cite[p. 47--68]{muller_introductionmachinelearning_2016}.
-
-Since in the section~\ref{subsec:dataset-exploration} it has already been stated that the
-relationship between the independent variables and the dependent variable is not linear
-it is not expected that the linear regression model will perform well.
-The linear regression model is used to compare the performance of the other models.
-
-\subsubsection{Linear Regression}\label{subsec:linear-regression}
-A liner regression model uses the feature inputs to make prediction about the
-target by creating a linear relationship which is easy to understand and
-interpret~\cite[p. 37]{molnar2020interpretable}.
+As previously mentioned in section~\ref{subsec:dataset-exploration}, the relationship between the
+independent variables and the dependent variable is not linear.
+Therefore, it is not anticipated that the linear regression model will produce accurate results.
+However, the linear regression model is still used in order to evaluate the performance of the
+other models.
 
 Linear models can be used to understand the relationship between a target variable y
 and one or more input features x.
 The general formula for predicting in a linear model in regression is shown in
-\ref{eq:linear-regression}~\cite[p.
-45]{muller_introductionmachinelearning_2016}.
+\ref{eq:linear-regression}~\cite[p. 45]{muller_introductionmachinelearning_2016}.
 In this context, $x[0]$ to $x[p]$ represent the attributes (with p being the number of
 attributes) of a specific data point.
 The parameters $w$ and $b$, which are learned by the model, and the predicted output $\hat{y}$,
@@ -631,31 +647,34 @@ are also included~\cite[p. 45]{muller_introductionmachinelearning_2016}.
 The linearity of the relationship between the inputs and the target makes the
 interpretation of the model straightforward~\cite[p. 37]{molnar2020interpretable}.
 
-Linear regression has no hyperparameters to tune and therefore no
+Linear regression has no hyper-parameters to tune and therefore no
 hyperparameter tuning was performed.
 
-\subsection{Statistics Based Learning}\label{subsec:statistics-based-learning}
-
-The approach that relies on statistics and uses distributive statistics to make the
-problem more manageable.
-It predicts based on the distribution structure. Learning through statistics involves
-utilizing the Naïve Bayes Algorithm~\cite[p. 8]{dridi2021supervised}.
-
-\subsubsection{Naive Bayes}
-...
+%\subsection{Statistics Based Learning}\label{subsec:statistics-based-learning}
+%
+%The approach that relies on statistics and uses distributive statistics to make the
+%problem more manageable.
+%It predicts based on the distribution structure. Learning through statistics involves
+%utilizing the Naïve Bayes Algorithm~\cite[p. 8]{dridi2021supervised}.
+%
+%\subsubsection{Naive Bayes}
+%...
 
 \subsection{Support Vector Regression (SVR)}\label{subsec:support-vector-regression-(svr)}
 Support Vector Machines (\ac{SVM}) are a popular approach for solving classification
 problems.
 The algorithm seeks to identify a hyperplane in an N-dimensional space, where N
 represents the number of features, to effectively separate and classify data
-points~\cite[p. 42]{awad_efficientlearningmachines_2015}.
+points.
+The hyperplane divides the data into two classes, where the points on one side of the
+hyperplane are classified as one class and the points on the other side are classified as
+the other class~\cite[p. 42]{awad_efficientlearningmachines_2015}.
 
 However, for regression problems such as predicting spring back, the \ac{SVM} algorithm
 needs to be adapted to provide continuous values instead of a finite set of values.
 To address this, the \ac{SVR} algorithm was developed, which draws inspiration from the
 \ac{SVM} algorithm and leverages similar principles.
-\ac{SVR} fits a model to data by only considering residuals smaller in absolute value
+It fits a model to data by only considering residuals smaller in absolute value
 than a designated constant known as $\epsilon$-sensitivity.
 By doing so, \ac{SVR} can accurately model and predict continuous values, making it a
 suitable approach for regression problems.
@@ -665,22 +684,19 @@ while the points outside the tube are penalized based on their distance from the
 predicted function.
 This approach is similar to how \ac{SVM}s penalize points in classification
 problems~\cite[p. 369]{montesinoslopez_supportvectormachines_2022}.
+
 % Kernel trick
-The kernel trick is a method to transform the data into a higher dimensional
-space, where the data is linearly separable.
-This is done by using a kernel function, which is a function that maps the data into a
-higher
-dimensional space.
+To transform the data into a higher dimensional space a method called kernel trick is used.
 Two methods are usually used for \ac{SVM}s, the polynomial kernel and the radial basis
-function,also known as gaussian kernel~\cite[p. 97-98]{
+function,also known as gaussian kernel~\cite[p. 97--98]{
     muller_introductionmachinelearning_2016}.
+Similar to the \ac{SVM} algorithm, the \ac{SVR} algorithm finds a well-fitting hyperplane to a
+kernel-induced feature space to achieve good generalization performance using the original
+features.
+This is detailed in~\cite[p. 369]{montesinoslopez_supportvectormachines_2022}.
 
-Like \ac{SVM}, the \ac{SVR} algorithm finds a well-fitting hyperplane to a kernel-
-induced feature space to achieve good generalization performance using the original
-features. This is detailed in \cite[p. 369]{montesinoslopez_supportvectormachines_2022}.
-
-The hyperparameters of the \ac{SVR} algorithm are listed in table~\ref{tab
-:hyperparameters_svr}.
+The hyperparameters used for the algorithm in this work are listed in
+table~\ref{tab:hyperparameters_svr}.
 
 \begin{table}[H]
     \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
@@ -709,21 +725,23 @@ The hyperparameters of the \ac{SVR} algorithm are listed in table~\ref{tab
             epsilon & 0.001 \\
             \bottomrule
         \end{tabular}
-        \caption{Hyperparameters of the \ac{SVR} model}
     \end{tcolorbox}
+    \caption{Hyperparameters of the \ac{SVR} model}
 \end{table}
 
 \subsection{Logic-based learning}\label{subsec:logic-based-learning}
 
 Logic-based algorithms solve problems by applying logical functions sequentially or
-incrementally. An example of such an algorithm is a decision tree, which is commonly
-used as a classification and regression model~\cite[p. 10]{dridi2021supervised}.
+incrementally.
+An example of such an algorithm is a decision tree, which is commonly used as a classification
+and regression model~\cite[p. 10]{dridi2021supervised}.
 
 \subsubsection{Decision Trees}
 % -> Problem von decision tree
 Decision Trees (\ac{DT}s) are a widely used type of model for both classification and
-regression problems. These models construct a hierarchy of rules to predict outcomes
-based on the data~\cite[p. 70]{muller_introductionmachinelearning_2016}~\cite[p. 253]{
+regression problems.
+These models construct a hierarchy of rules to predict outcomes based on the data~\cite[p. 70]{
+    muller_introductionmachinelearning_2016}~\cite[p. 253]{
     shaik_briefsurveyrandom_2019}.
 In \ac{DT} models, the data is split into multiple segments based on specific feature
 values.
@@ -732,48 +750,15 @@ belonging to one subset.
 The final subsets are called terminal or leaf nodes, while the intermediate subsets are
 known as internal or split nodes.
 To predict the outcome in a specific leaf node, the mean outcome of the training data
-in that leaf node is used~\cite[p. 70-72]{muller_introductionmachinelearning_2016}.
+in that leaf node is used~\cite[p. 70--72]{muller_introductionmachinelearning_2016}.
 
 Decision trees are models are useful when the relationship between features
-and outcome is
-or when features interact with one another.
-These models split the data multiple times based on certrain cutoff values,
+and outcome is or when features interact with one another.
+These models split the data multiple times based on certain cutoff values,
 resulting in different subset of the dataset.
 The final subsets, called leaf nodes are used to predict the outocme by
 taking the average of the training data in that subset~\cite[p. 76]{
     molnar2020interpretable}.
-
-Grid search cross validation was used to find the best hyperparameters for
-the decision tree.
-All hyperparameters are summarized in Table~\ref{tab:hyperparameters_dt}.
-
-\begin{table}[H]
-    \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
-        \sisetup{group-minimum-digits = 4}
-        \centering
-        \begin{tabular}{ll}
-            \toprule
-            \thead{\textbf{Hyperparameter}} & \thead{\textbf{Value}} &
-            \thead{\textbf{Description}}
-            \\
-            \toprule
-            criterion & absolute\_error
-            \hdashline
-            max\_depth & 30 \\
-            \hdashline
-            min\_samples\_split & 4 \\
-            \hdashline
-            min\_weight\_fraction\_leaf & 0. \\
-            \hdashline
-            splitter & random \\
-            \hdashline
-            ccp_alpha & 0.0 \\
-            \bottomrule
-        \end{tabular}
-        \caption{Hyperparameters of \ac{DT} model.}
-        \label{tab:hyperparameters_decision_tree}
-    \end{tcolorbox}
-\end{table}
 
 \subsubsection{Random Forest}\label{subsubsec:random-forest-regression}
 The main problem with \ac{DT} is their tendency to overfit and have poor
@@ -870,7 +855,7 @@ Grid search cross validation was used to find the best hyperparameters for
 the random forest model using Scikit-Learn's default \texttt{GridSearchCV} function.
 All hyperparameters are summarized in Table~\ref{tab:hyperparameters_rf}.
 
-The \textit{max\_features} was set to \textit{auto} and therefor the models
+The \textit{max\_features} was set to \textit{auto} and therefore the models
 does use all available features.
 As described in Figure~\ref{fig:rf_feature_importance} only limited features are
 available and all of them are important for the dependent variable spring back
@@ -878,41 +863,6 @@ The default unpruned model did overfit the training data and therefore was not a
 generlaize well on new data (as decvitbed by \cite[p. 133-136]{
     muller_introductionmachinelearning_2016}).
 There it was set to 10 using \texttt{GridSearchCV}.
-
-\begin{table}[H]
-    \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
-        \sisetup{group-minimum-digits = 4}
-        \centering
-        \begin{tabular}{ll}
-            \toprule
-            \thead{\textbf{Hyperparameter}} & \thead{\textbf{Value}} &
-            \thead{\textbf{Description}}
-            \\
-            %  \unit{(Kcal\per\mole)\squared}}} & \thead{RMSD l.b.} &
-            %  \thead{RMSD u.b.}  \\
-            \toprule
-            n\_estimators & 10 & The number of trees in the forest.
-            \\
-            \hdashline
-            criterion & absolute\_error \\
-            \hdashline
-            max\_depth & 30 \\
-            \hdashline
-            min\_samples\_split & 4 \\
-            \hdashline
-            min\_samples\_leaf & 2 \\
-            \hdashline
-            max\_features & auto \\
-            \hdashline
-            max\_leaf\_nodes & X \\
-            \hdashline
-            max\_leaf\_nodes & X \\
-            \bottomrule
-        \end{tabular}
-        \caption{Hyperparameters of the \ac{RF} model.}
-        \label{tab:hyperparameters_rf}
-    \end{tcolorbox}
-\end{table}
 
 \subsubsection{Gradient Boosting Regression Tree}
 A gradient boosting regression is a type of ensemble learning algorithm in
@@ -1001,17 +951,17 @@ compared to conventional random forests since one of the most time-intensive asp
 tree development is determining the optimal threshold for each feature at
 each node~\cite[p. 351]{geron2022hands}.
 
-\subsection{Neural Networks }\label{subsec:neural-networks}
-Another method for supervised learning involves the utilization of Neural Netowrks to
+\subsection{Neural Networks}\label{subsec:neural-networks}
+Another method for supervised learning involves the utilization of Neural Networks to
 perform classification and regression tasks.
-Neural Network models consist of multiple layers, and it is trained through a layer-by-
-layer approach~\cite[p. 11]{
-    dridi2021supervised}.
+In this work the discussion will be limited on the use of relatively simple Multi-layer Perceptron.
+MLPs can be seen as an extension of linear models that engage in several rounds of processing to
+reach a conclusion~\cite[p. 104]{muller_introductionmachinelearning_2016}.
 
 While this thesis does not delve into the use of Deep Learning for predicting spring
-back, it does employ a simple multi-layer perceptron as a baseline model. Although not
-the main focus, the results from this model can provide insights into the potential of
-neural networks for this task and for guiding future research.
+back, it does employ a simple multi-layer perceptron as a baseline model.
+The results from this model can provide insights into the potential of neural networks for this
+task and for guiding future research.
 
 \subsubsection{Multi-layer Perceptron}
 The multi-layer perceptron (MLP), which is the most widely used type of artificial
@@ -1019,45 +969,15 @@ neural network, has to be found producing generalizable models in various fields
     p.451]{taud2018multilayer}.
 
 The MLP is a feedforward neural network that is organized into layers, with information
-moving in one direction from the input layer tough the hidden layers to the output
+moving in one direction from the input layer trough the hidden layers to the output
 layer~\cite{bishop1995neural}.
 Each connection between neurons has a weight and perceptrons within the same layer
 share the same activations function which is typically a sigmoid function in hidden
 layers.
-The backpropagation algorithm is typically used to train \ac{MLP} models, by
+
+A backpropagation algorithm is typically used to train \ac{MLP} models, by
 propagating errors backwards from the output layer to the input layer in order to adjust
 the weights~\cite[p. 454]{taud2018multilayer}.
-
-\begin{table}[H]
-    \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
-        \sisetup{group-minimum-digits = 4}
-        \centering
-        \begin{tabular}{ll}
-            \toprule
-            \thead{\textbf{Hyperparameter}} & \thead{\textbf{Value}} &
-            \thead{\textbf{Description}}
-            \\
-            %  \unit{(Kcal\per\mole)\squared}}} & \thead{RMSD l.b.} &
-            %  \thead{RMSD u.b.}  \\
-            \toprule
-            random\_state & 1 \\
-            \hdashline
-            solver & lbfgs \\
-            \hdashline
-            max\_iter & 5000 \\
-            \hdashline
-            alpha & 0.01 \\
-            \hdashline
-            hidden\_layer\_sizes & (100, 100) \\
-            \hdashline
-            learning\_rate & constant \\
-            \bottomrule
-        \end{tabular}
-        \caption{Hyperparameters of the \ac{MLP} model.}
-        \label{tab:hyperparameters_mlp}
-    \end{tcolorbox}
-\end{table}
-
 
 \section{Model Training}\label{sec:model-training}
 
@@ -1075,9 +995,9 @@ selected dataset, allowing the models to predict this value accurately.
 Furthermore,removing data from the middle of the parameter space during training is
 expected to improve model performance and promote generalization to new data.
 
-All models were trained with the same dataset and parameters, differing only in the
-chosen algorithm.
-
+All models were trained on the same dataset. The hyper-parameters where set using Grid-Search Cross
+-validation.
+The full hyper-parameters for each model are listed in Table~\ref{sec:hyper-parameters}.
 
 \begin{figure}[H]
     \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]

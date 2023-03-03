@@ -184,7 +184,7 @@ a few instances but smaller for the rest.
 The algorithms \ac{LR} does perform worse than the other models.
 A likely reason is, that the relationship between the independent and dependent
 variables is not linear.
-This cna result in an inadequate fit and reduced predictive power (Source).
+This can result in an inadequate fit and reduced predictive power (Source).
 
 \ac{DT} on the other hand, can perform poorely when they overfit the training data.
 Also, they are pron to instability, both problems are mitigates by using ensemble methods
@@ -501,13 +501,13 @@ compositions and has the lowest variance.
     \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
         \centering
         \begin{subfigure}{0.4\textwidth}
-            \includegraphics[width=\textwidth]{missing_values_plot}
+            \includegraphics[width=\textwidth]{missing_values_plot.png}
             \caption{}
             \label{fig:first}
         \end{subfigure}
         \hfill
         \begin{subfigure}{0.4\textwidth}
-            \includegraphics[width=\textwidth]{variance_missing_values}
+            \includegraphics[width=\textwidth]{variance_missing_values.png}
             \caption{}
             \label{fig:second}
         \end{subfigure}
@@ -839,43 +839,20 @@ As mentioned in section~\ref{sec:dp1:-correctness}, both algorithms perform not 
 to be considered as a solution for the problem.
 Therefore the focus is on model agnostic methods to explain the predictions of the models.
 
+\subsection{LIME}\label{subsec:lime}
+LIME~\cite{ribeiro2016model} is a model-agnostic method that can be used to explain the
+predictions of any machine learning model.
+LIME is a local explanation method, which means that it explains the prediction of a single
+instance.
+LIME works by sampling a number of instances from the neighborhood of the instance to be
+explained.
 
-\subsection{Model Specific Interpretability
-Methods}\label{subsec:model-specific-interpretability
--methods}
+\textit{explanation lime }
 
-To attain interpretability, the simplest approach is to select algorithms
-that generate
-interpretable models.
-Some of these models like linear regression and decision trees where used in
-this work.
-
-The following section looks at the generated and uses model specific
-interpretability methods to
-interpret the results.
-
-\subsubsection{Feature Importance}
-
-Figure~\ref{fig:rf_feature_importance} compares and visualizes the relative
-importance of the features used for training the model.
-As shown, the thickness is the most important feature followed by distance
-and die opening.
-The results shows, that all three featured are relevant for the outcome and so no feature can be
-removed from the dataset to get a better performance of the model.
-
-\begin{figure}[H]
-    \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
-        \centering
-        \includegraphics[width=0.6\textwidth]{Random_Forest_Regression_importances}
-        \caption{Relative feature importance}
-        \label{fig:rf_feature_importance}
-    \end{tcolorbox}
-\end{figure}
 
 \subsection*{Global Model-Agnostic Methods}
 As already described in section~\ref{sec:interpretability}, only algorithms
-that are
-interpretable where used for the evaluation.
+that are interpretable where used for the evaluation.
 
 \cite{molnar2020interpretable} differentiates between
 model-specific and model-agnostic interpretability methods.
@@ -895,6 +872,59 @@ specific instance.
 For the purpose of this thesis, the focus is on global model-agnostic
 methods, as they can be used
 with any model type and provide an overview of the model's behavior.
+
+\subsubsection{Feature Importance and Partial Dependence}
+It is a common approach to find out what are the most common features in a dataset using feature
+importance plots.
+Once these have been identified the subsequent stept is to understand the dependence of the
+target variable on these features.
+This can be done by using partial dependence plots.
+
+\cite{greenwell2018simple} introduced a another feature importance measure based on partial
+dependence.
+Partial dependence refers to the relationship between a target variable and a single predictor
+variable in a statistical model, while keeping all other predictor variables constant.
+A feature that has a consistent partial dependence across all values is less important than a
+feature that exhibits significant variations~\cite[p. 117--118]{molnar2020interpretable}.
+
+Figure~\ref{fig:feature_impoartances_rf} compares and visualizes the relative
+importance of the features used for training the model.
+As shown, the thickness is the most important feature followed by distance
+and die opening.
+The results shows, that all three featured are relevant for the outcome and so no feature can be
+removed from the dataset to get a better performance of the model.
+
+Figure~\ref{fig:partial_dependence_svm} displays the partial dependence plot for the three
+features found in the dataset.
+The y-axis shows the predicted outcome of the model, while the x-
+axis represents the range of values over which the feature is varied.
+It is apparent that all three PDP plots exhibit a non-linear curve, indicating a non-linear
+relationship between the feature and the target variable.
+Notably, increasing the distance
+results in greater spring back, while increasing the thickness leads to a lower spring back.
+Although the influence of the die opening is not as significant as the other two features, it is
+still noticeable that a higher die opening results in more spring back.
+
+\begin{figure}
+    \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
+        \centering
+        \begin{subfigure}{0.45\textwidth}
+            \includegraphics[width=\textwidth]{rf_feature_importances}
+            \caption{Firts subfigure.}
+            \label{fig:feature_impoartances_rf}
+        \end{subfigure}
+        \hfill
+        \begin{subfigure}{0.45\textwidth}
+            \includegraphics[width=\textwidth]{partial_dependence_svm}
+            \caption{Second subfigure.}
+            \label{fig:partial_dependence_svm}
+        \end{subfigure}
+        \hfill
+
+        \caption{Feautre importances and partial dependence plot.}
+        \label{fig:figures}
+    \end{tcolorbox}
+\end{figure}
 
 
 %\subsubsection*{Number of Parameters}

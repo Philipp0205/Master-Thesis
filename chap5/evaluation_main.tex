@@ -813,23 +813,23 @@ choice of algorithms to those that produce interpretable results.
 Example of such algorithms include linear regression, logistic regression and decision
 trees~\cite[p. 35]{molnar2020interpretable}.
 
-\cite{molnar2020interpretable} defines three properties of interpretable models: linearity,
-monotonicity and interactions.
-A linear model expresses the relationship between features and the target outcome aa a linerar
-equation~\cite[]{molnar2020interpretable}.
-Monotonocitiy constraints ensure that there is a consistent relationship between a feature and
-the target outcome across the etnire renage of the feature. This can make it easier to understand
-the relationship.
-Some models automatically include interactions between features to improve prediciotn, while
-other require the manual creation of interaction features. However, inlcuding too many or complex
-interactions can make the model more difficult to interpret~\cite{molnar2020interpretable}.
+%\cite{molnar2020interpretable} defines three properties of interpretable models: linearity,
+%monotonicity and interactions.
+%A linear model expresses the relationship between features and the target outcome aa a linerar
+%equation~\cite[]{molnar2020interpretable}.
+%Monotonocitiy constraints ensure that there is a consistent relationship between a feature and
+%the target outcome across the etnire renage of the feature. This can make it easier to understand
+%the relationship.
+%Some models automatically include interactions between features to improve prediciotn, while
+%other require the manual creation of interaction features. However, inlcuding too many or complex
+%interactions can make the model more difficult to interpret~\cite{molnar2020interpretable}.
 
-In the model selection for this thesis the focuses mostly on interpretable models,
-as they are easier to understand and explain, therefore mostly models are chosen which fulfill
-all three properties.
-
-Later in the thesis, the interpretability of the models is used to explain
-the results.
+%In the model selection for this thesis the focuses mostly on interpretable models,
+%as they are easier to understand and explain, therefore mostly models are chosen which fulfill
+%all three properties.
+%
+%Later in the thesis, the interpretability of the models is used to explain
+%the results.
 
 \subsection{Interpretable Models}\label{subsec:interpretable-models}
 Linear Regression and Decision Trees are considered as interpretable models and offer good
@@ -838,93 +838,20 @@ As mentioned in section~\ref{sec:dp1:-correctness}, both algorithms perform not 
 to be considered as a solution for the problem.
 Therefore the focus is on model agnostic methods to explain the predictions of the models.
 
-
-
-\subsection*{Global Model-Agnostic Methods}
-As already described in section~\ref{sec:interpretability}, only algorithms
-that are interpretable where used for the evaluation.
-
-\cite{molnar2020interpretable} differentiates between
-model-specific and model-agnostic interpretability methods.
-Model-specific methods are methods that are specific to a certain model type, for example,
-decision trees.
-Model-agnostic methods are methods that can be used with any model type, for
-example, permutation importance.
-
 Also~\cite{molnar2020interpretable} differentiates between global and local
 interpretability. Global
 interpretability refers to the ability to understand the overall behavior of
 the model, while local interpretability refers to the ability to understand the behavior of the
 model for a specific instance.
 
-For the purpose of this thesis, the focus is on global model-agnostic
-methods, as they can be used
-with any model type and provide an overview of the model's behavior.
+As seen in the previous sections six different models were trained.
+It does not make sense to apply model-agnostic method on all six models, it makes more sense to
+apply the methods on the best performing models.
+Therefore in a first step in the section~\ref{subsec:overall-comparison-model-performance} the
+best performing models
+are identified and in a second step model-agnostic interpretability methods are applied to
+explain the predictions of the models.
 
-\subsubsection{Feature Importance and Partial Dependence}
-It is a common approach to find out what are the most common features in a dataset using feature
-importance plots.
-Once these have been identified the subsequent stept is to understand the dependence of the
-target variable on these features.
-This can be done by using partial dependence plots.
-
-\cite{greenwell2018simple} introduced a another feature importance measure based on partial
-dependence.
-Partial dependence refers to the relationship between a target variable and a single predictor
-variable in a statistical model, while keeping all other predictor variables constant.
-A feature that has a consistent partial dependence across all values is less important than a
-feature that exhibits significant variations~\cite[p. 117--118]{molnar2020interpretable}.
-
-Figure~\ref{fig:feature_impoartances_rf} compares and visualizes the relative
-importance of the features used for training the model.
-As shown, the thickness is the most important feature followed by distance
-and die opening.
-The results shows, that all three featured are relevant for the outcome and so no feature can be
-removed from the dataset to get a better performance of the model.
-
-Figure~\ref{fig:partial_dependence_svm} displays the partial dependence plot for the three
-features found in the dataset.
-The y-axis shows the predicted outcome of the model, while the x-
-axis represents the range of values over which the feature is varied.
-It is apparent that all three PDP plots exhibit a non-linear curve, indicating a non-linear
-relationship between the feature and the target variable.
-Notably, increasing the distance
-results in greater spring back, while increasing the thickness leads to a lower spring back.
-Although the influence of the die opening is not as significant as the other two features, it is
-still noticeable that a higher die opening results in more spring back.
-
-\begin{figure}
-    \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
-        \centering
-        \begin{subfigure}{0.45\textwidth}
-            \includegraphics[width=\textwidth]{rf_feature_importances}
-            \caption{Firts subfigure.}
-            \label{fig:feature_impoartances_rf}
-        \end{subfigure}
-        \hfill
-        \begin{subfigure}{0.45\textwidth}
-            \includegraphics[width=\textwidth]{partial_dependence_svm}
-            \caption{Second subfigure.}
-            \label{fig:partial_dependence_svm}
-        \end{subfigure}
-        \hfill
-
-        \caption{Feautre importances and partial dependence plot.}
-        \label{fig:figures}
-    \end{tcolorbox}
-\end{figure}
-
-
-\subsection*{Local Model Agnostic Methods}
-Local interpretability refers to the ability to understand the behavior of the model for a
-specific instance and is often used to explain the predictions of a model.
-Model agnostic methods can be used to explain the predictions of any model type~\cite{
-    molnar2020interpretable}.
-
-
-Local methods rely on interpreting individual instances from a dataset, and as such, it is
-crucial to select representative samples. One way to achieve this is by considering the V/t ratio
-of each instance.
 For the current dataset, the V/t ratios range from 3.3 to 100. The highest ratio can be achieved
 by bending a 0.5 mm thin metal sheet using a 50 mm wide die opening, while the lowest ratio is
 achieved by bending a 3 mm thick sheet on the same die opening.
@@ -946,18 +873,20 @@ Chosen instances from each case are shown in Table~\ref{tab:representative-insta
 \begin{table}[H]
     \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
         \centering
-        \begin{tabular}{l}
+        \begin{tabular}{lllll}
             \toprule
-            \textbf{Case} & \textbf{\(V\) } & \textbf{\(t\)} & \textbf{\(y_p\)} \\
+            \textbf{Case} & \textbf{\(V\) } & \textbf{\(t\)} & \textbf{\(y_p\)} & \textbf{V/t} \\
             \toprule
-            A             & 20              & 1              & ?                \\
-            A             & 20              & 3              & ?                \\
+%            A             & 10              & 2.0            & ?                & 5            \\
+            A             & 20              & 3              & ?                & 6.66         \\
             \hdashline
-            B             & 30              & 1.5            & ?                \\
-            B             & 30              & 2              & ?                \\
             \hdashline
-            C             & 50              & 0.5            & ?                \\
-            C             & 50              & 1              & ?                \\
+            B             & 30              & 2              & ?                & 15           \\
+            B             & 20              & 1              & ?                & 20           \\
+%            B             & 30              & 1.5            & ?                & 20           \\
+            \hdashline
+            C             & 50              & 1              & ?                & 50           \\
+            C             & 50              & 0.5            & ?                & 100          \\
             \bottomrule
         \end{tabular}
     \end{tcolorbox}
@@ -965,25 +894,25 @@ Chosen instances from each case are shown in Table~\ref{tab:representative-insta
     \label{tab:representative-instances}
 \end{table}
 
-\subsection{LIME}\label{subsec:lime}
-LIME~\cite{ribeiro2016model} is a model-agnostic method that can be used to explain the
-predictions of any machine learning model.
-LIME works by sampling a number of instances from the neighborhood of the instance to be
-explained.
-
-\textit{explanation lime }
-
-\textit{Explanation of the results}
-
-\subsection{Overall Results}\label{subsec:overall-results}
+\subsection{Comparison of the Models}\label{subsec:overall-comparison-model-performance}
 This section will showcase the outcomes generated by the trained models in more detail and
 will also discuss the results in relation to the research questions.
+This is done in this section to find out the best perfoming models.
+These models will be researched in more detail later with the help of model-agnostic
+methods to explain the predictions of the models.
 
+In order to evaluate the model's performance without bias, each test case where removed
+from the training data set so that the model has not seen the test case before.
+This results in a small but notable performance decrease in the test cases, but makes sure that the
+results are not biased.
 
-In order to evalute the model's performance without bias, each test case where removed
-from
-the training data set so that the model has not seen the test case before.
-This results in a small but notable performance decrease in the test cases.
+For the interpretation of the next picutres it is relevant to nkow that the target values
+repesent the man of all values.
+The quality the dataset is but not perfect, and it is possible that there are some outliers in the
+dataset.
+
+Figure~\ref{fig:performance-case-a} shows show two chosen test cases for case A with a
+V/t-ratio of 20 (\ref{fig:performance-20-1} and 6.6 (\ref{fig:performance-20-3}.
 
 Case~\ref{fig:performance-20-1} with a V/t-ratio of 20 demonstrates the models'
 ability to predict the spring with high accuracy.
@@ -996,7 +925,7 @@ spring back.
 \begin{figure}[H]
     \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
         \begin{subfigure}{0.5\textwidth}
-            \includegraphics[width=\textwidth]{performance_20_1}
+            \includegraphics[width=\textwidth]{performance_20_3}
             \caption{V: 20, t: 1}
             \label{fig:performance-20-1}
         \end{subfigure}
@@ -1007,21 +936,35 @@ spring back.
             \label{fig:performance-20-3}
         \end{subfigure}
     \end{tcolorbox}
-    \label{fig:performance-case-a}
     \caption{Performance plots for case A}
+    \label{fig:performance-case-a}
 \end{figure}
 
-As seen in Figure~\ref{fig:performance-case-b}, the performance in case B is similar.
-The models exhibit high accuracy in predicting the spring back in case a)~\ref{fig
-:performance-30_1.5} with a V/t-ratio of 15. Additionally, the spring backs at the
-higher end are also predicted with high accuracy.
+
+Figure~\ref{fig:performance-case-b} displays two selected test series for case B, which indicates
+that the V/t ratios fall within the recommended range. These test series produced the best
+results compared to cases A and C.
+
+As depicted in figure~\ref{fig:performance-20-1}, both models accurately predicted the spring
+back with high precision. The \ac{RF}, \ac{SVM}, and \ac{MLP} models demonstrated similar
+performance and produced usable results. Similar findings were observed for figure~\ref{fig
+:performance-30_2.0}, where the V/t ratio was different. In this case, the \ac{MLP} model
+performed well for \(y_p\) values of 5 and 10, but became inaccurate for higher values. On the
+other hand, the \ac{SLP} model consistently produced better results, while the \ac{ET} model
+still struggled to perform well.
+
+Overall, it is challenging to identify a clear favorite model based on the performance of the
+models in these test series.
+While some models performed better than others for specific variables or scenarios, the
+differences were not significant enough to identify a clear winner.
+Therefore, selecting an appropriate model will be decided by the other two cases A and C.
 
 \begin{figure}[H]
     \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
         \begin{subfigure}{0.5\textwidth}
-            \includegraphics[width=\textwidth]{performance_30_1.5}
-            \caption{V: 30, t: 1.5}
-            \label{fig:performance-30_1.5}
+            \includegraphics[width=\textwidth]{performance_20_1}
+            \caption{V: 20, t: 1}
+            \label{fig:performance-20-1}
         \end{subfigure}
         \hfill
         \begin{subfigure}{0.5\textwidth}
@@ -1034,36 +977,159 @@ higher end are also predicted with high accuracy.
     \label{fig:performance-case-b}
 \end{figure}
 
-In case C as seen in Figure~\ref{fig:performance-case-c} the models performance is
-getting worse.
+Case C is the most challenging case, as the V/t ratios are not within the recommended range.
+Figure~\ref{fig:performance-case-c} shows the performance of the models for two test series
+with V/t ratios of 50 and 100.
 
-Reasons for that? ...
+The results shown in figure~\ref{fig:performance-50_0.5} are clear.
+The results are unusable, as the models are not able to predict the spring back.
+In figure ~\ref{fig:performance-50_1} the results look better, the \ac{RF} and \ac{SVM} model
+seem to be the most consistent models?
 
 \begin{figure}[H]
     \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
         \begin{subfigure}{0.5\textwidth}
             \includegraphics[width=\textwidth]{performance_50_0.5}
             \caption{V: 50, t: 0.5}
-            \label{fig:performance-30_1.5}
+            \label{fig:performance-50_0.5}
         \end{subfigure}
         \hfill
         \begin{subfigure}{0.5\textwidth}
             \includegraphics[width=\textwidth]{performance_50_1}
             \caption{V: 50, t: 1}
-            \label{fig:performance-30_2.0}
+            \label{fig:performance-50_1}
         \end{subfigure}
     \end{tcolorbox}
     \caption{Performance plots for case C}
     \label{fig:performance-case-c}
 \end{figure}
 
+The best overall performing models are the \ac{MLP} and the \ac{SVM} model.
+As seen before, the model performs consistent across all thee scenarios, indicating that it can
+effectively handle a broad range of V/t ratios also outside the recommended industry guidelines
+range.
+Therefore the chosen models for more detailed analysis are the \ac{MLP} and the \ac{SVM} model.
 
-The best performing model is the \ac{SVM} model with an \ac{RMSE} of 0.2.
-Therefore the cases A, B and C are predicted using the \ac{SVM} model.
+Overall it can be said that the models are able to predict the spring back with high accuracy.
+For bad predictions the error is less than 0.25 mm, which is within the tolerance of the
+most manufacturing processes (This it not true yet).
 
-As seen in Figure~\ref{fig:default}, the model performs consistent across all thee
-scenarios, indicating that it can effectively handle a broad range of V/t ratios also
-outside the recommended industry guidelines range.
+
+\subsection*{Global Model-Agnostic Methods}
+In the following section global-model-agnostic methods are are applied to the trained machine
+learning models in order to understand the overall behavior of the models.
+
+There are two commonly used methods for analyzing the relationship between input features and the
+target variable: feature dependence plots and partial dependence plots.
+In the case of \ac{MLP} has no built-in feature importance, because the importance of each
+feature is determined by the weights assigned to the perceptron.
+The \ac{SVM} the feature importance cannot be directly derived from the model beacuse the
+algorithms applies a hyperplane that separates the data.
+The importance of the feature depeneds on the influence of the hyperplane and that is not easily
+measurable.
+Therefore not feature importance can be plotted for the two chosen models. Other models like the
+random forest have a built-in feature importance, which can be used to analyze the model.
+
+Figure~\ref{fig:feature_impoartances_rf} compares and visualizes the relative
+importance of the features used for training the model.
+As shown, the thickness is the most important feature followed by distance
+and die opening.
+The results shows, that all three featured are relevant for the outcome and so no feature can be
+removed from the dataset to get a better performance of the model.
+
+\begin{figure}[H]
+    \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
+        \centering
+        \includegraphics[width=0.9\textwidth]{rf_feature_importances}
+    \end{tcolorbox}
+    \caption{Feature importance of the random forest model.}
+    \label{fig:feature-importances-rf}
+\end{figure}
+
+\subsubsection{Partial Dependence}
+Feature dependence plots illustrate the relationship between a feature and the target variable.
+By analyzing these plots, we can identify which features have the strongest impact on the model's
+predictions, making it easier to prioritize and refine our feature selection.
+
+Partial dependence plots, on the other hand, examine the impact of a single input feature on the
+target variable while keeping all other features constant.
+These plots can help us understand which individual features have the most significant impact on
+the target, enabling us to fine-tune our feature engineering and gain deeper insights into the
+underlying relationships in our data.
+
+Both of these methods are powerful tools for understanding the role of input features in
+predictive modeling, and can be used together to gain a comprehensive understanding of the
+factors that drive model performance.
+
+\cite{greenwell2018simple} introduced a another feature importance measure based on partial
+dependence.
+Partial dependence refers to the relationship between a target variable and a single predictor
+variable in a statistical model, while keeping all other predictor variables constant.
+A feature that has a consistent partial dependence across all values is less important than a
+feature that exhibits significant variations~\cite[p. 117--118]{molnar2020interpretable}.
+
+
+Figure~\ref{fig:partial_dependence_plots}, we can see the PDPs for two models: Support Vector
+Machines (SVM) and Multilayer Perceptron (MLP).
+The results show that a higher \(y_p\) value leads to a greater spring back, while increasing the
+thickness of the metal sheet results in a lower spring back. The effect of the die opening is
+less significant than the other two features, but there is still a noticeable increase in spring
+back with higher die opening.
+
+The PDPs demonstrate that all features exhibit a non-linear relationship with the target variable.
+This information can be useful for understanding the behavior of the models and the impact of
+different features on the predicted outcome.
+
+\begin{figure}
+    \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
+        \centering
+        \begin{subfigure}{0.45\textwidth}
+            \includegraphics[width=\textwidth]{partial_dependence_SVM}
+            \caption{Partial dependence plot SVM}
+            \label{fig:feature_impoartances_rf}
+        \end{subfigure}
+        \hfill
+        \begin{subfigure}{0.45\textwidth}
+            \includegraphics[]{partial_dependence_MLP}
+            \caption{Partial dependence plot MLP}
+            \label{fig:partial_dependence_svm}
+        \end{subfigure}
+        \hfill
+        \caption{Partial dependence plots
+        \label{fig:partial_dependence_plots}
+    \end{tcolorbox}
+\end{figure}
+
+It is important to note that partial dependence plots and feature importance plots are limited to
+identifying linear relationships between features and the target variable.
+Since this is not the case as state previously, the results of the partial dependence plots are
+alternative models as permutation feaure importance and SHAP values are used to gain further
+information.
+
+\subsection{Permutation Feature Importance and SHAP}\label{subsec:permutation-feature-importance-
+and-shap}
+
+
+\subsection*{Local Model Agnostic Methods}
+Local interpretability refers to the ability to understand the behavior of the model for a
+specific instance and is often used to explain the predictions of a model.
+Model agnostic methods can be used to explain the predictions of any model type~\cite{
+    molnar2020interpretable}.
+
+Local methods rely on interpreting individual instances from a dataset, and as such, it is
+crucial to select representative samples. One way to achieve this is by considering the V/t ratio
+of each instance.
+
+\subsection{LIME}\label{subsec:lime}
+LIME~\cite{ribeiro2016model} is a model-agnostic method that can be used to explain the
+predictions of any machine learning model.
+LIME works by sampling a number of instances from the neighborhood of the instance to be
+explained.
+
+\textit{explanation lime }
+
+\textit{Explanation of the results}
+
 
 
 

@@ -7,12 +7,12 @@ Table~\ref{tab:evaluation_criteria}.
 The quality metrics have been structures based on
 the \ac{GQM}approach mentioned in subsection~\ref{subsec:goal-question-metric-approach}.
 
-The quality metrics are aligned with the quality model from~\cite{
-    siebert2022construction}, which in turn is based on the ISO/IEC 9126 standard for
+The quality metrics are aligned with the quality model
+from~\cite{siebert2022construction}, which in turn is based on the ISO/IEC 9126 standard for
 software quality evaluation.
 The standard has been adapted by \cite{siebert2022construction} to meet the specific
-requirements of machine learning models, as described in section~\ref{sec:evaluation-of
--machine-learning-models}.
+requirements of machine learning models, as described in section~\ref{sec:evaluation-of-machine-
+learning-models}.
 
 As~\cite{siebert2022construction} mostly focuses on the evaluation of classification
 models, the quality metrics have been adapted to fit the requirements of the regression
@@ -27,9 +27,8 @@ The following subsections follow this structure and describe the quality metrics
 detail.
 
 \captionsetup{margin={5pt,5pt}}
-\begin{table}[H]
+\begin{table}[{}]
     \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
-        \sisetup{group-minimum-digits = 4}
         \centering
         {\renewcommand{\arraystretch}{1}
             \begin{tabular}{p{2cm}p{8cm}p{3cm}}
@@ -48,7 +47,7 @@ detail.
                 tradeoff? Which means neither overfitting or unterfitting the
                 data.
                 \cite[p. 16]{siebert2022construction}
-                & Variance of CV, \newline $R^2
+                & Variance of CV, \newline $R^2$
                 \\
                 \hdashline
                 \textbf{Robustness} & Ability of the model to outliers, noise
@@ -261,8 +260,7 @@ line.
 \begin{figure}[h]
     \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
         \centering
-        \includegraphics[trim=left botm right top, width=0.9\textwidth,
-            clip]{cross_validation}
+        \includegraphics[trim=left botm right top, width=0.9\textwidth]{cross_validation}
         \caption{Variance of cross-validation}
         \label{fig:variance-of-cv}
     \end{tcolorbox}
@@ -280,7 +278,8 @@ explain any of the variance in the response variable around its mean, and 1 mean
 the model explains all the variance in the response variable around its mean~\cite[p.
 43]{muller_introductionmachinelearning_2016}.
 Special in sci-kit learns implementations is that the score can be negative if the model
-performs poorly. If a model always predicts the expected value of y, regardless of the
+performs poorly.
+If a model always predicts the expected value of y, regardless of the
 input features, it would receive an R^2 score of 0.0~\cite{_sklearnmetricsr2_}.
 
 Therefore, a high \(R^2\) indicated a good model fir and good bias-variance
@@ -501,13 +500,13 @@ compositions and has the lowest variance.
     \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
         \centering
         \begin{subfigure}{0.4\textwidth}
-            \includegraphics[width=\textwidth]{missing_values_plot.png}
+            \includegraphics[width=\textwidth]{missing_values_plot}
             \caption{}
             \label{fig:first}
         \end{subfigure}
         \hfill
         \begin{subfigure}{0.4\textwidth}
-            \includegraphics[width=\textwidth]{variance_missing_values.png}
+            \includegraphics[width=\textwidth]{variance_missing_values}
             \caption{}
             \label{fig:second}
         \end{subfigure}
@@ -968,7 +967,7 @@ Therefore, selecting an appropriate model will be decided by the other two cases
         \end{subfigure}
         \hfill
         \begin{subfigure}{0.5\textwidth}
-            \includegraphics[width=\textwidth]{performance_30_2.0}
+            \includegraphics[width=\textwidth]{performance_30_2}
             \caption{V: 30, t: 2}
             \label{fig:performance-30_2.0}
         \end{subfigure}
@@ -1072,8 +1071,9 @@ feature that exhibits significant variations~\cite[p. 117--118]{molnar2020interp
 Figure~\ref{fig:partial_dependence_plots}, we can see the PDPs for two models: Support Vector
 Machines (SVM) and Multilayer Perceptron (MLP).
 The results show that a higher \(y_p\) value leads to a greater spring back, while increasing the
-thickness of the metal sheet results in a lower spring back. The effect of the die opening is
-less significant than the other two features, but there is still a noticeable increase in spring
+thickness of the metal sheet results in a lower spring back.
+The effect of the die opening is less significant than the other two features, but there is still
+a noticeable increase in spring
 back with higher die opening.
 
 The PDPs demonstrate that all features exhibit a non-linear relationship with the target variable.
@@ -1085,17 +1085,18 @@ different features on the predicted outcome.
         \centering
         \begin{subfigure}{0.45\textwidth}
             \includegraphics[width=\textwidth]{partial_dependence_SVM}
-            \caption{Partial dependence plot SVM}
+            \caption{SVM}
             \label{fig:feature_impoartances_rf}
         \end{subfigure}
         \hfill
         \begin{subfigure}{0.45\textwidth}
-            \includegraphics[]{partial_dependence_MLP}
-            \caption{Partial dependence plot MLP}
+            \includegraphics[width=\textwidth]{partial_dependence_MLP}
+            \caption{MLP}
             \label{fig:partial_dependence_svm}
         \end{subfigure}
         \hfill
-        \caption{Partial dependence plots
+        \caption{Partial dependence plots}
+
         \label{fig:partial_dependence_plots}
     \end{tcolorbox}
 \end{figure}
@@ -1103,12 +1104,110 @@ different features on the predicted outcome.
 It is important to note that partial dependence plots and feature importance plots are limited to
 identifying linear relationships between features and the target variable.
 Since this is not the case as state previously, the results of the partial dependence plots are
-alternative models as permutation feaure importance and SHAP values are used to gain further
+alternative models as permutation feature importance and SHAP values are used to gain further
 information.
 
 \subsection{Permutation Feature Importance and SHAP}\label{subsec:permutation-feature-importance-
 and-shap}
 
+Permutation feature importance's asseses the impact on the model's prediction error when the values
+of a feature a randomly permutes. Permutation in this context means the proces of randomly
+shuffling the values of a single features while keeping the values of all other feautres unchanged.
+Thereby the association between the feature and the actual outcome is disrupted~\cite[p. 157]{
+    molnar2020interpretable}.
+
+The importance of a feature is evaluated by assessing the degree to which permuting its values
+results in an increase in the prediction error fo the model.
+If permuting a features results in a significant increases in errors the features is deemed
+important because the model relied on it for making accurate predictions.
+Conversely, if permuting a feature doesn't change the prediction error is considered unimportant
+because the model didn't utilize it for it's prediction~\cite[p. 158]{molnar2020interpretable}.
+
+Figure~\ref{fig:permutation_feature_importance} shows the permutation feature importance for the
+\ac{MLP} and \ac{SVM} models.
+Interestingly, the results show that the permutation feature importances for the die opening is
+always zero.
+This could mean that the die opening is not relevant for the overall decision making of both
+models.
+The normal feature importance plots showed that die die opening is important so that might not be
+explanation.
+So most likely the die opening is still and important feature when combined with either the
+thickness ore the penetration distance.
+
+
+
+
+\begin{table}[ht]
+    \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
+        \centering
+        \subfloat[Subtable 1 list of tables text][MLP]{
+            \begin{tabular}{lll}
+                \toprule
+                \multicolumn{3}{}{\textbf{$R^2$}} \\
+                \toprule
+                thickness   & 1.337 & +/-  0.173542 \\
+                \hdashline
+                distance    & 1.293 & +/-  0.145488 \\
+                \hdashline
+                die opening & 0.000 & +/-  0.000000 \\
+                \toprule
+                \multicolumn{3}{l}{\textbf{$MSE$}} \\
+                \toprule
+                thickness   & 0.274 & +/-  0.035613 \\
+                \hdashline
+                distance    & 0.265 & +/-  0.029856 \\
+                \hdashline
+                die opening & 0.000 & +/-  0.000000 \\
+                \bottomline
+            \end{tabular}}
+        \qquad
+        \subfloat[Subtable 2 list of tables text][SVM]{
+            \begin{tabular}{lll}
+                \toprule
+                \multicolumn{3}{}{\textbf{$R^2$}} \\
+                \toprule
+                distance    & 1.237 & +/-  0.139285 \\
+                \hdashline
+                thickness   & 1.178 & +/-  0.157247 \\
+                \hdashline
+                die opening & 0.000 & +/-  0.000000 \\
+                \toprule
+                \multicolumn{3}{l}{\textbf{$MSE$}} \\
+                \toprule
+                distance    & 0.254 & +/-  0.028583 \\
+                \hdashline
+                thickness   & 0.242 & +/-  0.032269 \\
+                \hdashline
+                die opening & 0.000 & +/-  0.000000 \\
+                \bottomline
+            \end{tabular}}
+    \end{tcolorbox}
+    \caption{Permutation feature importance}
+    \label{tab:permutation_feature_importance}
+\end{table}
+
+To investigate the joint performance of the die opening feature with the other two features,
+again partial dependence plots can be used.
+Figure~\ref{fig:partial_dependence_plots} shows a two-way partial dependence plot for the \ac{MLP
+} model.
+The x- and y-axes represent the thickness and the distance, respectively.
+The slope of the contour lines indicates the direction of the effect of the die opening on the
+prediction.
+The contour lines are colored and labeled according to the value of the prediction.
+It can be seen that the contour lines are not parallel which suggest the two features are
+interaction with each other and therefore have a joint effect on the model prediction.
+
+Therefore it can be concluded than different to the first appearance in  the partial dependence
+plots the die opening is not irrelevant for the model prediction.
+
+\begin{figure}[H]
+    \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
+        \centering
+        \includegraphics[width=0.9\textwidth]{dpd_distance_die_opening}
+    \end{tcolorbox}
+    \caption{DPD distance and die opening}
+    \label{fig:dpd-distance-die-opening}
+\end{figure}
 
 \subsection*{Local Model Agnostic Methods}
 Local interpretability refers to the ability to understand the behavior of the model for a
@@ -1117,8 +1216,8 @@ Model agnostic methods can be used to explain the predictions of any model type~
     molnar2020interpretable}.
 
 Local methods rely on interpreting individual instances from a dataset, and as such, it is
-crucial to select representative samples. One way to achieve this is by considering the V/t ratio
-of each instance.
+crucial to select representative samples.
+One way to achieve this is by considering the V/t ratio of each instance.
 
 \subsection{LIME}\label{subsec:lime}
 LIME~\cite{ribeiro2016model} is a model-agnostic method that can be used to explain the
@@ -1126,10 +1225,5 @@ predictions of any machine learning model.
 LIME works by sampling a number of instances from the neighborhood of the instance to be
 explained.
 
-\textit{explanation lime }
-
 \textit{Explanation of the results}
-
-
-
 

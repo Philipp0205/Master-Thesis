@@ -3,60 +3,67 @@
 
 \section{Sheet Metal}\label{sec:sheet-metal}
 % Definition
-Sheet metal is a type of metal usually manufacturey by flat rolling and characterized by
-its high
-length
-to thickness ratio,
-typically ranging from 0.4 mm to 6mm.
-Above this range, its is considered to be a plate and blow it, it is considered to be
-foil~
-\cite[p. 405]{groover_fundamentalsmodernmanufacturing_2020}.
+Sheet metal is usually manufactured by flat rolling any type of metal and thus characterized by
+its aspect ratio of thickness and surface area typically ranging from 0.4 mm to 6mm.
+Above this range, its is considered to be a plate and below it is considered to be
+foil~\cite[p. 405]{groover_fundamentalsmodernmanufacturing_2020}.
 % Material
-Low-carbon steel is the most commonly used type of sheet metal. Its low cost and has a
-good form ability as well as its sufficient strength for most applications.
-\cite[p. 405]{groover_fundamentalsmodernmanufacturing_2020}
+Low-carbon steel is the most commonly used type of sheet metal because it is low cost and has a good form ability as
+well as its sufficient strength for most applications~\cite[p. 405]{groover_fundamentalsmodernmanufacturing_2020}.
 % Commercial importance
-Sheet metals play a vital role in many industries. A significant number of consumer and
-industrial products such as automobiles contain sheet metal parts.
-% Manufacturing methods
-The majority of sheet metal forming operations are conducted using presses and are
-known as press working.
-These presses employ tooling such as punch and die or stamping
-die.
-The sheet metal forming processes can be classified into three main categories:
-cutting, bending, and drawing, with bending being the most common and only relevant
-process for this thesis.
-Bending and drawing are employed to shape sheet metal parts
-into their required forms~
-\cite[p. 405]{groover_fundamentalsmodernmanufacturing_2020}.
+Sheet metals play a vital role in many industries most notably automotive and aerospace to reduce the weight of
+products~\cite[pp. 1]{zheng_reviewformingtechniques_2018}.
 
-\subsection{Bending}
+\subsection*{Sheet Metal Manufacturing}
+% Manufacturing methods
+Sheet metal working is primarily carried out using machine tools known as presses and the process
+is referred to as sheet-metal press-working.
+To carry out this processes stamping presses are used which are equipped with punch and die
+tooling which is specifically designed for this purpose
+\cite[p. 405]{groover_fundamentalsmodernmanufacturing_2020}.
+The punch is a shaped tool that is usually mounted as upper part on the press ram and applies
+pressure on the sheet metal to shape it.
+The die is a stationary tool that is mounted in the press bed and provides a support surface for
+the sheet metal and also defines the shape of the finished
+product~\ref{sec:bending}~\cite[p. 412]{groover_fundamentalsmodernmanufacturing_2020}.
+
+While the term "punch" is quite intuitive, the term ``die'' can cause confusion.
+The term "die" is typically used to refer to the lower or stationary part of a tooling setup and traces
+back to the early days of metal working.
+It originated from old English word "dēag" which means a mold, shape, or form most likely refers to the fact that
+the metal placed on the die is pressed or molded into a specific shape.
+
+The sheet metal forming processes can be classified into three main categories:
+cutting, bending, and drawing.
+The process of cutting is employed to divide large sheets of material into smaller pieces while bending and drawing
+techniques are employed to shape sheet metal into the desired forms required for creating specific parts.
+Bending and drawing are employed to shape sheet metal parts
+into their required forms~\cite[p. 405]{groover_fundamentalsmodernmanufacturing_2020}.
+
+The bending bending method used in this study (Air Bending) deploys a mixture of bending and drawing and will be
+explained in more detail in the next section.
+
+
+\section{Sheet Metal Bending}\label{sec:bending}
 % Bending definition and description
 Bending is a forming operation that is used to change the shape of a sheet metal by
 apply a load to it.
+It involves using force to shape the sheet mal in into a desired form~\cite[p. 1]{dib_singleensembleclassifiers_2020}.
 The load is applied in way that exceeds the yield strength of the metal, but is below its
 ultimate tensile strength, which allows the metal to bet permanently deformed into a
-new shape~
-\cite[p. 1]{baig_machinelearningprediction_2021}.
+new shape~\cite[p. 1]{baig_machinelearningprediction_2021}.
+Sheet metal bending is usually used to produce large quantities of components at low cost in various
+industries~\cite[p. 1]{dib_singleensembleclassifiers_2020}
 
-% Bending process
-During the bending process, the metal on the outside of the neural plane (the plane
-that is perpendicular to the bending axis) is stretched, while the metal, while the
-metal on the inside is compressed.
-
-This results in a curvature of the sheet metal in the direction of the applied load.
-\cite[p. 3]{baig_machinelearningprediction_2021}
-% How curvature is achieved 
-The amount of curvature that is achieved in the bending process is determined by the
-amount of
-load applied, the thickness and properties of the metal, and the location and length of
-the
-neutral plane. By controlling these factors, it is possible to achieve precise and
-consistent
-results in the bending of sheet metal.
-
+During the bending process, the metal sheet undergoes plastic deformation, where the outer fibers are stretches while
+the inner fibers are compressed.
+This results in a curvature of the sheet metal in the direction of the applied
+load~\cite[p. 3]{baig_machinelearningprediction_2021}.
+The bending process creates a neutral plane, which an imaginary surface within the metal sheet where there is
+neither compression nor stretching. It is also called neutral axis or neutral
+line~\cite[pp. 67]{gustafson1998analytical}.
 Figure~\ref{fig:neutral-plane} shows the neutral plane after the bending operation, it is
-visible, that is is closer to the inside of the bend than to the outside of the bend.
+visible, that it is closer to the inside of the bend than to the outside of the bend.
 The arrows show where the metal was stretched and where it was compressed.
 
 % Pado:  Since you are including figures, make sure to mention/describe them in the
@@ -67,72 +74,93 @@ The arrows show where the metal was stretched and where it was compressed.
 % here for
 % the computer science public.
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.6\textwidth]{neutral-plane}
-    \caption{Bending plane, compression and stretching of sheet metal \cite[p.
-    3]{baig_machinelearningprediction_2021}}
+\begin{figure}[h]
+    \begin{tcolorbox}[arc=0pt,boxrule=0.5pt, colback=white]
+        \centering
+        \includegraphics[width=0.6\textwidth]{chap2/images/neutral-plane}
+    \end{tcolorbox}
+    \caption{Bending plane, compression and stretching of sheet
+    metal~\cite[p. 3]{baig_machinelearningprediction_2021}}
     \label{fig:neutral-plane}
 \end{figure}
 
+% How curvature is achieved 
+The amount of curvature that is achieved in the bending process is determined by the
+amount of load applied, the thickness and properties of the metal, and the location and length of the neutral plane.
+By controlling these factors, it is possible to achieve precise and consistent results in the bending of sheet metal.
 
-\section{Sheet Metal Bending}\label{sec:sheet-metal-bending}
-% Definitoin sheet metal bending
-The process of sheet metal bending involves using force to shape sheet metal into a
-desired form.
-It is usually used to produce large quantities of components at a low cost in various
-industries
-\cite[p. 1]{dib_singleensembleclassifiers_2020}.
-
-\subsubsection{Air Bending}
+\subsection{Air Bending}\label{subsec:air-bending}
 % Definition
 Air bending is a variant in the V-Bending process which is performed using puch-and-die
-tooling.
-\cite[p. 416]{groover_fundamentalsmodernmanufacturing_2020}
-As illustrated in Figure~\ref{fig:air-bending} the punch pushed the sheet metal which
-is placed
-in the die down.
-% Punch and die Tooling explanation
-In other bending forms the die is also used to shape or form the metal in a specific
-way. This is
-where the term "die" comes from in this context. (Source missing)
-In other bending methods the die is fully closed and provides a form where the sheet
-metal is
-pressed into. In air bending this is not the case, but the term stays the same. (Source
-missing)
+tooling
+\cite[p. 416]{groover_fundamentalsmodernmanufacturing_2020}.
+In Figure~\ref{fig:air-bending} the air bending process is illustrated.
+It can be seen that the punch is mounted on the upper part and applies force on the
+sheet metal.
+The sheet metal is placed on the die which is mounted on the lower part of the press.
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.3\textwidth]{air-bending}
-    \caption{Air bending \cite[p. 416]{groover_fundamentalsmodernmanufacturing_2020}}
-    \label{fig:air-bending}
+
+The difference between air- and V-bending is the way the sheet metal is pressed into the die.
+Figure~\ref{fig:v-bending} shows the V-bending process, where the sheet metal is pressed into the for of the die.
+This process is often used to create complex and precise bends. The die can have different shapes and does not always
+have to be a V-shape.
+It can also be a U-shape, a Z-shape, or any other shape that is required to achieve the desired bend.
+On the other hand, in air bending shown in figure~\ref{fig:air-bending}, the die is open and the sheet metal is not
+pressed into the die.
+Instead, it bent by applying force to the top of the metal sheet.
+The process allows for a wider range of bend angles, as the punch travel distance is not limited by the die.
+Additionally, air bending can achive a tighter bend radius compared to V-bending, but may result in a slightly
+rounded bed.
+
+Sheet metal bending is a fundamental process in the manufacturing industry, allowing for the creation of various
+metal shapes and configurations. Two common techniques are air bending and V-bending, each with unique characteristics.
+
+The primary distinction between air bending and V-bending is the way the sheet metal is pressed into the die. In
+V-bending, as illustrated in Figure~\ref{fig:v-bending}, the sheet metal is pressed into the form of the die.
+Depending on the die this can produce shapr and precise bends.
+The die can have various shapes, including U-shape, Z-shape, or any other shape needed to achieve the desired bend.
+
+In contrast, in air bending, as demonstrated in Figure~\ref{fig:air-bending}, the die is open, and the sheet metal is
+not pressed into the die.
+Instead, force is applied to the top of the metal sheet, bending it into shape.
+This process enables a broader range of bend angles, as the punch travel distance is not restricted by the die.
+
+While air bending can achieve tighter bend radii than V-bending, it may result in a slightly rounded bend. The choice
+between air bending and V-bending depends on the specific needs of the manufacturing process.
+
+\begin{figure}[h]
+    \begin{tcolorbox}[arc=0pt,boxrule=0.5pt, colback=white]
+        \centering
+        \begin{subfigure}{0.4\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{chap3/images/air-bending}
+            \caption{Air bending}
+            \label{fig:air-bending}
+        \end{subfigure}
+        \hfill
+        \begin{subfigure}{0.4\textwidth}
+            \includegraphics[width=\textwidth]{chap3/images/v-bending}
+            \caption{V-Bending}
+            \label{fig:v-bending}
+        \end{subfigure}
+        \hfill
+    \end{tcolorbox}
+    \caption{Differnt bending methods~\cite[pp. 416]{groover_fundamentalsmodernmanufacturing_2020}}
+    \label{fig:bending-methods}
 \end{figure}
 
 % Usage of air bending
-Air bending is commonly used in automotive industry to manufacture sheet metal parts. \cite[p.
-342]{kim_predictionbendallowance_2007}
-In this process the punch sheet metal comes in contact of the outside edges of the die
-, as well
-as the punch tip, but it does not come in contact with the die surface.
+Air bending is commonly used in automotive industry to manufacture sheet metal
+parts~\cite[p. 342]{kim_predictionbendallowance_2007}.
 It is typically the preferred bending method because, its high flexibility because it
-is possible
-to achieve different bending angles using the same punch-and-die tooling.
-\cite[p. 3]{miranda_formingspringbackprediction_2018}\cite[p.
-1]{cruz_applicationmachinelearning_2021}
+is possible to achieve different bending angles using the same punch-and-die
+tooling~\cite[p. 3]{miranda_formingspringbackprediction_2018}\cite[p. 1]{cruz_applicationmachinelearning_2021}
 
 % Pado: What’s a press brake bending machine?
-Today sheet metal bending machines like air bending machines are usually equipped with
-"copmputer
-numeral control" (CNC) systems that can automatically control the bending process and
-produce the
-desired shape." \cite[p. 3]{miranda_formingspringbackprediction_2018}
-The air bending process is shows strong nonlinear behavior, considering its parameters
-and their
-interrelationships. \cite[p. 3]{miranda_formingspringbackprediction_2018}
-
-% Pado: More detail, please! What exactly are its parameters? What are the non-linearly
-% affected
-% measures?
+Today press machines are usually equipped with ``copmputer numeral control (CNC) systems that can automatically
+control the bending process and
+produce the desired shape''~\cite[p. 3]{miranda_formingspringbackprediction_2018}
+The process parameters and their are explained in the section~\ref{sec:process-parameters}.
 
 \subsubsection{Spring Back}\label{sec:spring-back}
 % How the spring back is created
@@ -171,7 +199,7 @@ Prerequisite for all compensation methods is that the spring back is known there
 the accurate
 prediction of the spring back play an important role in the manufacturing process.
 
-\begin{figure}[H]
+\begin{figure}[h]
     \centering
     \includegraphics[width=0.5\textwidth]{spring-back}
     \caption{Spring back \cite[p. 5]{cruz_applicationmachinelearning_2021}}

@@ -37,41 +37,36 @@ detail.
                 & \thead{\textbf{Metric}} \\
                 \toprule
                 \textbf{Correctness} & Ability of the model to perform the
-                current task measured on the development dataset and the runtime dataset
-                \cite[p. 16]{siebert2022construction}
+                current task measured on the development dataset and the runtime dataset~\cite[p
+                . 16]{siebert2022construction}
                 &
                 MAE, \newline MSE, \newline RMSE
                 \\
                 \hdashline
                 \textbf{Relevance} & Does the model achieve a good bias-variance
                 tradeoff? Which means neither overfitting or unterfitting the
-                data.
-                \cite[p. 16]{siebert2022construction}
+                data.~\cite[p. 16]{siebert2022construction}
                 & Variance of CV, \newline $R^2$
                 \\
                 \hdashline
                 \textbf{Robustness} & Ability of the model to outliers, noise
-                and other data quality issues
-                \cite[p. 16]{siebert2022construction}
+                and other data quality issues~\cite[p. 16]{siebert2022construction}
                 & Loss of Accuracy, \newline Average Loss
                 \\
                 \hdashline
                 \textbf{Stability} & Does the artifact generate repeatable
-                results when trained on different data?
-                \cite[p. 16]{siebert2022construction}
+                results when trained on different data?~\cite[p. 16]{siebert2022construction}
                 & LOOCV stability
                 \\
                 \hdashline
                 \textbf{Interpret- ability} & How well can the model be
-                explained?
-                \cite[p. 16]{siebert2022construction}
+                explained?~\cite[p. 16]{siebert2022construction}
                 & Linearity, \newline monotonicity, \newline  interaction
                 \\
                 \hdashline
                 \textbf{Resource utilization} & How much resources are
                 required to train and run
-                the model?
-                \cite[p. 16]{siebert2022construction}
+                the model?~\cite[p. 16]{siebert2022construction}
                 & Training time, \newline runtime, \newline storage space
                 \\
                 \bottomrule
@@ -260,7 +255,8 @@ line.
 \begin{figure}[h]
     \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
         \centering
-        \includegraphics[trim=left botm right top, width=0.9\textwidth]{cross_validation}
+        \includegraphics[trim=left botm right top, width=0.9\textwidth]
+        {chap5/images /cross_validation}
         \caption{Variance of cross-validation}
         \label{fig:variance-of-cv}
     \end{tcolorbox}
@@ -500,13 +496,13 @@ compositions and has the lowest variance.
     \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
         \centering
         \begin{subfigure}{0.4\textwidth}
-            \includegraphics[width=\textwidth]{missing_values_plot}
+            \includegraphics[width=\textwidth]{chap5/images/missing_values_plot}
             \caption{}
             \label{fig:first}
         \end{subfigure}
         \hfill
         \begin{subfigure}{0.4\textwidth}
-            \includegraphics[width=\textwidth]{variance_missing_values}
+            \includegraphics[width=\textwidth]{chap5/images/variance_missing_values}
             \caption{}
             \label{fig:second}
         \end{subfigure}
@@ -924,15 +920,15 @@ spring back.
 \begin{figure}[H]
     \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
         \begin{subfigure}{0.5\textwidth}
-            \includegraphics[width=\textwidth]{performance_20_3}
+            \includegraphics[width=\textwidth]{chap5/images/performance_20_3}
             \caption{V: 20, t: 1}
-            \label{fig:performance-20-1}
+            \label{fig:performance-20-3-1}
         \end{subfigure}
         \hfill
         \begin{subfigure}{0.5\textwidth}
-            \includegraphics[width=\textwidth]{performance_20_3}
+            \includegraphics[width=\textwidth]{chap5/images/performance_20_3}
             \caption{V: 20, t: 3}
-            \label{fig:performance-20-3}
+            \label{fig:performance-20-3-2}
         \end{subfigure}
     \end{tcolorbox}
     \caption{Performance plots for case A}
@@ -961,13 +957,13 @@ Therefore, selecting an appropriate model will be decided by the other two cases
 \begin{figure}[H]
     \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
         \begin{subfigure}{0.5\textwidth}
-            \includegraphics[width=\textwidth]{performance_20_1}
+            \includegraphics[width=\textwidth]{chap5/images/performance_20_1}
             \caption{V: 20, t: 1}
             \label{fig:performance-20-1}
         \end{subfigure}
         \hfill
         \begin{subfigure}{0.5\textwidth}
-            \includegraphics[width=\textwidth]{performance_30_2}
+            \includegraphics[width=\textwidth]{chap5/images/performance_30_2}
             \caption{V: 30, t: 2}
             \label{fig:performance-30_2.0}
         \end{subfigure}
@@ -988,13 +984,13 @@ seem to be the most consistent models?
 \begin{figure}[H]
     \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
         \begin{subfigure}{0.5\textwidth}
-            \includegraphics[width=\textwidth]{performance_50_0.5}
+            \includegraphics[width=\textwidth]{chap5/images/performance_50_0.5}
             \caption{V: 50, t: 0.5}
             \label{fig:performance-50_0.5}
         \end{subfigure}
         \hfill
         \begin{subfigure}{0.5\textwidth}
-            \includegraphics[width=\textwidth]{performance_50_1}
+            \includegraphics[width=\textwidth]{chap5/images/performance_50_1}
             \caption{V: 50, t: 1}
             \label{fig:performance-50_1}
         \end{subfigure}
@@ -1039,7 +1035,7 @@ removed from the dataset to get a better performance of the model.
 \begin{figure}[H]
     \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
         \centering
-        \includegraphics[width=0.9\textwidth]{rf_feature_importances}
+        \includegraphics[width=0.9\textwidth]{chap5/images/rf_feature_importances}
     \end{tcolorbox}
     \caption{Feature importance of the random forest model.}
     \label{fig:feature-importances-rf}
@@ -1084,13 +1080,13 @@ different features on the predicted outcome.
     \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
         \centering
         \begin{subfigure}{0.45\textwidth}
-            \includegraphics[width=\textwidth]{partial_dependence_SVM}
+            \includegraphics[width=\textwidth]{chap5/images/partial_dependence_SVM}
             \caption{SVM}
             \label{fig:feature_impoartances_rf}
         \end{subfigure}
         \hfill
         \begin{subfigure}{0.45\textwidth}
-            \includegraphics[width=\textwidth]{partial_dependence_MLP}
+            \includegraphics[width=\textwidth]{chap5/images/partial_dependence_MLP}
             \caption{MLP}
             \label{fig:partial_dependence_svm}
         \end{subfigure}
@@ -1188,8 +1184,8 @@ thickness ore the penetration distance.
 
 To investigate the joint performance of the die opening feature with the other two features,
 again partial dependence plots can be used.
-Figure~\ref{fig:partial_dependence_plots} shows a two-way partial dependence plot for the \ac{MLP
-} model.
+Figure~\ref{fig:partial_dependence_plots} shows a two-way partial dependence plot for the
+\ac{MLP} model.
 The x- and y-axes represent the thickness and the distance, respectively.
 The slope of the contour lines indicates the direction of the effect of the die opening on the
 prediction.
@@ -1197,13 +1193,13 @@ The contour lines are colored and labeled according to the value of the predicti
 It can be seen that the contour lines are not parallel which suggest the two features are
 interaction with each other and therefore have a joint effect on the model prediction.
 
-Therefore it can be concluded than different to the first appearance in  the partial dependence
+Therefore it can be concluded than different to the first appearance in the partial dependence
 plots the die opening is not irrelevant for the model prediction.
 
 \begin{figure}[H]
     \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
         \centering
-        \includegraphics[width=0.9\textwidth]{dpd_distance_die_opening}
+        \includegraphics[width=0.9\textwidth]{chap5/images/pdp_distance_die_opening}
     \end{tcolorbox}
     \caption{DPD distance and die opening}
     \label{fig:dpd-distance-die-opening}
@@ -1220,10 +1216,49 @@ crucial to select representative samples.
 One way to achieve this is by considering the V/t ratio of each instance.
 
 \subsection{LIME}\label{subsec:lime}
-LIME~\cite{ribeiro2016model} is a model-agnostic method that can be used to explain the
-predictions of any machine learning model.
-LIME works by sampling a number of instances from the neighborhood of the instance to be
-explained.
+The LIME method stands for Local interpretable model-agnostic explanations
+and a model itself that can be used to explain the predictions of any machine
+learning model, the model is treated as a black-box~\cite{ribeiro2016model}.
+To accomplish this, LIME generates a new dataset with permuted samples along with the predictions
+made by the black box model for each sample.
+Using this dataset, LIME trains an interpretable model that is given weights based on the
+proximity of the sampled instance to the instance of interest.
+The interpretable model can be any model that is considered interpretable, such as a Liner
+Regression or Decision Trees.
 
-\textit{Explanation of the results}
+This approach allows LIME to provide explanations for individual predictions by approximating the
+behavior of the black box model in a localized and interpretable way~\cite[p. 185]{
+    molnar2020interpretable}.
+
+\cite{molnar2020interpretable} express local surrogate models like LIME as follows:
+
+\begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
+    \begin{equation}
+        explanation(x) = arg\; min\underset{g \in G}\; L(f,g,\pi_x) + \Omega(g)
+    \end{equation}
+\end{tcolorbox}
+
+The model for explaining a certain instance $x$ is represented by the model $g$ (such as a
+linear regression model), which reduces the loss (for example \ac{MSE}), measuring how closely
+the explanation aligns with the prediction made by the original model $f$ (for instance, an
+\ac{MLP} model).
+At the same time, the model complexity $\Omega(g)$ should remain low.
+The set of all possible linear regression models is referred to as $G$ , which encompasses all
+potential explanations.
+The proximity measure, denoted as $\pi_x$ , determines the size of the area surrounding the area
+surrounding the instance $x$ that is taken into account for the
+explanation~\cite[p. 185]{molnar2020interpretable}.
+
+LIME mainly provides instance explanations in the form of feature importance values.
+It can show the predicted values along with the explanations on how which features contributed
+in which direction to the prediction.
+This can be seen similar to PDP plots but instead of showing the average effect of a feature
+on the the overall prediction of the model, it shows the effect of a feature on the prediction
+for a specific instance.
+One instance in this case consists of the thickness, distance die opening and the corresponding
+spring back value.
+
+
+\textit{If I have questions for specific instances I should put them here.}
+
 

@@ -58,6 +58,7 @@
 
 \definecolor{OxfordBlue}{rgb}{0,0.106,0.329}   % Color
 \definecolor{UMRed}{rgb}{0.73,0.09,0.19}   % UM Logo Color
+%\definecolor{black}{rgb}{0,0,0}   % UM Logo Color
 
 \colorlet{DissertationColor}{UMRed}   
 

@@ -4,17 +4,17 @@
 \section{Sheet Metal}\label{sec:sheet-metal}
 % Definition
 Sheet metal is usually manufactured by flat rolling any type of metal and thus characterized by
-its aspect ratio of thickness and surface area typically ranging from 0.4 mm to 6mm.
+its aspect ratio of surface area thinkess which is typically ranging from 0.4 mm to 6mm.
 Above this range, its is considered to be a plate and below it is considered to be
 foil~\cite[p. 405]{groover_fundamentalsmodernmanufacturing_2020}.
 % Material
 Low-carbon steel is the most commonly used type of sheet metal because it is low cost and has a good form ability as
 well as its sufficient strength for most applications~\cite[p. 405]{groover_fundamentalsmodernmanufacturing_2020}.
 % Commercial importance
-Sheet metals play a vital role in many industries most notably automotive and aerospace to reduce the weight of
+Sheet metals play a vital role in many industries for example automotive and aerospace to reduce the weight of
 products~\cite[pp. 1]{zheng_reviewformingtechniques_2018}.
 
-\subsection*{Sheet Metal Manufacturing}
+\subsection{Sheet Metal Manufacturing}\label{subsec:sheet-metal-manufacturing}
 % Manufacturing methods
 Sheet metal working is primarily carried out using machine tools known as presses and the process
 is referred to as sheet-metal press-working.
@@ -26,22 +26,21 @@ pressure on the sheet metal to shape it.
 The die is a stationary tool that is mounted in the press bed and provides a support surface for
 the sheet metal and also defines the shape of the finished
 product~\ref{sec:bending}~\cite[p. 412]{groover_fundamentalsmodernmanufacturing_2020}.
+Figure~\ref{fig:bending-methods} shows the tooling setup together with a sheet metal being bend.
 
-While the term "punch" is quite intuitive, the term ``die'' can cause confusion.
-The term "die" is typically used to refer to the lower or stationary part of a tooling setup and traces
-back to the early days of metal working.
-It originated from old English word "dēag" which means a mold, shape, or form most likely refers to the fact that
+While the term `punch' is quite intuitive, the term ``die'' can cause confusion.
+The term `die' is a typically term in metal working to refer to the lower or stationary part of a tooling setup.
+It originated from old English word `dēag' which means a mold, shape, or form most likely refers to the fact that
 the metal placed on the die is pressed or molded into a specific shape.
 
-The sheet metal forming processes can be classified into three main categories:
-cutting, bending, and drawing.
+The sheet metal forming processes can be classified into three main categories: cutting, bending, and drawing.
 The process of cutting is employed to divide large sheets of material into smaller pieces while bending and drawing
-techniques are employed to shape sheet metal into the desired forms required for creating specific parts.
-Bending and drawing are employed to shape sheet metal parts
-into their required forms~\cite[p. 405]{groover_fundamentalsmodernmanufacturing_2020}.
-
-The bending bending method used in this study (Air Bending) deploys a mixture of bending and drawing and will be
-explained in more detail in the next section.
+techniques are employed to shape sheet metal into the desired forms required for creating specific
+parts~\cite[pp. 405]{groover_fundamentalsmodernmanufacturing_2020}.
+Drawing involves stretching the metal to create a convex or concave shape, while bending involves strining the metal
+to create a permanent bend.
+The bending method used in this study (Air Bending) deploys a mixture of bending and drawing and will be
+explained in more detail in the next section~\cite[pp. 416]{groover_fundamentalsmodernmanufacturing_2020}.
 
 
 \section{Sheet Metal Bending}\label{sec:bending}
@@ -52,27 +51,21 @@ It involves using force to shape the sheet mal in into a desired form~\cite[p. 1
 The load is applied in way that exceeds the yield strength of the metal, but is below its
 ultimate tensile strength, which allows the metal to bet permanently deformed into a
 new shape~\cite[p. 1]{baig_machinelearningprediction_2021}.
+A load below the yield strength will not deform the metal, while a load above the ultimate tensile strength will
+cause the metal to break.
 Sheet metal bending is usually used to produce large quantities of components at low cost in various
-industries~\cite[p. 1]{dib_singleensembleclassifiers_2020}
+industries~\cite[p. 1]{dib_singleensembleclassifiers_2020}.
 
 During the bending process, the metal sheet undergoes plastic deformation, where the outer fibers are stretches while
 the inner fibers are compressed.
 This results in a curvature of the sheet metal in the direction of the applied
 load~\cite[p. 3]{baig_machinelearningprediction_2021}.
 The bending process creates a neutral plane, which an imaginary surface within the metal sheet where there is
-neither compression nor stretching. It is also called neutral axis or neutral
-line~\cite[pp. 67]{gustafson1998analytical}.
+neither compression nor stretching.
+It is also called neutral axis or neutral line~\cite[pp. 67]{gustafson1998analytical}.
 Figure~\ref{fig:neutral-plane} shows the neutral plane after the bending operation, it is
 visible, that it is closer to the inside of the bend than to the outside of the bend.
 The arrows show where the metal was stretched and where it was compressed.
-
-% Pado:  Since you are including figures, make sure to mention/describe them in the
-% text (this
-% would be a great opportunity here to define what the punch and die are in this case -
-% the
-% common meaning of die is „Würfel“ as in „roll the dice“, so the term needs defining
-% here for
-% the computer science public.
 
 \begin{figure}[h]
     \begin{tcolorbox}[arc=0pt,boxrule=0.5pt, colback=white]
@@ -86,59 +79,35 @@ The arrows show where the metal was stretched and where it was compressed.
 
 % How curvature is achieved 
 The amount of curvature that is achieved in the bending process is determined by the
-amount of load applied, the thickness and properties of the metal, and the location and length of the neutral plane.
+amount of load applied, the thickness and properties of the metal and the location and length of the neutral plane.
 By controlling these factors, it is possible to achieve precise and consistent results in the bending of sheet metal.
 
 \subsection{Air Bending}\label{subsec:air-bending}
-% Definition
-Air bending is a variant in the V-Bending process which is performed using puch-and-die
-tooling
-\cite[p. 416]{groover_fundamentalsmodernmanufacturing_2020}.
-In Figure~\ref{fig:air-bending} the air bending process is illustrated.
-It can be seen that the punch is mounted on the upper part and applies force on the
-sheet metal.
-The sheet metal is placed on the die which is mounted on the lower part of the press.
-
-
-The difference between air- and V-bending is the way the sheet metal is pressed into the die.
-Figure~\ref{fig:v-bending} shows the V-bending process, where the sheet metal is pressed into the for of the die.
-This process is often used to create complex and precise bends. The die can have different shapes and does not always
-have to be a V-shape.
-It can also be a U-shape, a Z-shape, or any other shape that is required to achieve the desired bend.
-On the other hand, in air bending shown in figure~\ref{fig:air-bending}, the die is open and the sheet metal is not
-pressed into the die.
-Instead, it bent by applying force to the top of the metal sheet.
-The process allows for a wider range of bend angles, as the punch travel distance is not limited by the die.
-Additionally, air bending can achive a tighter bend radius compared to V-bending, but may result in a slightly
-rounded bed.
-
 Sheet metal bending is a fundamental process in the manufacturing industry, allowing for the creation of various
-metal shapes and configurations. Two common techniques are air bending and V-bending, each with unique characteristics.
+metal shapes and configurations.
+V-bending and its variant, Air Bending, are common techniques that utilize punch-and-die
+tooling~\cite[p. 416]{groover_fundamentalsmodernmanufacturing_2020}.
 
-The primary distinction between air bending and V-bending is the way the sheet metal is pressed into the die. In
-V-bending, as illustrated in Figure~\ref{fig:v-bending}, the sheet metal is pressed into the form of the die.
-Depending on the die this can produce shapr and precise bends.
-The die can have various shapes, including U-shape, Z-shape, or any other shape needed to achieve the desired bend.
+The V-bending process, as shown in Figure~\ref{fig:v-bending}, entails pressing the metal into the shape of the die
+to form precise and complex bends.
+The die can take various shapes, including U-shaped, Z-shaped, or any other shape required to achieve the desired bend.
 
-In contrast, in air bending, as demonstrated in Figure~\ref{fig:air-bending}, the die is open, and the sheet metal is
-not pressed into the die.
-Instead, force is applied to the top of the metal sheet, bending it into shape.
-This process enables a broader range of bend angles, as the punch travel distance is not restricted by the die.
-
-While air bending can achieve tighter bend radii than V-bending, it may result in a slightly rounded bend. The choice
-between air bending and V-bending depends on the specific needs of the manufacturing process.
+In contrast, air bending, as depicted in Figure~\ref{fig:air-bending}, utilizes an open die that only supports the
+metal on each side. This process permits a more extensive range of bend angles since the punch travel distance is not
+restricted by the die. Air bending can also achieve a tighter bend radius compared to V-bending, but it may result in
+a slightly rounded bend.
 
 \begin{figure}[h]
     \begin{tcolorbox}[arc=0pt,boxrule=0.5pt, colback=white]
         \centering
-        \begin{subfigure}{0.4\textwidth}
+        \begin{subfigure}{0.3\textwidth}
             \centering
             \includegraphics[width=\textwidth]{chap3/images/air-bending}
             \caption{Air bending}
             \label{fig:air-bending}
         \end{subfigure}
         \hfill
-        \begin{subfigure}{0.4\textwidth}
+        \begin{subfigure}{0.3\textwidth}
             \includegraphics[width=\textwidth]{chap3/images/v-bending}
             \caption{V-Bending}
             \label{fig:v-bending}
@@ -164,349 +133,313 @@ The process parameters and their are explained in the section~\ref{sec:process-p
 
 \subsubsection{Spring Back}\label{sec:spring-back}
 % How the spring back is created
-When the punch and therefore the bending pressure is removed at the end of the deformation
-operation, elastic energy remains in the bent part. This elastic energy is released,
-and the
-metal sheet partially returns to its original shape. \cite[p.
-113-114]{groover_fundamentalsmodernmanufacturing_2020} In metal forming this process is
-called
-spring back and is illustrated in Figure~\ref{fig:spring-back}.
-% Descriptoin of figure 
-The solid line shows the metal plate in its original for when the punch was still
-applied. The
-dashed line shows the metal plate after the punch was removed. The metal plate is
-partially
-returned to its original shape. The angle before the spring back is usually denoted as $\alpha_f$
-and the angle after spring back as $\alpha_i$.
+After the deformation pressure from process described in section~\ref{subsec:air-bending} is released, there is still
+some elastic energy remaining in the bent part.
+As a result, the bent part will partially return to its original
+shape, which is known as spring back~\cite[p. 413--414]{groover_fundamentalsmodernmanufacturing_2020}.
+
+Figure~\ref{fig:spring-back} shows the spring back of a metal plate after the punch was removed.
+The spring back is determined by the angle of the bent part after the bunch is removed compared to the angle when
+the punch was still applied.
+The solid line shows the metal plate in its original form when the punch was still
+applied. The dashed line shows the metal plate after the punch was removed.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.5\textwidth]{chap3/images/spring-back}
+    \caption{Spring back~\cite[p. 5]{cruz_applicationmachinelearning_2021}}
+    \label{fig:spring-back}
+\end{figure}
+
+The angle before the spring back is usually denoted as $\alpha_f$ and the angle after spring back as $\alpha_i$.
 % Introduce of formula
 The spring back ($\Delta \alpha_{SB}$) is therefore the difference between $\alpha_f$ and
-$\alpha_i$ as show in equation~\ref*{eq:calculation_springback}. \cite[p.
-6]{cruz_applicationmachinelearning_2021}
+$\alpha_i$ as show in equation~\ref*{eq:calculation_springback}~\cite[p. 6]{cruz_applicationmachinelearning_2021}.
 
 \begin{equation}
     \delta \alpha_{SB} = \alpha_i - \alpha_f
     \label{eq:calculation_springback}
 \end{equation}
 
-% Prevent spring back 
-To address this issue there are several methods to compensate the spring back. For
-example one
-common method is over bending, which means that the punch angle and radius are
-fabricated smaller
-than the specified angle.
-\cite[p. 114]{groover_fundamentalsmodernmanufacturing_2020}
+To tackle this problem, there are various techniques to compensate for spring back.
+One commonly used approach is over bending, wherein the punch angle and radius are fabricated smaller than the
+specified angle.
 Prerequisite for all compensation methods is that the spring back is known therefore
-the accurate
-prediction of the spring back play an important role in the manufacturing process.
-
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=0.5\textwidth]{spring-back}
-    \caption{Spring back \cite[p. 5]{cruz_applicationmachinelearning_2021}}
-    \label{fig:spring-back}
-\end{figure}
+the accurate prediction of the spring back play an important role in the manufacturing
+process ~\cite[p. 114]{groover_fundamentalsmodernmanufacturing_2020}.
 
 
 \section{Machine Learning}\label{sec:machine-learning}
-Machine learning also called \ac{ML} is a field of study that involves using
-statistical and
-computational techniques to analyze and learn from data. \cite[p.
-1]{muller_introductionmachinelearning_2016}
+The concept of machine learning involves deriving insights and information from data.
+It is a scientific discipline that sits at the crossroads of computer science, artificial intelligence, and statistics,
+and is sometimes referred to as predictive analytics or statistical
+learning~\cite[p. 1]{muller_introductionmachinelearning_2016}.
 
-\subsection{Supervised Learning}\label{subsec:supervised-learning}
-Supervised learning is a type of machine learning where we have a set of input/output
-pairs that
-we use to train a model to predict an outcome for a given input. We use this model to make
-predictions on new, unseen data, the training set. It consists of the input/output
-pairs, needs
-to be created manually, but once the model is trained, it can automate and potentially
-improve
-upon tasks that would be time-consuming or difficult for humans to perform. \cite[p.
-25]{muller_introductionmachinelearning_2016}
+Machine learning algorithms create a model by analyzing a sample dataset, commonly known as training data. The
+purpose of the model is to make predictions or decisions without requiring explicit programming to perform the task.
+These algorithms rather than being `hard coded' they are `soft coded' meaning that they adapt their structure
+automatically though repetition to improve their performance in achieving the desired task~\cite[pp. 4]{el2015machine
+}~\cite[pp. 151--170]{koza1996automated}.
+This adaptive process is called training, in wich input data samples are provided along with desired outcomes,
+allowing the algorithm to optimize itself to produce the desired result not only with the training inputs but also with
+new, previously unseen data~\cite[pp. 4]{el2015machine}.
+The process producing reulsts on unseen data is also called generalization~\cite[p. 4]{zhou_machinelearning_2021}.
+The training is the fundamental aspect of \ac{ML} and it can be continuous allowing the algorithm to
+learn from new data and its mistakes~\cite[pp. 4]{el2015machine}.
 
-\subsection{Regression}\label{subsec:regression}
+Machine learning algorithms have numerous applications in fields just as example agriculture (\cite{
+    yoosefzadeh2021application}), computer vision (\cite{hu2020voronoi}) or metal working
+(see section~\ref{sec:state-of-research}).
+
+\subsection{Terminology}\label{subsec:terminology}
+To carry out machine learning, a \textit{dataset} is required as the initial foundation.
+A dataset is composed of \textit{samples}, with each sample being a single row or observation.
+For example, if a dataset contains information about metal sheet bending, each row would represent a single bend.
+
+A \textit{feature} is an individual measurable property or characteristic of the data, and the associated value is
+called
+an \textit{attribute}.
+A feature could be, for example, the thickness of a sheet metal component, and the attribute could be 3mm.
+Features used to predict the outcome of a sample are called \textit{independent features}, while the outcome feature is
+referred to as the \textit{dependent feature} or \textit{target}. In this study, the springback is the dependent
+feature.
+The dataset of this study will be explained in section~\ref{subsec:dataset-exploration}.
+
+The process of using machine learning algorithms to create a model is called \textit{training}, and the data used for
+that process is referred to as \textit{training data} or \textit{fitting}.
+Usually, the training data is a subset of the whole dataset.
+The process of using the model to make predictions on new, unseen data is called
+\textit{generalization}~\cite[p. 35]{muller_introductionmachinelearning_2016}.
+The test-train split is described in more detail in section~\ref{subsec:test-train-split}.
+
+The outcome of the learning process is referred to as a \textit{model} that can be used to make predictions on new,
+unseen data.
+\ac{ML} algorithms are also often reffered as \textit{learners}.
+
+\subsection{Supervised Learning and Unsupervised Learning}\label{subsec:supervised-learning}
+Learning tasks can be categorized in two groups, based on whether the training data already contains the outcome or not.
+These groups are supervised learning and unsupervised learning~\cite[p. 4]{zhou_machinelearning_2021}.
+
+Supervised learning is employed when not only the independend features but also the dependent feature is known.
+Since this is the case in the dataset used in this study, supervised learning is the preferred
+method~\cite[p. 25]{muller_introductionmachinelearning_2016}.
+To achieve this supervised \ac{ML} algorithms are trained with parts of the dataset, the training data.
+Building the trainin set usually requires human effore but once it is built supervised learning automates the task
+and makes it more efficient. The two main types of supervised learning are classification and
+regression~\cite[p. 25]{muller_introductionmachinelearning_2016}, which will be explained in the following section.
+
+\subsection{Classification and Regression}\label{subsec:regression}
 There are two main types of supervised machine learning problems: classification and
 regression.
-For regression problems it is the goal to predict a continuous numerical value. This
-can be a
-real number in mathematical terms or a floating-point number in programming terms.
-\cite[p. 226]{muller_introductionmachinelearning_2016}
+For regression tasks it is the goal to predict a continuous numerical value.
+This can be a real number in mathematical terms or a floating-point number in programming
+terms~\cite[p. 226]{muller_introductionmachinelearning_2016}
 Classification problems involve predicting a class label, which is a choice from a
-predefined
-list of possible options. \cite[p. 25]{muller_introductionmachinelearning_2016}
+predefined list of possible options~\cite[p. 25]{muller_introductionmachinelearning_2016}.
 
-Predicting the spring back is a regression problem because the spring back is a
-continuous-valued
-output.
-Therefore, this work focuses on supervised learning for a regression problem and does
-not further
-consider classification problems.
+% Examples
+An example for a classification problem could be the prediction of the type of a flower based on its features such as
+petal length and width. The possible outcomes are the different types of flowers, which are the class labels.
+The class labels are discrete values, which means that they are not continuous.
+An example for a regression problem could be the prediction of the price of a house based on its features such as
+number of rooms and square footage. The possible outcomes are the different prices of houses, which are the
+continuous values.
 
-\subsection{Overfitting and Underfitting}\label{subsec:overfitting-and-underfitting}
-% Generalization
-In supervised learning, the goal is to construct a model using training data that can
-accurately
-predict outcomes for new, unseen data that shares similar characteristics as the
-training data.
-The ability of a model to make accurate predictions on unseen data is referred to as
-generalization. The objective is to develop a model that generalizes as effectively as
-possible.
-\cite[p. 35]{muller_introductionmachinelearning_2016}
+Since spring back is a continues values usually expressed in millimeters or degrees, this study focuses on
+regression problems.
 
-The effectiveness of an algorithm on new data is determined by its performance on a
-test set.
-Simple models tend to generalize better to new data. Overfitting occurs when a model is
-too
-complex for the amount of information available and does not generalize well, while
-underfitting
-occurs when a model is too simple and does not perform well on the training set. The
-goal is to
-find the simplest model that captures the variability in the data.
-\cite[p. 35]{muller_introductionmachinelearning_2016}
+\subsection{Empirical Error and Overfitting}\label{subsec:overfitting-and-underfitting}
+The discrepancy between the output predicted by the learning algorithm and the actual output is referred to as the
+error.
+The error computed on the training set is known as training error or empirical error, while the error determined on new
+samples is called generalization error~\cite[p. 26]{zhou_machinelearning_2021}.
+The goal of machine learning is to minimize the generalization error.
+The difficulty is, that the details of new samples are unknown while training the learning algorithm, that means that
+only the empirical error can be minimized.
+This bears the risk of creating models that perform well on the training data but
+generalize poorly on new, unseen data.
+A usual reason is that the algorithm learns details of the training samples as general properties of the data
+which are not true for new samples.
+This phenomenon is called overfitting and is the main reason why the generalization error is usually higher than the
+empirical error.
+The opposite phenomenon is called underfitting and happens when the algorithm fails to learn geneal properties of
+the training samples~\cite[p. 26]{zhou_machinelearning_2021}.
+
+An overfitting model is too complex for the amount of information available and therefore does not generalize well,
+while an underfitting model is too simple an does not perform well on the training set.
+Complex in this context means, that the model has a high number of parameters, which get adjusted in a way while
+training the model that it fits the training data too well.
+
+As an example for overfitting, consider a model that tries to predict the price of a house based on its square footage.
+The model could learn that the price of a house is proportional to its square footage, but it could also learn that the
+price of a house is proportional to its square footage plus the number of rooms.
+The latter model would overfit the training data, because it would not generalize well to new samples.
+
+\textit{Or should I use a picture as example of overfitting?}
+
+The goal is to find the simplest model that captures the variability in the
+data~\cite[p. 35]{muller_introductionmachinelearning_2016}.
 
 \subsection{Bias-Variance Tradeoff}\label{subsec:bias-variance-tradeoff}
-% Bias 
-Bias measures how well the central tendency of a learner's model approximates the
-actual function
-it is trying to learn. If the model consistently learns the true function accurately,
-it is
-unbiased. Otherwise, it is biased. \cite[p. 7-8]{neal_biasvariancetradeofftextbooks_2019}
-In essence the bias is the differences between the predicted values by the model and
-the actual
-values.
-A high bias indiactes a model with a complex fit to the training data and therefore
-overfits
-\cite[p. 20]{neal_biasvariancetradeofftextbooks_2019}
+Aside from determining the generalization ability of learning algorithms, it is also usefull to comprehend the
+reasons behind the performance.
+A crucial mechanism for comprehending the generalization performance of algorithms is the bias-variance
+decomposition~\cite[pp. 49]{zhou_machinelearning_2021}.
 
-% Variance 
-Variance measure how much the model's prediction vary, when trained on different
-subsets of the
-data. That means that a model with low variance generalizes one new data. A high variance
-indicates that the model as a complex fit to the data and therefore is overfitting the
-training
-data. This means it will not perform well on new data. \cite[p.
-7-8]{neal_biasvariancetradeofftextbooks_2019}
+Bias measures the difference between models predictions and the actual
+(ground-truth) values~\cite[p. 51]{zhou_machinelearning_2021}.
+It measures how well the model can capture the underlying
+relationships~\cite[p. 7--8]{neal_biasvariancetradeofftextbooks_2019}.
+A model with high bias is typically too simple and therefore unable to capture the complexity of the data, resulting
+in underfitting.
+On the other hand, a model with low bias is typically too complex and therefore can capture better the underlying
+patterns in the data. But if the model gets too complex it will result in
+overfitting~\cite[p. 20]{neal_biasvariancetradeofftextbooks_2019}.
 
-% Tradeoff 
-Both, high variance and high bias are undesirable properties for a model. The goal is,
-to find a
-model with low bias and low variance. This is called the bias-variance trade off. \cite[p.
-9]{neal_biasvariancetradeofftextbooks_2019}
+The term `variance' refers to the variability in the learning performance cause by changes in the training
+set~\cite[p. 51]{zhou_machinelearning_2021}.
+A model with low variances typically generalizes well on new data while high variance indicates that the model
+overfits the training data and therefore does not generalize well on new
+data~\cite[p. 7--8]{neal_biasvariancetradeofftextbooks_2019}.
+
+Variance and bias are conflicting because the represent two different sources of error.
+Error from bias is due to the model being too simple, while error from variance is due to the model being too
+complex.
+Therefore, as the model becomes more complex, the bias decreases and the variance increases, and vice versa.
+This is known as the bias-variance tradeoff and the coal is valled to find a model that strikes the balance between
+bias and minimizes the overall error of the model on new unseen
+data~\cite[p. 9]{neal_biasvariancetradeofftextbooks_2019}.
+
 
 % Regularization
-\subsubsection*{Regularization}
-Regularization refers to a group of techniques that force a model to be simpler.
-this usually results in a slight increase in bias but a substantial decrease in
-variance~\cite[p.
-12]{burkov2019hundred}.
+%\subsubsection*{Regularization}
+%Regularization refers to a group of techniques that force a model to be simpler.
+%this usually results in a slight increase in bias but a substantial decrease in
+%variance~\cite[p. 12]{burkov2019hundred}.
+%
+%The regularization method used in this thesis and in general the most popular are L1
+%and L2 regularization.
+%In order to construct a regularized model, the objective function is altered by
+%including a penalizing term that increases the value as the model becomes more complex~\cite[p. 12]{burkov2019hundred}
 
-The regularization method used in this thesis and in general the most popular are L1
-and L2
-regularization.
-In order to construct a regularized model, the objective function is altered by
-including a
-penalizing term that increases the value as the model becomes more complex~\cite[p.
-12]{burkov2019hundred}
+%\subsection{Ensemble Learning}\label{subsec:ensemble-learning}
+%Ensemble techniques in machine learning to involve the construction of multiple models
+%, called
+%"learners," for a given task. The primary goal of these methods is to improve the
+%accuracy and
+%performance of the model by combining the predictions of multiple learners. Ensemble
+%techniques
+%differ from single classifier methods by constructing multiple models and combining
+%them using a
+%voting strategy in order to highlight different aspects of the data. This can
+%potentially lead to
+%improved overall performance. \cite[p. 253]{shaik_briefsurveyrandom_2019}
 
-\subsection{Ensemble Learning}\label{subsec:ensemble-learning}
-Ensemble techniques in machine learning to involve the construction of multiple models
-, called
-"learners," for a given task. The primary goal of these methods is to improve the
-accuracy and
-performance of the model by combining the predictions of multiple learners. Ensemble
-techniques
-differ from single classifier methods by constructing multiple models and combining
-them using a
-voting strategy in order to highlight different aspects of the data. This can
-potentially lead to
-improved overall performance. \cite[p. 253]{shaik_briefsurveyrandom_2019}
+\subsection{Evaluation and Improvements of Models}\label{subsec:evaluations-and-improvements-of-models}
 
-\subsection{Evaluations and Improvements of Models}
-
-\subsubsection{Cross Validation}
+\subsubsection{Cross Validation}\label{subsubsec:cross-validation}
 Cross-validation is a method of evaluating the performance of a model by training
-multiple models
-on different subsets of the data and evaluating their performance. The most common
-version of
-cross-validation is k-fold cross-validation, in which the data is divided into k folds
-, and k
-models are trained, each using a different fold as the test set and the remaining folds
-as the
-training set.
+multiple models on different subsets of the data and evaluating their performance.
+The most common version of cross-validation is k-fold cross-validation, in which the data is divided into k folds,
+and k models are trained, each using a different fold as the test set and the remaining folds as the training set.
 The accuracy of each model is then evaluated, and the average accuracy across all k
-models is
-used as an estimate of the generalization performance of the model. This process helps
-to reduce
-the variability in model performance due to the specific choice of training and test
-sets, and is
-therefore considered to be a more stable and reliable way to evaluate the performance
-of a model.
-\cite[p. 252-260]{muller_introductionmachinelearning_2016}
+models is used as an estimate of the generalization performance of the model.
+This process helps to reduce the variability in model performance due to the specific choice of training and test
+sets, and is therefore considered to be a more stable and reliable way to evaluate the performance of a
+model~\cite[p. 252--260]{muller_introductionmachinelearning_2016}.
 
-\subsubsection{Grid Search}
+Figure~\ref{fig:cross-validation} shows how the cross-validation process and how the variance
+is calculated.
+It can be seen that the training data set was divided into multiple folds.
+The number of folds is denoted as $k$.
+One fold is used as test set (grey) while the remaining folds are used as training set (white).
+A model is trained on each iteration and the performance is evaluated with a metric denoted as $E$.
+Common metrics that can be used for evaluation are $R^2$, $MSE$, $MAE$ and $RMSE$ which are explained in section
+\ref{sec:dp1:-correctness} where they are used.
+
+\begin{figure}[h]
+    \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
+        \centering
+        \includegraphics[trim=left botm right top, width=0.9\textwidth]
+        {chap2/images/cross_validation}
+        \caption{Variance of cross-validation}
+        \label{fig:cross-validation}
+    \end{tcolorbox}
+\end{figure}
+
+\subsubsection{Grid Search}\label{subsubsec:grid-search}
 Each machine learning method has a number of parameters that can be tuned to improve the
-performance of the model. Parameters are often not known in advance and must be tuned
-to the data.
+performance of the model.
+Parameters are often not known in advance and must be tuned to the data.
 This is a common task in machine learning and therefore there are standard methods like
-grid
-search to find the best parameters.
+grid search to find the best parameters.
 Grid search is a method of systematically working through multiple combinations of
-parameters
-(called grid), cross-validating as it goes to determine which tune gives the best
-performance.
-\cite[p. 260-275]{muller_introductionmachinelearning_2016}
+parameters (called grid), cross-validating as it goes to determine which tune gives the best
+performance~\cite[p. 260--275]{muller_introductionmachinelearning_2016}.
 
 
 \section{State of research}\label{sec:state-of-research}
-In recent years, there has been a growing adoption of \ac{ML} in various applications
-related to sheet metal forming. With goal to achieve optimal manufacturing quality.
-Three main types of \ac{ML} algorithms are used in sheet metal forming applications,
-namely supervised learning, unsupervised learning, and reinforcement learning~
-\cite[p. 2]{cruz_applicationmachinelearning_2021}.
+Sheet metals exhibit a high ratio of yield strength to elastic modulus, which leads to significant springback,
+potentially compromising the accuracy of the final product. Consequently, extensive research has been conducted to
+estimate spring back behavior in sheet metal forming processes~\cite[p. 565]{liu2021deep}.
+In recent years, there has been a surge in the adoption of \ac{ML} for various applications related to sheet metal
+forming, aiming to achieve optimal manufacturing quality. Both supervised and unsupervised \ac{ML} methods have been
+employed in these applications~\cite[p. 2]{cruz_applicationmachinelearning_2021}.
 
-Sheet metals have a high ratio of yields strength to elastic modulus, which results in
-significant spring back, which can compromise the accuracy of the final product.
-As a result, extensive research has been carried to estimate the spring back behavior
-in sheet metal forming processes~\cite[p. 565]{liu2021deep}.
+Current research on mitigating spring back in sheet metal forming primarily focuses on compensation methods through
+numerical simulations, most notably finite element analysis (FEA)\cite[p. 565]{liu2021deep}.
+That means that the data used for training the model is generated by a simulation.
 
-Current research on mitigating the spring back in sheet metal forming is primarily
-focused on compensations methods through numerical simulations, most notably finite
-element analysis (FEA)~\cite[p. 565]{liu2021deep}
-\cite{lingbeek2005development}  present two methods for compensating spring back in the
-deep drawing process, but more reliable simulations is needed of industrial applications.
+Lingbeek et al.\cite{lingbeek2005development} present two methods for compensating sprin gback in the deep
+drawing process, but conclude that more reliable simulations are needed for industrial applications.
+Liu et al. utilized an Support Vector Machine to predict spring back in a micro W-bending process, demonstrating high
+prediction accuracy and generalization performance compared to experimental
+results~\cite[p. 1]{liu_springbackpredictionforming_2019}.
+Dib et al. evaluated several \ac{ML} algorithms for predicting spring back and maximum thinning in U-channel and square
+cup forming processes, with the a Multilayer Perceptron emerging as the best
+model~\cite{dib_singleensembleclassifiers_2020}.
+Likewise, Abdessalem et al. compared the performance of a quadratic response surface method (RSM) and two \ac{SVM}
+models for determining the best surrogate model for probabilistic structure optimization of sheet metals.
+Both \ac{SVM} models outperformed the RSM model~\cite[]{abdessalem2015probabilistic}.
 
-Also traditional supervised learning methods where used in metal forming applications.
-
-Liu et al. used a \ac{SVM} to predict the spring back in a micro W-bending process,
-demonstratring high prediciotn accuracy and generalization performance in comparison to
-experimental results~\cite[p. 1]{liu_springbackpredictionforming_2019}
-Dib et al. evaluated several \ac{ML} algorithms for predicting the spring back in a
-maximum thinning in U-channel and square cup forming processes. The \ac{MLP} found to
-be the best model~\cite{dib_singleensembleclassifiers_2020}.
-Similarly Abdessalem et al. compared the performance of a quadratic response surface
-metod (RSM) and two \ac{SVM} models for determinig the best surrogate model for
-probalistic strucutre oprimization of hydrofomred sheet metals. Both \ac{SVM} models
-outperformed the RSM model~\cite[]{abdessalem2015probabilistic}.
-
-It has to be noted that most of the research including \ac{ML} relies on FEA to
-generate the data for training and testing the models.
+It has to be noted that most of the research including \ac{ML} relies on FEA to generate the data for training and
+testing the models.
 This is due to the fact that it is time consuming to obtain enough experimental data for
 sheet metal forming processes.
-\cite{dib_singleensembleclassifiers_2020} not that the implementations of virtual
-tryout still heavily relies on human expertise to make critical decisions.
-Also the use of FEM does not necessarily eliminated unexpected defects due to variations
-in material properties, tool geometry and process parameters~\cite[p. 2]{
-    dib_singleensembleclassifiers_2020}.
+Dib et al. note that the implementations of virtual tryout still heavily relies on human expertise to make critical
+decisions.
+Also the use of FEM does not necessarily eliminates unexpected defects due to variations
+in material properties, tool geometry and process parameters~\cite[p. 2]{dib_singleensembleclassifiers_2020}.
 
-% The authors of [21] used SVM to estimate the springback of a micro W-bending process
-% with high
-% prediction accuracy and generalization performance. The authors of [22] compared the
-% performance of different machine learning algorithms (multilayer perceptron type ANN,
-% random
-% forest, decision tree, naive Bayes, SVM, KNN, and logistic regression) in predicting
-% springback
-% and maximum thinning in two different forming geometries, namely U-channel and square
-% cup. The
-% authors concluded that the multilayer perceptron algorithm was the best in
-% identifying the
-% springback, with a slightly higher score than SVM.
-% \cite{cruz_applicationmachinelearning_2021}
-
-
-% "The literature review shows that FEM methods and Machine Learning approaches are the
-% two
-% techniques that are vastly applied to predict the springback in sheet metals. Since
-% FEM is slow
-% so it cannot be used as an on-line tool in the production line for predicting
-% springback [29].
-% In machine learning, most of the earlier attempts used artificial neural networks
-% (ANN) to
-% predict springback, which has several limitations. Using ANN, the predictions cannot be
-% justified easily, i.e., the explainability of the answer from the neural network is
-% very low.
-% Neural networks require a lot of computation power to train the model. A neural
-% network needs a
-% large amount of data so that the model trained is generalized, rather than overfitted
-% or under
-% fitted to the data."
-% \cite{baig_machinelearningprediction_2021}
-
-% "Hence, this research article used tree-based learning algorithms which have high
-% explainability, needs less computational power, and need less data to train the model."
-% \cite{baig_machinelearningprediction_2021}
-
-
-% Pado: Expand this discussion a little and move it up (see comment above) 
-
-
-% There is a considerable amount of literature on modeling of the
-% air-bending process. Several significant references are summa-
-% rized here briefly. \cite[]{kim_predictionbendallowance_2007}
-
-% Cruz 
-With the availability of data there has been an increased use of Machine Learning \ac{
-    ML} in
-sheet metal forming with the goal to reduce costs and increase manufacturing quality.
-\cite{bock_reviewapplicationmachine_2019} \cite[]{cao_manufacturingadvancedsmart_2019}
-% Quellen
-lesen
-The ML algorithms can be divided into the main categories supervised learning,
-unsupervised
-learning and reinforcement learning. \cite[]{liu_reinforcementlearningfreeform_2020}
-Supervised learning is generally used in classification problems and regression
-problems while
-unsupervised learning is used to find patterns in data \cite[p.
-2]{cruz_applicationmachinelearning_2021}.
-
-\subsubsection*{Spring Back Prediction Using Unsupervised Learning}
+\subsection*{Spring Back Prediction Using Unsupervised Learning}
+\labelsub{subsec:spring-back-prediction-using-unsupervised-learning}
 Artificial Neural Networks \ac{ANN}s are widely used in sheet metal forming because of
-their high
-accuracy and generalization performance. \cite[p. 2]{cruz_applicationmachinelearning_2021}
+their high accuracy and generalization performance~\cite[p. 2]{cruz_applicationmachinelearning_2021}.
 \cite[]{narayanasamy_comparisonregressionartificial_2012a} which compared regression
-and neural
-network modeling for predicting spring back of steel sheet metal during the air bending
-process.
+and neural network modeling for predicting spring back of steel sheet metal during the air bending process.
 They observed that ANN was able to predict the spring back with higher accuracy. But
-they had a
-sample size of 25 and suggested further research.
+they had a sample size of 25 and suggested further research.
 \cite[]{inamdar_developmentartificialneural_2000} developed an ANN for the air bending
-process to
-predict spring back as well as the punch travel to achieve the desired angle in a
-single stroke.
+process to predict spring back as well as the punch travel to achieve the desired angle in a single stroke.
 \cite[]{kazan_predictionspringbackwipebending_2009} developed an ANN trained with FEM
-simulation
-data to predict the spring back for the wipe-bending process.
-
-% Therefore, the virtual tryout of sheet metal forming com-
-% ponents with FEM is normally performed considering
-% predefined material properties and values for some process
-% parameters, such as the friction coefficient among others.
-% In fact, the virtual tryout is still reliant on human expertise
-% used to make key decisions at different stages of the design
-% process.
-% \cite[]{dib_singleensembleclassifiers_2020}
+simulation data to predict the spring back for the wipe-bending process.
 
 Because \ac{ANN}s need a large amount of data to train the model generating the data
 with real
 machines is a time-consuming process.
-Therefore, it is common to use \ac{ANN}s trained with Finite Element Method \ac{FEM}
-simulation
-data.
-\textit{Was sind die Nachteile von FEM? Warum nutze eich "echte" Experimente?}
+Therefore, it is common to use \ac{ANN}s trained with Finite Element Method \ac{FEM}simulation data.
 
+\textit{Was sind die Nachteile von FEM? Warum nutze eich "echte" Experimente?}
 \subsubsection*{Spring Back Prediction Using Supervised Learning}
 Liu et al. (2019) used a Support Vector Machine \ac{SVM} to predict the spring back of
 micro
-W-Bending operations. \cite{liu_springbackpredictionforming_2019}
+W-Bending operations~\cite{liu_springbackpredictionforming_2019}.
 Dib et al. (2019) compared different \ac{ML} techniques (logistic regression, SVM, KNN
-, ANN,
-random forest, decision tree, naive Bayes, MSP) to predict the spring back and the
-occurrence of
-defects in sheet metal. \cite[p. 1]{dib_singleensembleclassifiers_2020}
+, ANN,random forest, decision tree, naive Bayes, MSP) to predict the spring back and the occurrence of
+defects in sheet metal~\cite[p. 1]{dib_singleensembleclassifiers_2020}.
 The authors conclude that the MLP and the SVM are the best performing algorithms and
-suggest
-further studies of ML regressions models and kriging regression models. \cite[p.
-13]{dib_singleensembleclassifiers_2020}
+suggest further studies of ML regressions models and kriging regression
+models~\cite[p. 13]{dib_singleensembleclassifiers_2020}.
 
 % Artificial neural networks, among the various types of learning algorithms, are widely
 % used in sheet metal forming processes due to their ability to overcome the limitations

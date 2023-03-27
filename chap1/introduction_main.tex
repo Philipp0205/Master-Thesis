@@ -9,32 +9,43 @@ crafting intricate parts and components~\cite[p. 1]{cruz_applicationmachinelearn
 But, as the demand for greater efficiency and reduced emissions grows, the need to improve these
 processes becomes even more crucial~\cite[p. 4]{zheng_reviewformingtechniques_2018}.
 
-% Problembeschreibung und thematische Abgrenzung
-Spring back is a common phenomenon that occurs when sheet metal is bent.
-It is a deformation that can derail the entire manufacturing process and lead to more trial and
-error cycles~\cite[p. 1]{cruz_applicationmachinelearning_2021}.
-Sheet metal forming is a complex process that involves a large number of variables and
-parameters Therefore, it is difficult to predict the spring back accurately, which
-makes it an interesting case for machine learning.
 
-% Relevance & Motivation
-The current focus of research is on the application of \ac{ML} to datasets generated via
-simulation and other bending techniques.
-However, limited attention has been paid to the use of real-world data and the air-bending method.
-As a result, this study aims to address these gaps by exclusively utilizing a three-point bending
-machine to generate a complete dataset.
-This research aims to enhance the relevance and motivation for applying \ac{ML} to real-world
-scenarios using air bending.
+\section{Problem Identification and Motivation}\label{sec:problem-identification-and-motivation}
+Over the past several decades, extensive research has been conducted on sheet metal forming technologies to meet the
+increasing demand for lightweight metal components.
+One common challenge in the field is the phenomenon of spring back, which is the tendency of a sheet metal to return
+to its original shape after being bent~\cite[p. 1]{cruz_applicationmachinelearning_2021}.
+This deformation can significantly disrupt the entire manufacturing process, leading to increased trial and error
+cycles~\cite[p. 1]{cruz_applicationmachinelearning_2021}.
+The complexity of sheet metal forming arises from the non-linear behavior caused by deformations of the metal sheet,
+making spring back prediction particularly difficult.
+Consequently, researchers have explored various compensation methods, including the use of Machine Learning (ML)
+models~\cite[p.1]{liu_newmachinelearning_2012}.
 
-% Goal
-The objective of this project is to accurately predict spring back and develop machine learning
-models that satisfy essential quality attributes.
-To assess the performance of the \ac{ML} models, six key quality attributes have been identified
-: correctness, relevance, robustness, stability
-, interpretability, and resource utilization.
-The aim is to create models that perform well in each of these areas and ensure that the predictions
-are as precise as possible.
+Traditional approaches often rely on trial and error techniques~\cite[p. 1]{dib_singleensembleclassifiers_2020}.
+Expert consultations in the field of sheet metal forming revealed that a common trial and error approach involves the
+creation of `technology tables' which contain bending parameters and resulting spring back data
+(see appendix~\ref{sec:technology-tables}).
+These tables are generated through numerous experiments with varying bending angles and metal sheets.
+However, this method is both time-consuming and costly, making it ill-suited for producing high-volume and low-cost
+components (personal communication, Dr. Wolfram Hochstrate and M. Sc. Peter Lange).
 
+These challenges underscore the need for an accurate ML model to predict spring back.
+Current research predominantly focuses on applying ML to datasets generated via simulation and other bending
+techniques (see section~\ref{sec:state-of-research} `State of Research').
+However, there has been limited attention given to the utilization of real-world data and the air-bending method.
+This study aims to fill these gaps by exclusively using air-bending to generate a comprehensive dataset, thus
+enhancing the relevance and motivation for applying ML to real-world scenarios.
+
+The primary goal of this project is to accurately predict spring back and develop \ac{ML} models that satisfy crucial
+quality attributes.
+To evaluate the performance of the ML models, six key Design Principles (DPs) have been identified:
+correctness,relevance, robustness, stability, resource utilization, and interpretability
+(see~\ref{sec:objectives-of-a-solution}).
+The objective is to create models that excel in each of these areas, ensuring the predictions are as precise and
+reliable as possible.
+
+\section{Research Method and Structure}\label{sec:research-method-and-structure}
 % Methode
 The research methodology employed in this thesis is Design Science Research (DSR), which is a
 research approach that emphasizes the development and assessment of innovative solutions to real-
@@ -42,7 +53,14 @@ world problems.
 DSR aims to generate new knowledge by creating, implementing, and evaluating new artifacts or
 solutions.
 
+It is worth taking a look at figure~\ref{fig:dsr_process} up front to get a understanding on how this study is
+structured.
+Some changes have been made to the DSR process which are reasoned in the chapter~\ref{ch:research-methodology}.
+The first activity `Identify Problem \& `Motivation' is already covered in this introduction and the order of the
+activities 4 and 5 where changed to suit the structure of this study.
+
 % Aufbau der Bachelorarbeit
 The thesis follows a two-phase process of ``build'' and ``evaluate'' within the DSR approach.
 The research methodology chapter (\ref{ch:research-methodology}) elaborates on how this approach is
 utilized throughout the thesis.
+

@@ -1,33 +1,39 @@
 \chapter{Evaluation}\label{ch:evaluation}
-% take a step back and put your results from 4 into context. 
-This chapter conducts a comprehensive analysis of the \ac{ML} models implemented in
-the preceding chapter.
-An overview of the quality metrics used for the evaluation is presented in
-Table~\ref{tab:evaluation_criteria}.
-The quality metrics have been structures based on
-the \ac{GQM}approach mentioned in subsection~\ref{subsec:goal-question-metric-approach}.
+% take a step back and put your results from 4 into context.
+This chapter represents the Evaluation phase encompassing the evaluation, demonstration, and
+communication activities outlined in the description of the \ac{DSR} process outlined in
+Chapter~\ref{ch:research-methodology} `Research Methodology'.
+The \ac{DSR} process is divided into the `build' and `evaluate' phases and their respective
+activities(see Figure~\ref{fig:dsr_process}).
 
-The quality metrics are aligned with the quality model
-from~\cite{siebert2022construction}, which in turn is based on the ISO/IEC 9126 standard for
-software quality evaluation.
-The standard has been adapted by \cite{siebert2022construction} to meet the specific
-requirements of machine learning models, as described in section~\ref{sec:evaluation-of-machine-
-learning-models}.
+The evaluation activity offers a comprehensive analysis of the machine learning (ML) models implemented in the
+preceding chapter.
+This phase involves assessing the effectiveness of the developed models in addressing the defined
+problems.
+During the demonstration phase, various scenarios are chosen to illustrate the potential real-world
+applications of the models and their performance in those contexts.
+In the communication phase, the results are presented in a manner easily understood by a non-technical audience.
+The objective of this step is to effectively communicate the outcomes and implications of the research to individuals
+who may lack a technical background in ML.
 
-As~\cite{siebert2022construction} mostly focuses on the evaluation of classification
-models, the quality metrics have been adapted to fit the requirements of the regression
-models implemented in this thesis.
-This is elaborated in each individual quality metric section.
+Table~\ref{tab:evaluation_criteria} provides an overview of the quality metrics employed for the evaluation,
+structured based on the \ac{GQM} approach discussed in subsection~\ref{subsec:goal-question-metric-approach}.
+The quality metrics align with the quality model from~\cite{siebert2022construction}, which in turn is grounded in
+the ISO/IEC 9126 standard for software quality evaluation.
+This standard has been adapted by\cite{siebert2022construction} to address the specific requirements of machine
+learning models, as detailed in Section~\ref{sec:evaluation-of-machine-learning-models}.
 
-Table~\ref{tab:evaluation_criteria} shows the quality metrics used for the evaluation
-of the \ac{ML} models.
-The \ac{GQM} approach is used to structure the evaluation of the \ac{ML} models.
-To each goal a question or one or more metrics where assigned.
-The following subsections follow this structure and describe the quality metrics in more
-detail.
+Since~\cite{siebert2022construction} primarily focuses on evaluating classification models, the quality metrics have
+been tailored to suit the needs of the regression models implemented in this thesis.
+Each individual quality metric section provides further elaboration.
+Table~\ref{tab:evaluation_criteria} also displays the quality metrics used for evaluating the \ac{ML} models.
+The \ac{GQM} approach structures the evaluation of the \ac{ML} models, with each goal assigned a question or one or
+more metrics.
+The following subsections adhere to this structure and describe the quality metrics in greater detail.
+
 
 \captionsetup{margin={5pt,5pt}}
-\begin{table}[{}]
+\begin{table}[h]
     \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
         \centering
         {\renewcommand{\arraystretch}{1}
@@ -95,12 +101,14 @@ Commonly used metrics for regression models are the mean absolute error \ac{MAE}
 \ac{MSE} and \ac{RMSE}.
 Their formal description is given in~\ref{eq:mae},~\ref{eq:mse} and~\ref{eq:rmse} where
 \(e_i\) being the prediction error which is the difference between the predicted value
-by the model and the acutal value.
+by the model and the actual value.
 \(y_i\) is the actual value and \(n\) is the number of samples in the testing data set.
 
-For the evaluatoins the \texttt{sci-kit learn}~(\cite{scikit-learn}) implementation of
-these metric was
-used.
+For the evaluation the \texttt{sci-kit learn}~(\cite{scikit-learn}) implementation of
+these metrics was used.
+
+The MAE is the average of the absolute differences between the predicted and the
+actual values.
 
 \textbf{Mean Absolute Error (MAE)}
 
@@ -125,12 +133,10 @@ The MSE is more sensitive to outliers than the MAE.
 \end{tcolorbox}
 
 The RMSE is the square root of the MSE. The RMSE is the most popular metric
-for evaluating the
-performance of regression models. The RMSE is interpretable in the same units
-as the response
-variable. The RMSE is more sensitive to outliers than the MAE.
-The MAE is the average of the absolute difference between the predicted and
-actual values.
+for evaluating the performance of regression models.
+The RMSE is interpretable in the same units as the response variable.
+The RMSE is more sensitive to outliers than the MAE.
+The MAE is the average of the absolute difference between the predicted and actual values.
 
 \textbf{Root Mean Squared Error (RMSE)}
 
@@ -143,21 +149,6 @@ actual values.
 
 For a full overview about the performance all three metrics are sued for the
 evaluation.
-
-% \subsection{Goal Hierarchy}
-
-% The correctness describes the ability of the model to perform on the
-% selected task. Concrete,
-% the model has to predict the spring back as correct as possible. The goal
-% hierarchy for the
-% correctness is shown in Figure~\ref{fig:goal_hierarchie_correctness}.
-
-% \begin{figure}[H]
-%     \centering
-%     \includegraphics[width=0.6\textwidth]{goal_hierarchie_correctness}
-%     \caption{Goal hierarchy: Correctness}
-%     \label{fig:goal_hierarchie_correctness}
-% \end{figure}
 
 \subsection{Results}\label{subsec:results}
 The Table~\ref{tab:results-correctness} shows the results of the
@@ -189,7 +180,7 @@ Because the simple \ac{DT} as well as the \ac{LR} are not able to predict the
 spring back correctly, they are not considered for the next steps of the evaluation.
 
 % Table wit hall used machine learning models and their metrics
-\begin{table}[H]
+\begin{table}[h]
     \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
 % \sisetup{group-minimum-digits = 4}
         \centering

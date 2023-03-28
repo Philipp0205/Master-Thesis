@@ -1034,11 +1034,29 @@ In addition to the data split shown in Figure~\ref{fig:train_test_split}, a rand
 /20 split was used to train and evaluate the models.
 The second split was only used as a backup method to see if the results differs a lot from the other split.
 
+\subsection{Setting the Hyper-Parameters}\label{subsec:hyper-parameters}
+Prior to training a machine learning model, users of machine learning implementations like the ons found in
+\texttt{sci-kit learn} generally need to manually choose a machine learning algorithm and configure one or more model
+parameters, known as hyper-parameters~\cite[pp. 1]{claesen2015hyperparameter}.
+The chosen hyper-paramters significantly influence the performance of the resulting model and differe a lot from use
+case to use case~\cite[pp. 1]{claesen2015hyperparameter}.
+Therefore it is important to set the right parameters.
+
+As example hyper-parameters for the random-forest model are the number of trees, the number of features to consider when
+looking for the best split and the maximum depth of the tree.
+Obviously the hyper-parameters differ for each model.
+One common approach to find the best hyper-parameters is to use a grid-search cross-validation.
+This is the approach used in this study and was described in Section~\ref{subsubsec:grid-search} `Grid Search'.
+
+To enable the reader to reproduce the results of this study, the hyper-parameters used for each model are listed in
+appendix~\ref{sec:hyper-parameters}.
+The can also be ofund in the source code of this study.
 
 \section{Result of the Build-Phase}\label{sec:results-build-phase}
 
 The design and development of the machine learning models have been completed, marking the end of the `Build' phase
-in this study. All models were implemented using the libraries listed in Table~\ref{table:libraries}, and the source
+in this study.
+All models were implemented using the libraries listed in Table~\ref{table:libraries}, and the source
 code is publicly available on GitHub at:
 
 \url{https://github.com/Philipp0205/Master-Thesis-Code}

@@ -83,7 +83,8 @@ All hyper-parameters are summarized in Table~\ref{tab:hyperparameters_decision_t
 \end{table}
 
 \subsection*{Random Forest}
-\begin{table}[H]
+
+\begin{table}[h]
     \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
         \sisetup{group-minimum-digits = 4}
         \centering
@@ -115,6 +116,98 @@ All hyper-parameters are summarized in Table~\ref{tab:hyperparameters_decision_t
         \end{tabular}
         \caption{Hyperparameters of the \ac{RF} model.}
         \label{tab:hyperparameters_rf}
+    \end{tcolorbox}
+\end{table}
+
+\subsection*{Extra Trees}
+
+\begin{table}[h]
+    \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
+        \sisetup{group-minimum-digits = 4}
+        \centering
+        \begin{tabular}{ll}
+            \toprule
+            \thead{\textbf{Hyperparameter}} & \thead{\textbf{Value}} &
+            \thead{\textbf{Description}}
+            \\
+            %  \unit{(Kcal\per\mole)\squared}}} & \thead{RMSD l.b.} &
+            %  \thead{RMSD u.b.}  \\
+            \toprule
+            bootstrap & True
+            \\
+            \hdashline
+            criterion & absolute\_error \\
+            \hdashline
+            max\_depth & 6 \\
+            \hdashline
+            min\_samples\_split & 4 \\
+            \hdashline
+            min\_samples\_leaf & 1 \\
+            \bottomrule
+        \end{tabular}
+        \caption{Hyperparameters of the Extra Trees model.}
+        \label{tab:hyperparameters_et}
+    \end{tcolorbox}
+\end{table}
+
+\subsection*{Gradient Boosting}
+
+\begin{table}[h]
+    \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
+        \sisetup{group-minimum-digits = 4}
+        \centering
+        \begin{tabular}{ll}
+            \toprule
+            \thead{\textbf{Hyperparameter}} & \thead{\textbf{Value}} &
+            \thead{\textbf{Description}}
+            \\
+            \toprule
+            loss & huber
+            \\
+            \hdashline
+            learning\_reate & 0.1 \\
+            \hdashline
+            max\_depth & 4 \\
+            \hdashline
+            min\_samples\_split & 3 \\
+            \hdashline
+            min\_samples\_leaf & 3 \\
+            \hdashline
+            n\_estimators & 200 \\
+            \bottomrule
+        \end{tabular}
+        \caption{Hyperparameters of the Extra Trees model.}
+        \label{tab:hyperparameters_gradient_boosting}
+    \end{tcolorbox}
+\end{table}
+
+\subsection*{SVM}
+
+\begin{table}[h]
+    \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
+        \sisetup{group-minimum-digits = 4}
+        \centering
+        \begin{tabular}{ll}
+            \toprule
+            \thead{\textbf{Hyperparameter}} & \thead{\textbf{Value}} &
+            \thead{\textbf{Description}}
+            \\
+            \toprule
+            bootstrap & True \\
+            \hdashline
+            criterion & absolute\_error \\
+            \hdashline
+            min\_samples\_split & 4 \\
+            \hdashline
+            max\_depth & 6 \\
+            \hdashline
+            min\_samples\_leaf & 1 \\
+            \hdashline
+            n\_estimators & 10 \\
+            \bottomrule
+        \end{tabular}
+        \caption{Hyper-paramters of the SVM model.}
+        \label{tab:hyperparameters_svm}
     \end{tcolorbox}
 \end{table}
 

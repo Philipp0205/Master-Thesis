@@ -55,7 +55,7 @@ A \ac{ML} model should predict the spring back with a high degree of accuracy an
 correctness, as even small errors in the prediction will cause fitting problem in the
 manufacturing process.
 
-\subsubsection*{Design Principle 2: Relevance}
+\subsection*{Design Principle 2: Relevance}
 In addition to measure the correctness it is important to understand ``why''
 the model has this performance.
 A model is considered relevant when it is able to accurately predict the outcomes of
@@ -68,7 +68,16 @@ generalize well to unseen data~\cite[p. 49--51]{zhou_machinelearning_2021}.
 It suggest, that a model can accurately capture the underlying patterns in the data
 without overfitting or underfitting~\cite[p. 49--51]{zhou_machinelearning_2021}.
 
-\subsubsection*{Design Principle 3: Robustness}
+\subsection*{Design Principle 3: Robustness}
+
+The IEEE standard glossary of software engineering terminology describe
+robustness as ``The degree to which a system or component can function correctly in the presence of
+invalid inputs or stressful environmental conditions''~\cite[p. 64]{terminology1990ieee}.
+\cite{saez2016evaluating} extend this definition to fit machine learning
+models and describe it as the ``capability of an algorithm to build models that are insensitive to
+data corruptions and suffer less from the impact of noise''~\cite[p. 2]{saez_evaluatingclassifierbehavior_2016}.
+\cite{siebert2022construction} specifically mention data quality issued like
+outliers or noise~\cite[p. 16]{siebert2022construction}.
 
 When working with real-world data, quality issues such as outliers, missing data, and
 noise are common problems.
@@ -82,7 +91,8 @@ accurate predictions~\cite[p. 16]{siebert2022construction}.
 %Because regressions algorithms are used in this new metrics have to be found~\cite[p.
 %3]{saez_evaluatingclassifierbehavior_2016}.
 
-\subsubsection*{Design Principle 4: Stability}
+\subsection*{Design Principle 4: Stability}
+
 
 The stability of a model is an important quality parameter, as it is essential that
 the model produces the same results when trained on different datasets.
@@ -92,7 +102,14 @@ Therefore, it is important that the model is able to generalize well to unseen d
 produce repeatable results when trained on different
 datasets~\cite[p. 16]{siebert2022construction}.
 
-\subsection*{Design Principle 5: Resource utilization}
+% Dopplung?
+Stability is defined as the ability of the model to generate repeatable
+results when trained on different data~\cite[p. 16]{siebert2022construction}.
+One appropriate way to measure the stability of a model is to use \ac{LOOCV},
+which is a form of Cross-Validation where one sample is used for validation and the remaining
+data is used for training~\cite[p. 200--201]{gareth2013introduction}.
+
+\subsection*{Design Principle 5: Resource utilization}\label{subsec:dp5-resource-utilization}
 One of the primary objectives of utilizing machine learning for predicting spring back is to
 reduce the number of trial-and-error cycles during the manufacturing process, thus saving
 valuable resources such as material and labor
@@ -115,7 +132,7 @@ Therefore, it is crucial to carefully consider the resources needed to train and
 effectively~\cite[p. 16]{siebert2022construction}.
 What resources are used and evaluated is described in more detail in~\ref{sec:resource- utilization}.
 
-\subsubsection*{Design Principle 6: Interpretability}
+\subsection*{Design Principle 6: Interpretability}
 Interpretability is a critical design principle that refers to the degree to which humans can comprehend and
 interpret the decision-making process of a trained machine learning model~\cite[p. 13]{molnar2020interpretable}.
 \cite{miller2019explanation} describe interpretability as the ``degree to which a human can understand the cause

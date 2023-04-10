@@ -198,9 +198,9 @@ because the errors made by the other models are large for a few instances but sm
             \hdashline
             \textbf{Ada Boost}                & 0.202 & 0.261 \\
             \hdashline
-            \textbf{Random Forest}            & 0.159 & 0.221 \\
-            \hdashline
             \textbf{Gradient Boosted Trees}   & 0.168 & 0.221 \\
+            \hdashline
+            \textbf{Random Forest}            & 0.159 & 0.221 \\
             \hdashline
             \textbf{Multi-Layered-Perceptron} & 0.136 & 0.190 \\
             \hdashline
@@ -883,50 +883,53 @@ Local methods rely on interpreting individual instances from a dataset, and as s
 crucial to select representative samples.
 One way to achieve this is by considering the V/t ratio of each instance.
 
-\subsection{LIME}\label{subsec:lime}
-The LIME method stands for Local interpretable model-agnostic explanations
-and a model itself that can be used to explain the predictions of any machine
-learning model, the model is treated as a black-box~\cite{ribeiro2016model}.
-To accomplish this, LIME generates a new dataset with permuted samples along with the predictions
-made by the black box model for each sample.
-Using this dataset, LIME trains an interpretable model that is given weights based on the
-proximity of the sampled instance to the instance of interest.
-The interpretable model can be any model that is considered interpretable, such as a Liner
-Regression or Decision Trees.
+The local model agnostic method LIME was applied on different machine learning models.
+But it did not yield any meaningful results.
 
-This approach allows LIME to provide explanations for individual predictions by approximating the
-behavior of the black box model in a localized and interpretable way~\cite[p. 185]{molnar2020interpretable}.
-
-\cite{molnar2020interpretable} express local surrogate models like LIME as follows:
-
-\begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
-    \begin{equation}
-        explanation(x) = arg\; min\underset{g \in G}\; L(f,g,\pi_x) + \Omega(g)
-    \end{equation}
-\end{tcolorbox}
-
-The model for explaining a certain instance $x$ is represented by the model $g$ (such as a
-linear regression model), which reduces the loss (for example \ac{MSE}), measuring how closely
-the explanation aligns with the prediction made by the original model $f$ (for instance, an
-\ac{MLP} model).
-At the same time, the model complexity $\Omega(g)$ should remain low.
-The set of all possible linear regression models is referred to as $G$ , which encompasses all
-potential explanations.
-The proximity measure, denoted as $\pi_x$ , determines the size of the area surrounding the area
-surrounding the instance $x$ that is taken into account for the
-explanation~\cite[p. 185]{molnar2020interpretable}.
-
-LIME mainly provides instance explanations in the form of feature importance values.
-It can show the predicted values along with the explanations on how which features contributed
-in which direction to the prediction.
-This can be seen similar to PDP plots but instead of showing the average effect of a feature
-on the overall prediction of the model, it shows the effect of a feature on the prediction
-for a specific instance.
-One instance in this case consists of the thickness, distance die opening and the corresponding
-spring back value.
-
-
-\textit{If I have questions for specific instances I should put them here.}
+%\subsection{LIME}\label{subsec:lime}
+%The LIME method stands for Local interpretable model-agnostic explanations
+%and a model itself that can be used to explain the predictions of any machine
+%learning model, the model is treated as a black-box~\cite{ribeiro2016model}.
+%To accomplish this, LIME generates a new dataset with permuted samples along with the predictions
+%made by the black box model for each sample.
+%Using this dataset, LIME trains an interpretable model that is given weights based on the
+%proximity of the sampled instance to the instance of interest.
+%The interpretable model can be any model that is considered interpretable, such as a Liner
+%Regression or Decision Trees.
+%
+%This approach allows LIME to provide explanations for individual predictions by approximating the
+%behavior of the black box model in a localized and interpretable way~\cite[p. 185]{molnar2020interpretable}.
+%
+%\cite{molnar2020interpretable} express local surrogate models like LIME as follows:
+%
+%\begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
+%    \begin{equation}
+%        explanation(x) = arg\; min\underset{g \in G}\; L(f,g,\pi_x) + \Omega(g)
+%    \end{equation}
+%\end{tcolorbox}
+%
+%The model for explaining a certain instance $x$ is represented by the model $g$ (such as a
+%linear regression model), which reduces the loss (for example \ac{MSE}), measuring how closely
+%the explanation aligns with the prediction made by the original model $f$ (for instance, an
+%\ac{MLP} model).
+%At the same time, the model complexity $\Omega(g)$ should remain low.
+%The set of all possible linear regression models is referred to as $G$ , which encompasses all
+%potential explanations.
+%The proximity measure, denoted as $\pi_x$ , determines the size of the area surrounding the area
+%surrounding the instance $x$ that is taken into account for the
+%explanation~\cite[p. 185]{molnar2020interpretable}.
+%
+%LIME mainly provides instance explanations in the form of feature importance values.
+%It can show the predicted values along with the explanations on how which features contributed
+%in which direction to the prediction.
+%This can be seen similar to PDP plots but instead of showing the average effect of a feature
+%on the overall prediction of the model, it shows the effect of a feature on the prediction
+%for a specific instance.
+%One instance in this case consists of the thickness, distance die opening and the corresponding
+%spring back value.
+%
+%
+%\textit{If I have questions for specific instances I should put them here.}
 
 
 \section{Demonstration}\label{sec:demonstration}
@@ -935,33 +938,37 @@ This activity focuses on the demonstration of the developed models in specific s
 overall performance like in the evaluation activity.
 For this purpose three scenarios are selected and the models are demonstrated in these scenarios.
 
-For the current dataset, the V/t ratios range from 10 to 100. The highest ratio can be achieved by bending a 0.5 mm
-thin metal sheet using a 50 mm wide die opening, while the lowest ratio is
-achieved by bending a 1 mm thick sheet on a 10 mm die opening.
+For the current dataset, the V/t ratios range from 10 to 100.
+The highest ratio can be achieved by bending a 0.5 mm thin metal sheet using a 50 mm wide die opening, while the
+lowest ratio is achieved by bending a 1 mm thick sheet on a 10 mm die opening.
 
 Recommended V/t ratios in industrial practices are between 6 and 10~\cite[p.7]{cruz_applicationmachinelearning_2021}.
 Bending operations performed outside of this range of recommended ratios may result in
 high spring back.
-Through testing and a look at the dataset the optimal V/t ratios for the experimental setups used in this study is
-different from the recommended V/t ratios.
-As seen in Section~\ref{subsec:training-test-split} `Test-Train Split' it was not possible to squeeze metals larger
-than 1 mm through a die opening of 10 mm.
-This means that the lowest possible V/t ratio is 10 and the industrial practise of 6 to 10 is not exactly applicable
-for the experimental setup used in this study.
+The lowest V/t ration in the dataset is 10, after that it was not possible to squeeze metals larger than 1 mm
+through a die opening of 10 mm.
+This means that the ratios used in industrial practise do not exactly apply of the dataset used in this study.
 
-A look a the mean springbacks can help here.
-Figure~\ref{fig:springback-heatmap} shows the mean spring back for each V/t ratio.
-It can be seen, that V/t of 100 results by far in the highest spring back while a V/t of 10 results in the lowest.
+Upon examining Figure~\ref{fig:springback-heatmap}, it is evident that the V/t ratio has a significant impact on
+spring back.
+There appears to be a correlation between a greater die opening and a reduced thickness resulting in greater spring
+backs.
+Notably, the data points for $t0.5 V40$ and $t0.5 V50$ exhibit particularly elevated spring backs relative to the
+remaining data set.
+Conversely, all the data collected with a 10 mm die opening indicate lower spring back values.
 
 \begin{figure}[h]
     \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
         \centering
-        \includegraphics[width=0.9\textwidth]{chap5/images/mean_springback_heatmap}
+        \includegraphics[width=0.8\textwidth]{chap5/images/mean_springback_heatmap}
     \end{tcolorbox}
     \caption{Feature importance of the random forest model.}
     \label{fig:springback-heatmap}
 \end{figure}
 
+To select specific instances for the demonstration, the V/t ratios of the instances are considered.
+A V/t ratios around 20 is considered to in the middle of the the dataset.
+Therefore three cases are defined, where the V/t ratios are below, within and above the recommended range.
 
 The selected representative instances for the local methods are from one of three cases:
 \begin{itemize}
@@ -971,131 +978,119 @@ The selected representative instances for the local methods are from one of thre
 \end{itemize}
 
 Chosen instances from each case are shown in Table~\ref{tab:representative-instances}.
+The tabe shows the instances chosen grouped by the fact if there in, below or above the recommended range.
 
 \begin{table}[H]
     \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
         \centering
         \begin{tabular}{lllll}
             \toprule
-            \textbf{Case} & \textbf{\(V\) } & \textbf{\(t\)} & \textbf{\(y_p\)} & \textbf{V/t} \\
+            \textbf{Case} & \textbf{\(V\) } & \textbf{\(t\)} & \textbf{V/t} & \textbf{In Range} \\
             \toprule
-            A             & 10              & 1.0            & ?                & 10           \\
-            A             & 20              & 3.0            & ?                & 6.66         \\
+            A             & 20              & 3.0            & 6.66         & below             \\
             \hdashline
-            B             & 30              & 1.5            & ?                & 20           \\
-            B             & 20              & 1.5            & ?                & 13.33        \\
+            B             & 30              & 1.5            & 20           & in                \\
+%            B             & 20              & 1.5            & 13.33        & in                \\
+            A             & 20              & 2.0            & 10           & in                \\
             \hdashline
-            C             & 50              & 1              & ?                & 50           \\
-            C             & 50              & 0.5            & ?                & 100          \\
+            C             & 40              & 0.5            & 80           & above             \\
+            C             & 50              & 0.5            & 100          & above             \\
             \bottomrule
         \end{tabular}
     \end{tcolorbox}
-    \caption{Representative instances for the local methods.}
+    \caption{Representative instances for the local methods.
+    V denots the die opening, t denotes the thickness of the metal sheet and V/t denotes the V/t ratio.
+    The last column indicates if the V/t ratio is in, below or above the recommended range.}
     \label{tab:representative-instances}
 \end{table}
 
 \subsection{Comparison of the Models}\label{subsec:overall-comparison-model-performance}
-This section will showcase the outcomes generated by the trained models in more detail and
-will also discuss the results in relation to the research questions.
-This is done in this section to find out the best perfoming models.
-These models will be researched in more detail later with the help of model-agnostic
-methods to explain the predictions of the models.
+In this section, the outcomes generated by the trained models on the selected cases A, B, and C are presented. To
+ensure unbiased results, all samples that were part of the test cases were removed from the training data set.
+For instance, for case A(a), all samples with a die opening of 20 and a thickness of 2 were removed from the dataset.
+This was done to prevent the models from overfitting to the test cases.
+While it is anticipated that the models' performance may decline in these tests due to the removal of training data,
+the decrease is not expected to be significant.
 
-In order to evaluate the model's performance without bias, each test case where removed
-from the training data set so that the model has not seen the test case before.
-This results in a small but notable performance decrease in the test cases, but makes sure that the
-results are not biased.
+In interpreting the following figures, it is important to note that the target values represent the mean of all
+values.
+While the dataset's quality is not perfect, there may \ e some outliers present. In some cases there are only a few
+samples for a specific sample and therefore the mean is not a good representation of the actual value.
 
-For the interpretation of the next picutres it is relevant to nkow that the target values
-repesent the man of all values.
-The quality the dataset is but not perfect, and it is possible that there are some outliers in the
-dataset.
+Figure~\ref{fig:performance-case-a} depicts two chosen test cases for case A with a V/t-ratio below the recommended
+range.
+Test case (a) performs quite well overall and all models can predict the spring back with a mean absolute error of
+less than 0.5 mm.
+The weak point of the model seems to be the predictions of the edge punch penetration values and it can be seen that
+the predictions is always lower than the actual value.
+However, the models' performance deteriorates in instance (b)\ref{fig:performance-20-3.0} with a V/t-ratio of 6.6,
+particularly in the prediction of spring backs.
 
-Figure~\ref{fig:performance-case-a} shows show two chosen test cases for case A with a
-V/t-ratio of 20 (\ref{fig:performance-20-1} and 6.6 (\ref{fig:performance-20-3}.
-
-Case~\ref{fig:performance-20-1} with a V/t-ratio of 20 demonstrates the models'
-ability to predict the spring with high accuracy.
-However, the performance decreases in case b)\ref{fig:performance-20-3} with a V/t-ratio
-of 6.6, particularly when predicting the spring backs.
-It is likely that there is a measurement error at V = 7.5 in case
-b)~\ref{fig:performance-20-3}, causing some models to potentially predict the correct
-spring back.
-
-\begin{figure}[H]
+\begin{figure}[h]
     \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
-        \begin{subfigure}{0.5\textwidth}
-            \includegraphics[width=\textwidth]{chap5/images/performance_20_3}
-            \caption{V: 20, t: 1}
-            \label{fig:performance-20-3-1}
-        \end{subfigure}
+        % Todo V20 t.2.5
+%        \begin{subfigure}{0.5\textwidth}
+%            \includegraphics[width=\textwidth]{chap5/images/performance_20_2.0}
+%            \caption{V: 20, t: 2}
+%            \label{fig:performance-20-2.0}
+%        \end{subfigure}
         \hfill
         \begin{subfigure}{0.5\textwidth}
-            \includegraphics[width=\textwidth]{chap5/images/performance_20_3}
+            \includegraphics[width=\textwidth]{chap5/images/performance_20_3.0}
             \caption{V: 20, t: 3}
-            \label{fig:performance-20-3-2}
+            \label{fig:performance-20-3.0}
         \end{subfigure}
     \end{tcolorbox}
     \caption{Performance plots for case A}
     \label{fig:performance-case-a}
 \end{figure}
 
+Figure~\ref{fig:performance-case-b} illustrates two selected test series for case B, where the V/t ratios fall within
+the recommended range.
+These test series produced the best results compared to cases A and C.
+In instances (a) and (b), all models performed reasonably well, with instance (b) displaying better overall
+performance.
+It is apparent that the SVM model appears to predict spring back better in case (a), while the MLP model performs
+best in case (b).
+Overall, it is difficult to identify a clear favorite model based on the performance of the models in these test
+series. Although some models performed better than others for specific variables or scenarios, the differences were
+not significant enough to identify a clear winner. Therefore, the selection of an appropriate model will be
+determined by the outcomes of the other two cases, A and C.
 
-Figure~\ref{fig:performance-case-b} displays two selected test series for case B, which indicates
-that the V/t ratios fall within the recommended range. These test series produced the best
-results compared to cases A and C.
-
-As depicted in figure~\ref{fig:performance-20-1}, both models accurately predicted the spring
-back with high precision. The \ac{RF}, \ac{SVM}, and \ac{MLP} models demonstrated similar
-performance and produced usable results. Similar findings were observed for figure~\ref{fig
-:performance-30_2.0}, where the V/t ratio was different. In this case, the \ac{MLP} model
-performed well for \(y_p\) values of 5 and 10, but became inaccurate for higher values. On the
-other hand, the \ac{SLP} model consistently produced better results, while the \ac{ET} model
-still struggled to perform well.
-
-Overall, it is challenging to identify a clear favorite model based on the performance of the
-models in these test series.
-While some models performed better than others for specific variables or scenarios, the
-differences were not significant enough to identify a clear winner.
-Therefore, selecting an appropriate model will be decided by the other two cases A and C.
-
-\begin{figure}[H]
+\begin{figure}[h]
     \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
         \begin{subfigure}{0.5\textwidth}
-            \includegraphics[width=\textwidth]{chap5/images/performance_20_1}
-            \caption{V: 20, t: 1}
-            \label{fig:performance-20-1}
+            \includegraphics[width=\textwidth]{chap5/images/performance_20_1.5}
+            \caption{V: 20, t: 1.5}
+            \label{fig:performance-20-1.5}
         \end{subfigure}
         \hfill
         \begin{subfigure}{0.5\textwidth}
-            \includegraphics[width=\textwidth]{chap5/images/performance_30_2}
-            \caption{V: 30, t: 2}
-            \label{fig:performance-30_2.0}
+            \includegraphics[width=\textwidth]{chap5/images/performance_20_2.0}
+            \caption{V: 20, t: 2}
+            \label{fig:performance-20_2.0}
         \end{subfigure}
     \end{tcolorbox}
     \caption{Performance plots for case B}
     \label{fig:performance-case-b}
 \end{figure}
 
-Case C is the most challenging case, as the V/t ratios are not within the recommended range.
-Figure~\ref{fig:performance-case-c} shows the performance of the models for two test series
-with V/t ratios of 50 and 100.
+Case C is the most challenging case, as all models exhibit visibly poor performance. This is expected since the V/t
+ratio is well above the recommended range. The results are unusable, as the models are unable to predict the spring
+back. However, in Figure~\ref{fig:performance-50_1}, the results appear more promising, with the RF and SVM models
+demonstrating the most consistent performance. It is clear that further work is required to develop machine learning
+models that perform well in these scenarios.
 
-The results shown in figure~\ref{fig:performance-50_0.5} are clear.
-The results are unusable, as the models are not able to predict the spring back.
-In figure ~\ref{fig:performance-50_1} the results look better, the \ac{RF} and \ac{SVM} model
-seem to be the most consistent models?
-
-\begin{figure}[H]
+\begin{figure}[h]
     \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
         \begin{subfigure}{0.5\textwidth}
-            \includegraphics[width=\textwidth]{chap5/images/performance_50_0.5}
+            \includegraphics[width=\textwidth]{chap5/images/performance_40_0.5}
             \caption{V: 50, t: 0.5}
             \label{fig:performance-50_0.5}
         \end{subfigure}
         \hfill
         \begin{subfigure}{0.5\textwidth}
-            \includegraphics[width=\textwidth]{chap5/images/performance_50_1}
+            \includegraphics[width=\textwidth]{chap5/images/performance_50_0.5}
             \caption{V: 50, t: 1}
             \label{fig:performance-50_1}
         \end{subfigure}
@@ -1105,7 +1100,7 @@ seem to be the most consistent models?
 \end{figure}
 
 The best overall performing models are the \ac{MLP} and the \ac{SVM} model.
-As seen before, the model performs consistent across all thee scenarios, indicating that it can
+As seen before, the model performs consistent across all three scenarios, indicating that it can
 effectively handle a broad range of V/t ratios also outside the recommended industry guidelines
 range.
 Therefore the chosen models for more detailed analysis are the \ac{MLP} and the \ac{SVM} model.
@@ -1113,3 +1108,242 @@ Therefore the chosen models for more detailed analysis are the \ac{MLP} and the 
 Overall it can be said that the models are able to predict the spring back with high accuracy.
 For bad predictions the error is less than 0.25 mm, which is within the tolerance of the
 most manufacturing processes (This it not true yet).
+
+
+\section{Results and Discussion}\label{sec:results-and-interpretation}
+This part of the study is structured in the following way:
+The first part ``Summary of Results'' provides a brief overview of the results achieved in this study.
+The second part ``Interpretation of Results'' discusses the results in more detail and tries to explain the
+observations.
+Both parts are structured according to the three research questions created
+in~\ref{sec:problem-identification-and-motivation}.
+
+...
+
+\subsection{Summary of Results}\label{subsec:summary-of-results}
+%Introduction
+%Briefly restate the research objectives and hypotheses
+%Provide an overview of the methods used (e.g., data collection, ML model development, and evaluation)
+
+The research objective of this study is to find out if \ac{ML} models can accurately predict the spring back of
+bent sheet metal parts.
+Going further on this question it was the goal to find out which model or which ensemble models perform the best.
+Finally the another goal was it to use interpreable model to get more nisghts about the bending process.
+
+%Data Collection and Preprocessing
+%Summarize the collected real-world air-bending dataset, including the number of samples, features, and target
+%variable (spring back)
+%Describe any preprocessing steps applied to the data (e.g., normalization, feature engineering, or data imputation)
+The data was collected using the air-bending process and the spring back was measured using the output data of the
+press brake.
+The dataset included 400 samples with the target feature srping back the input feature punch penetration, die
+opening and metal sheet thickness.
+It was noted that the data quality seemed to be good and therefore not much data preprocessing steps where needed.
+The datset was quite complete and therefore not data imputation was needed.
+The data was normalized using different scalers from the sci-kit learn library.
+
+
+%Key Findings
+%Summarize the most important findings related to the tested hypotheses
+%Identify the best-performing ML model(s) based on the evaluation criteria
+%Highlight any novel insights or contributions made by the research
+
+\subsubsection{Hypothesis 1}
+
+\textbf{Hypothesis 1:} Machine Learning (ML) models can accurately predict spring back in sheet metal forming using
+real -world air-bending data, outperforming traditional trial-and-error methods.
+
+The first research question is if \ac{ML} models can accurately predict the spring back of bent sheet metal parts.
+The first Design Principle correctness (\ref{sec:dp1:-correctness}) was used to test this hypothesis using the
+regression metric RMSE as main evaluation criteria.
+The results showed that all \ac{ML} most models where able to predict the spring back with a RMSE of less than 0.2 mm,
+indicating acceptable accuracy.
+The Extra Tree and Support Vector Machine models performed best with a RMSE of 0.15 mm.
+The Ada Boost, Random Forest and Gradient Boosting models performed demonstarted moderate prediction performance
+while the performance of Linear Regression and Decision Tree models showed poor performance and therefore where not
+considered for further analysis.
+
+\subsubsection{Hypothesis 2}
+
+\textbf{Hypothesis 2:} Specific ML models or combinations of models (e.g., ensemble methods) will yield better
+performance
+in terms of the six Design Principles (DPs) compared to other models.
+
+The second research question is if \ac{ML} specific models or ensemble models outperform the other models.
+For this hypothesis Design Principles 2 - 5 where used.
+
+\textbf{Relevance}
+
+The relevance was evaluated by assessing the bis-variance tradeoff of all trained models, except the Linear Regression
+and Decision Tree which where ruled out.
+The resutls showed that the Extra Tree, Multi-Layers Perceptron and Random models had the best balance between
+bias and variance and therefore where considered the most relevant.
+Most models where able to explain the variance in the data.
+
+
+\textbf{Robustness}
+
+The robustness was evaluated by their perfomance when exposed to missing data and noise.
+The results showed again that the Extra Tree demonstrated the most robust performance particulary with noise present
+in the dataset.
+The MLP and SVM, usualy known for their high performance experienced a significant decline in the performed
+experiemtns.
+The MLP showed the most stable performance when trained on multiple different subset of the data but was quite
+seneitvie when noise was added to the dataset.
+The Support Vector Machine model displayer high sensivitiy of outlies since the model was not able to place a good
+enough hyperplane anymore.
+
+The findings emphasize the importance of using robust models and pre-processing the data to eliminate noise and
+outliers.
+Additionally it was found that already more than 1ß\% of noise can have a significant impact on the performance of
+
+\textbf{Stability}
+
+The stability was evaluated using Leave One Out Cross Validation (LOOCV).
+The primariy metric of the evaluation was the standard derivation of the cross-validatoin scores.
+This time the results showd that the Gradient boosting model was the most stable with a standard
+derivations of 0.183 followed by the Extra Tree and Random Forest models.
+
+Interestingly the SVM as well as the MLP model which showed good results in other design principles where less stable
+in this case compared to the other models.
+
+\textbf{Resource Utilization}
+The resource utilization was evaluated using three key metric: Training time, prediction time and memory usage.
+This metrics should be used to evaluated the how much computational resources the trained \ac{ML} models need.
+
+The results indicate that the Extra Tree model and the Random Forest of 19.541 ms and 24.912 ms models had the shortest
+training time compared to the other models.
+The MLP model had by far the longest training time with over 16 seconds for the relatively small dataset of 400 samples.
+Regarding the inference time the Gradient Boosting model was the fastest, while the MLP again was the slowest .
+The RF and ET models demonstrated comparable inference times.
+
+In terms of memory usage the MLP model was the most memory intensive model with 170 KB of memory usage.
+The other model's memory usage was comparably low ranging from 157 KB to 159 KB.
+The dataset's small size leaded less complex models and that contributed to the low memory usage.
+
+\textbf{Hypothesis 3:} ML models with high interpretability can provide valuable insights into the factors that
+contribute to spring back, potentially leading to better understanding of the underlying physical processes and
+more effective compensation strategies.
+
+To answer the third hypothesis model-agnostic methods were used to evaluate the interoperability, as model specific
+method where not suitable since the used interpretable algorithm did not perform well.
+Global method agnostic methods such as feature dependence and partial dependence plots where applied to the best
+performing models.
+Thickness, distance and die opening where all identified as important features for the prediction spring back with the
+thickness of the metal sheet having the biggest influence on the outcome.
+
+Partial dependence plots revealed non-linear dependencies between the features and the target variable.
+Permutation feature importance and SHAP where sued to to further investiage the importance of the features.
+The results indicated that thickness and punch penetration were crucial for the models decision-making while while the
+die opening was important but only in combination with the other two features.
+Two-way partial dependence plots showed an interaction between thickness and distance, confirming the importance of the
+die opening for the predictions.
+
+Also the model-agnostic method LIME was applied to different machine learning models but did not yield any new insights.
+
+\subsection{Interpretation of Results}\label{subsec:interpretation-of-results}
+
+The results of the this study provide insights in the applications of machine learning on the field of metal sheet
+bending and the prediction of spring back.
+The interpretation of the results is as follows:
+
+\subsubsection{Hypothesis 1}
+The findings support the first hypothesis that \ac{ML} models can accurately predict the spring back of bent sheet
+metal.
+The Extra Tree and Support Vector Machine models performed best with a RMSE of 0.15 mm, while other models still
+exhibited good performance.
+This means that in average the predictions of the best models derivative by 0.15 mm from the actual spring back.
+
+With spring backs ranging from 0.5 mm to 3.1 mm an RMSE of 0.15 mm is acceptable for many applications. It means that
+the spring back can predicted.
+
+Traditional trial-and error methods like technology tables (see~\ref{sec:problem-identification-and-motivation})
+provide the data of a limited number of samples / bends.
+The resulting \ac{ML} models of this study predict an unlimited number of new bends with a high accuracy.
+Therefore they out-perform the traditional method.
+
+\textit{I could compare the results to the resutls of other studies but it is hard since most other studies used a
+different bending methods. But I could show that a real dataset is better than on generated by simulation}
+
+\subsubsection{Hypothesis 2}
+
+The results show that specific \ac{ML} perform better compared to other models based on the six Design Principles
+that where used.
+The Extra Tree model demonstrated the best balance between bias and variance, as well as robust performance when
+exposed to missing data and noise.
+The Gradient Boosting model displayed the highest stability, while the Extra Tree and Random Forest models exhibited
+the best resource utilization.
+These findings suggest that selecting the most suitable ML models for specific applications is crucial for achieving
+optimal performance.
+
+The best overall performance was achieved by the Extra Tree model.
+It was the only model that performed well in all performed tests.
+The Extra Tree model is a good choice for applications where the model should be trained on a small dataset and
+should be able to predict new samples with a high accuracy.
+
+It has to be noted that only a simple neural network was used in this study.
+It already showed good results but could be further improved by using more complex neural networks.
+
+\subsubsection{Hypothesis 3}
+The results show interpretability methods can provide valuable insights into factors that contribute to spring back,
+potentially leading to a better understanding of the underlying physical processes and more effective compensation
+strategies.
+The thickness of the metal sheet was found to have the most significant influence on spring back, while other
+features, such as punch penetration and die opening, also played important roles in the models' decision-making
+processes.
+
+With he use of model-angostic methods, the study also revealed non-linear dependencies between the input and the
+target features, as well as interactions between thickness and distance.
+This information can be valuable for further refining the models, as well as for developing more effective
+compensation strategies in the sheet metal forming process.
+
+This study was not able to use certain models with high interpretability such as decision trees or linear models
+since their performance was not good enough.
+
+
+
+\textit{As a side effect of this study the design princples as well as the dsr process could be used in further
+research}
+
+\subsection{Limitations of Research}\label{subsec:limitations-of-research}
+This study has some limitations that should be considered when interpreting the results.
+
+\textbf{Limited sample size:} The dataet use has a limited number of samples.
+With 400 samples the models might not have enough data to capture the full complexity of the spring back phenomenom.
+A larger dataset could potentially improve the model performance.
+
+\textbf{Feature selection:} This study had a limited number of input featues (punch penetration, die opening and
+metal sheet thickness).
+Other potentially relevant factors such as material peroperties, temperatures might limited the models ability to
+capture all factors affecting the spring back.
+
+\textbf{Model selection:} This study had to selected a limited number of models.
+There might be other models or more edvanced techniniques that might yield better resutls.
+
+\subsection{Recommendations for Further Research}\label{subsec:recommendations-for-further-research}
+The limitations identified in this study provide direction for future research.
+Based on the results, the \ac{MLP}demonstrated superior performance in multiple design principles, indicating that
+deep learning models may be promising for predicting spring back.
+
+%As suggested by \cite{dib_singleensembleclassifiers_2020}, the use of more complex ensemble models could further
+%improve the generalization performance of the models.
+
+
+One of the most interesting directions for future research is the use of \ac{ML} models to predict bend deduction.
+Bend deduction is the phenomenon where the metal sheet shrinks during the bending process, resulting in a smaller
+bend angle than the one specified in the design.
+Similar to the spring back this can lead to fitting issues and is therefore an important topic for further research.
+As noted by~\cite{strano2017fusion}, while some predictions models are available for spring back, bend deduction is
+frequently overlooked and could be a fruitful topic for future investigation.
+
+Moreover there are likely other factors that influence the spring back beyond those included as features in this study.
+To account for these additional patterns, future research could consider including features such as rolling
+direction, temperature, and tension.
+
+\begin{itemize}
+    \item As it can be seen in the evaluatoin more data = better results lol
+    \item Adaptive learning
+\end{itemize}
+
+
+

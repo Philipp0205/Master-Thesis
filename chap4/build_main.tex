@@ -11,11 +11,6 @@ the effectiveness of the artefact.
 The \ac{DP} are derived from the requirements of the overall models and are based on
 the work of~\cite{siebert2022construction}.
 
-%The Build phase involves the creation of machine learning models, which serve as
-%artifacts.
-%By implementing these steps, the DSR process establishes a rigourous and methodical
-%approach for creating new artifacts.
-
 
 \section{Objectives of a Solution}\label{sec:objectives-of-a-solution}
 
@@ -36,6 +31,11 @@ In Chapter~\ref{ch:evaluation} `Evaluation' these six DP metrics will be combine
 assess the effectiveness of the ML models.
 This approach will ensure a thorough evaluation of the ML models based on the quality parameters that are important
 for the DSR process.
+
+This study aims to answer three research questions, which are formulated in the
+Section ~\ref{sec:problem-identification-and-motivation}`Problem Identification and Motivation'.
+Design Principle 1 will be used to answer the first research question, the principles 2-5 will be used to answer the
+second research question and the principle 6 will be used to answer the third research question.
 
 \subsection*{Design Principle 1: Correctness}\label{correctness}
 
@@ -69,12 +69,11 @@ It suggest, that a model can accurately capture the underlying patterns in the d
 without overfitting or underfitting~\cite[p. 49--51]{zhou_machinelearning_2021}.
 
 \subsection*{Design Principle 3: Robustness}
-
-The IEEE standard glossary of software engineering terminology describe
-robustness as ``The degree to which a system or component can function correctly in the presence of
+Robustness is described as in the IEEE standard glossary of software engineering terminology as:
+``The degree to which a system or component can function correctly in the presence of
 invalid inputs or stressful environmental conditions''~\cite[p. 64]{terminology1990ieee}.
 \cite{saez2016evaluating} extend this definition to fit machine learning
-models and describe it as the ``capability of an algorithm to build models that are insensitive to
+models and describe it as ``the capability of an algorithm to build models that are insensitive to
 data corruptions and suffer less from the impact of noise''~\cite[p. 2]{saez_evaluatingclassifierbehavior_2016}.
 \cite{siebert2022construction} specifically mention data quality issued like
 outliers or noise~\cite[p. 16]{siebert2022construction}.
@@ -569,6 +568,10 @@ This thesis focuses on the utilization of supervised machine learning models to 
 spring back.
 Therefore, a selection of the most common machine learning models where used, based on
 the systematic literature review of~\cite{dridi2021supervised}.
+Dridi (2021) defines eight widely used supervised machine learning models in the paper.
+These models are Logistic Regression, Support Vector Machines, Decision Trees, Random Forests, AdaBoost, Naive Bayes
+, and K-Nearest Neighbors.
+
 In the paper, the author defines eight widely used supervised machine learning models: Logistic
 Regression, Support Vector Machines, Decision Trees, Random Forests, AdaBoost, Naive Bayes,
 and K -Nearest Neighbors~\cite[p. 8]{dridi2021supervised}.
@@ -584,8 +587,10 @@ In this study, a linear regression model is employed as the baseline model.
 Linear regression a widely used method that is used to predict a continuous output (dependend variables) based on a set
 of input features (independend variables).
 The goal of a \ac{LR} model is to find the best-fitting straight to explain the relationship between the dependent
-and independent variables~\cite[p. 45]{muller_introductionmachinelearning_2016}.
-This so called regression line can be express as shown in Equation~\ref{eq:linear-regression}.
+(spring back) and independent (die opening, thicnkess, punch penetration)
+variables~\cite[p. 45]{muller_introductionmachinelearning_2016}.
+This so called regression line can be express as shown in Equation~\ref{eq:linear-regression}, which is take from
+Müller and Guido (2016)~\cite[p. 45]{muller_introductionmachinelearning_2016}.
 
 \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
     \begin{equation}
@@ -599,13 +604,6 @@ features.
 The model's parameters, $w$ and $w$, are acquired through learning, and $\hat{y}$ signifies the forecast made by the
 model.
 If the dataset only has one feature, the equation would appear as:
-
-\begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
-    \begin{equation}
-        \hat{y} = w[0] * x[0] + b
-        \label{eq:linear-regression-one-feature}
-    \end{equation}
-\end{tcolorbox}
 
 The linear regression model is trained by minimizing the sum of squared errors between the predicted and actual
 values.
@@ -644,23 +642,24 @@ has a class assigned, in this case, either red or blue.
 The SVM algorithm seeks to identify a line (hyperplane) that separates the data points into different classes in the
 best possible way which means that there is the largest possible margin between the line and the
 nearest points of each class~\cite{muller_introductionmachinelearning_2016}.
-The margin is defined as the distance between the hyperplane and the nearest point of each class.
+The distance between the nearest point of each class and the hyperplane is called the margin.
 The math behind that is quite involved and is not covered in this thesis, interested readers can read more about it
 in ~\cite{hastie2009elements}.
 
 The points that lie closest to the hyperplane are called support vectors, these define the margin which is tried to be
-maximized by the algorithm and therefore play a crucial role in determining the optimal position of the hyperplane.
+maximized by the algorithm and therefore are important for determining the optimal position of the hyperplane.
 The hyperplance servers as a decision boundary that spearates the data points into different
 classes, in the example the points on the one side of the hyperplane are classified with the blue class while the
 points on
 the other side are classified with the red class ~\cite[p. 42]{awad_efficientlearningmachines_2015}.
 
 Since each feature in the dataset is formulated as one dimension in the geometrical space, visualizing the hyperplane
-is usually not as straightforward as in the example depicted in Figure~\ref{fig:svm-example}. In the case of the
-spring back dataset, for instance, the hyperplane would be a three-dimensional plane, but it is not uncommon to have
+is usually not as straightforward as in the example depicted in Figure~\ref{fig:svm-example}.
+In the case of the spring back dataset, for instance, the hyperplane would be a three-dimensional plane, but it is
+not uncommon to have
 spaces with even higher dimensions.
-The algorithm aims to identify a hyperplane in an N-dimensional space, where N denotes the number of features, to
-effectively separate and classify data points~\cite[]{awad_efficientlearningmachines_2015}.
+To effectively separate and classify data points, the algorithm aims to find a hyperplane in an N-dimensional space,
+where N is the number of features~\cite[]{awad_efficientlearningmachines_2015}.
 
 \begin{figure}[H]
     \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
@@ -687,7 +686,7 @@ This approach is similar to how \ac{SVM}s penalize points in classification
 problems~\cite[p. 369]{montesinoslopez_supportvectormachines_2022}.
 
 % Kernel trick
-To transform the data into a higher dimensional space a method called kernel trick is used.
+The kernel trick is a technique used to transfer data into higher-dimensional space.
 Two methods are usually used for \ac{SVM}s, the polynomial kernel and the radial basis
 function, also known as gaussian kernel~\cite[p. 97--98]{muller_introductionmachinelearning_2016}.
 Similar to the \ac{SVM} algorithm, the \ac{SVR} algorithm finds a well-fitting hyperplane to a
@@ -742,12 +741,11 @@ Decision Trees (\ac{DT}s) are a widely used type of model for both classificatio
 regression problems.
 These models construct a hierarchy of rules to predict outcomes based on the
 data~\cite[p. 70]{muller_introductionmachinelearning_2016}~\cite[p. 253]{shaik_briefsurveyrandom_2019}.
-The algorithm splits the data into multiple segments based on specific feature
-valuescreates various subsets of the dataset, with each sample belonging to one subset.
-The final subsets are called terminal or leaf nodes, while the intermediate subsets are
-known as internal or split nodes.
-To predict the outcome in a specific leaf node, the mean outcome of the training data
-in that leaf node is used~\cite[p. 70--72]{muller_introductionmachinelearning_2016}.
+Based on certain feature values, the algorithm divides the data into various segments and creates a variety of
+subsets of the dataset, with each sample belonging to one subset.
+The intermediate subsets are called internal or split nodes, and the final subsets are called terminal or leaf nodes.
+The average outcome of the training data of a particular leaf node is used to predict its
+outcome\cite[p. 79]{molnar2020interpretable}~\cite[p. 70--72]{muller_introductionmachinelearning_2016}.
 
 Figure~\ref{fig:dt-example} shows a greatly reduced real-life example of a decision tree taken out of a random forest
 that was trained for this study. Random forests will be explained in the next section.
@@ -765,8 +763,8 @@ In this dataset, the independent variables are denoted as $x[i]$, where $x[0]$ r
 $x[1]$ represents the metal sheet thickness, and $x[2]$ represents the die opening. These variables are used to make
 decisions at each node, and provide the basis for predicting the value of the dependent variable.
 
-One important metric for evaluating the performance of the decision tree is the squared error, or \ac{MSE},
-associated with the predictions made by each decision node.
+The mean squared error, also known as MSE, related to the predictions made by each decision node, is a crucial metric
+for assessing the performance of the decision tree.
 This metric indicates how well the decision node separates the data into different subsets based on the selected
 feature threshold.
 A lower value indicates a better separation, and suggests that the decision rule is more effective in predicting the
@@ -799,9 +797,8 @@ DT~\cite[p. 78]{muller_introductionmachinelearning_2016}~\cite[p. 251]{liu_newma
 In ensemble methods, multiple models such as decision trees are combined to form a single model. To make new
 predictions, the predictions of each individual model are aggregated, for example by averaging the
 predictions~\cite[p. 222]{boehmke2019hands}.
-
-The \ac{RF} algorithm build trees independent in parallel nad the final prediction is made by averaging the predictions
-of all trees.
+The RF algorithm builds trees independently in parallel, and then all of the trees' predictions are combined to make
+the final prediction.
 
 One prominent ensemble learning algorithm is the Random Forest
 (\ac{RF}) algorithm~\cite[]{breiman_randomforests_2001}, which combines multiple decision trees (weak learners) to
@@ -828,7 +825,7 @@ The bagging was not visualized but every single decision tree is trained on a va
 described reasons.
 The red arrows indicate the decisions made by each decision tree for one specific sample.
 As a result, each decision tree independently arrives at one prediction which in this case would be a spring back value.
-The final prediction is made by averaging the predictions of all trees.
+Averaging the predictions of all trees makes the final prediction~\cite[p. 9]{breiman_randomforests_2001}.
 
 \begin{figure}[h]
     \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
@@ -854,7 +851,7 @@ methods~\cite[p. 3--4]{biau_randomforestguided_2016}~\cite[p. 25]{breiman_random
 
 \subsubsection{Gradient Boosting Regression Tree}
 
-A Gradient Boosting Regression Trees (\ac{GBR}) are an ensemble learning algorithm that combines multiple decision trees
+A Gradient Boosting Regression Trees (\ac{GBT}) are an ensemble learning algorithm that combines multiple decision trees
 to yield more accurate and stable predictions.
 The main difference to the random forest algorithm is that the trees are trained sequentially rather than in parallel,
 with each tree correcting the errors of the previous tree~\cite[p. 88--89]{muller_introductionmachinelearning_2016}.
@@ -869,9 +866,11 @@ residual errors are used.
 This process sequentially boost the performance of the mode with new tree added to the
 ensemble, hence the name Gradient ~\textit{Boosting}~\cite[p. 222]{boehmke2019hands}
 
-While Random Forests (discussed in the previous section) create an ensemble of independent trees with a deep
-structure, GBMs form an ensemble of shallow trees built sequentially.
-Each tree in the ensemble learns from and improves upon the previous one~\cite[p. 221]{boehmke2019hands}.
+
+
+GBMs form an ensemble of shallow trees built sequentially, whereas Random Forests (discussed in the previous section
+) create an ensemble of independent trees with a deep structure.
+Every tree in the group learns from and enhances the previous one~\cite[p. 221]{boehmke2019hands}.
 The shallow trees are achieved through a process called pre-pruning, which means that the growth of a tree is halted
 at a specific depth.
 This provides the advantage of a smaller model that consumes less memory and facilitates faster prediction.
@@ -1068,6 +1067,7 @@ This is the approach used in this study and was described in Section~\ref{subsub
 To enable the reader to reproduce the results of this study, the hyper-parameters used for each model are listed in
 appendix~\ref{sec:hyper-parameters}.
 The can also be ofund in the source code of this study.
+
 
 \section{Result of the Build-Phase}\label{sec:results-build-phase}
 

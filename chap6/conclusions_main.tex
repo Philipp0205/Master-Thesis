@@ -1,38 +1,98 @@
-\chapter{Conclusions}
+\chapter{Conclusions}\label{ch:conclusions}
 
 
-\section{Limitations}
+\section{Summary of the main findings}\label{subsec:summary-of-the-main-findings}
+This study investigated the use of Machine Learning \ac{ML} models to accurately predict spring back in sheet metal
+air-bending data, determin the best-performing models, and explore the potential of interpretability in ML models in
+providing insights into the factors that contribute to spring back.
+
+The results demonstrated that ML models, particularly the Extra Tree and Support Vector Machine models can accurately
+predict the spring back, outperforming traditional trial-and-error methods.
+The Extra Tree model showed the best overall performance across the six Design Principles (DPs), highlighting the
+importance to choose the right model depending on the application.
+
+
+\section{Answering the research question}\label{sec:answering-the-research-question}
+In this section the findings are summarized to answer the research questions of this study.
+
+\subsection{Research Question 1: Can Machine Learning Models Accurately Predict Spring Back in Sheet Metal Forming?}
+\label{subsec:research-question-1:-can-machine-learning-models-accurately-predict-spring-back-in-sheet-metal-forming?}
+
+The findings of this study support Hypothesis 1 and demontrate that \ac{ML} models cann accurately predict the spring
+back in sheet metal bending.
+The best performing models, Extra Trees and Support Vector Machine, achieved an RMSE of 0.15 mm, which is acceptable
+for many applications, considering the range of spring back values (0.5 mm to 3.1 mm).
+The \ac{ML} models outperform traditional trial-and-error methods, such as technology tables, by providing accurate
+predictions for a broader range of samples and bends.
+
+\subsection{Research Question 2: Which ML Models or Combinations of Models Yield the Best Performance?}
+\label{subsec:research-question-2:-which-ml-models-or-combinations-of-models-yield-the-best-performance?}
+The study's result answer Hypothesis 2, showing that specific \ac{ML} models perform better based on the six Design
+Principles used.
+The Extra Trees model demonstrated the best balance between bias and variance and robust performance when exposed to
+missing data na noise.
+The gradient Boosting model displayer the highest stability, while the Extra Rees and Random Forest models exhibited the
+the best resource utilization.
+The findings highlight the importance of selecting suitable \ac{ML} models for specific applications to achieve the
+best performance.
+
+\subsection{Research Question 3: Can ML Models with High Interpretability Provide Valuable Insights into the Factors
+Contributing to Spring Back?}
+\label{subsec:research-question-3:-can-ml-models-with-high-interpretability-provide
+-valuable-insights-into-the-factors-
+contributing-to-spring-back?}
+This study's findings partially support Hypothesis 3, indicating that interpretability methods can provide valuable
+insights into the factors that contribute to spring back.
+The thickness of the metal sheet was found to have the most significant influence on the spring back, but also punch
+penetration and die opening played important roles.
+Model-agnostic interpretability methods revealed non-linear dependencies and interactions between features, which can
+be valuable for refining the models and developing more effective compensations strategies.
+
+Furthermore, it is important to note that certain models which are considered as interpretable such as decision trees
+or linear models could not be used in this study due to their insufficient performance.
+This suggest that a balance between interpretability and performance is necessary for gaining valuable insights into
+the factors affecting spring back.j
+
+
+\section{Classification in the state of research}\label{sec:classification-in-the-state-of-research}
+This study contributes to the existing body of research on the applicatoins of ML models to metal forming processes.
+By using data that was generated in the real-world and a more comprehensive evaluation framework based on six Design
+Principles, the study could provide a foundations for future research in this field.
+The findings of this study not only apply on the spring back predicion but also have broad implications for other
+evaluations of ML models in other domain.
+
+
+\section{Outlook for future research}\label{subsec:outlook-for-future-research}
+
+
+Future research can build upon the findings of this study by exploring several ways.
 
 \begin{itemize}
+    \item Investigating the use of more complex neural networks to improve the prediction accuracy of ML models in
+    \item spring back
+    prediction.
+    \item Examining the performance of ensemble models and their potential in delivering better performance compared to
+    individual models.
+    \item Collecting and incorporating more data for high spring back cases to enhance the performance of ML models in
+    predicting extreme cases.
+    \item Developing standardized evaluation frameworks for ML models in various fields, drawing inspiration from the
+    \item Design
+    Principles used in this study.
+    \item Investigating the use of other interpretable ML models or model-agnostic methods to gain deeper insights
+    \item into the
+    factors affecting spring back and the underlying physical processes in sheet metal forming.
 \end{itemize}
 
-
-\section{Bezug auf Stand der Vorschung}
-
-\begin{itemize}
-    \item Neues Qualitäsmodell für die Evaluatoin von Prozessdaten
-    \item Echte Daten statt FEA
-    \item Drei punkt biege verfahren
-\end{itemize}
+By addressing these areas, future research can further advance the understanding and application of ML models in
+predicting spring back and other complex processes.
 
 
-\section{Revisiting the Aims and Objectives}
-
-
-\section{Critique and Limitations}
-
-
-\section{Future Work}\label{sec:future-work}
-
-
-\section{Final Remarks}
-
-
-\section{TODO}
-
-\begin{itemize}
-    \item Stability section refinement
-    \item Read Siebert paper and add important points to the thesis
-    \item  ---
-    \item Robustness refinement
-\end{itemize}
+\section{Conclusion}\label{sec:conclusion}
+This study demonstrated the potential of \ac{ML} models to accurately predict spring back in sheet in the air
+-bending metal forming process using real-world data.
+The results support the three hypotheses posed, showing that \ac{ML} models can outperform traditional methods and
+that specific models or combinations of models yield better romance.
+Also that that interpretability methods can be used to provide valuable insights into the factors contributing to
+spring back.
+The findings of this study can be used to guide the development of \ac{ML} models for other complex processes and
+provide a foundation for future research in this field.

@@ -1,39 +1,32 @@
 \chapter{Evaluation}\label{ch:evaluation}
 % take a step back and put your results from 4 into context.
-This chapter represents the Evaluation phase encompassing the evaluation, demonstration, and
-communication activities outlined in the description of the \ac{DSR} process outlined in
+This chapter represents the evaluation phase, which includes the evaluation, demonstration and
+communication activities outlined in the description of the \ac{DSR} process in
 Chapter~\ref{ch:research-methodology} `Research Methodology'.
-The \ac{DSR} process is divided into the `build' and `evaluate' phases and their respective
-activities(see Figure~\ref{fig:dsr_process}).
 
-The evaluation activity offers a comprehensive analysis of the machine learning (ML) models implemented in the
-preceding chapter.
-This phase involves assessing the effectiveness of the developed models in addressing the defined
-problems.
-During the demonstration phase, various scenarios are chosen to illustrate the potential real-world
-applications of the models and their performance in those contexts.
-In the communication phase, the results are presented in a manner easily understood by a non-technical audience.
-The objective of this step is to effectively communicate the outcomes and implications of the research to individuals
-who may lack a technical background in ML.
+The evaluation activity provides a comprehensive analysis of the Machine Learning models built in the
+previous chapter.
+This phase evaluates the effectiveness of the developed models in solving the defined research questions.
+During the demonstration phase, different scenarios are chosen to illustrate the potential real-world applications of
+the
+of the models and their performance in these contexts.
+Finally, during the communication phase, the results of this study will be presented with the aim of effectively
+communicate the results and their interpretation.
 
 Table~\ref{tab:evaluation_criteria} provides an overview of the quality metrics employed for the evaluation,
 structured based on the \ac{GQM} approach discussed in subsection~\ref{subsec:goal-question-metric-approach}.
-The quality metrics align with the quality model from~\cite{siebert2022construction}, which in turn is grounded in
+The quality metrics align with the quality model from~\cite{siebert2022construction}, which in turn is based on
 the ISO/IEC 9126 standard for software quality evaluation.
 This standard has been adapted by\cite{siebert2022construction} to address the specific requirements of machine
 learning models, as detailed in Section~\ref{sec:evaluation-of-machine-learning-models}.
 
 Since~\cite{siebert2022construction} primarily focuses on evaluating classification models, the quality metrics have
 been tailored to suit the needs of the regression models implemented in this thesis.
-Each individual quality metric section provides further elaboration.
+Each individual quality metric section provides further elaboration, on what was changed.
 Table~\ref{tab:evaluation_criteria} also displays the quality metrics used for evaluating the \ac{ML} models.
-The \ac{GQM} approach structures the evaluation of the \ac{ML} models, with each goal assigned a question or one or
-more metrics.
-The following subsections adhere to this structure and describe the quality metrics in greater detail.
-
 
 \captionsetup{margin={5pt,5pt}}
-\begin{table}[h]
+\begin{table}[H]
     \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
         \centering
         {\renewcommand{\arraystretch}{1}
@@ -42,16 +35,18 @@ The following subsections adhere to this structure and describe the quality metr
                 \thead{\textbf{Goal}} & \thead{\textbf{Question}}
                 & \thead{\textbf{Metric}} \\
                 \toprule
-                \textbf{Correctness} & Ability of the model to perform the
-                current task measured on the development dataset and the runtime dataset~\cite[p
-                . 16]{siebert2022construction}
+                \textbf{Correctness} &
+                How is the ability of the model to perform the current task measured on the development dataset and
+                the runtime dataset
+                ~\cite[p. 16]{siebert2022construction}?
                 &
                 MAE, \newline MSE, \newline RMSE
                 \\
                 \hdashline
-                \textbf{Relevance} & Does the model achieve a good bias-variance
-                tradeoff? Which means neither overfitting or unterfitting the
-                data.~\cite[p. 16]{siebert2022construction}
+                \textbf{Relevance} &
+                Does the bias-variance tradeoff work well for the model? which means that the data should not be
+                overfit or underfit.
+                ~\cite[p. 16]{siebert2022construction}?
                 & Variance of CV, \newline $R^2$
                 \\
                 \hdashline
@@ -93,52 +88,40 @@ The following subsections adhere to this structure and describe the quality metr
 
 The model must be able to perform well on the selected task.
 \cite{siebert2022construction} used the classification metrics precision, recall and F-
-score to evaluate the correctness models.
-As the regression models implemented in this thesis are not able to predict
-the class of a sample, these metrics are not applicable.
+score to evaluate the correctness.
+Since predicting the spring back is a regression task, these metrics are not applicable.
 
-To assess how accurately a statistical learning technique predicts data, a means of measuring how closely
-its predictions correspond to the observed data is needed.
-In other words, we need to measure how well the predicted response value for a specific observation matches the
-actual response value~\cite[p. 29]{hastie2009elements}.
+For this study metrics are needed to measure how well the predicted spring back for a specific observation
+matches the actual spring back~\cite[p. 29]{hastie2009elements}.
+Commonly used metrics for regression models are the \ac{MAE}, Mean Squared Error \ac{MSE} and \ac{RMSE}.
+Their formal description is given in the equations~\ref{eq:mae} and~\ref{eq:rmse} where
+$e_i$ is the prediction error which is the difference between the predicted value of the model and the actual value.
+While $y_i$ is the actual value and $n$ is the number of samples in the testing data set.
+For the evaluation the \textit{sci-kit learn}~(\cite{scikit-learn}) implementations of these metrics were used.
 
-Commonly used metrics for regression models are the mean absolute error \ac{MAE},
-\ac{MSE} and \ac{RMSE}.
-Their formal description is given in~\ref{eq:mae},~\ref{eq:mse} and~\ref{eq:rmse} where
-$e_i$ being the prediction error which is the difference between the predicted value
-by the model and the actual value.
-$y_i$ is the actual value and $n$ is the number of samples in the testing data set.
-For the evaluation the \texttt{sci-kit learn}~(\cite{scikit-learn}) implementation of
-these metrics was used.
-
-The MAE is determined by computing the average of the absolute differences between the predicted and actual values.
-To ensure that the errors are always positive, the absolute value of the error $e_i$ is taken, as shown in
-Formula~\ref{eq:mae}~\cite[p. 1248]{chai2014root}.
 The MAE is a measure of the average magnitude of errors in a set of predictions, without considering their direction.
 As it returns the same units as the data, it is easy to interpret.
-A lower MAE indicates better model performance, as stated by Chai and Draxler (2014)~\cite[pp. 1248]{chai2014root}.
+A lower MAE indicates better model performance~\cite[pp. 1248]{chai2014root}.
 
 \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
     \begin{equation}
-        MAE = \frac{1}{n} \sum_{ichat=1}^{n} |e_i|
+        MAE = \frac{1}{n} \sum_{i=1}^{n} |e_i|
         \label{eq:mae}
     \end{equation}
 \end{tcolorbox}
 
-The MSE is computed like shown in Equation~\ref{eq:rmse}~\cite[p. 1248]{chai2014root} (inside the root) by determining
-the average of the squared differences between the predicted and actual values.
-As it is based on squared differences, it is more sensitive to outliers than the MAE.
-Moreover, the MSE is expressed in squared units of the data and not in the same units as the data.
+The MSE is computed like shown in Equation~\ref{eq:rmse}~\cite[p. 1248]{chai2014root} (only the part inside the root) by
+determining the average of the squared differences between the predicted and actual values.
+%As it is based on squared differences, it is more sensitive to outliers than the MAE
 If the predicted responses closely align with the actual responses, the MSE will be low, but if there is a significant
-difference between the predicted and actual responses for some observations, then the MSE will be
-high~\cite[p. 30]{hastie2009elements}.
+difference between the predicted and actual responses , the MSE will be high~\cite[p. 30]{hastie2009elements}.
+The MSE is expressed in squared units of the data, making it difficult to interpret and therefore the RMSE is preferred.
 
-The RMSE is the square root of the MSE and measures the average distance between the predicted and actual values.
-It is the most widely used metric for evaluating the performance of regression models and is expressed in the same units
-as the response variable.
-Like the MSE, the RMSE is more sensitive to outliers than the MAE.
-The MAE, on the other hand, is calculated by computing the average of the absolute difference between the predicted
-and actual values.
+The RMSE measures the average difference between the predicted and actual values and is calculated as the square root
+of the MSE.
+Its expression is in the same units as the response variable, making it the most popular metric for assessing the
+effectiveness of regression models.
+The RMSE and respectively the MSE are more sensitive to outliers than the MAE.
 
 \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
     \begin{equation}
@@ -151,31 +134,35 @@ There is an ongoing debate regarding the best metric to use for evaluating regre
 For instance,~\cite{willmott2005advantages} contend that the RMSE is not an appropriate measure for determining the
 average performance of a model and suggest using the MAE instead, while~\cite{chai2014root} argue in favor of the
 RMSE.
-The MAE is commonly used when a dataset contains outliers, because the RMSE is more sensitive to outliers.
+The MAE is commonly used when a dataset contains outliers.
 However, as the dataset reviewed in Section~\ref{subsec:dataset-exploration} does not contain many outliers, the
-evaluation will focus on the RMSE.
+RMSE is the better metric for this study~\cite[p. 1249]{chai2014root}.
 Both measures will be included in the analysis, to give the reader a better understanding of the performance of
 the models.
 The MSE was not included in the analysis, as it is not expressed in the same unit as the data and is therefore
 more difficult to interpret and might be misleading.
 
+
 \subsection{Results}\label{subsec:results}
-Table~\re{tab:results-correctness} presents the results of the evaluation of the machine learning models for
+Table~\ref{tab:results-correctness} presents the results of the evaluation of the machine learning models for
 correctness, sorted by the RMSE in ascending order.
-As the RMSE and MSE have the same units as the dataset, in this case, the spring back in millimeters, it can be
-concluded that the best models have an RMSE below 0.2 millimeters, indicating that they can predict the spring back
-with acceptable accuracy for many use cases.
+It can be can be concluded that the best models have an RMSE of less than 0.2 millimetres, indicating that they can predict the
+spring back with acceptable accuracy for many applications.
 
 The Linear Regression and Decision Tree models have poor predictive performance compared to the other models.
-For \ac{LR} This is expected since the relationship between the independent and dependent variables is
-not linear. In contrast, Decision Trees can perform poorly when overfitting the training data, and they are prone to
-instability. These problems are mitigated by using ensemble methods like Random Forest and Gradient Boosted Tree.
-
+For the \ac{LR} model this is expected since the relationship between the independent and dependent variables is
+not linear.
+In contrast, Decision Trees can perform poorly when overfitting the training data and they are prone to
+instability.
+These problems are mitigated by using ensemble methods like Random Forest and Gradient Boosted Tree.
 As the simple Decision Tree and Linear Regression models are not able to predict the spring back accurately enough,
-they are not considered for the next steps of the evaluation. On the other hand, the Ada Boost, Random Forest, and
-Gradient Boosted Tree models demonstrate moderate predictive performance compared to all models.
+they are not considered for the next steps of the evaluation.
 
-The MLP, Extra Trees, and SVM models have relatively low MAE and RMSE values, indicating good predictive performance .
+The Ada Boost, Random Forest, and Gradient Boosted Tree models demonstrate moderate predictive
+performance while the Multi-Layer-Perceptron, Extra Trees, and Support Vector Machine models have relatively low MAE
+and RMSE
+values, indicating good
+predictive performance.
 
 It is worth noting that the SVM model has a slightly better MAE while still maintaining a comparable RMSE compared
 to the other models.
@@ -183,7 +170,7 @@ This could be because the errors made by the SVM are evenly distributed across i
 because the errors made by the other models are large for a few instances but smaller for the rest.
 
 % Table wit hall used machine learning models and their metrics
-\begin{table}[h]
+\begin{table}[H]
     \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
 % \sisetup{group-minimum-digits = 4}
         \centering
@@ -210,7 +197,8 @@ because the errors made by the other models are large for a few instances but sm
             \bottomrule
         \end{tabular}
     \end{tcolorbox}
-    \caption{Results for the Desin Principle 1 Correctness. The results are sorted by RMSE in ascending order.}
+    \caption{\textbf{Results for the Design Principle 1 Correctness:} The results are sorted by RMSE in ascending
+    order.}
     \label{tab:results-correctness}
 \end{table}
 
@@ -228,36 +216,35 @@ A model is considered relevant when it achieves a balance between bias and
 variance, avoiding both overfitting and underfitting of the training data.
 The relevance of the model can be quantified through the \textit{variance of cross-validation}, which proves insight
 into how the model performs when trained and
-evaluated on different subsets of data and how generalizes.
+evaluated on different subsets of data and how well it generalizes.
 
 % Explanation interpretation of variance
 A low variance indicates that the model's performance is consistent across
 different folds, suggesting that the model is not overfitting the training data.
 Conversely, a high variance implies that the performance can vary significantly
-depending on the specific data points used the test set, indicating a potential
+depending on the specific data points used in the test set, indicating a potential
 overfitting problem.
 
-The $R^2$ statistic is a commonly used measure for evaluating the performance of regression models.
-It is used as an estimator for the trained model and is a statistical measure that represents the percentage of the
-response variable variation that is explained by a linear
-model~\cite[p. 43]{muller_introductionmachinelearning_2016}.
-The $R^2$ score ranges between 0 and 1, where a score of 0 indicates that the model does not explain any of the
-variance in the response variable around its mean, and a score of 1 indicates that the model explains all the
-variance in the response variable around its mean~\cite[p. 43]{muller_introductionmachinelearning_2016}.
-
+A common metric for gauging the effectiveness of regression models is the $R2$ statistic, it shows how much of the
+the variance is explained by the model.
+It ranges usually from 0 to 1, where 0 means that the model doe not explain any of the variance and a score of 1
+means that the model fully explains the variance
+~\cite[p. 43]{muller_introductionmachinelearning_2016}.
 
 Equation~\eqref{eq:r2} shows the formula for the $R^2$ score:
 
 \begin{equation}
     \label{eq:r2}
-    R^2 = \frac{Explained\_variance}{Total\_variance\_targert\_variable}
+    R^2 = \frac{\text{Explained variance}}{\text{Total variance targert variable}}
 \end{equation}
 
 One unique feature of scikit-learn's implementation of $R^2$ is that the score can be negative if the model performs
 poorly.
-For instance, if a model always predicts the expected value of y, regardless of the input features, it would
-receive an $R^2$ score of 0.0~\cite{_sklearnmetricsr2_}. Therefore, a high $R^2$ score indicates a good model fit and
-a good bias-variance tradeoff~\cite[p. 43]{muller_introductionmachinelearning_2016}.
+For instance, a model would receive a $R2$ score of 0.0 if it consistently predicted the expected value of y
+regardless of the input features
+~\cite{_sklearnmetricsr2_}.
+Therefore, a high $R^2$ score indicates a good model fit and a good bias-variance
+tradeoff~\cite[p. 43]{muller_introductionmachinelearning_2016}.
 
 \subsection{Results}\label{subsec:results3}
 
@@ -283,9 +270,10 @@ Based on the table the following models have the best bias-variance tradeoff:
     Although the model explains less variance.
 \end{enumerate}
 
-Overall, it's important to consider the cross-validation scores in conjunction with
-the other other metrics to get a more complete picture of how well your model is
-performing. This will be done in later sections.
+
+To gain a more full picture of how well your model is performing, evaluate the cross-validation scores in conjunction
+with the other metrics. This will be addressed in subsequent parts.
+
 
 \begin{table}[h]
     \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
@@ -487,14 +475,15 @@ using the equation provided in Equation~\ref{eq:loocv}~\cite[p. 201]{gareth2013i
 
 However, it is important to note that the resulting mean squared error (\ac{MSE}) is a poor estimate of the model's
 generalization error since only one sample is used for validation~\cite[p. 201]{gareth2013introduction}.
-Nevertheless, it can still be used to assess the model's stability, which is the primary focus of this section.
-The stability of the model can be evaluated by examining the standard deviation of the cross-validation scores.
+Butthe metirc can be used to evaluate the model's stability, which is the gial of this seciton.
+The final stability is determined by the standard deviation of the cross-validation scores.
 A low standard deviation across all folds indicates that the model can generate consistent results when trained on
-different
-datasets, which suggests a more stable model.
+different datasets, which suggests a more stable model.
 
-It is worth noting that there are several ways to measure the stability of a model. In this study, \ac{LOOCV} was
-chosen for several reasons.
+
+It is worth mentioning that there are numerous methods for determining a model's stability.
+In this study, \ac{LOOCV} was chosen for several reasons.
+
 First, \ac{LOOCV} uses almost all the available data for training, while k-fold cross -validation reserves a portion
 of the data for testing.
 Since the dataset used in this study is relatively small,using all the data for training is advantageous.
@@ -638,13 +627,10 @@ dataset is not very big and the resuling models are also less complex.
 In accordance with the definitions of interpretability outlined in Section~\ref{sec:objectives-of-a-solution}, it
 becomes apparent that quantitatively measuring interpretability is not viable.
 However, alternative approaches can be employed to gauge a model's interpretability.
-\cite{molnar2020interpretable} distinguishes between model-agnostic and model-specific methods.
-Model-agnostic methods can be applied to any model, whereas model-specific methods are tailored to a particular
-model~\cite[p. 19]{molnar2020interpretable}.
-
-\cite{molnar2020interpretable} differentiates between model-agnostic and model-specific methods.
-Model-agnostic methods are methods that can be applied to any model, while model-specific methods are
-methods that are specific to a model~\cite[p. 19]{molnar2020interpretable}.
+\cite{molnar2020interpretable}
+distinguishes between model-specific and model-agnostic approaches.
+Model-specific procedures are particular to one model, but model-agnostic methods can be applied to any model.
+~\cite[p. 19]{molnar2020interpretable}.
 
 One strategy for achieving interpretability is restricting the selection of algorithms to those that yield
 model specific interpretable outcomes.
@@ -737,9 +723,8 @@ The effect of the die opening is less
 significant than the other two features, but there is still a noticeable increase in spring back with higher die
 opening.
 The PDPs demonstrate that all features exhibit a non-linear relationship with the target variable.
-This information
-can be useful for understanding the behavior of the models and the impact of different features on the predicted
-outcome.
+This information can be useful for understanding the behavior of the models and the impact of different features on
+the predicted outcome.
 
 \begin{figure}[h]
     \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
@@ -756,10 +741,9 @@ outcome.
             \label{fig:partial_dependence_svm}
         \end{subfigure}
         \hfill
-        \caption{Partial dependence plots}
-
-        \label{fig:partial_dependence_plots}
     \end{tcolorbox}
+    \caption{Partial dependence plots}
+    \label{fig:partial_dependence_plots}
 \end{figure}
 
 It is important to note that partial dependence plots and feature importance plots are limited to
@@ -887,51 +871,6 @@ One way to achieve this is by considering the V/t ratio of each instance.
 The local model agnostic method LIME was applied on different machine learning models.
 But it did not yield any meaningful results.
 
-%\subsection{LIME}\label{subsec:lime}
-%The LIME method stands for Local interpretable model-agnostic explanations
-%and a model itself that can be used to explain the predictions of any machine
-%learning model, the model is treated as a black-box~\cite{ribeiro2016model}.
-%To accomplish this, LIME generates a new dataset with permuted samples along with the predictions
-%made by the black box model for each sample.
-%Using this dataset, LIME trains an interpretable model that is given weights based on the
-%proximity of the sampled instance to the instance of interest.
-%The interpretable model can be any model that is considered interpretable, such as a Liner
-%Regression or Decision Trees.
-%
-%This approach allows LIME to provide explanations for individual predictions by approximating the
-%behavior of the black box model in a localized and interpretable way~\cite[p. 185]{molnar2020interpretable}.
-%
-%\cite{molnar2020interpretable} express local surrogate models like LIME as follows:
-%
-%\begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
-%    \begin{equation}
-%        explanation(x) = arg\; min\underset{g \in G}\; L(f,g,\pi_x) + \Omega(g)
-%    \end{equation}
-%\end{tcolorbox}
-%
-%The model for explaining a certain instance $x$ is represented by the model $g$ (such as a
-%linear regression model), which reduces the loss (for example \ac{MSE}), measuring how closely
-%the explanation aligns with the prediction made by the original model $f$ (for instance, an
-%\ac{MLP} model).
-%At the same time, the model complexity $\Omega(g)$ should remain low.
-%The set of all possible linear regression models is referred to as $G$ , which encompasses all
-%potential explanations.
-%The proximity measure, denoted as $\pi_x$ , determines the size of the area surrounding the area
-%surrounding the instance $x$ that is taken into account for the
-%explanation~\cite[p. 185]{molnar2020interpretable}.
-%
-%LIME mainly provides instance explanations in the form of feature importance values.
-%It can show the predicted values along with the explanations on how which features contributed
-%in which direction to the prediction.
-%This can be seen similar to PDP plots but instead of showing the average effect of a feature
-%on the overall prediction of the model, it shows the effect of a feature on the prediction
-%for a specific instance.
-%One instance in this case consists of the thickness, distance die opening and the corresponding
-%spring back value.
-%
-%
-%\textit{If I have questions for specific instances I should put them here.}
-
 
 \section{Demonstration}\label{sec:demonstration}
 This section represents the demonstration activity in the \ac{DSR} process.
@@ -1011,12 +950,13 @@ ensure unbiased results, all samples that were part of the test cases were remov
 For instance, for case A(a), all samples with a die opening of 20 and a thickness of 2 were removed from the dataset.
 This was done to prevent the models from overfitting to the test cases.
 While it is anticipated that the models' performance may decline in these tests due to the removal of training data,
-the decrease is not expected to be significant.
+The decline is unlikely to be large.
 
-In interpreting the following figures, it is important to note that the target values represent the mean of all
-values.
-While the dataset's quality is not perfect, there may \ e some outliers present. In some cases there are only a few
-samples for a specific sample and therefore the mean is not a good representation of the actual value.
+It is vital to remember that the goal values represent the mean of all values when evaluating the numbers below.
+While the dataset's quality is not perfect, there may \ e some outliers present.
+In some circumstances, there are just a few samples for a particular sample, therefore the mean is not a reliable
+reflection of the true value.
+
 
 Figure~\ref{fig:performance-case-a} depicts two chosen test cases for case A with a V/t-ratio below the recommended
 range.
@@ -1077,10 +1017,12 @@ determined by the outcomes of the other two cases, A and C.
 \end{figure}
 
 Case C is the most challenging case, as all models exhibit visibly poor performance. This is expected since the V/t
-ratio is well above the recommended range. The results are unusable, as the models are unable to predict the spring
-back. However, in Figure~\ref{fig:performance-50_1}, the results appear more promising, with the RF and SVM models
-demonstrating the most consistent performance. It is clear that further work is required to develop machine learning
-models that perform well in these scenarios.
+ratio is well above the recommended range.
+The results are unusable, as the models are unable to predict the spring
+back.
+However, in Figure~\ref{fig:performance-50_1}, the results appear more promising, with the RF and SVM models
+demonstrating the most consistent performance.
+More work is clearly needed to construct machine learning models that perform well in these settings.
 
 \begin{figure}[h]
     \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
@@ -1111,11 +1053,10 @@ For bad predictions the error is less than 0.25 mm, which is within the toleranc
 most manufacturing processes (This it not true yet).
 
 
-\section{Results and Discussion}\label{sec:results-and-interpretation}
-This section of the study is organized as follows:
-The first part, ``Summary of Results,'' provides a concise overview of the results obtained in this study. The second
-part, ``Interpretation of Results,'' discusses the results in greater detail and attempts to explain the
-observations.
+\section{Results and Discussion}\label{sec:results-and-discussion}
+This component of the research is structured as follows:
+The first section, titled ''Summary of Results,'' presents a succinct review of the study's findings. The second
+section, ''Interpretation of Results,'' delves deeper into the findings and seeks to explain them.
 Both parts are structured according to the three research questions formulated
 in~\ref{sec:problem-identification-and-motivation}.
 
@@ -1242,17 +1183,16 @@ Also the model-agnostic method LIME was applied to different machine learning mo
 
 \subsubsection*{Further Results}
 Additionally to the results found for the three hypotheses more insights where gained during the research process.
-This study used the \ac{DSR} methodology to guide the research process as well as design principles as guidelines for
+This study used the \ac{DSR} methodology to guide the research process as well as Design Principles as guidelines for
 this process.
-
-It is common for other research to provide only the regression metrics like MAE and RMSE for to evaluate the models.
+It is common for other research to use only regression metrics like MAE and RMSE for to evaluate the models.
 This is understandable since the correctness of a models is usually the most important factor for the evaluation.
 But these metrics alone do not provide a complete picture of the models performance, since they do not consider
 other important factors like the interpretability of the model or the computational resources needed to train and
 predict with the model.
 
-This study attempted to create a more comprehensive framework for the evaluation of the models by using the design
-principles as based on the IEEE ISO/IEC 9126 guidelines.
+This study attempted to create a more comprehensive framework for the evaluation of the models by using the Design
+Principles as based on the IEEE ISO/IEC 9126 guidelines.
 Until a similar standard is developed for \ac{ML} models this study provides a good starting point for future research
 in this field.
 This framework could be used in further research to evaluate the performance of \ac{ML} models not only in the field of
@@ -1266,20 +1206,20 @@ The interpretation of the results is as follows:
 
 \subsubsection{Hypothesis 1}
 The findings support the first hypothesis that \ac{ML} models can accurately predict the spring back of bent sheet
-metal.
+metal parts.
 The Extra Tree and Support Vector Machine models performed best with a RMSE of 0.15 mm, while other models still
 exhibited good performance.
-This means that in average the predictions of the best models derivative by 0.15 mm from the actual spring back.
+This means that in average the predictions of the best models derivative by 0.15 mm from the actual spring back,
+with spring backs ranging from 0.5 mm to 3.1 mm in this study this performance is acceptable for many applications.
 
-With spring backs ranging from 0.5 mm to 3.1 mm an RMSE of 0.15 mm is acceptable for many applications.
-It means that the spring back can predicted.
+Traditional trial-and-error methods, such as technology tables (refer to
+Section~\ref{sec:problem-identification-and-motivation}), offer data for a limited number of bends, encompassing
+only those bends that were previously tested.
+In contrast, the resulting \ac{ML} models from this study are capable of predicting an unlimited number of new bends
+with high accuracy.
+Therefore, it can be conclusively stated that \ac{ML} models are capable of outperforming traditional methods.
 
-Traditional trial-and error methods like technology tables (see~\ref{sec:problem-identification-and-motivation})
-provide the data of a limited number of samples / bends.
-The resulting \ac{ML} models of this study predict an unlimited number of new bends with a high accuracy.
-Therefore they out-perform the traditional method.
-
-In the presentation section (see~\ref{sec:presentation-of-results}) it could be seen that the models are not perfect.
+In the presentation section (see~\ref{sec:demonstration}) it could be seen that the models are not perfect.
 In particularly they tend to underestimate high spring back values, this could be part of an area where further research
 may be needed.
 To improve the prediction accuracy more data for high spring back cases might already be enough to improve the to a
@@ -1287,7 +1227,10 @@ satisfying level.
 
 The use of real-word data instead of simulated data for the training of the models make the results of this study more
 representative for real-world applications.
-A comparison with other studies is challenging due to the differences in the bending methods that where employed.
+A comparison with other studies is challenging since variations in the bending process such as material, machine,
+bending method and other factors might yield significantly different results.
+%In comparison with similar studies like \cite{baig_machinelearningprediction_2021} it can be seen that the
+%real -world data used definitely paid of comparing the results
 
 \subsubsection{Hypothesis 2}
 
@@ -1303,12 +1246,11 @@ optimal performance.
 The best overall performance was achieved by the Extra Tree model.
 It was the only model that performed well in all performed tests.
 The Extra Tree model is a good choice for applications where the model should be trained on a small dataset and
-should be able to predict new samples with a high accuracy.
-
-It is important to note that only a simple neural network was used in this study.
-While it already showed good results, further improvements could be achieved by using more complex neural networks.
+Should be able to accurately forecast new samples.
+It is crucial to highlight that only a simple neural network was utilized in this study, and while it produced good
+results, more complicated neural networks could produce even better outcomes.
 Further more the use of ensemble models could yield interesting results (see recommendations for further
-research~\ref{sec:recommendations-for-further-research}).
+research~\ref{subsec:recommendations-for-further-research}).
 
 \subsubsection{Hypothesis 3}
 The results show interpretability methods can provide valuable insights into factors that contribute to spring back,
@@ -1318,55 +1260,51 @@ The thickness of the metal sheet was found to have the most significant influenc
 features, such as punch penetration and die opening, also played important roles in the models' decision-making
 processes.
 
-With he use of model-angnostic methods, the study also revealed non-linear dependencies between the input and the
+With he use of model-agnostic methods, the study also revealed non-linear dependencies between the input and the
 target features, as well as interactions between thickness and distance.
 This information can be valuable for further refining the models, as well as for developing more effective
 compensation strategies in the sheet metal forming process.
-
-This study was not able to use certain models with high interpretability such as decision trees or linear models
+This study was not able to use models with high interpretability such as decision trees or linear models
 since their performance was not good enough.
 
 \subsection{Limitations of Research}\label{subsec:limitations-of-research}
-This study has some limitations that should be considered when interpreting the results.
+There are some limitations to this studay that needed to be considered when interpreting the results.
 
-The dataset used has a limited number of samples.
-With 400 samples the models might not have enough data to capture the full complexity of the spring back phenomenom.
+The dataset used has a limited number of samples, with 400 samples the models might not have enough data to capture
+the full complexity of the spring back phenomenon.
 Furthermore the dataset did not contain many high spring back scenarios, which might have led to the models
 underestimating high spring back values.
 A larger dataset with more high spring back samples could potentially improve the model performance.
 Additionally it has to be noted that many parameters weren't changed in the experimental setup.
-This study used on specific press brake with on punch radius and one material.
-Experiments wit hdifferent bending methods and materials will most certainly yield different results.
+For example the used press brake, punch radius and material of the metal sheets where not changed.
+Experiments with different bending methods and materials will most certainly yield different results.
 
 This study had a limited number of input features (punch penetration, die opening and
 metal sheet thickness).
 Other potentially relevant factors such as material properties, temperatures might limited the models ability to
 capture all factors affecting the spring back.
 
-This study had to selected a limited number of models,
-There might be other models or more advanced techniques that might yield better results, recommendations for further
+Also this study had to selected a limited number of models,
+there might be other models or more advanced techniques that might yield better results, recommendations for further
 research will be made in the following section.
 
 \subsection{Recommendations for Further Research}\label{subsec:recommendations-for-further-research}
 The limitations identified in this study provide direction for future research.
 
-This study selected a limited number of \ac{ML} methods, but there are many other models that could be used to
+This study selected a limited number of \ac{ML} methods, but there are other models that could be used to
 predict spring back.
-Based on the results, the \ac{MLP}demonstrated superior performance in multiple design principles, indicating that
-deep learning models may be promising for predicting spring back.
+Based on the results, the \ac{MLP} demonstrated superior performance in multiple design principles, indicating that
+deep learning models may be promising candidates for future research.
 Furthermore using ensemble models that combine the strengths for multiple other models using bagging or stacking could
 lead to interesting new results.
 This would involve training multiple other models on the same dataset and combine their predictions to improve the
-prediction performance and could also lead to more robust results.
-
-Since this Also with 400 samples the models might not have enough data to capture the full complexity of the spring back
-phenomenom.
-
+prediction performance and the robustness of the models.
+Additionally the dataset could be expanded by adding more samples with high spring back values.
 A larger dataset could potentially improve the model performance.
 
 One of the most interesting directions for future research is the use of \ac{ML} models to predict bend deduction.
 Bend deduction is the phenomenon where the metal sheet shrinks during the bending process, resulting in a smaller
-bend angle than the one specified in the design.
+piece than the one specified in the design.
 Similar to the spring back this can lead to fitting issues and is therefore an important topic for further research.
 As noted by~\cite{strano2017fusion}, while some predictions models are available for spring back, bend deduction is
 frequently overlooked and could be a fruitful topic for future investigation.
@@ -1374,11 +1312,3 @@ frequently overlooked and could be a fruitful topic for future investigation.
 Moreover there are likely other factors that influence the spring back beyond those included as features in this study.
 To account for these additional patterns, future research could consider including features such as rolling
 direction, temperature, and tension.
-
-\begin{itemize}
-    \item As it can be seen in the evaluatoin more data = better results lol
-    \item Adaptive learning
-\end{itemize}
-
-
-

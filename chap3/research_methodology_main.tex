@@ -1,26 +1,28 @@
 \chapter{Research methodology}\label{ch:research-methodology}
 
-The research methodology employed in this thesis adheres to the design science research (DSR) approach, as detailed
-in~\cite[p. 17]{rennenkampff_managementitagilitaetentwicklung_2015}.
+The research methodology employed in this thesis adheres to the Design Science Research (DSR) approach, as detailed
+in
+~\cite[p. 17]{rennenkampff_managementitagilitaetentwicklung_2015}.
 DSR is a research paradigm where the researcher, acting as a designer, strives to develop artifacts that address
-specific problems or questions~\cite[p. 10]{hevner_designscienceresearch_2010}.
+specific problems or questions
+~\cite[p. 10]{hevner_designscienceresearch_2010}.
+In the context of DSR, ``design'' is defined by Peffers et al. (2007) as the process of crafting an applicable solution
+for a given problem~\cite[p. 47]{peffers_designscienceresearch_2007}.
 
-In the context of DSR, `design' is defined by Peffers et al. (2007) as the process of crafting an applicable solution
-for a given problem~\cite[p.47]{peffers_designscienceresearch_2007}.
-As a methodological framework, the design -oriented research approach is particularly well-suited for addressing the
+As a methodological framework, the design-oriented research approach is particularly well-suited for addressing the
 research questions at hand.
 The prediction of spring back and bend deduction constitutes a significant issue in practical business applications,
 as previously discussed.
 Moreover, the development and implementation of machine learning models are inherently design-oriented activities.
-
 % Artifact definition
-The term `artifacts' is deliberately broad, encompassing various forms.
-In this study, the artifacts refer to machine learning models that are applied to the generated data.
-Therefore the term artifact and machine learning model are used interchangeably in this study.
+The term ``artifact'' is deliberately broad, encompassing various forms.
+In this study, the artifacts refer to \ac{ML} models that are applied to the problem of predicting spring back.
+Therefore the term artifact and machine learning model are used interchangeable in this study.
 
 DSR can be executed through diverse means, with a notable example provided by~\cite{peffers_designscienceresearch_2007},
 as illustrated in Figure~\ref{fig:dsr_process}.
-This approach consists of six steps, which are further divided into the overarching phases of "Build" and "Evaluate".
+This approach consists of six steps, which are further divided into the overarching phases of ``Build'' and
+``Evaluate''.
 This thesis adheres to these phases in its research methodology.
 
 \begin{figure}[h]
@@ -33,16 +35,16 @@ This thesis adheres to these phases in its research methodology.
     \end{tcolorbox}
 \end{figure}
 
-\paragraph{``Activity 1 - Problem identification and motivation''~\cite[p. 54]{peffers_designscienceresearch_2007}:}
-The specific research problem is identified in this activity and the value of a possible solution is
-established~\cite[p. 54--55]{peffers_designscienceresearch_2007}.
+\paragraph{``Activity 1 - Problem identification and motivation''~\cite[p. 52]{peffers_designscienceresearch_2007}:}
+``Define the specific research problem and justify the value of a solution.''
+~\cite[p. 52]{peffers_designscienceresearch_2007}
 
-The problem as well as the motivation for this study where already described in the chapter~\ref{ch:introduction}
-`Introduction' the read an introduction into the topic.
-To summarize this study aims to improve the prediction of spring back in the air bending process using real world
+This study aims to improve the prediction of spring back in the air bending process using real world
 data with supervised learning.
-The value of the solution will be a reduction of trial and error cycles in the air bending process, which since is done
-for example through technology tables.
+The value of the solution will be a reduction of trial and error cycles and therefore a reduction of time and cost in
+the air bending process.
+The problem as well as the motivation for this study was described in the \cref{ch:introduction}
+``Introduction'' in more detail.
 
 \paragraph{``Activity 2: Define the objectives for a solution''~\cite[p. 55]{peffers_designscienceresearch_2007}:}
 The goal of a solution comes from the definition of the problem, which takes into account what is possible and feasible.
@@ -50,9 +52,9 @@ Objectives can be quantitative or qualitative, and they should be based on the p
 established in the previous step.
 Knowledge about previous solutions and their effectiveness is required~\cite[p. 55]{peffers_designscienceresearch_2007}.
 
-The objectives of this study are expressed as six design principles:
-correctness,relevance, robustness, stability, resource utilization, and interpretability.
-These are explained in detail in the chapter~\ref{sec:objectives-of-a-solution} `Design Principles'.
+The objectives for the solution, the different \ac{ML} models, will be to excell in all six Design Principles which
+will be introduced in the next chapter.
+The Design Principles are a set of criteria that are used to evaluate the performance of the \ac{ML} models.
 
 \paragraph{``Activity 3: Design and development''~\cite[p. 55]{peffers_designscienceresearch_2007}:}
 In this phase, the development of the artifact takes place.
@@ -61,25 +63,26 @@ research question.
 The process begins with outlining the functionality and architecture of the artifacts, followed by their subsequent
 creation~\cite[p. 55]{peffers_designscienceresearch_2007}.
 
-In this study the artifacts are machine learning models.
-This steps is including the model selection and the training of the models.
-The development of the artifacts is described in the chapter~\ref{ch:build} `Build'.
+In this study the artifacts are Machine Learning models.
+This steps includes the model selection and the training of the models.
+The development of the artifacts is described in the \cref{ch:build} ``Build''.
 
 \paragraph{``Activity 4: Evaluation''~\cite[p. 56]{peffers_designscienceresearch_2007}:}
 In this activity, the effectiveness of the developed artifact in addressing the defined problems from Activity 1 is
 examined and assessed.
 The evaluator is expected to have knowledge of relevant metrics and analytical techniques.
-The evaluation process may vary based on the nature of the problem at hand which is machine learning in this
+The evaluation process may vary based on the nature of the problem at hand which is Machine Learning in this
 study~\cite[p. 56]{peffers_designscienceresearch_2007}.
 A comparison between the functionality of the artifact and other existing solutions can be conducted.
 Additionally, quantifiable parameters can be employed to objectively measure the artifact's
 performance~\cite[p. 56]{peffers_designscienceresearch_2007}.
-As already staded in this study the created artifacts are evaluated using six distinct design principles.
+As already stated in this study the created artifacts are evaluated using six distinct design principles.
 
 
 \cite{peffers_designscienceresearch_2007} note that researches are not obligated to follow the order of activities
-from 1 to 6.
-In this study the order fo the activities 4 and 5 are changes.
+from 1 to 6
+~\cite[p. 56]{peffers_designscienceresearch_2007}.
+In this study the order fo the activities 4 and 5 swapped,
 In the original DSR approach the evaluation is done after the demonstration activity, this was changed because the
 evaluation activity is used to select the best performing artifacts.
 It would not make sense demonstrate every single machine learning model, because it is expected that not all of them

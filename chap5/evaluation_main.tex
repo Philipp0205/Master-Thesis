@@ -93,47 +93,12 @@ Since predicting the spring back is a regression task, these metrics are not app
 
 For this study metrics are needed to measure how well the predicted spring back for a specific observation
 matches the actual spring back~\cite[p. 29]{hastie2009elements}.
-Commonly used metrics for regression models are the \ac{MAE}, Mean Squared Error \ac{MSE} and \ac{RMSE}.
-Their formal description is given in the equations~\ref{eq:mae} and~\ref{eq:rmse} where
-$e_i$ is the prediction error which is the difference between the predicted value of the model and the actual value.
-While $y_i$ is the actual value and $n$ is the number of samples in the testing data set.
+These metrics used in this study are the MAE, MSE and RMSE and where presented in~\cref{subsubsec:regression-metrics}
 For the evaluation the \textit{sci-kit learn}~(\cite{scikit-learn}) implementations of these metrics were used.
 
-The MAE is a measure of the average magnitude of errors in a set of predictions, without considering their direction.
-As it returns the same units as the data, it is easy to interpret.
-A lower MAE indicates better model performance~\cite[pp. 1248]{chai2014root}.
-
-\begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
-    \begin{equation}
-        MAE = \frac{1}{n} \sum_{i=1}^{n} |e_i|
-        \label{eq:mae}
-    \end{equation}
-\end{tcolorbox}
-
-The MSE is computed like shown in Equation~\ref{eq:rmse}~\cite[p. 1248]{chai2014root} (only the part inside the root) by
-determining the average of the squared differences between the predicted and actual values.
-%As it is based on squared differences, it is more sensitive to outliers than the MAE
-If the predicted responses closely align with the actual responses, the MSE will be low, but if there is a significant
-difference between the predicted and actual responses , the MSE will be high~\cite[p. 30]{hastie2009elements}.
-The MSE is expressed in squared units of the data, making it difficult to interpret and therefore the RMSE is preferred.
-
-The RMSE measures the average difference between the predicted and actual values and is calculated as the square root
-of the MSE.
-Its expression is in the same units as the response variable, making it the most popular metric for assessing the
-effectiveness of regression models.
-The RMSE and respectively the MSE are more sensitive to outliers than the MAE.
-
-\begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
-    \begin{equation}
-        \label{eq:rmse}
-        MSE = \sqrt{\frac{1}{n} \sum_{i=1}^{n} e_i^2}
-    \end{equation}
-\end{tcolorbox}
-
 There is an ongoing debate regarding the best metric to use for evaluating regression models.
-For instance,~\cite{willmott2005advantages} contend that the RMSE is not an appropriate measure for determining the
-average performance of a model and suggest using the MAE instead, while~\cite{chai2014root} argue in favor of the
-RMSE.
+For instance~\cite{willmott2005advantages} contend that the RMSE is not an appropriate measure for determining the
+average performance of a model and suggest using the MAE instead, while~\cite{chai2014root} argue in favor of the RMSE.
 The MAE is commonly used when a dataset contains outliers.
 However, as the dataset reviewed in Section~\ref{subsec:dataset-exploration} does not contain many outliers, the
 RMSE is the better metric for this study~\cite[p. 1249]{chai2014root}.
@@ -142,11 +107,11 @@ the models.
 The MSE was not included in the analysis, as it is not expressed in the same unit as the data and is therefore
 more difficult to interpret and might be misleading.
 
-
 \subsection{Results}\label{subsec:results}
 Table~\ref{tab:results-correctness} presents the results of the evaluation of the machine learning models for
 correctness, sorted by the RMSE in ascending order.
-It can be can be concluded that the best models have an RMSE of less than 0.2 millimetres, indicating that they can predict the
+It can be can be concluded that the best models have an RMSE of less than 0.2 millimetres, indicating that they can
+predict the
 spring back with acceptable accuracy for many applications.
 
 The Linear Regression and Decision Tree models have poor predictive performance compared to the other models.

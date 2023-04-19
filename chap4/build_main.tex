@@ -1,82 +1,80 @@
 \chapter{Build}\label{ch:build}
-This chapter outlines the steps of the \ac{DSR} process, which are
-summarized under the ``Build'' phase, except `Identify Problem \& Motivation' which was already done in the
-chapter~\ref{ch:introduction} `Introduction'.
-The design science process is described in more detail in chapter
-chapter~\ref{ch:research-methodology} `Research Methodology'.
-
-The first activity in the DSR process was to identify the problem that needs to be addressed,
+This chapter outlines the activities of the \ac{DSR} process, which are
+summarized under the ``Build'' phase, except ``Identify Problem \& Motivation'' which was already done in the
+\cref{ch:introduction} ``Introduction''.
+The first activity in the DSR process is to identify the problem that needs to be addressed,
 this step leads to the formulation of \ac{DP}, which are later used to evaluate
 the effectiveness of the artefact.
-The \ac{DP} are derived from the requirements of the overall models and are based on
-the work of~\cite{siebert2022construction}.
-
 
 \section{Objectives of a Solution}\label{sec:objectives-of-a-solution}
 
-The objectives of a solution are essential to evaluate the effectiveness of machine learning (ML) models in the
+The objectives of a solution are essential to evaluate the effectiveness of ML models in the
 DSR process.
-To this end, several DPs are used, which are chosen based on the quality parameters proposed by Siebert et
-al.~\cite{siebert2022construction}.
-These quality parameters are specifically tailored for evaluating ML models and are, therefore, well-suited for this
+Therefore six Design Principles are used based on the quality parameters proposed by \cite{siebert2022construction}.
+These quality parameters are specifically tailored for evaluating ML models and are therefore well-suited for this
 study.
 
-In the following sections six DPs will be desibed which will provide insights into the strengths and weaknesses of the
+In the following sections six DPs will be described which will provide insights into the strengths and weaknesses of the
 ML models and guide the decision-making process in the DSR process.
-The \ac{DP} are correctnes, relevance, robustness, stability, resource utilization and interpretability.
-By leveraging these principles, researches can optiize their models to achive the desired outcomes and improve the
+The chosen \ac{DP} are: Correctness, relevance, robustness, stability, resource utilization and interpretability.
+By leveraging these principles, researches can optimize their models to achieve the desired outcomes and improve the
 quality of their research
-
-In Chapter~\ref{ch:evaluation} `Evaluation' these six DP metrics will be combined with relevant questions and metrics to
-assess the effectiveness of the ML models.
+In Chapter~\ref{ch:evaluation} ``Evaluation'' uses the DPs from this chapter  and combines them with relevant
+questions and metrics to assess the effectiveness of the ML models.
 This approach will ensure a thorough evaluation of the ML models based on the quality parameters that are important
 for the DSR process.
 
-This study aims to answer three research questions, which are formulated in the
-Section ~\ref{sec:problem-identification-and-motivation}`Problem Identification and Motivation'.
-Design Principle 1 will be used to answer the first research question, the principles 2-5 will be used to answer the
+This study aims to get all information to answer three research questions, which are formulated in the
+\cref{sec:problem-identification-and-motivation} ``Problem Identification and Motivation''.
+Design Principle 1 will be used to answer the first research question, the principles 2 to 5 will be used to answer the
 second research question and the principle 6 will be used to answer the third research question.
 
-\subsection*{Design Principle 1: Correctness}\label{correctness}
+\subsection*{Design Principle 1: Correctness}\label{subsec:correctness}
 
-The demand for high-quality products is a driving force in the manufacturing industry,
+% TODO Cruz et al. does conclude that from other sources
+The demand for lightweight products is a driving force in the manufacturing industry,
 as consumers and businesses alike demand products that meet stringent standard of
-precision and accuracy~\cite[p. 1]{cruz_applicationmachinelearning_2021}.
+precision and accuracy
+~\cite[p. 2]{cruz_applicationmachinelearning_2021}.
 This is particularly true in the case of sheet metal forming, where even small
 deviations from the desired dimensions can cause significant implications for the final
 product.
-Therefore, metal parts need to be produced with high precision and accuracy and
-spring back is an undesired side effect which needs to be
-minimized~\cite[p.1]{cruz_applicationmachinelearning_2021}.
+Therefore it is desirable to minimize the spring back
+~\cite[p.1]{cruz_applicationmachinelearning_2021}.
 
 \ac{ML} has emerged as a powerful tool for predicting the spring back in other bending
-methods as shown in section~\ref{sec:state-of-research}~state of research.
+methods as shown in \cref{sec:state-of-research} ``State of Research''.
 A \ac{ML} model should predict the spring back with a high degree of accuracy and
 correctness, as even small errors in the prediction will cause fitting problem in the
 manufacturing process.
 
 \subsection*{Design Principle 2: Relevance}
-In addition to measure the correctness it is important to understand ``why''
+In addition to measure the correctness it is important to understand `why'
 the model has this performance.
 A model is considered relevant when it is able to accurately predict the outcomes of
-new unseen dat that were not used during training.
+new unseen data that were not used during training.
 A relevant model should have a low error rate on both the training data and the test
-data and achieve a good bias-variance trade-off~\cite[p. 16]{siebert2022construction}.
+data and achieve a good bias-variance trade-off
+~\cite[p. 16]{siebert2022construction}.
 
 Understanding the bias-variance trade-off is crucial in developing \ac{ML} models that
-generalize well to unseen data~\cite[p. 49--51]{zhou_machinelearning_2021}.
-It suggest, that a model can accurately capture the underlying patterns in the data
+generalize well to unseen data
+% TODO Zitation nicht geprüft
+~\cite[p. 49--51]{zhou_machinelearning_2021}.
+It suggests, that a model can accurately capture the underlying patterns in the data
 without overfitting or underfitting~\cite[p. 49--51]{zhou_machinelearning_2021}.
 
 \subsection*{Design Principle 3: Robustness}
-Robustness is described as in the IEEE standard glossary of software engineering terminology as:
+Robustness is described in the IEEE standard glossary of software engineering terminology as:
 ``The degree to which a system or component can function correctly in the presence of
 invalid inputs or stressful environmental conditions''~\cite[p. 64]{terminology1990ieee}.
 \cite{saez2016evaluating} extend this definition to fit machine learning
 models and describe it as ``the capability of an algorithm to build models that are insensitive to
-data corruptions and suffer less from the impact of noise''~\cite[p. 2]{saez_evaluatingclassifierbehavior_2016}.
-\cite{siebert2022construction} specifically mention data quality issued like
-outliers or noise~\cite[p. 16]{siebert2022construction}.
+data corruptions and suffer less from the impact of noise''
+~\cite[p. 2]{saez_evaluatingclassifierbehavior_2016}.
+\cite{siebert2022construction} also specifically mention data quality issued like
+outliers or noise
+~\cite[p. 16]{siebert2022construction}.
 
 When working with real-world data, quality issues such as outliers, missing data, and
 noise are common problems.
@@ -85,55 +83,46 @@ predictions.
 To overcome these challenges, a robust model must be able to handle data quality issues and still produce
 accurate predictions~\cite[p. 16]{siebert2022construction}.
 
-%\cite{saez_evaluatingclassifierbehavior_2016} proposed a new measure called Equalized
-%Loss of Accuracy to evaluate classifications models for robustness.
-%Because regressions algorithms are used in this new metrics have to be found~\cite[p.
-%3]{saez_evaluatingclassifierbehavior_2016}.
-
 \subsection*{Design Principle 4: Stability}
 
-
 The stability of a model is an important quality parameter, as it is essential that
-the model produces the same results when trained on different datasets.
-This is particularly important in the case of \ac{ML} models, as the training data
-is often limited and the model is trained on a small subset of the available data.
+the model produces the same results when trained on different datasets
+~\cite[p. 16]{siebert2022construction}.
+This is particularly important in this study, since the training data is limited and the model is trained on a
+smaller subset of the available data.
 Therefore, it is important that the model is able to generalize well to unseen data and
-produce repeatable results when trained on different
-datasets~\cite[p. 16]{siebert2022construction}.
+produce repeatable results when trained on different datasets
+~\cite[p. 16]{siebert2022construction}.
 
-% Dopplung?
-Stability is defined as the ability of the model to generate repeatable
-results when trained on different data~\cite[p. 16]{siebert2022construction}.
-LOOCV, a type of Cross-Validation in which one sample is used for validation and the remaining data is used for
-training, is one appropriate way to measure a model's stability.
-~\cite[p. 200--201]{gareth2013introduction}.
 
 \subsection*{Design Principle 5: Resource utilization}\label{subsec:dp5-resource-utilization}
 One of the primary objectives of utilizing machine learning for predicting spring back is to
 reduce the number of trial-and-error cycles during the manufacturing process, thus saving
 valuable resources such as material and labor
-(refer to Section~\ref{sec:problem-identification-and-motivation}).
+(refer to \cref{sec:problem-identification-and-motivation}).
 
-As example the technology sighted in section~\ref{sec:technology-tables} require 11 unique bends to get the data
-for a for one type of metal with a certain thickness.
+An example technology-table can be seen in \cref{sec:technology-tables}, in this case it requires 11 unique bends
+to get the data for a for one type of metal with a certain thickness.
 These metal sheets cannot be repurposed due to their specific angles resulting in wasted materials and manual labor.
 Additionally, the machines used for bending the metal are often occupied around the clock, further adding to the
 inefficiency of the process (personal communication, Dr. Wolfram Hochstrate).
+A \ac{ML} could generate these predictions in a fraction of the time without using any additional metal sheets.
 
-Nevertheless, it is crucial to acknowledge that developing an \ac{ML} model also entails resource
-consumption.
+Nevertheless, it is crucial to acknowledge that developing an \ac{ML} model also entails resource consumption.
 Training \ac{ML} models can be a labor-intensive process, as it often requires significant
-computing power and the generation of large amounts of training data, depending on the algorithm
-used.
+computing power and the generation of large amounts of training data, depending on the algorithm used.
 Resources used up by \ac{ML} are for example memory space and also time needed to train the model and make predictions.
 
 Therefore, it is crucial to carefully consider the resources needed to train and use the model
-effectively~\cite[p. 16]{siebert2022construction}.
-What resources are used and evaluated is described in more detail in~\ref{sec:resource- utilization}.
+effectively
+~\cite[p. 16]{siebert2022construction}.
+What resources are used and evaluated is described in more detail in~\ref{sec:resource-utilization}.
+
 
 \subsection*{Design Principle 6: Interpretability}
-Interpretability is a critical design principle that refers to the degree to which humans can comprehend and
-interpret the decision-making process of a trained machine learning model~\cite[p. 13]{molnar2020interpretable}.
+Interpretability is a critical Design Principle that refers to the degree to which humans can comprehend and
+interpret the decision-making process of a trained machine learning model
+~\cite[p. 13]{molnar2020interpretable}.
 \cite{miller2019explanation} describe interpretability as the ``degree to which a human can understand the cause
 of a decision''~\cite[p. 1]{miller2019explanation}.
 Good interpretability is crucial because it fosters trust in the model and enables users to rely on it.
@@ -686,7 +675,7 @@ This metric indicates how well the decision node separates the data into differe
 feature threshold.
 A lower value indicates a better separation, and suggests that the decision rule is more effective in predicting the
 value of the dependent variable.
-Performance metrics like the \ac{MSE} are further explained in section~\ref{correctness}.
+Performance metrics like the \ac{MSE} are further explained in section~\ref{subsec:correctness}.
 
 The line labeled `samples' in each node denotes the number of samples that reach that particular decision node.
 This metric provides insight into the distribution of data within the decision tree, and can be used to identify
@@ -776,7 +765,7 @@ rather than simultaneously, with each tree correcting the errors of the previous
 This is done with training each new tree is residual errors of the previous tree, which es the
 difference between the predicted value and can also be called the loss.
 One example for a metric that can be used as loss is the mean squared error (MSE) (more details in
-section~\ref{correctness}).
+section~\ref{subsec:correctness}).
 To train a tree on the residual errors, the process is similar to training a decision tree on any other regression
 task.
 Instead of using the original target variable (spring back) as the label for the training data instead the

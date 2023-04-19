@@ -82,105 +82,88 @@ As already stated in this study the created artifacts are evaluated using six di
 \cite{peffers_designscienceresearch_2007} note that researches are not obligated to follow the order of activities
 from 1 to 6
 ~\cite[p. 56]{peffers_designscienceresearch_2007}.
-In this study the order fo the activities 4 and 5 swapped,
-In the original DSR approach the evaluation is done after the demonstration activity, this was changed because the
-evaluation activity is used to select the best performing artifacts.
-It would not make sense demonstrate every single machine learning model, because it is expected that not all of them
-will perform good enough to employed for the problem.
+In this study the order fo the activities 4 and 5 swapped, in the original DSR approach the evaluation is done after
+the demonstration activity, this was changed because the evaluation activity is used to select the best performing
+artifacts.
 
 \paragraph{Activity 5: Demonstration}
 The purpose of this activity is to demonstrate the effectiveness of the previously created artifact in solving one or
 more problems.
-Effective knowledge of the artifact is necessary for this
-activity~\cite[p. 55]{peffers_designscienceresearch_2007}.
+Effective knowledge of the artifact is necessary for this activity
+~\cite[p. 55]{peffers_designscienceresearch_2007}.
 Unlike the evaluation activity, which assesses the overall performance of the artifact, demonstration focuses on the
 performance of the artifact in specific scenarios.
 To achieve this, three scenarios, each comprising two examples (single spring back predictions), are utilized to
-compare the best -performing models.
+compare the best-performing models.
 The scenarios are selected to cover the entire attribute space of the problem and are described in detail in
-Chapter~\ref{ch:evaluation}, \textit{Evaluation}.
+~\cref{ch:evaluation}, \textit{Evaluation}.
 
 \paragraph{Activity 6 - Communication}
 The last activity is ued to communicate significance of the problem and the usefulness of the artifacts to a wider
-audience~\cite[p. 56]{peffers_designscienceresearch_2007}.
-In this study this is done in the chapter~\ref{sec:results-and-discussion} `Results and Discussion'.
+audience
+~\cite[p. 56]{peffers_designscienceresearch_2007}.
+In this study this is done in the \cref{sec:results-and-discussion} ``Results and Discussion''.
 
 
 \section{Design Principles}\label{sec:design-principles}
-
-% Pado: Do the principles guide the Design&Development step only, or are they used through the
-% Build or even Build&Evaluate phases?
-% Are there standard principles that should be used, or is there a set to choose from, or does
-% one create them individually for each study?
-
 Recent studies suggest that the desired result of design science endeavors should be also be knowledge that takes the
 shape of
 ``Design Principles''~\cite{baskerville2010explanatory, sein2011action, gregor_positioningpresentingdesign_2013}.
 They capture knowledge concerning the production of additional examples of objects that belong to the same
-category~\cite[p. 39]{sein2011action}.
+category
+~\cite[p. 39]{sein2011action}.
 Other ML models are examples of the same category in the context of this study.
 This information is gathered as the researcher progresses from one instance of the artifact to a more general level
 ~\cite[p. 37]{chandra2016making}.
 
-Design Principles should provide a set of guidelines for the creation of new artifacts.
-Also DPs should be abstract enough to be used in later research as well~\cite[p. 37]{sein2011action}.
+In this study Design Principles should provide a set of guidelines for the creation of new artifacts.
+% TODO weg weil ich es nicht in der Quelle gefunden habe...
+%Also DPs should be abstract enough to be used in later research as well~\cite[p. 37]{sein2011action}.
 
 
 \section{Evaluation of Machine Learning Models}\label{sec:evaluation-of-machine-learning-models}
-Evaluating \ac{ML} models is different from evaluating other software for several reasons.
-One of them is that data-driven software components, like \ac{ML} models, have functionality that
-is not completely defined by the developer but is instead learned from data.
-Therefore, using machine learning presents new challenges compared to traditional software
-engineering~\cite[p. 2]{siebert2022construction}.
-
 The field of software engineering has established standards for determining the quality of software systems and their
 components.
 One such notable standard is the ISO/IEC 9126, which provides a quality model that is widely used in
 software engineering.
-However, these standards are not applicable for evaluating machine learning models.
-Therefore,as noted by Siebert et al. (2022), adaptation is necessary.
+These standards are not applicable for evaluating \ac{ML} models, as data-driven software components, such
+as \ac{ML} models, have functionality that is not fully defined by the developer but rather is learnt from data.
+As a result, when compared to traditional software engineering, using ML poses unique issues.
+~\cite[p. 2]{siebert2022construction}.
+Therefore, as noted by \cite{siebert2022construction}, adaptation is necessary.
 They have reinterpreted and expanded upon these existing quality models to make them applicable to the context of
-machine learning, as stated in their work~\cite[p. 1]{siebert2022construction}.
+Machine Learning, as stated in their work
+~\cite[p. 1]{siebert2022construction}.
 
-In order to define the Design Principles for the \ac{ML} models in this work, the
+In this study, in order to define the Design Principles for the \ac{ML} models in this work, the
 considerations of~\cite[]{siebert2022construction} are used.
 This allows for a systematic process to assess the quality of the developed models.
-
 \cite{siebert2022construction} consider several quality attributes, including
 correctness, relevance, robustness, stability, interpretability and resource utilization.
 Alongside these attributes, the authors also provide a set of quality measures to evaluate the
 models, but these are nor complete and are only used as a starting point for the evaluation of the
-models in this work, further evaluation is described in Chapter~\ref{ch:evaluation}.
-
-It is important to note, that the mentioned quality attributes and measures should
-not be seen as a complete set of quality attributes and measures for \ac{ML} models.
-Other studies, such as~\cite{zhang2020machine} have proposed additional sets of quality attributes.
-These additional perspectives will also be considered in the evaluation of the models, but only
-as a supplementary means of evaluating model performance.
-%In~\cite{zhang2020machine}, the authors describe ``testing properties'' and identify attributes
-%such as correctness, relevance, robustness, and interpretability, which are similar to those
-%mentioned in~\cite{siebert2022construction}.
-%However, this work does not consider attributes such as Security, Fairness, and Privacy~\cite[p.
-%3]{zhang2020machine}, as they may be difficult to measure and in the context of sheet metal
-%bending they are not relevant for this work.
+models in this work, further evaluation is described in \cref{ch:evaluation}.
 
 
-\section{Goal Question Metric Approach}\label{subsec:goal-question-metric-approach}
-To make the defined quality attributes measurable, the “Goal-Question-Metric”-approach \ac{GQM}
-was chosen in this work.
+\section{Goal Question Metric Approach}\label{sec:goal-question-metric-approach}
+To make the defined quality attributes measurable, the ``Goal-Question-Metric''-approach \ac{GQM}
+was chosen in this study.
 It is one of the most common approaches in DSR and is divided into three levels~\cite[p. 3]{basili_goalquestionmetric_}.
 
 \paragraph{1. Conceptual level (goal):}
 ``A goal is defined for an object, for a variety of reasons,
 with respect to various models of quality, from various points of view, relative to a
-particular environment.''~\cite[p. 3]{basili_goalquestionmetric_}
+particular environment.''
+~\cite[p. 3]{basili_goalquestionmetric_}
 
 Specific goals are established for a software product (in this case a \ac{ML} model).
 These goals consider various quality aspects, perspectives, and contexts.
-Clearly defined goals help to guide the direction of the development~\cite[p. 3]{basili_goalquestionmetric_}.
+Clearly defined goals help to guide the direction of the development
+~\cite[p. 3]{basili_goalquestionmetric_}.
+In this study the goals are the Design Principles that are to be established in the next \cref{ch:build}.
 
 \paragraph{2. Operational level (question):}
-To achieve the set goals, one ore multiple questions are fomrulated to asses and characterize the objectives.
+To achieve the set goals, one or multiple questions are formulated to assess and characterize the objectives.
 These questions address the quality attributes and help understanding the object of measurement from the selected
 viewpoint.
 The questions guide the measurement process by identifying the relevant aspects that need to be
@@ -188,7 +171,7 @@ analyzed~\cite[p. 3]{basili_goalquestionmetric_}.
 
 \paragraph{3. Quantitative level (metric):}
 For each question, a set of metrics is defined to provide quantitative data and answers.
-These metrics are used to evalute the object of measurement, offering precise and objective insights into the
+These metrics are used to evaluate the object of measurement, offering precise and objective insights into the
 quality aspects being assessed~\cite[p. 3]{basili_goalquestionmetric_}.
 
 In this study only one question is formulated for each goal.

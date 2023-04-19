@@ -14,7 +14,7 @@ Finally, during the communication phase, the results of this study will be prese
 communicate the results and their interpretation.
 
 Table~\ref{tab:evaluation_criteria} provides an overview of the quality metrics employed for the evaluation,
-structured based on the \ac{GQM} approach discussed in subsection~\ref{subsec:goal-question-metric-approach}.
+structured based on the \ac{GQM} approach discussed in subsection~\ref{sec:goal-question-metric-approach}.
 The quality metrics align with the quality model from~\cite{siebert2022construction}, which in turn is based on
 the ISO/IEC 9126 standard for software quality evaluation.
 This standard has been adapted by\cite{siebert2022construction} to address the specific requirements of machine
@@ -426,6 +426,10 @@ performance.
 
 
 \section{DP4: Stability}\label{sec:stability}
+
+LOOCV, a type of Cross-Validation in which one sample is used for validation and the remaining data is used for
+training, is one appropriate way to measure a model's stability.
+~\cite[p. 200--201]{gareth2013introduction}.
 
 To evaluate the model's stability, the \ac{LOOCV} was repeated for all samples in the dataset, resulting in a total
 of $n$ iterations.

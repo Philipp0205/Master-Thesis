@@ -51,6 +51,7 @@
 \end{figure}
 
 \section*{Hyper Parameters}\label{sec:hyper-parameters}
+
 \subsection*{Decision Tree}
 Grid search cross validation was used to find the best hyper-parameters for
 the decision tree.
@@ -182,6 +183,39 @@ All hyper-parameters are summarized in Table~\ref{tab:hyperparameters_decision_t
         \label{tab:hyperparameters_gradient_boosting}
     \end{tcolorbox}
 \end{table}
+
+\subsection{Extra Trees}
+\begin{table}[h]
+    \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
+        \sisetup{group-minimum-digits = 4}
+        \centering
+        \begin{tabular}{ll}
+            \toprule
+            \thead{\textbf{Hyperparameter}} & \thead{\textbf{Value}} &
+            \thead{\textbf{Description}}
+            \\
+            \toprule
+            bootstrap & True,
+            \\
+            \hdashline
+            learning\_reate & 0.1 \\
+            \hdashline
+            criterion & 'absolute_error',
+            \hdashline
+            max\_depth & 6,
+            \hdashline
+            min\_samples_split & 4,
+            \hdashline
+            n\_estimators & 10,
+            \hdashline
+            min\_samples\_leaf & 1,
+            \bottomrule
+        \end{tabular}
+        \caption{Hyperparameters of the Extra Trees model.}
+        \label{tab:hyperparameters_gradient_boosting}
+    \end{tcolorbox}
+\end{table}
+
 
 \subsection*{SVM}
 

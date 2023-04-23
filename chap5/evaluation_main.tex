@@ -1,29 +1,26 @@
 \chapter{Evaluation}\label{ch:evaluation}
 % take a step back and put your results from 4 into context.
 This chapter represents the evaluation phase, which includes the evaluation, demonstration and
-communication activities outlined in the description of the \ac{DSR} process in
-Chapter~\ref{ch:research-methodology} `Research Methodology'.
+communication activities outlined in the \ac{DSR} process in \cref{ch:research-methodology}.
 
 The evaluation activity provides a comprehensive analysis of the Machine Learning models built in the
 previous chapter.
 This phase evaluates the effectiveness of the developed models in solving the defined research questions.
 During the demonstration phase, different scenarios are chosen to illustrate the potential real-world applications of
-the
-of the models and their performance in these contexts.
+the of the models and their performance in these contexts.
 Finally, during the communication phase, the results of this study will be presented with the aim of effectively
 communicate the results and their interpretation.
 
-Table~\ref{tab:evaluation_criteria} provides an overview of the quality metrics employed for the evaluation,
-structured based on the \ac{GQM} approach discussed in subsection~\ref{sec:goal-question-metric-approach}.
+\cref{tab:evaluation_criteria} provides an overview of the quality metrics employed for the evaluation,
+structured based on the \ac{GQM} approach discussed in \cref{sec:goal-question-metric-approach}.
 The quality metrics align with the quality model from~\cite{siebert2022construction}, which in turn is based on
 the ISO/IEC 9126 standard for software quality evaluation.
 This standard has been adapted by\cite{siebert2022construction} to address the specific requirements of machine
 learning models, as detailed in Section~\ref{sec:evaluation-of-machine-learning-models}.
-
-Since~\cite{siebert2022construction} primarily focuses on evaluating classification models, the quality metrics have
-been tailored to suit the needs of the regression models implemented in this thesis.
+Since~\cite{siebert2022construction} primarily focus on evaluating classification models, the quality metrics have
+been tailored to suit the needs of the regression models implemented in this study.
 Each individual quality metric section provides further elaboration, on what was changed.
-Table~\ref{tab:evaluation_criteria} also displays the quality metrics used for evaluating the \ac{ML} models.
+\cref{tab:evaluation_criteria} also displays the quality metrics used for evaluating the \ac{ML} models.
 
 \captionsetup{margin={5pt,5pt}}
 \begin{table}[H]
@@ -87,10 +84,9 @@ Table~\ref{tab:evaluation_criteria} also displays the quality metrics used for e
 % runtime dataset
 
 The model must be able to perform well on the selected task.
-\cite{siebert2022construction} used the classification metrics precision, recall and F-
-score to evaluate the correctness.
+\cite{siebert2022construction} used the classification metrics precision, recall and F- score to evaluate the
+correctness.
 Since predicting the spring back is a regression task, these metrics are not applicable.
-
 For this study metrics are needed to measure how well the predicted spring back for a specific observation
 matches the actual spring back~\cite[p. 29]{hastie2009elements}.
 These metrics used in this study are the MAE, MSE and RMSE and where presented in~\cref{subsubsec:regression-metrics}
@@ -100,34 +96,34 @@ There is an ongoing debate regarding the best metric to use for evaluating regre
 For instance~\cite{willmott2005advantages} contend that the RMSE is not an appropriate measure for determining the
 average performance of a model and suggest using the MAE instead, while~\cite{chai2014root} argue in favor of the RMSE.
 The MAE is commonly used when a dataset contains outliers.
-However, as the dataset reviewed in Section~\ref{subsec:dataset-exploration} does not contain many outliers, the
-RMSE is the better metric for this study~\cite[p. 1249]{chai2014root}.
+However, as the dataset reviewed in \cref{subsec:dataset-exploration} is likely to not contain many outliers, the
+RMSE will be used as the primary metric in this study~\cite[p. 1249]{chai2014root}.
+The MSE and MAE will be used as well but only when they make sense, for example when noise is added to the dataset
+and therefore more outliers (\cref{sec:robustness}) are present or if the non squared error yields more meaningful
+results.
+
 Both measures will be included in the analysis, to give the reader a better understanding of the performance of
 the models.
 The MSE was not included in the analysis, as it is not expressed in the same unit as the data and is therefore
 more difficult to interpret and might be misleading.
 
 \subsection{Results}\label{subsec:results}
-Table~\ref{tab:results-correctness} presents the results of the evaluation of the machine learning models for
+\cref{tab:results-correctness} presents the results of the evaluation of the Machine Learning models for
 correctness, sorted by the RMSE in ascending order.
 It can be can be concluded that the best models have an RMSE of less than 0.2 millimetres, indicating that they can
-predict the
-spring back with acceptable accuracy for many applications.
+predict the spring back with acceptable accuracy for many applications.
 
 The Linear Regression and Decision Tree models have poor predictive performance compared to the other models.
 For the \ac{LR} model this is expected since the relationship between the independent and dependent variables is
 not linear.
 In contrast, Decision Trees can perform poorly when overfitting the training data and they are prone to
 instability.
-These problems are mitigated by using ensemble methods like Random Forest and Gradient Boosted Tree.
+These problems are mitigated by using ensemble methods like Random Forest and Gradient Boosted Treesj.
 As the simple Decision Tree and Linear Regression models are not able to predict the spring back accurately enough,
 they are not considered for the next steps of the evaluation.
-
 The Ada Boost, Random Forest, and Gradient Boosted Tree models demonstrate moderate predictive
 performance while the Multi-Layer-Perceptron, Extra Trees, and Support Vector Machine models have relatively low MAE
-and RMSE
-values, indicating good
-predictive performance.
+and RMSE values, indicating good predictive performance.
 
 It is worth noting that the SVM model has a slightly better MAE while still maintaining a comparable RMSE compared
 to the other models.
@@ -196,7 +192,8 @@ It ranges usually from 0 to 1, where 0 means that the model doe not explain any 
 means that the model fully explains the variance
 ~\cite[p. 43]{muller_introductionmachinelearning_2016}.
 
-Equation~\eqref{eq:r2} shows the formula for the $R^2$ score:
+\cref{eq:r2} shows the formula for the $R^2$ score as explained by
+~\cite[p. 43]{muller_introductionmachinelearning_2016}.
 
 \begin{equation}
     \label{eq:r2}
@@ -213,10 +210,11 @@ tradeoff~\cite[p. 43]{muller_introductionmachinelearning_2016}.
 
 \subsection{Results}\label{subsec:results3}
 
-Table~\ref*{tab:results_relevance} displays the variance of cross-validation and the $R^2$ for all the machine
-learning models used, sorted in ascending order of their $R^2$ score. The variance of cross-validation was calculated
-using Scikit-Learn's \texttt{cross\_val\_score} method, and five-fold cross-validation was used for the calculation.
-The formula shown in Equation~\ref{eq:r2} was used to calculate the $R^2$ score.
+\cref*{tab:results_relevance} displays the variance of cross-validation and the $R^2$ for all the machine
+learning models used, sorted in ascending order of their $R^2$ score.
+The variance of cross-validation was calculated using Scikit-Learn's \texttt{cross\_val\_score} method, and five
+-fold cross-validation was used for the calculation.
+The formula shown in \cref{eq:r2} was used to calculate the $R^2$ score.
 
 It can be observed that most of the models have relatively low variance, indicating that their performance is
 consistent across different folds.
@@ -228,16 +226,15 @@ Based on the table the following models have the best bias-variance tradeoff:
     variance in the data, and a relatively low Variance of CV, indicating stable performance across different
     subsets of the data.
     \item Multi-Layer Perceptron (MLP): The MLP model has the second-highest $R^2$ value of 0.825 and a low Variance
-    of CV
-    of 0.023, which implies that it can explain a substantial amount of variance in the data and perform
+    of CV of 0.023, which implies that it can explain a substantial amount of variance in the data and perform
     consistently across different subsets.
     \item Random Forest: The Random Forest model has an $R^2$ value of 0.784 and a Variance of CV of 0.041.
     Although the model explains less variance.
 \end{enumerate}
 
-
 To gain a more full picture of how well your model is performing, evaluate the cross-validation scores in conjunction
-with the other metrics. This will be addressed in subsequent parts.
+with the other metrics.
+This will be addressed in subsequent parts.
 
 
 \begin{table}[h]
@@ -271,14 +268,14 @@ with the other metrics. This will be addressed in subsequent parts.
 \section{DP3: Robustness}\label{sec:robustness}
 % Definition of robustness
 
-Unlike \ac{DP} Correctness(\ref{sec:dp1:-correctness}), robustness is a non-functional characteristic of a \ac{ML}
+Unlike \ac{DP} Correctness(\cref{sec:dp1:-correctness}), robustness is a non-functional characteristic of a \ac{ML}
 model.
 A way to evaluate the robustness is to check the correctness of the model with added noise to the
-data~\cite[p. 18]{zhou_machinelearning_2021}, if the model is still able to predict the correct values, it is
+data
+~\cite[p. 1]{saez_evaluatingclassifierbehavior_2016}, if the model is still able to predict the correct values, it is
 considered robust.
-As mentioned in section~\ref{subsec:dataset-exploration} the data set
-was generated in a controlled environment does not contain many data quality issues and noise as they where removed
-during the process.
+As mentioned in \cref{subsec:dataset-exploration} the data set was generated in a controlled environment does not
+contain many data quality issues and noise as they where removed during the process.
 This offers the opportunity to test the robustness of the models by manipulating the data set to introduce the data
 quality issues missing values and noise.
 To do that two tests where developed and are described in the following sections.
@@ -307,9 +304,9 @@ dataset.
 However, this experiment did not provide distinguishable results and was therefore not
 included in the results.
 
-The third and final experiment utilized random sampling to create different train- test data compositions, allowing
+The third and final experiment utilized random sampling to create different train-test data compositions, allowing
 for the evaluation of the model's handling of missing data.
-Split rations from 90:10 to 10:90 were used, with a step size of 10.
+Split ratios from 90:10 to 10:90 were used, with a step size of 10.
 This approach was inspired by a similar method used in a previous study~\cite[p. 570--574]{liu2021deep}  which used
 thee different split ratios to evaluate the performance of a deep learning model.
 
@@ -318,12 +315,11 @@ different data compositions, particularly when dealing with missing
 data, and were used in conjunction with other metrics to gain a comprehensive understanding of
 the model's overall performance.
 
-Figure~\ref{fig:results-missing-values} shows how the models performed when trained on
+\cref{fig:results-missing-values} shows how the models performed when trained on
 continuously less data.
 It can be seen that all models perform well when trained with on 90\% of the data.
 However, when trained on 50\% of the data, the \ac{MLP}  and \ac{GBT} models start to perform
-better than the
-other models.
+better than the other models.
 When trained on 20\% of the data and less all models significantly underperform.
 Also the \ac{ET} model stays relatively stable when trained on less data.
 
@@ -356,13 +352,13 @@ compositions and has the lowest variance.
 \subsection{Noise}\label{subsec:noise}
 A common practise in \ac{ML} is to add noise to the training data to improve
 the model's generalization abilities.
-In the following section Gaussian Noise will be added to the data set to evaluate the robustness
+In this study Gaussian Noise will be added to the data set to evaluate the robustness
 of the model.
 The noise will be added to the training data only as the training data should be as correct as possible to get
 comparable results.
 
-To add the noise, \textit{numpy.random.normal} function was used, which
-generate random numbers with a Gaussian distribution~\cite{scikit-learn}.
+To add the noise, \textit{numpy.random.normal} function was used, which generate random numbers with a Gaussian
+distribution~\cite{scikit-learn}.
 The mean and standard deviations of each feature were calculated based on the original data, and the function was
 used to generate noisy values for each feature.
 
@@ -385,11 +381,11 @@ The total loss was calculated by averaging the difference of these values as sho
 \end{itemize}
 
 \subsection{Results}\label{subsec:results-robustness}
-
-
-Figure~\ref{fig:results-noise-fig} presents the performance of models as more noise is introduced to the training
-dataset. The noisy dataset comprised 1000 samples, and the x-axis indicates the percentage of the original data that
-was augmented with noise. The dashed lines correspond to the default performance of the models in the absence of noise.
+\cref{fig:results-noise-fig} presents the performance of models as more noise is introduced to the training
+dataset.
+The noisy dataset comprised 1000 samples, and the x-axis indicates the percentage of the original data that
+was augmented with noise.
+The dashed lines correspond to the default performance of the models in the absence of noise.
 
 The results indicate that the performance of all models deteriorates rapidly with the addition of noise.
 Specifically, the first 20\% of the noisy data causes the most significant decline in model performance, after which the
@@ -409,6 +405,9 @@ These results emphasize the significance of selecting robust models and pre-proc
 presence of outliers.
 Moreover, the study reveals that even a small amount of noise (i.e., 10\%) can significantly impact the model's
 performance.
+The significance of using a high-quality dataset is emphasized.
+Also, the results indicate that a smaller dataset can still be effective in model training as long as the data
+quality is good.
 
 \begin{figure}[h]
     \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
@@ -426,15 +425,14 @@ performance.
 
 
 \section{DP4: Stability}\label{sec:stability}
-
+To evaluate the stability of the models, the Leave-One-Out Cross-Validation (LOOCV) can be used.
 LOOCV, a type of Cross-Validation in which one sample is used for validation and the remaining data is used for
 training, is one appropriate way to measure a model's stability.
 ~\cite[p. 200--201]{gareth2013introduction}.
-
 To evaluate the model's stability, the \ac{LOOCV} was repeated for all samples in the dataset, resulting in a total
 of $n$ iterations.
 The stability of the model was then determined by calculating the average prediction error across all iterations,
-using the equation provided in Equation~\ref{eq:loocv}~\cite[p. 201]{gareth2013introduction}.
+using the equation provided in \cref{eq:loocv}~\cite[p. 201]{gareth2013introduction}.
 
 \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
     \begin{equation}
@@ -442,40 +440,40 @@ using the equation provided in Equation~\ref{eq:loocv}~\cite[p. 201]{gareth2013i
     \end{equation}
 \end{tcolorbox}
 
-However, it is important to note that the resulting mean squared error (\ac{MSE}) is a poor estimate of the model's
-generalization error since only one sample is used for validation~\cite[p. 201]{gareth2013introduction}.
-Butthe metirc can be used to evaluate the model's stability, which is the gial of this seciton.
-The final stability is determined by the standard deviation of the cross-validation scores.
+Usually the MSE is used as the error metric since it is not needed the RMSE is just the square root of the MSE and
+therefore does not provide any additional information.
+Additionally the resulting (\ac{MSE}) is a poor estimate of the model's
+generalization error since only one sample is used for validation.
+But the metric can be used to evaluate the model's stability, which is the goal of this section.
+The final stability is determined by the standard deviation of the cross-validation scores
+~\cite[p. 201]{gareth2013introduction}.
 A low standard deviation across all folds indicates that the model can generate consistent results when trained on
 different datasets, which suggests a more stable model.
 
-
 It is worth mentioning that there are numerous methods for determining a model's stability.
-In this study, \ac{LOOCV} was chosen for several reasons.
-
+In this study, \ac{LOOCV} was chosen for several reasons:
 First, \ac{LOOCV} uses almost all the available data for training, while k-fold cross -validation reserves a portion
 of the data for testing.
-Since the dataset used in this study is relatively small,using all the data for training is advantageous.
+Since the dataset used in this study is relatively small, using all the data for training is advantageous.
 Second, \ac{LOOCV} typically has lower bias due to the larger training set.
 Lastly, various approaches were attempted to measure the model's stability, and \ac{LOOCV} delivered
 the most stable and interpretable results.
 The primary drawback of this method is its computational expense since it
 requires $n$ iterations.
 
-Table~\ref{subsec:results-stability} presents the cross-validation score and standard deviation for each model. The
-focus of the analysis was on the standard deviation since it provides a better indication of the model's stability.
+\cref{subsec:results-stability} presents the cross-validation score and standard deviation for each model.
+The focus of the analysis is on the standard deviation since it provides a better indication of the model's stability.
 As mentioned earlier, the \ac{CV} score using \ac{LOOCV} is a poor estimator of the model's generalization error.
 
 \subsection{Results}\label{subsec:results-stability}
 
-The Table~\ref{tab:results-stability} show the mean cross-validation score and standard deviation for each model.
+\cref{tab:results-stability} shows the mean cross-validation score and standard deviation for each model.
 In order to evaluate the stability of the model, the standard deviation was used as the primary metric.
-
 The stability analysis using LOOCV reveals that the Gradient Boosting model is the most stable with a standard
 deviation of 0.183.
 The Etra Trees and Random Forest model exhibit similar levels of stability with mean CV scores of 0.047 and 0.049,
 and standard deviations of 0.206 and 0.194
-It can be observed again, similarar to the evaluation of the robustness that the MLP and SVM models exhibit
+It can be observed again, similar to the evaluation of the robustness that the MLP and SVM models exhibit
 lower stability levels compared to the other models even though they where the most promising in the evaluation of
 the correctness.
 
@@ -512,7 +510,7 @@ should be also taken into account.
 \section{DP5: Resource utilization}\label{sec:resource-utilization}
 
 To evaluate the resource utilization of the model, several metrics can be employed.
-As discussed in Section~\ref{subsec:dp5-resource-utilization}, this study concentrates on time, computational power,
+As discussed in \cref{subsec:dp5-resource-utilization}, this study focuses on time, computational power,
 and memory resources.
 Consequently, the metrics utilized to assess resource utilization include training time, inference time, and memory
 usage.
@@ -538,29 +536,30 @@ A smaller memory footprint is preferred because it required less resources in th
 To measure the memory usage the \texttt{memory\_usage} function from the package \texttt{memory\_profiler} is
 employed.
 
+
 \subsection*{Results}
 
-Table~\ref{tab:results_resource_utilization} shows the results for the text that where made.
-Looking at the traing time the Extra Trees and Random Forest model perform the with the shortes training times
+\cref{tab:results_resource_utilization} shows the results for the text that where made.
+Looking at the training time the Extra Trees and Random Forest model perform the with the shortest training times
 of 19.541 and 24.912 ms
-The Support Vector Maschine and Gradient boosted model have intermediate training times.
+The Support Vector Machine and Gradient boosted model have intermediate training times.
 The MLP is clearly the slowest with over 16 seconds.
-The training time can be attributed the nature of the models and their training algrithm.
-The RF and ET both benefit from the bagging technique which means that they train an ensemble of decision trees and
+The training time can be attributed the nature of the models and their training algorithm.
+The RF and ET both benefit from the bagging technique which means that they training an ensemble of decision trees and
 combine them to one big model.
-This can be done in parallel and therefore massivly speeds up the training
-process (see Section~\ref{subsubsec:random -forests}).
+This can be done in parallel and therefore massively speeds up the training
+process (see \ref{subsubsec:random-forests}).
 On the other side MLPs are typically more computational since feeding forward and backpropagation are not
-parallelize and computationally expensive in general (see Section~\ref{subsec:neural-networks}).
+parallelize and computationally expensive in general (see \cref{subsec:neural-networks}).
 
 A comparable picture can be derived for the inference time.
-This time the GBR, which is also a tree based algithm is the fasted to make predictions while the MLP is the slowest.
+This time the GBR, which is also a tree based algorithm is the fasted to make predictions while the MLP is the slowest.
 The ET, RF and SVM models have comparable times.
 
 Looking at the memory usage the models are quite similar with the MLP using the most memory 170 KB.
-The other models have quite similar memory usage raning from 157 to 158 KB.
+The other models have quite similar memory usage ranging from 157 to 158 KB.
 Overall the memory space seems not to be a big issue for the models, a reason for that is the fact that the
-dataset is not very big and the resuling models are also less complex.
+dataset is not very big and the resulting models are also less complex.
 
 
 \begin{table}[h]
@@ -593,30 +592,30 @@ dataset is not very big and the resuling models are also less complex.
 
 
 \section{DP6: Interpretability}\label{sec:interpretability}
-In accordance with the definitions of interpretability outlined in Section~\ref{sec:objectives-of-a-solution}, it
+In accordance with the definitions of interpretability outlined in \cref{sec:objectives-of-a-solution}, it
 becomes apparent that quantitatively measuring interpretability is not viable.
 However, alternative approaches can be employed to gauge a model's interpretability.
-\cite{molnar2020interpretable}
-distinguishes between model-specific and model-agnostic approaches.
-Model-specific procedures are particular to one model, but model-agnostic methods can be applied to any model.
-~\cite[p. 19]{molnar2020interpretable}.
+
+%\cite{molnar2020interpretable} distinguishes between model-specific and model-agnostic approaches.
+%Model-specific procedures are particular to one model, but model-agnostic methods can be applied to any model.
+%~\cite[p. 19]{molnar2020interpretable}.
 
 One strategy for achieving interpretability is restricting the selection of algorithms to those that yield
 model specific interpretable outcomes.
-Interpretable algorithms used in this study are linear regression and Decision
+Interpretable algorithms used in this study are Linear Regression and Decision
 Trees~\cite[p. 35]{molnar2020interpretable}.
-Nonetheless, as discussed in Section~\ref{sec:dp1:-correctness}, these algorithms do not demonstrate sufficient
+Nonetheless, as discussed in \cref{sec:dp1:-correctness}, these algorithms do not demonstrate sufficient
 performance to be deemed viable solutions for predicting spring back.
 Consequently, this study cannot rely on model-specific interpretability methods and should instead utilize model
 -agnostic methods for generating explanations.
 
-Also~\cite{molnar2020interpretable} differentiates between global and local interpretability.
+Also~\cite{doshi2017towards} differentiates between global and local interpretability.
 Global interpretability refers to the ability to understand the overall behavior of
 the model, while local interpretability refers to the ability to understand the behavior of the
 model for a specific instance.
-
 It does not make sense to apply model-agnostic method on all trained models, it makes more sense to
 apply the methods on the best performing models.
+% TODO and Extra Trees...
 In the other parts of the evaluation, the Random Forest, Support Vector Machine and Multi Layer Perceptron models
 where always under the best perfoming models and are therefore the models that are used in the following
 sections.
@@ -624,6 +623,8 @@ sections.
 \subsection{Global Model-Agnostic Methods}\label{subsec:global-model-agnostic-methods}
 In the following section, global model-agnostic methods are applied to the trained machine learning models to
 understand their overall behavior.
+
+% TODO Source?
 Two commonly used methods for analyzing the relationship between input features
 and the target variable are Feature Dependence plots and Partial Dependence plots.
 Feature dependence plots illustrate the relationship between a feature and the target variable.
@@ -634,21 +635,21 @@ In the case of \ac{MLP}, there is no built-in feature importance, as the importa
 the weights assigned to the perceptron.
 For \ac{SVM}, feature importance cannot be directly derived from the model
 because the algorithm applies a hyperplane that separates the data.
-The importance of a feature depends on the
-influence of the hyperplane, which is not easily measurable.
+The importance of a feature depends on the influence of the hyperplane, which is not easily measurable.
 Consequently, feature importance cannot be plotted for
 the two chosen models.
 In contrast, other models, such as random forests, have built-in feature importance that can
 be utilized to analyze the model.
 
 
-Figure~\ref{fig:feature_importances_rf} compares and visualizes the relative importance of the features used for
+\ref{fig:feature-importances-rf1} compares and visualizes the relative importance of the features used for
 training the model.
+The figure was created using the \texttt{feature\_importances\_} attribute of the \texttt{RandomForestRegressor}
+model from the \texttt{scikit-learn} library.
 The Partial Dependence Plots (PDP) provide insights into the relevance and interactions of the
 features.
 As illustrated, thickness is the most important feature, followed by distance and die opening.
-This means
-that changes in thickness have the most significant impact on spring back, while variations in the other two features
+This means that changes in thickness have the most significant impact on spring back, while variations in the other two features
 have a comparatively smaller influence on the outcome.
 In terms of interactions, all features are relevant, indicating that each feature contributes unique information to
 the model.
@@ -663,7 +664,7 @@ performance of the model.
         \includegraphics[width=0.7\textwidth]{chap5/images/rf_feature_importances}
     \end{tcolorbox}
     \caption{Feature importance of the random forest model.}
-    \label{fig:feature-importances-rf}
+    \label{fig:feature-importances-rf1}
 \end{figure}
 
 The feature importance plot did facilitate a better understanding of the relationship between the features and the

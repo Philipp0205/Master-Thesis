@@ -184,31 +184,32 @@ All hyper-parameters are summarized in Table~\ref{tab:hyperparameters_decision_t
     \end{tcolorbox}
 \end{table}
 
-\subsection{Extra Trees}
+\subsection{Extra Trees}\label{subsec:extra-trees}
+
 \begin{table}[h]
     \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
         \sisetup{group-minimum-digits = 4}
         \centering
-        \begin{tabular}{ll}
+        \begin{tabular}{lll}
             \toprule
             \thead{\textbf{Hyperparameter}} & \thead{\textbf{Value}} &
             \thead{\textbf{Description}}
             \\
             \toprule
-            bootstrap & True,
+            bootstrap & True \\
             \\
             \hdashline
             learning\_reate & 0.1 \\
             \hdashline
-            criterion & 'absolute_error',
+            criterion & 'absolute_error' \\
             \hdashline
-            max\_depth & 6,
+            max\_depth & 6 \\
             \hdashline
-            min\_samples_split & 4,
+            min\_samples_split & 4 \\
             \hdashline
-            n\_estimators & 10,
+            n\_estimators & 10 \\
             \hdashline
-            min\_samples\_leaf & 1,
+            min\_samples\_leaf & 1 \\
             \bottomrule
         \end{tabular}
         \caption{Hyperparameters of the Extra Trees model.}

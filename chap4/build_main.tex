@@ -11,22 +11,22 @@ the effectiveness of the artefact.
 
 The objectives of a solution are essential to evaluate the effectiveness of ML models in the
 DSR process.
-Therefore six Design Principles are used based on the quality parameters proposed by \cite{siebert2022construction}.
+Therefore six Design Principles are used based on the quality parameters proposed by~\cite{siebert2022construction}.
 These quality parameters are specifically tailored for evaluating ML models and are therefore well-suited for this
 study.
 
 In the following sections six DPs will be described which will provide insights into the strengths and weaknesses of the
-ML models and guide the decision-making process in the DSR process.
+ML models and guide the decision making process in the DSR process.
 The chosen \ac{DP} are: Correctness, relevance, robustness, stability, resource utilization and interpretability.
 By leveraging these principles, researches can optimize their models to achieve the desired outcomes and improve the
-quality of their research
+quality of their research.
 In Chapter~\ref{ch:evaluation} ``Evaluation'' uses the DPs from this chapter and combines them with relevant
 questions and metrics to assess the effectiveness of the ML models.
 This approach will ensure a thorough evaluation of the ML models based on the quality parameters that are important
 for the DSR process.
 
 This study aims to get all information to answer three research questions, which are formulated in the
-\cref{sec:problem-identification-and-motivation} ``Problem Identification and Motivation''.
+\cref{sec:problem-identification-and-motivation ``Problem Identification and Motivation''.
 Design Principle 1 will be used to answer the first research question, the principles 2 to 5 will be used to answer the
 second research question and the principle 6 will be used to answer the third research question.
 
@@ -73,7 +73,7 @@ invalid inputs or stressful environmental conditions''~\cite[p. 64]{terminology1
 models and describe it as ``the capability of an algorithm to build models that are insensitive to
 data corruptions and suffer less from the impact of noise''
 ~\cite[p. 2]{saez_evaluatingclassifierbehavior_2016}.
-\cite{siebert2022construction} also specifically mention data quality issued like
+\cite{siebert2022construction} also specifically mention data quality issues like
 outliers or noise
 ~\cite[p. 16]{siebert2022construction}.
 
@@ -81,7 +81,7 @@ When working with real-world data, quality issues such as outliers, missing data
 noise are common problems.
 These issues can have a negative impact on the performance of the model, making it challenging to produce accurate
 predictions.
-To overcome these challenges, a robust model must be able to handle data quality issues and still produce
+To overcome these challenges, a model should be robust, to be able to handle data quality issues and still produce
 accurate predictions~\cite[p. 16]{siebert2022construction}.
 
 \subsection*{Design Principle 4: Stability}
@@ -105,8 +105,9 @@ reduce the number of trial-and-error cycles during the manufacturing process, th
 valuable resources such as material and labor
 (refer to \cref{sec:problem-identification-and-motivation}).
 
-An example technology-table can be seen in \cref{sec:technology-tables}, in this case it requires 11 unique bends
-to get the data for a for one type of metal with a certain thickness.
+
+For example the technology sighted in \cref{sec:technology-tables} requires 11 unique bends to obtain the data
+for one for one type of metal with a certain thickness.
 These metal sheets cannot be repurposed due to their specific angles resulting in wasted materials and manual labor.
 Additionally, the machines used for bending the metal are often occupied around the clock, further adding to the
 inefficiency of the process (personal communication, Dr. Wolfram Hochstrate).
@@ -122,13 +123,16 @@ effectively
 ~\cite[p. 16]{siebert2022construction}.
 What resources are used and evaluated is described in more detail in~\ref{sec:resource-utilization}.
 
+The initial five \ac{DP}s primarily assess the performance of \ac{ML} models across various criteria.
+However, the final \ac{DP} takes a divergent approach by focusing on the human aspect of \ac{ML} models.
+This is crucial because a model's accuracy alone is insufficient; it must also be comprehensible to the user.
+
 
 \subsection*{Design Principle 6: Interpretability}
-
 \cite{doshi2017towards} defines interpretability as ``as the ability to explain or to present in understandable
 terms to a human.''
 ~\cite[p. w]{doshi2017towards}.
-\cite{miller2019explanation} add that is is also important to understand ``why'' the model has this performance
+\cite{miller2019explanation} add that it is also important to understand ``why'' the model has this performance
 ~\cite[p. 1]{miller2019explanation}.
 Good interpretability is crucial because it fosters trust in the model and enables users to rely on it.
 Additionally, interpretability can aid in debugging and enhancing the model's performance.
@@ -136,18 +140,20 @@ Additionally, interpretability can aid in debugging and enhancing the model's pe
 In this study it is the goal to comprehend the decision making process of the trained models as good as possible.
 As discussed in \cref{ch:theoretical-foundations}, the sheet metal forming process involves numerous
 variables, making the process design intricate, particularly when producing components that necessitate several
-processing stages multiple sets of tools
+processing stages and multiple sets of tools
 ~\cite[p. 1]{dib_singleensembleclassifiers_2020}.
 Therefore,  and interpretable model is deemed a better model and enables the user to make informed decision based
 on the models results.
 
 
 \section{Dataset generation}\label{sec:dataset-generation}
-In study a dataset was generated by conducting a series of bending experiments on metal sheets with varying thicknesses.
-Cold-rolled steel conforming to the DIN EN 10130 standard was used as the material, with thicknesses ranging from 0
-.5 mm to 3 mm.
+In this study a dataset was generated by conducting a series of bending experiments on metal sheets with varying
+thicknesses.
+Cold-rolled steel conforming to the DIN EN 10130 standard was used as the material, with thicknesses ranging from
+0.5~mm to 3~mm.
 This material was chosen due to its widespread use in bending processes and its wide availability.
-To create the dataset, 20x80 mm sheets were utilized along with a stamping press from the company Zwick.
+To create the dataset, 20~x~80 mm sheets were utilized along with a stamping press from the company ZwickRoell GmbH
+\& Co. KG
 The metal sheets were bent in the rolling direction, as it could be observered in previous experiments that the spring
 back effect varied depending on the rolling direction.
 The original dataset comprised 384 \texttt{.tra} files, which is a proprietary format used by the stamping press.
@@ -157,9 +163,9 @@ The following section outlines the experimental setup used for the experiments p
 Data collection occurred outside of the thesis period and initially consisted of 384 samples.
 An additional 20 samples were later added to the dataset to fill any gaps present in the dataset.
 
-Many other studies use finite element (FIE) simulations to generate their datasets as shown in
+Many other studies use finite element method (FEM) simulations to generate their datasets as shown in
 \cref{sec:state-of-research}).
-However, the finite element method is a computationally expensive method and requires a significant amount of time to
+However, the FEM is a computationally expensive method and requires a significant amount of time to
 generate a dataset.
 Additionally, FIE simulations due to the simulated nature are not able to capture all the effects of the sheet metal
 forming process, data generated in real world experiments is more representative of the real world.
@@ -169,20 +175,21 @@ The experiments were carried out in a controlled environment, allowing for the d
 good repeatability.
 
 \subsection{Experimental Setup}\label{subsec:experimental-setup}
-The stamping press utilized for the experimental setup is the \textit{Zwick 1454MO}, which is equipped with a load cell
+The stamping press utilized for the experimental setup is the \textit{ZwickRoell GmbH \& Co. KG1454MO}, which is
+equipped with a load cell
 and a displacement sensor.
-These measure the force applied to the sheet ($F$, measured in N) and the displacement of the punch, also called
-punch penetration ($y_p$), respectively.
-The die is mounted on the bottom and is stationary, while the punch is mounted on the top and can be moved (see
-\cref{subsec:sheet-metal-manufacturing} for more details).
+These measure the force (F) applied to the sheet in Newton (N) and the displacement of the punch, also called
+punch penetration ($y_p$ in mm), respectively.
+The stationary die is mounted on the bottom , while the movable punch is mounted
+(see\cref{subsec:sheet-metal-manufacturing} for more details).
 The die opening of the machine is adjustable from 10 mm to 100 mm.
-The machine is operated via a computer and the \textit{ZwickRöll TestXpert} software, which is used for both machine
+The machine is operated via a computer and the \textit{ZwickRoell TestXpert} software, which is used for both machine
 control and data collection.
 
 The process parameters and experimental setup are illustrated in Figure~\ref{fig:process_parameters}.
 The die opening, $V$, represents the distance between the two contact points of the die, where the sheet metal is
 placed.
-The punch penetration, $y_p$, measured in millimeters, is the distance the punch moves into the sheet and
+The punch penetration, $y_p$ is the distance the punch moves into the sheet and
 the thickness of the metal sheet is denoted by $t$ and ranges from 0.5 to 3 mm in this study.
 The radius of the punch tip, denoted as $r_p$, remains constant throughout the experiments as it was never replaced.
 The bending angle, $\alpha$, is provided for completeness but will not be used in the subsequent analysis.
@@ -201,7 +208,7 @@ The bending angle, $\alpha$, is provided for completeness but will not be used i
 
 To ensure consistent results, a set of constant and variable parameters were selected.
 The punch was never changed and therefore the punch radius ($r_p$) is a constant parameter.
-Also the length and the width of the used metals sheet were standardized to 20 mm and 80 mm, respectively.
+Also the length and the width of the used metal sheets were standardized to 20 mm and 80 mm, respectively.
 
 The hold time, which refers to the duration that the punch remains stationary
 after reaching the maximum displacement ($y_p_{\max}$), was set to a minimum of 1 second.
@@ -295,8 +302,9 @@ is activated before the punch touches the metal sheet.
 The wait time at of 1 second $y_p_{max}$ is a limitation of the machine and can not be
 changed and therefore is always a part of the experimental setup.
 
-At $y_p_{max}$ force decrease bee seen in figure~\ref{fig:springback_measured}, which is most
-likely due to released friction (personal communications with ...).
+At the point where the punch is moved fully down, known as $y_p_{max}$, there is a noticeable decrease in force, as
+observed in \cref{fig:springback_measured}. This phenomenon is most likely attributed to the released friction (
+personal communication with Prof. Dr.-Ing. Marco Schneider).
 
 \begin{figure}[H]
     \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
@@ -348,8 +356,7 @@ An example of the dataset is presented in \cref{tab:dataset_example}.
             \bottomrule
         \end{tabular}
     \end{tcolorbox}
-    \caption{\textbf{Dataset example:} The dataset contains 396 data points. The independent variables are the punch
-    penetration, thickness and die opening. The dependent variable is the spring back.}
+    \caption{Excerpt from the dataset with 404 data points used in this study.}
     \label{tab:dataset_example}
 \end{table}
 
@@ -380,31 +387,41 @@ measurements of the samples.
 As a result, the dataset exhibits a minimal number of outliers and high data quality,
 which is a crucial prerequisite for developing reliable machine learning models.
 
-Figure~\ref{fig:train_test_split} illustrates that the dataset encompasses nearly all possible combinations of the
+\cref{fig:train_test_split} illustrates that the dataset encompasses nearly all possible combinations of the
 process parameters, namely $V$, $t$, and $y_p$.
-The $y_p$ values in the dataset are uniformly distributed and consistently range between 2.5 and 20 mm.
-Furthermore,the dataset was continuously expanded with new data points throughout the project to enhance its size and
+The $y_p$ values in the dataset are uniformly distributed and consistently ranged between 2.5 and 20 mm.
+Furthermore, the dataset was continuously expanded with new data points throughout the project to enhance its size and
 diversity.
+The figure also show the test-train split which will be explained in \cref{fig:train_test_split}.
+
+\begin{figure}[h]
+    \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
+        \centering
+        \includegraphics[width=0.8\textwidth]{chap4/images/test_train_split}
+    \end{tcolorbox}
+    \caption{The training and test dataset.}
+    \label{fig:train_test_split}
+\end{figure}
 
 The following gaps can be seen in the dataset: Metal sheet thickness with $V10$  after 1 mm could not be measured
 because the die opening was too small to fit the metal sheet.
-Also data for $V$ 20 and $t$ 2,5 as well as $V$ 40 and $t$ 1 are missing.
+Also data for $V$ 20 and $t$ 2,5 as well as $V$ 40 and $t$ 1 are missing, for time related reasons.
 
 Throughout the data collection and expansion process, any outliers and incorrect measurements were identified and
 removed from the dataset to maintain its high quality.
-However, it is worth noting that the data may not fully reflect real-world scenarios where various factors, such as
-measurements errors, noise and bias can impact data quality.
-In later sections, data quality issues will be intentionally introduced to evaluate the models' robustness to such
-challenges.
+%However, it is worth noting that the data may not fully reflect real-world scenarios where various factors, such as
+%measurements errors, noise and bias can impact data quality.
+%In later sections, data quality issues will be intentionally introduced to evaluate the models' robustness to such
+%challenges.
 This will provide insights into how well the machine learning models perform in more realistic scenarios and aid in
 developing more effective models for practical applications.
 
 \subsection{Data Preprocessing}\label{subsec:data-preprocessing}
-To normalize the independent features $y_p$, $V$, and $t$, as well as the dependent feature $spring_back$, the
+To normalize the independent features $y_p$, $V$, and $t$, as well as the dependent feature $spring\_back$, the
 \texttt{MinMaxScaler} or, in some cases, the \texttt{StandardScaler} from the
 \texttt{scikit-learn}~\cite{scikit -learn} library where employed.
 
-The \texttt{MinMaxScaler} scales the data between 0 and 1, and the scaler was fit on the training data and
+The \texttt{MinMaxScaler} scales the data between 0 and 1 and the scaler was fit on the training data and
 subsequently used to transform the test data.
 It is important to note that scaling was only performed on the training data, as cross-validation was later employed
 to tune and evaluate the models.
@@ -418,7 +435,7 @@ A ThinkPad X1 Carbon 2019 with an Intel Core i7-10610U CPU @ 1.80GHz and 16 GB R
 learning models.
 The OS used was Ubuntu 20.04.2 LTS on which the code was written in Python 3.8.5 with the PyCharm IDE.
 The code can be found on GitHub and on the the CD accompanying this thesis.
-The libraries used are listed in \cref{table:libraries}.
+The libraries used are listed in \cref{tab:libraries}.
 
 \captionsetup{width=1\textwidth}
 \begin{table}[h]
@@ -431,31 +448,31 @@ The libraries used are listed in \cref{table:libraries}.
             &
             \\
             \toprule
-            Sci-Kit Learn & 1.2.2 & ~\cite{scikit-learn} &
-            Machine Learning in python \\
+            Sci-Kit Learn & 1.2.2 & ~\cite{scikit-learn} \\
             \hdashline
-            numpy~ & 1.23.2 & ~\cite{harris2020array} &
-            Mathematical operations in python \\
+            numpy~ & 1.23.2 & ~\cite{harris2020array} \\
             \hdashline
-            pandas & 1.5.1 & ~\cite{mckinney-proc-scipy-2010} & Data
-            manipulation \\
+            pandas & 1.5.1 & ~\cite{mckinney-proc-scipy-2010} \\
             \hdashline
-            matplotlib & 3.6.2 & ~\cite{Hunter:2007} &
-            Plotting data \\
+            matplotlib & 3.6.2 & ~\cite{Hunter:2007} \\
             \hdashline
-            scienceplots & 2.0.1 & ~\cite{SciencePlots} &
-            Style of matplotlib \\
+            scienceplots & 2.0.1 & ~\cite{SciencePlots} \\
             \hdashline
-            seaborn & 0.12.2 & ~\cite{Waskom2021} & Additional plotting \\
+            seaborn & 0.12.2 & ~\cite{Waskom2021} \\
             \bottomrule
         \end{tabular}
     \end{tcolorbox}
-    \label{table:libraries}
     \caption{Libraries used for the machine learning models.}
+    \label{tab:libraries}
 \end{table}
 
-Upon examining the correlation matrix depicted in \cref{fig:correlation_matrix},
-it is evident that the distance and spring back features exhibit a stronger correlation
+A note to the citations of the libraries.
+All of the above libraries are well documented on their website.
+Libraries used for the machine learning models.
+
+Upon examining the correlation matrix depicted in \cref{fig:correlation_matrix}, the correlation is between 0 and 1,
+the higher the value the stronger the correlation.
+It is evident that the distance and spring back features exhibit a stronger correlation
 than the other features.
 This correlation is to be expected since punch penetration $y_p$ is the primary factor
 that influences the amount of spring back.
@@ -470,7 +487,7 @@ The correlation matrix was generated using the \texttt{heatmap} function from th
         \centering
         \includegraphics[width=0.7\textwidth]{chap4/images/correlation_matrix}
     \end{tcolorbox}
-    \caption{Correlation matrix generated with a Random Forest Regressor model.}
+    \caption{Correlation matrix generated with a Random Forest Regressor model}
     \label{fig:correlation_matrix}
 \end{figure}
 
@@ -494,13 +511,13 @@ Support Vector Machines~\cite[p. 8]{dridi2021supervised}.
 
 \subsection{The Baseline Model}\label{subsec:regression-models}
 In this study, a Linear Regression (LR) model is employed as the baseline model.
-Linear regression a widely used method that is used to predict a continuous output (dependent variables) based on a set
+Linear regression a widely used method to predict a continuous output (dependent variables) based on a set
 of input features (independent variables).
 The goal of a \ac{LR} model is to find the best-fitting straight to explain the relationship between the dependent
 (spring back) and independent (die opening, thicnkess, punch penetration)
 variables
 ~\cite[pp. 45--46]{muller_introductionmachinelearning_2016}.
-This so called regression line can be express as shown in Equation~\ref{eq:linear-regression}, which is take from
+This so called regression line can be express as shown in \xref{eq:linear-regression}, which is taken from
 Müller and Guido (2016)
 ~\cite[p. 45]{muller_introductionmachinelearning_2016}.
 
@@ -511,29 +528,28 @@ Müller and Guido (2016)
     \end{equation}
 \end{tcolorbox}
 
+The linear regression model is trained by minimizing the sum of squared errors between predicted and actual values.
 The values $x[0]$ to $x[p]$ indicate the properties of a single data instance, with $p$ being the number of
 features.
-The learned parameters of the model are $w$ and $b$, and $\hat{y}$  is the prediction genearted by the model.
+The learned parameters of the model are $w$ and $b$, and $\hat{y}$  is the prediction generated by the model.
 
-The linear regression model is trained by minimizing the sum of squared errors between predicted and actual values.
 The Mean Squared Error is calculated by adding together the squared discrepancies between the predicted and true
 values~\cite[p. 47--68]{muller_introductionmachinelearning_2016}.
-\çite[p. 47--68]{muller_introductionmachinelearning_2016} to compute the MSE.
 This model presumes a linear relationship between the independent and dependent variables.
-The dataset exploration in Sectionrefsubsec:dataset-exploration, on the other hand, revealed a nonlinear relationship
+The dataset exploration in \cref{subsec:dataset-exploration}, on the other hand, revealed a nonlinear relationship
 , implying that the linear regression model may not deliver reliable predictions.
 Despite this disadvantage, the model can be used as a baseline against which other models can be compared.
 
-% TODO hier ist noch Molnar
-Another reason to use linear regression is its interpretability and simplicity.
-The linear relationship between inputs and targets makes model interpretation
-straightforward
-~\cite[p. 37]{molnar2020interpretable}.
+%% TODO hier ist noch Molnar
+%Another reason to use linear regression is its interpretability and simplicity.
+%The linear relationship between inputs and targets makes model interpretation
+%straightforward
+%~\cite[p. 37]{molnar2020interpretable}.
 
-Another reason why an \ac{LR} model is used in this study is its interpretability and simplicity.
-The linearity of the relationship between the inputs and the target makes the
-interpretation of the model straightforward
-~\cite[p. 37]{molnar2020interpretable}.
+%Another reason why an \ac{LR} model is used in this study is its interpretability and simplicity.
+%The linearity of the relationship between the inputs and the target makes the
+%interpretation of the model straightforward
+%~\cite[p. 37]{molnar2020interpretable}.
 
 \subsection{Support Vector Regression (SVR)}\label{subsec:support-vector-regression-(svr)}
 Support Vector Machines (SVMs) are a popular approach for solving classification problems.
@@ -541,9 +557,8 @@ To understand how the SVM algorithm works, it can be helpful to approach the pro
 For example, a two-dimensional space as shown in \cref{fig:svm-example} can be considered, where each data point
 has a class assigned, in this case, either red or blue.
 The SVM algorithm seeks to identify a line (hyperplane) that separates the data points into different classes in the
-best possible way which means that there is the largest possible margin between the line and the
-nearest points of each class.
-The distance between the nearest point of each class and the hyperplane is called the margin
+best way possible which means that there is the largest possible distance between the line and the
+nearest points of each class
 ~\cite[pp. 92--96]{muller_introductionmachinelearning_2016}.
 
 The points that lie closest to the hyperplane are called support vectors, these define the margin which is tried to be
@@ -558,7 +573,7 @@ Since each feature in the dataset is formulated as one dimension in the geometri
 is usually not as straightforward as in the example depicted in Figure~\ref{fig:svm-example}.
 In the case of the spring back dataset, for instance, the hyperplane would be a three-dimensional plane, but it is
 not uncommon to have spaces with even higher dimensions.
-The algorithm seeks a hyperplane in an N-dimensional space, where N is the number of features, in order to
+The algorithm seeks a hyperplane in an N-dimensional space (where N is the number of features) in order to
 effectively separate and classify data points
 ~\cite[]{awad_efficientlearningmachines_2015}.
 
@@ -567,7 +582,7 @@ effectively separate and classify data points
         \centering
         \includegraphics[width=0.7\textwidth]{chap4/images/svm_example}
     \end{tcolorbox}
-    \caption{Simple \ac{SVM} examle~\cite[p. 94]{muller_introductionmachinelearning_2016}}
+    \caption{Simple \ac{SVM} example~\cite[p. 94]{muller_introductionmachinelearning_2016}}
     \label{fig:svm-example}
 \end{figure}
 
@@ -613,7 +628,7 @@ subsets of the dataset, with each sample belonging to one subset.
 The intermediate subsets are called decision nodes, and the final subsets are called terminal or leaf nodes
 ~\cite[p. 358]{geron2022hands}.
 The average outcome of the training data of a particular leaf node is used to predict its
-outcome~
+outcome
 ~\cite[p. 70--72]{muller_introductionmachinelearning_2016}.
 
 \cref{fig:dt-example} shows a reduced real-life example of a decision tree taken out of a Random Forest
@@ -627,6 +642,8 @@ These decision rules are listed on the first line of each node, and provide a cr
 subsets based on specific feature thresholds.
 For example, in the line \texttt{x[1] <= 0.75}, the decision rule is based on the second independent variable,
 $x[1]$, and the threshold value of 0 .75.
+In \cref{fig:dt-example} the green nodes represents the root, the blue nodes are the decision nodes, and the red
+nodes are the leaf nodes.
 
 The independent variables in this dataset are indicated as $x[i]$, where $x[0]$ indicates punch penetration, $x[1]$
 represents metal sheet thickness, and $x[2]$ represents die opening.
@@ -638,27 +655,27 @@ This metric indicates how well the decision node separates the data into differe
 feature threshold.
 A lower value indicates a better separation, and suggests that the decision rule is more effective in predicting the
 value of the dependent variable.
-Performance metrics like the \ac{MSE} are further explained in section~\ref{subsec:correctness}.
+Performance metrics like the \ac{MSE} are further explained in \ref{subsubsec:regression-metrics}.
 The line labeled ``samples'' in each node denotes the number of samples that reach that particular decision node.
 This metric provides insight into the distribution of data within the decision tree, and can be used to identify
 areas of high or low density within the sample.
 
 Finally, the ``value'' line in each node represents the predicted spring back for the samples that reach that
 particular decision node.
-This value provides an estimate of the dependent variable, and can be used to make predictions based on the input data.
+This value provides an estimate of the dependent variable and can be used to make predictions based on the input data.
 
-\begin{figure}[h]
+\begin{figure}[]
     \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
         \centering
         \includegraphics[width=0.7\textwidth]{chap4/images/decision_tree_example}
     \end{tcolorbox}
     \caption{Decision tree example made with \texttt{sklearn.tree.plot\_tree}~\cite{scikit-learn}.
-    The green noded represents the root, the blue nodes are the decision nodes, and the red nodes are the leaf nodes.}
+    }
     \label{fig:dt-example}
 \end{figure}
 
 \subsubsection{Random Forest}\label{subsubsec:random-forests}
-The primary issue with Decision Trees (\ac{DT}) is their propensity to overfit, leading to poor generalization
+The primary issue with DT is their propensity to overfit, leading to poor generalization
 performance and rendering them unsuitable for most use cases.
 To tackle this problem, ensemble methods are often employed instead of a single
 DT
@@ -670,9 +687,8 @@ predictions
 %The RF algorithm builds trees independently in parallel, and then all of the trees' predictions are combined to make
 %the final prediction.
 
-The Random Forest algorithm
-(\ac{RF}) algorithm~\cite[]{breiman_randomforests_2001} which combines multiple decision trees (weak learners) to
-produce a more precise and stable prediction (strong learner)
+The Random Forest (RF) algorithm~\cite[]{breiman_randomforests_2001} which combines multiple decision trees (weak
+learners) to produce a more precise and stable prediction (strong learner)
 ~\cite[p. 24]{awad_efficientlearningmachines_2015}~\cite[pp. 340]{gareth2013introduction}.
 This approach, known as the ``divide and conquer'' method, involves dividing the data into smaller randomized subsets
 and constructing a randomized tree predictor for each subset
@@ -692,7 +708,9 @@ patterns rather than being susceptible to noise
 Therefore bagging aids in diminishing the impact of individual data points or outliers that may have a
 significant influence on a single decision tree.
 
-The algorithm is visualized in Figure~\ref{fig:rf-example}.
+The algorithm is visualized in \cref{fig:rf-example} the green decision nodes are the root nodes, blue decision nodes
+are the decision nodes, and red nodes are the leaf nodes.
+The red arrows indicate the decisions made by each decision tree for one specific sample.
 Instead of a single decision tree, $N$ decision trees are built in the format described in \cref{fig:dt-example}.
 The bagging was not visualized but every single decision tree is trained on a variation of the dataset for the before
 described reasons.
@@ -707,9 +725,7 @@ Averaging the predictions of all trees makes the final prediction~\cite[p. 9]{br
     \end{tcolorbox}
     \caption{Visualization of the Random Forest algorithm as defined by~\cite[p.1]{breiman_randomforests_2001} (Own
     representation).
-    Green decision nodes are the root nodes, blue decision nodes are the decision nodes, and red nodes are the leaf
-    nodes.
-    The red arrows indicate the decisions made by each decision tree for one specific sample.}
+    }
     \label{fig:rf-example}
 \end{figure}
 
@@ -722,6 +738,7 @@ This mechanism is flexible enough to handle classifications and regression probl
 random forests count to the most successful \ac{ML}
 methods
 ~\cite[p. 3--4]{biau_randomforestguided_2016}~\cite[p. 25]{breiman_randomforests_2001}.
+
 
 \subsubsection{Gradient Boosting Regression Tree}
 
@@ -915,16 +932,6 @@ All models were trained on the same dataset.
 For algorithms with hyper-parameters, Grid-Search Cross-validation was used to set the them accordingly.
 The full hyper-parameters for each model are listed in \href{sec:hyper-parameters}.
 
-\begin{figure}[ht]
-    \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
-        \centering
-        \includegraphics[width=0.8\textwidth]{chap4/images/test_train_split}
-    \end{tcolorbox}
-    \caption{The training and test dataset. (Data especially for V40 is
-    still missing)}
-    \label{fig:train_test_split}
-\end{figure}
-
 \subsection{Setting the Hyper-Parameters}\label{subsec:hyper-parameters}
 Prior to training a machine learning model, users of machine learning implementations like the ons found in
 \texttt{sci-kit learn} generally need to manually choose a Machine Learning algorithm and configure one or more model
@@ -947,7 +954,7 @@ This can also be seen in the study's source code.
 
 The design and development of the machine learning models have been completed, marking the end of the `Build' phase
 in this study.
-All models were implemented using the libraries listed in \cref{table:libraries}, and the source
+All models were implemented using the libraries listed in \cref{tab:libraries}, and the source
 code is publicly available on GitHub at:
 
 \url{https://github.com/Philipp0205/Master-Thesis-Code}

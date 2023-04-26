@@ -57,9 +57,9 @@ Each individual quality metric section provides further elaboration, on what was
                 & LOOCV stability
                 \\
                 \hdashline
-                \textbf{Interpret- ability} & How well can the model be
+                \textbf{Interpret-ability} & How well can the model be
                 explained?~\cite[p. 16]{siebert2022construction}
-                & Linearity, \newline monotonicity, \newline  interaction
+                & Different interpretability methods
                 \\
                 \hdashline
                 \textbf{Resource utilization} & How much resources are
@@ -107,6 +107,28 @@ the models.
 The MSE was not included in the analysis, as it is not expressed in the same unit as the data and is therefore
 more difficult to interpret and might be misleading.
 
+\subsection*{How much error is acceptable?}
+
+An important question to ask when evaluating the performance of a model is how much error is acceptable.
+When bending sheet metal parts a tolerance of 1 degree of the bending angle is often used.
+Since the spring back in this study is measured in mm and not as angle this tolerance has to be converted.
+
+This can be done with the following formula:
+
+
+\begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
+    \begin{equation}
+        \label{eq:tolerance}
+        \text{\text{angle tolerance}} = \frac{\text{spring back}}{2 * \pi * \text{R}} / 180
+    \end{equation}
+    \begin{equation}
+        \text{for example: } 1^\circ * (2 * \pi * 25 mm) / 180 = 0.87 mm
+    \end{equation}
+\end{tcolorbox}
+
+where $R$ is the radius of the bending die.
+This means that for example a radius of 25 mm a spring back of 0.87 mm results 1 degree of tolerance:
+
 \subsection{Results}\label{subsec:results}
 \cref{tab:results-correctness} presents the results of the evaluation of the Machine Learning models for
 correctness, sorted by the RMSE in ascending order.
@@ -118,13 +140,16 @@ For the \ac{LR} model this is expected since the relationship between the indepe
 not linear.
 In contrast, Decision Trees can perform poorly when overfitting the training data and they are prone to
 instability.
-These problems are mitigated by using ensemble methods like Random Forest and Gradient Boosted Treesj.
+These problems are mitigated by using ensemble methods like Random Forest and Gradient Boosted Trees.
 As the simple Decision Tree and Linear Regression models are not able to predict the spring back accurately enough,
 they are not considered for the next steps of the evaluation.
+As there are only two algorithms that are deemed interpretable with explanations specific to their respective models
+, it follows that alternative techniques must be identified for the interpretability assessment to be conducted later.
+This matter will be deliberated in~\cref{sec:interpretability}.
+
 The Ada Boost, Random Forest, and Gradient Boosted Tree models demonstrate moderate predictive
 performance while the Multi-Layer-Perceptron, Extra Trees, and Support Vector Machine models have relatively low MAE
 and RMSE values, indicating good predictive performance.
-
 It is worth noting that the SVM model has a slightly better MAE while still maintaining a comparable RMSE compared
 to the other models.
 This could be because the errors made by the SVM are evenly distributed across instances or
@@ -135,26 +160,26 @@ because the errors made by the other models are large for a few instances but sm
     \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
 % \sisetup{group-minimum-digits = 4}
         \centering
-        \begin{tabular}{lll}
+        \begin{tabular}{llll}
             \toprule
             \thead{\textbf{Model Name}} & \thead{\textbf{MAE}}
-            & \thead{\textbf{RMSE}} \\
+            & \thead{\textbf{RMSE}} & \thead{\textbf{Relative Error}} \\
             \toprule
-            \textbf{Decision Tree}            & 0.255 & 0.348 \\
+            \textbf{Decision Tree} & 0.255 & 0.348 \\
             \hdashline
-            \textbf{Linear Regression}        & 0.220 & 0.282 \\
+            \textbf{Linear Regression} & 0.220 & 0.282 \\
             \hdashline
-            \textbf{Ada Boost}                & 0.202 & 0.261 \\
+            \textbf{Ada Boost} & 0.202 & 0.261 \\
             \hdashline
-            \textbf{Gradient Boosted Trees}   & 0.168 & 0.221 \\
+            \textbf{Gradient Boosted Trees} & 0.168 & 0.221 \\
             \hdashline
-            \textbf{Random Forest}            & 0.159 & 0.221 \\
+            \textbf{Random Forest} & 0.159 & 0.221 \\
             \hdashline
             \textbf{Multi-Layered-Perceptron} & 0.136 & 0.190 \\
             \hdashline
-            \textbf{Extra Trees }             & 0.135 & 0.172 \\
+            \textbf{Extra Trees } & 0.135 & 0.172 \\
             \hdashline
-            \textbf{Support Vector Machine}   & 0.106 & 0.146 \\
+            \textbf{Support Vector Machine} & 0.106 & 0.146 \\
             \bottomrule
         \end{tabular}
     \end{tcolorbox}
@@ -205,6 +230,8 @@ poorly.
 For instance, a model would receive a $R2$ score of 0.0 if it consistently predicted the expected value of y
 regardless of the input features
 ~\cite{_sklearnmetricsr2_}.
+In order to achieve a negative $R2$ score with sci-kit learns' implementation a model has to perform worse than a
+model that simply predicts the mean value of the dependend variable.
 Therefore, a high $R^2$ score indicates a good model fit and a good bias-variance
 tradeoff~\cite[p. 43]{muller_introductionmachinelearning_2016}.
 
@@ -301,8 +328,13 @@ number of overlapping test sets and a high computational cost.
 As an alternative, regular \ac{CV} was applied, with an increasing number of folds.
 The minimum number of folds was 2 and the maximum was equal to the total number of samples in the
 dataset.
-However, this experiment did not provide distinguishable results and was therefore not
-included in the results.
+
+Unfortunately, the experiment did not yield distinguishable results, indicating that all models performed similarly.
+As a result, no conclusions could be drawn. While various metrics were tested for the CV score, none provided any
+useful insights.
+It is unclear why this particular test did not produce results, but it may have been due to the specific combination
+of dataset and model used in this study.
+Nevertheless, this approach remains a viable option for future research and should be considered.
 
 The third and final experiment utilized random sampling to create different train-test data compositions, allowing
 for the evaluation of the model's handling of missing data.
@@ -322,6 +354,15 @@ However, when trained on 50\% of the data, the \ac{MLP}  and \ac{GBT} models sta
 better than the other models.
 When trained on 20\% of the data and less all models significantly underperform.
 Also the \ac{ET} model stays relatively stable when trained on less data.
+
+the results shows that having a small dataset doesn't necessarily mean that the results will be bead.
+In fact, the results indicate that even with only 400 samples in the dataset, half of that would sitll produce good
+results.
+This implies that data quality plays a crucial role in determining the success of a model rather than the quantity of
+data.
+However, it is important to note that a dataset's size should not be too small, as that would be less than 200
+samples in this case, which could lead to unreliable results.
+The results who that even half of the only 400 sample string dataset would still yield good results.
 
 \begin{figure}[h]
     \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
@@ -349,6 +390,7 @@ compositions and has the lowest variance.
     \label{fig:variance-missing-values}
 \end{figure}
 
+
 \subsection{Noise}\label{subsec:noise}
 A common practise in \ac{ML} is to add noise to the training data to improve
 the model's generalization abilities.
@@ -356,10 +398,10 @@ In this study Gaussian Noise will be added to the data set to evaluate the robus
 of the model.
 The noise will be added to the training data only as the training data should be as correct as possible to get
 comparable results.
-
-To add the noise, \textit{numpy.random.normal} function was used, which generate random numbers with a Gaussian
-distribution~\cite{scikit-learn}.
-The mean and standard deviations of each feature were calculated based on the original data, and the function was
+To add the noise, \textit{numpy.random.normal} function was used, which generates random numbers with a Gaussian
+distribution
+~\cite{harris2020array}.
+The mean and standard deviation of each feature were calculated based on the original data, and the function was
 used to generate noisy values for each feature.
 
 To study the model's reaction to increasing amounts of noise, the noise added
@@ -386,12 +428,11 @@ dataset.
 The noisy dataset comprised 1000 samples, and the x-axis indicates the percentage of the original data that
 was augmented with noise.
 The dashed lines correspond to the default performance of the models in the absence of noise.
-
 The results indicate that the performance of all models deteriorates rapidly with the addition of noise.
 Specifically, the first 20\% of the noisy data causes the most significant decline in model performance, after which the
 performance plateaus at a poor level.
-It is noteworthy that the Extra Trees model exhibits the most robust performance, outperforming the Gradient Boosted
-Trees and Random Forest models, which also demonstrate similar levels of resilience.
+It is noteworthy that the Extra Trees model exhibits the most robust performance, outperforming the Random Forest
+and Gradient Boosted Trees models, which also demonstrate similar levels of resilience.
 
 The results are interesting since they demonstrate that the typically high-performing SVM and MLP models
 exhibit underperformance under the current conditions.
@@ -409,6 +450,12 @@ The significance of using a high-quality dataset is emphasized.
 Also, the results indicate that a smaller dataset can still be effective in model training as long as the data
 quality is good.
 
+Also this test underlines the previous results, that relatively little data is enough to get good results as already
+little noise is enough to get bad results.
+This means that a good data quality outweighs a small dataset, as long as the dataset is not too small which would
+be below 200 samples in this case.
+
+
 \begin{figure}[h]
     \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
         \centering
@@ -416,7 +463,7 @@ quality is good.
     \end{tcolorbox}
     \caption{Comparison of performance on noisy data.
     The x-axis shows how many percent of the noisy dataset where added to the training data.
-    The y-axis shows the MSE metric.
+    The y-axis shows the RMSE metric.
     The dotted lines show the default performance of the model.
     The solid lines show the performance of the model when noise was added to the training data.
     }
@@ -574,15 +621,15 @@ dataset is not very big and the resulting models are also less complex.
             \unit{kb}}}
             \\
             \toprule
-            \textbf{ET}  & 19.541     & 1.939  & 157.93 \\
+            \textbf{ET}  & 19541     & 1.939  & 157.93 \\
             \hdashline
-            \textbf{RF} & 24.912     & 2.027  & 157.684 \\
+            \textbf{RF} & 24912     & 2.027  & 157.684 \\
             \hdashline
-            \textbf{GBR} & 43.688    & 1.302  & 158.121 \\
+            \textbf{GBR} & 43688    & 1.302  & 158.121 \\
             \hdashline
-            \textbf{SVM} & 421.007 & 2.587 & 158.082 \\
+            \textbf{SVM} & 421007 & 2.587 & 158.082 \\
             \hdashline
-            \textbf{MLP} & 16466.261s & 17.988 & 170.715 \\
+            \textbf{MLP} & 16466261 & 17.988 & 170.715 \\
             \bottomrule
         \end{tabular}
     \end{tcolorbox}
@@ -612,7 +659,12 @@ Consequently, this study cannot rely on model-specific interpretability methods 
 Also~\cite{doshi2017towards} differentiates between global and local interpretability.
 Global interpretability refers to the ability to understand the overall behavior of
 the model, while local interpretability refers to the ability to understand the behavior of the
-model for a specific instance.
+model for a specific instance~\cite[p. 7]{doshi2017towards}.
+\cite{doshi2017towards} note that global interpretability is important when scientific understanding or the detection
+of bias is the goal while local interpretability is important when the goal is to understand a specific prediction of
+the trained model
+~\cite[p. 7]{doshi2017towards}.
+
 It does not make sense to apply model-agnostic method on all trained models, it makes more sense to
 apply the methods on the best performing models.
 % TODO and Extra Trees...
@@ -626,7 +678,7 @@ understand their overall behavior.
 
 % TODO Source?
 Two commonly used methods for analyzing the relationship between input features
-and the target variable are Feature Dependence plots and Partial Dependence plots.
+and the target variable are Feature Dependence Plots (FDP) and Partial Dependence Plots (PDP).
 Feature dependence plots illustrate the relationship between a feature and the target variable.
 By analyzing these plots, we can identify which features have the strongest impact on the model's
 predictions, making it easier to prioritize and refine our feature selection.
@@ -649,7 +701,8 @@ model from the \texttt{scikit-learn} library.
 The Partial Dependence Plots (PDP) provide insights into the relevance and interactions of the
 features.
 As illustrated, thickness is the most important feature, followed by distance and die opening.
-This means that changes in thickness have the most significant impact on spring back, while variations in the other two features
+This means that changes in thickness have the most significant impact on spring back, while variations in the other
+two features
 have a comparatively smaller influence on the outcome.
 In terms of interactions, all features are relevant, indicating that each feature contributes unique information to
 the model.
@@ -670,28 +723,42 @@ performance of the model.
 The feature importance plot did facilitate a better understanding of the relationship between the features and the
 target
 variable.
-However, they do not provide insights into exactly how the features influence the outcome. Partial dependence plots
-can be helpful for this purpose.
+However, they do not provide insights into exactly how the features influence the outcome.
+Partial dependence plots can be helpful for this purpose.
 
 \subsubsection{Partial Dependence}
-\cite{greenwell2018simple} introduced another feature importance measure based on partial dependence.
-Partial dependence refers to the relationship between a target variable and a single predictor variable in a statistical
-model, while keeping all other predictor variables constant.
-A feature that exhibits a consistent partial dependence across all values is less important than a feature that
 
-Partial dependence plots examine the impact of a single input feature on the target variable while keeping all other
-features constant.
+Another tool to measure the importance measure is Partial Dependence Plots (PDP).
+They measure the relationship between a target variable and a single predictor variable in a statistical model, while
+keeping all other predictor variables constant
+~\cite[pp. 313--314]{boehmke2019hands}.
+A feature that exhibits a consistent partial dependence across all values is less important than a feature that
+exhibits a non-linear relationship with the target variable.
 While the feature importance plot shows the relative importance of each feature, the partial dependence plot shows
 the impact of a single feature on the target variable.
+Sci-kit learns's implementation of PDP plots is widely used and also utilized in this study
+~\cite{scikit-learn}.
 
-In Figure~\ref{fig:partial_dependence_plots}, we can see the PDPs for two models: Support Vector Machines (SVM) and
-Multilayer Perceptron (MLP).
+
+In \cref{fig:partial_dependence_plots}, we can see the PDPs for two models: Support Vector Machines and
+Multilayer Perceptron.
+To the best knowledge of the author this is the first time that PDPs are used to analyze the relationship between
+the input features and the target variable in the context of spring back prediction.
+
 It can be seen that the plots for both models yield the same results for the three features.
 The results show that a higher $y_p$ value leads to a greater spring back, while
 increasing the thickness of the metal sheet results in a lower spring back.
-The effect of the die opening is less
-significant than the other two features, but there is still a noticeable increase in spring back with higher die
-opening.
+The effect of the die opening is less significant than the other two features, but there is still a noticeable
+increase in spring back with higher die opening.
+
+The $y_p$ is the main factor that influences the bending angle and since most applications require a specific angle
+this is not a viable option.
+The results show that the most viable option to reduce the spring back in practical applications is to reduce the
+thickness of the metal sheet.
+As shown in \cref{fig:partial_dependence_plots}, especially for small thicknesses a change of 0.5 mm can lead to a
+significant reduction of the spring back.
+Since the same bending angle usually chan be achieved with multiple die openings it is also recommended to use a
+smaller die opening to reduce the spring back as well.
 The PDPs demonstrate that all features exhibit a non-linear relationship with the target variable.
 This information can be useful for understanding the behavior of the models and the impact of different features on
 the predicted outcome.
@@ -712,51 +779,64 @@ the predicted outcome.
         \end{subfigure}
         \hfill
     \end{tcolorbox}
-    \caption{Partial dependence plots}
+    \caption{Partial dependence plots generated with \textit{sci-kit learn}~\cite{scikit-learn}}
     \label{fig:partial_dependence_plots}
 \end{figure}
 
 It is important to note that partial dependence plots and feature importance plots are limited to
 identifying linear relationships between features and the target variable.
 Since this is not the case as state previously, the results of the partial dependence plots are
-alternative models as permutation feature importance and SHAP values are used to gain further
+alternative models as permutation feature importance values are used to gain further
 information.
 
-\subsection{Permutation Feature Importance and SHAP}\label{subsec:permutation-feature-importance-
+
+\subsection{Permutation Feature Importance}\label{subsec:permutation-feature-importance-
 and-shap}
 
 Permutation feature importance's assesses the impact on the model's prediction error when the values
 of a feature a randomly permutes.
 Permutation in this context means the process of randomly shuffling the values of a single features while keeping the
-values of all other feautres unchanged.
-Thereby the association between the feature and the actual outcome is disrupted~\cite[p. 157]{molnar2020interpretable}.
-
+values of all other features unchanged.
+Thereby the association between the feature and the actual outcome is disrupted~\cite{_permutationfeatureimportance_}
+%~\cite[p. 157]{molnar2020interpretable}.
 The importance of a feature is evaluated by assessing the degree to which permuting its values
 results in an increase in the prediction error fo the model.
 If permuting a features results in a significant increases in errors the features is deemed
 important because the model relied on it for making accurate predictions.
 Conversely, if permuting a feature doesn't change the prediction error is considered unimportant
-because the model didn't utilize it for its prediction~\cite[p. 158]{molnar2020interpretable}.
+because the model didn't utilize it for its prediction
+~\cite{_permutationfeatureimportance_}.
+%~\cite[p. 158]{molnar2020interpretable}.
 
-The resutls presented in Figure~\ref{fig:permutation_feature_importance} show that hte MLP and the SVM models yield
-similar trends in the importance of features.
-The feautres thickness and punch penetrration have a high importance with their permutation causing a significant
-increase
-in the prediction error both in $R^2$ and $MSE$.
-This inidicates that they are crucial for the decision making of the model.
+The results for the MLP and SVM models presented in \cref{tab:permutation_feature_importance}.
+The top section of the table shows the permutation importance of the feature for the $R^2$ while the bottom section
+show the permutation importance for the $MSE$.
+In this case again the $MSE$ was chosen since the $RMSE$ would not provide any additional information.
+For each feature the permutation feature importance score as well as the standard derivation is listed.
+If a feature achieves a higher permutation importance score it is considered to be more important, since it does
+influence the outcome of the model more.
+Additionally the standard derivation is given, a higher standard derivations suggest that the feature importance
+score is more unstable.
+The results show that the MLP and the SVM models yield similar trends in the importance of features.
+The features thickness and punch penetration have a high importance with their permutation causing a significant
+increase in the prediction error both in $R^2$ and $MSE$.
+This indicates that they are crucial for the decision making of the model.
 
-Different from the previous plots, the die opening has a importance of zero in both models.
+What differs from the previous analysis: The die opening has a importance of zero in both models.
 Ths implies does permuting this features does not have any influence on the prediction error.
-There are two possible explanations for this.
+This is a surprising result and there are two possible explanations for this:
+\begin{enumerate}
+    \item The die opening is not relevant for the decision making at all and does not provide any
+    significant information.
+    \item Or on the other hand the die opening is important but only in combination with either the thickness or the
+    penetration distance.
+    This suggest that there might be an interaction effect that was not captured in previous analysis.
+\end{enumerate}
 
-1. The die opening is not relevant for the decision making and does not provide any significant information.
-
-2. The die opening is important but only in combination with either the thickness or the penetration distance.
-This suggest that there might be an interactions effect that was not captures in previous analysis.
-
-Since the normal feature importance plots showed that die opening is important the second explanation is more likely.
-To further investigate this possiblitly a partial dependence plot was created for the die opening in combination with
-either the thickness or the penetration distance.
+Since the normal feature importance plots showed that die opening is important the second explanation is more
+likely.
+To further investigate this possibility a partial dependence plot was created specifically for the die opening in
+combination with either the thickness or the penetration distance.
 
 \begin{table}[h]
     \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
@@ -809,16 +889,21 @@ either the thickness or the penetration distance.
 
 To investigate the joint performance of the die opening feature with the other two features,
 again partial dependence plots can be used.
-Figure~\ref{fig:partial_dependence_plots} shows a two-way partial dependence plot for the
+\cref{fig:dpd-distance-die-opening} shows a two-way partial dependence plot for the
 \ac{MLP} model.
-The x- and y-axes represent the thickness and the distance, respectively.
+It is segmented into three individual plots: The first two plots show the partial dependen of the distance and the
+die opening.
+But the most interesting is the third plot which the interaction of the two input features distance (x-axis) and die
+opening (y-axis).
 The slope of the contour lines indicates the direction of the effect of the die opening on the
 prediction.
 The contour lines are colored and labeled according to the value of the prediction.
 It can be seen that the contour lines are not parallel which suggest the two features are
 interaction with each other and therefore have a joint effect on the model prediction.
+
 This means that the second explanation mentioned above is correct and the die opening is not irrelevant for the model
 prediction but just interacts with the other two features.
+Therefore it only affect the prediction in combination with the other two features.
 
 \begin{figure}[h]
     \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
@@ -831,13 +916,14 @@ prediction but just interacts with the other two features.
 
 \subsection{Local Model Agnostic Methods}\label{subsec:local-model-agnostic-methods}
 Local interpretability refers to the ability to understand the behavior of the model for a
-specific instance and is often used to explain the predictions of a model.
-Model agnostic methods can be used to explain the predictions of any model type~\cite{molnar2020interpretable}.
+specific instance and is often used to explain the predictions of a model
+~\cite[p. 19]{hall2019introduction}.
+Model agnostic methods can be used to explain the predictions of any model type and not only specific algorithms
+~\cite[p. 20]{hall2019introduction}.
 
 Local methods rely on interpreting individual instances from a dataset, and as such, it is
 crucial to select representative samples.
 One way to achieve this is by considering the V/t ratio of each instance.
-
 The local model agnostic method LIME was applied on different machine learning models.
 But it did not yield any meaningful results.
 
@@ -859,10 +945,10 @@ The lowest V/t ration in the dataset is 10, after that it was not possible to sq
 through a die opening of 10 mm.
 This means that the ratios used in industrial practise do not exactly apply of the dataset used in this study.
 
-Upon examining Figure~\ref{fig:springback-heatmap}, it is evident that the V/t ratio has a significant impact on
+Upon examining \cref{fig:springback-heatmap}, it is evident that the V/t ratio has a significant impact on
 spring back.
-There appears to be a correlation between a greater die opening and a reduced thickness resulting in greater spring
-backs.
+There appears to be a connection between a greater die opening and a reduced thickness resulting in greater spring
+backs. This was also observed in \cref{subsec:dataset-exploration}.
 Notably, the data points for $t0.5 V40$ and $t0.5 V50$ exhibit particularly elevated spring backs relative to the
 remaining data set.
 Conversely, all the data collected with a 10 mm die opening indicate lower spring back values.
@@ -872,12 +958,13 @@ Conversely, all the data collected with a 10 mm die opening indicate lower sprin
         \centering
         \includegraphics[width=0.8\textwidth]{chap5/images/mean_springback_heatmap}
     \end{tcolorbox}
-    \caption{Feature importance of the random forest model.}
+    \caption{Mean spring back for a V/t combinations. The x-axis denoted the thickness WHILE THE y-axis denotes the
+    die opening}
     \label{fig:springback-heatmap}
 \end{figure}
 
 To select specific instances for the demonstration, the V/t ratios of the instances are considered.
-A V/t ratios around 20 is considered to in the middle of the the dataset.
+A V/t ratios around 20 is considered to be in the middle of the the dataset.
 Therefore three cases are defined, where the V/t ratios are below, within and above the recommended range.
 
 The selected representative instances for the local methods are from one of three cases:
@@ -887,8 +974,8 @@ The selected representative instances for the local methods are from one of thre
     \item Case C includes instances with V/t ratios above the recommended range.
 \end{itemize}
 
-Chosen instances from each case are shown in Table~\ref{tab:representative-instances}.
-The tabe shows the instances chosen grouped by the fact if there in, below or above the recommended range.
+The chosen instances from each case are shown in \cref{tab:representative-instances}.
+The table shows the instances chosen grouped by the fact if there in, below or above the recommended range.
 
 \begin{table}[h]
     \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
@@ -915,27 +1002,26 @@ The tabe shows the instances chosen grouped by the fact if there in, below or ab
 \end{table}
 
 \subsection{Comparison of the Models}\label{subsec:overall-comparison-model-performance}
-In this section, the outcomes generated by the trained models on the selected cases A, B, and C are presented. To
-ensure unbiased results, all samples that were part of the test cases were removed from the training data set.
-For instance, for case A(a), all samples with a die opening of 20 and a thickness of 2 were removed from the dataset.
+In this section, the outcomes generated by the trained models on the selected cases A, B, and C are presented.
+To ensure unbiased results, all samples that were part of the test cases were removed from the training data set.
+For instance, for case A (a), all samples with a die opening of 20 and a thickness of 2 were removed from the dataset.
 This was done to prevent the models from overfitting to the test cases.
-While it is anticipated that the models' performance may decline in these tests due to the removal of training data,
-The decline is unlikely to be large.
+It is expected that the models' performance will decline a bit in these test cases due to the removal of some
+training data.
 
 It is vital to remember that the goal values represent the mean of all values when evaluating the numbers below.
-While the dataset's quality is not perfect, there may \ e some outliers present.
-In some circumstances, there are just a few samples for a particular sample, therefore the mean is not a reliable
+While the dataset's quality is not perfect, there may still some outliers present.
+In some circumstances, there are just a few datapoints for a particular instance, therefore the mean is not a reliable
 reflection of the true value.
 
-
-Figure~\ref{fig:performance-case-a} depicts two chosen test cases for case A with a V/t-ratio below the recommended
+\cref{fig:performance-case-a} depicts two chosen test cases for case A with a V/t-ratio below the recommended
 range.
 Test case (a) performs quite well overall and all models can predict the spring back with a mean absolute error of
 less than 0.5 mm.
 The weak point of the model seems to be the predictions of the edge punch penetration values and it can be seen that
 the predictions is always lower than the actual value.
-However, the models' performance deteriorates in instance (b)\ref{fig:performance-20-3.0} with a V/t-ratio of 6.6,
-particularly in the prediction of spring backs.
+However, the models' performance deteriorates in instance (b) shown in \cref{fig:performance-20-3.0} with a V/t
+-ratio of 6.6, particularly in the prediction of spring backs.
 
 \begin{figure}[h]
     \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
@@ -956,7 +1042,7 @@ particularly in the prediction of spring backs.
     \label{fig:performance-case-a}
 \end{figure}
 
-Figure~\ref{fig:performance-case-b} illustrates two selected test series for case B, where the V/t ratios fall within
+\cref{fig:performance-case-b} illustrates two selected test series for case B, where the V/t ratios fall within
 the recommended range.
 These test series produced the best results compared to cases A and C.
 In instances (a) and (b), all models performed reasonably well, with instance (b) displaying better overall
@@ -964,9 +1050,10 @@ performance.
 It is apparent that the SVM model appears to predict spring back better in case (a), while the MLP model performs
 best in case (b).
 Overall, it is difficult to identify a clear favorite model based on the performance of the models in these test
-series. Although some models performed better than others for specific variables or scenarios, the differences were
-not significant enough to identify a clear winner. Therefore, the selection of an appropriate model will be
-determined by the outcomes of the other two cases, A and C.
+series.
+Although some models performed better than others for specific variables or scenarios, the differences were
+not significant enough to identify a clear winner.
+Therefore, the selection of an appropriate model will be determined by the outcomes of the other two cases, A and C.
 
 \begin{figure}[h]
     \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
@@ -986,11 +1073,10 @@ determined by the outcomes of the other two cases, A and C.
     \label{fig:performance-case-b}
 \end{figure}
 
-Case C is the most challenging case, as all models exhibit visibly poor performance. This is expected since the V/t
-ratio is well above the recommended range.
-The results are unusable, as the models are unable to predict the spring
-back.
-However, in Figure~\ref{fig:performance-50_1}, the results appear more promising, with the RF and SVM models
+Case C is the most challenging case, as all models exhibit visibly poor performance.
+This is expected since the V/t ratio is well above the recommended range.
+The results are unusable, as the models are unable to predict the spring back.
+However, in \cref{fig:performance-50_1}, the results appear more promising, with the RF and SVM models
 demonstrating the most consistent performance.
 More work is clearly needed to construct machine learning models that perform well in these settings.
 
@@ -1014,21 +1100,18 @@ More work is clearly needed to construct machine learning models that perform we
 
 The best overall performing models are the \ac{MLP} and the \ac{SVM} model.
 As seen before, the model performs consistent across all three scenarios, indicating that it can
-effectively handle a broad range of V/t ratios also outside the recommended industry guidelines
-range.
-Therefore the chosen models for more detailed analysis are the \ac{MLP} and the \ac{SVM} model.
-
+effectively handle a broad range of V/t ratios also outside the recommended industry guidelines.
 Overall it can be said that the models are able to predict the spring back with high accuracy.
 For bad predictions the error is less than 0.25 mm, which is within the tolerance of the
-most manufacturing processes (This it not true yet).
+most manufacturing processes.
 
 
 \section{Results and Discussion}\label{sec:results-and-discussion}
 This component of the research is structured as follows:
-The first section, titled ''Summary of Results,'' presents a succinct review of the study's findings. The second
-section, ''Interpretation of Results,'' delves deeper into the findings and seeks to explain them.
+The first section, titled ``Summary of Results'' presents an review of the study's findings.
+The second section, ``Interpretation of Results'' delves deeper into the findings and seeks to explain them.
 Both parts are structured according to the three research questions formulated
-in~\ref{sec:problem-identification-and-motivation}.
+in~\cref{sec:problem-identification-and-motivation}.
 
 \subsection{Summary of Results}\label{subsec:summary-of-results}
 %Introduction
@@ -1143,7 +1226,7 @@ performing models.
 Thickness, distance and die opening where all identified as important features for the prediction spring back with the
 thickness of the metal sheet having the biggest influence on the outcome.
 Partial dependence plots revealed non-linear dependencies between the features and the target variable.
-Permutation feature importance and SHAP where sued to to further investigate the importance of the features.
+Permutation feature importance was  to to further investigate the importance of the features.
 The results indicated that thickness and punch penetration were crucial for the models decision-making while while the
 die opening was important but only in combination with the other two features.
 Two-way partial dependence plots showed an interaction between thickness and distance, confirming the importance of the
@@ -1183,17 +1266,19 @@ This means that in average the predictions of the best models derivative by 0.15
 with spring backs ranging from 0.5 mm to 3.1 mm in this study this performance is acceptable for many applications.
 
 Traditional trial-and-error methods, such as technology tables (refer to
-Section~\ref{sec:problem-identification-and-motivation}), offer data for a limited number of bends, encompassing
+\cref{sec:problem-identification-and-motivation}), offer data for a limited number of bends, encompassing
 only those bends that were previously tested.
 In contrast, the resulting \ac{ML} models from this study are capable of predicting an unlimited number of new bends
 with high accuracy.
 Therefore, it can be conclusively stated that \ac{ML} models are capable of outperforming traditional methods.
 
-In the presentation section (see~\ref{sec:demonstration}) it could be seen that the models are not perfect.
+In the presentation section (\cref{sec:demonstration}) it could be seen that the models are not perfect.
 In particularly they tend to underestimate high spring back values, this could be part of an area where further research
 may be needed.
 To improve the prediction accuracy more data for high spring back cases might already be enough to improve the to a
 satisfying level.
+The reason for that is that not enough high spring back cases are present in the dataset as can be seen in
+\cref{sec:research-method-and-structure}, consequently the trained ML models do not perform well that regard.
 
 The use of real-word data instead of simulated data for the training of the models make the results of this study more
 representative for real-world applications.

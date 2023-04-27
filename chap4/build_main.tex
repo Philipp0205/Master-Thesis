@@ -742,16 +742,16 @@ methods
 
 \subsubsection{Gradient Boosting Regression Tree}
 
-A Gradient Boosting Regression Trees (\ac{GBT}) are an ensemble learning algorithm that combines multiple Decision Trees
+A \ac{GBT} is an ensemble learning algorithm that combines multiple Decision Trees
 to yield more accurate and stable predictions.
 The main difference between this algorithm and the Random Forest algorithm is that the trees are trained sequentially
 rather than simultaneously, with each tree correcting the errors of the previous tree.
 ~\cite[p. 88--89]{muller_introductionmachinelearning_2016}.
-This is done with training each new tree is residual errors of the previous tree, which es the
+This is done with training each new tree with the residual errors of the previous tree, which is the
 difference between the predicted value and can also be called the loss.
 One example for a metric that can be used as loss is the Mean Squared Error (MSE) (more details in
 section~\ref{subsec:correctness}).
-To train a tree on the residual errors, the process is similar to training a decision tree on any other regression
+To train a tree on the residual errors, the process is similar to train a decision tree on any other regression
 task.
 Instead of using the original target variable (spring back) as the label for the training data instead the
 residual errors are used.
@@ -774,7 +774,7 @@ Furthermore, the algorithm performs well without scaling the dataset and can han
 continuous features
 ~\cite[p. 91]{muller_introductionmachinelearning_2016}
 
-In Figure~\ref{fig:gbr-example}, we illustrate the Gradient Boosted Regression Trees (GBRT) algorithm using a sample
+In \cref{fig:gbr-example}, we illustrate the Gradient Boosted Regression Trees (GBRT) algorithm using a sample
 dataset.
 The first tree is trained on the original dataset with the target variable being the spring back.
 After the construction of the initial decision tree, each sample in the dataset will have a predicted value which is
@@ -799,6 +799,8 @@ outcome
     \caption{Visualization of the \ac{GBR} algorithm adapted from~\cite[p. 222]{boehmke2019hands}}
     \label{fig:gbr-example}
 \end{figure}
+
+
 
 \subsubsection{Extra Trees}\label{subsubsec:extra-trees}
 In the construction of a random forest, decision trees are developed using a randomly selected subset of features for
@@ -825,7 +827,7 @@ because that would be outside the scope of this paper.
 Instead a simple Multi-Layer Perceptron (MLP) is used for the comparison with the other models. The goal is to
 evaluate if the employment of Neural Networks can be a future research area.
 
-The perceptron is inspired by the biological neuron the brain and is the basic processing unit of a neural
+The perceptron is inspired by the biological neuron in the brain and is the basic processing unit of a neural
 network.
 Each perceptron has one or more inputs from the previous perceptions or the environment and computes a weight sum of
 these inputs.
@@ -836,12 +838,12 @@ The activation function is often a simple sigmoid function which determines a th
 
 The MLP is a feedforward neural network which means that is organized into layers, with information
 moving in one direction from the input layer through the hidden layers to the output
-layer
+layer.
 These layers are the input layer, one or more hidden layers and an output
 layer
 ~\cite[pp. 279--280]{bishop1995neural}.
-The input layer is the network's first layer and is in charge of receiving input data. It contains the same number of
-nodes as the number of features in the dataset.
+The input layer is the network's first layer and is in charge of receiving input data.
+It contains the same number of nodes as the number of features in the dataset
 ~\cite[p. 105]{muller_introductionmachinelearning_2016}.
 In this example, the neural network's input layer would be made up of three perceptrons, each of which corresponded
 to one of the independent features, namely thickness, die opening, and punch penetration.
@@ -875,7 +877,7 @@ handwritten digits, this example is simplified and applied on the MLP model used
     This process is known as the forward pass.
     \item The error is then calculated by comparing the predicted output with the actual output.
     For example, if the projected spring back is 0.5 and the actual spring back is 0.6, the difference between these
-    values is the error.
+    values is the error which can also be negative.
     \item The error is propagated backwards through the network, from the output layer to the input layer, to
     calculate the gradient of the error with respect to the network's weights and biases. To reduce the error,
     the weights are then updated in the direction of the negative gradient using an optimization algorithm such
@@ -900,11 +902,11 @@ The weights of the connections between the perceptrons are denoted as $w_i$.
 \begin{figure}[h]
     \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
         \centering
-        \includegraphics[width=1\textwidth]{chap4/images/mlp_example}
+        \includegraphics[width=0.8\textwidth]{chap4/images/mlp_example}
     \end{tcolorbox}
     \caption{Visual representation of a Multi-layer Perceptron. Modeled after decription of
     \cite{nielsen_neuralnetworksdeep_2015} and applied on the scenario of this study
-        (Own repsentation). }
+        (own repsentation). }
     \label{fig:mlp-example}
 \end{figure}
 
@@ -920,10 +922,9 @@ This involves taking some samples from the original dataset and using them exclu
 \cref{fig:train_test_split} displays the dataset partitioned into training and testing sets for the models used in
 this study.
 Specifically, the samples with a die opening of 30 were reserved for testing, while the remaining data was used for
-training .
-While a random train-test split can often yield better model performance, this
-approach may not evaluate the model's ability to predict new data with a different die
-opening.
+training.
+While a random train-test split can often yield better model performance, but this may not evaluate the model's ability
+to predict new data with a different die opening.
 
 The decision to use a die opening of 30 was based on its central location within the selected dataset, allowing the
 models to predict this value accurately. Furthermore, removing data from the middle of the parameter space during
@@ -947,14 +948,14 @@ The use of a grid-search cross-validation is a popular method to discover the be
 This is the approach used in this study and was described in \cref{subsubsec:grid-search} `Grid Search'.
 The hyper-parameters utilized for each model are listed in~\cref{sec:hyper-parameters} to allow the reader to
 duplicate the outcomes of this study.
-This can also be seen in the study's source code.
+This data can also be seen in the study's source code.
 
 
 \section{Result of the Build-Phase}\label{sec:results-build-phase}
 
 The design and development of the machine learning models have been completed, marking the end of the `Build' phase
 in this study.
-All models were implemented using the libraries listed in \cref{tab:libraries}, and the source
+All models were implemented using the libraries listed in \cref{tab:libraries} and the source
 code is publicly available on GitHub at:
 
 \url{https://github.com/Philipp0205/Master-Thesis-Code}

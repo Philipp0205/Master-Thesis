@@ -1403,54 +1403,50 @@ in this field.
 This framework could be used in further research to evaluate the performance of \ac{ML} models not only in the field of
 spring back prediction but also in other fields.
 
+
 \subsection{How to apply the results in practise}\label{subsec:how-to-apply-the-results-in-practise}
 The results show which models are best suited for a particular \ac{DP} but do not provide a clear answer to the
 question of which model should be used in practice.
+The goal of this sections is to provide recommendations for the use of the results in practise.
+A general prioritization of \ac{DP}s cannot be made since the importance is depending on the use case.
 
-The goal of this section is to provide a recommendation for the use in practise and is the target groups are
-practitioners.
-To apply this study closely to practise for each \ac{DP}(s)  a concrete example use case is provided
-followed by a recommendation for the use of the models based on the results of the study.
+In industries like aerospace, where high precision metal components are crucial, minor inaccuracies in metal production
+can result in critical failures.
+Therefore, the development of accurate (DP Correctness) ML models is essential for predicting spring
+back in these applications.
+The recommended ML models for this use case are the Support Vector Machine (SVM) and Multilayer Perceptron (MLP)
+based on their proven effectiveness in predicting the desired outcomes.
 
-\textbf{Correctness: High precision metal components}:
-
-Precision is very important in certain industries, such as aerospace, where even minor inaccuracies in metal
-production can result in critical failures.
-Therefore, the development of accurate \ac{ML} models is essential for predicting spring back in these applications.
-The recommended \ac{ML} models for this use case are the \ac{SVM} and \ac{MLP}based on their proven effectiveness in
-predicting the desired outcomes.
-
-
-\textbf{Relevance \& Stability: Diverse metal components}:
-
-When working with a wide variety of metal components that differ in thicknesses, bending angles, or types of metal,
-\ac{ML} models need to be adaptable to these different conditions.
+When working with a wide variety of diverse metal components that differ in thicknesses, bending angles, or types of
+metal, ML models need to be adaptable to these different conditions.
 A relevant and stable model is essential to ensure consistent performance across different projects and accurately
 predict the spring back for various parameters.
-
-Among the best models in terms of relevance were \ac{SVM}, \ac{ET}, and \ac{MLP}.
-However, the SVM and MLP models did not prove to be stable and were among the low-performing
-models in that regard.
+Among the best models in terms of relevance were SVM, Extra Trees (ET), and MLP.
+However, the SVM and MLP models did not prove to be stable and were among the low-performing models in that regard.
 Therefore, the recommended model for this use case is the ET model.
 
-\textbf{Robustness: Manufacturing with varying data quality}:
-In some industries, such as the automotive industry, data quality may vary due to factors such as wear and tear on
-machinery or differences in material batches.
-Therefore, an \ac{ML} model that is robust would be essential in these scenarios as it could handle variations in the
-data more effectively.
-
+In some industries, such as the automotive industry, manufacturing with varying data quality may occur due to factors
+such as wear and tear on machinery or differences in material batches.
+Therefore, a robust ML model would be essential in these scenarios, as it could handle variations in the data more
+effectively.
 However, the results of this study make model selection quite challenging as two tests were conducted on all models,
 and the top-performing models were different in each test.
-In the missing values test, the \ac{MLP}, followed by the \ac{SVM}, seemed to be the best performing models.
-However, when noise was added to the training data, a different picture emerged, with both models performing the
-worst compared to the other tree-based models.
+In the missing values test, the MLP, followed by the SVM, seemed to be the best
+performing models.
+However, when noise was added to the training data, a different picture emerged, with both models
+performing the worst compared to the other tree-based models.
+As the variance in the missing values test was not very
+high, as seen in the referenced figure, it is advisable to prioritize the noise test.
+Therefore, we recommend selecting the ET and Gradient Boosting Trees (GBT) models for this case.
 
-As the variance in the missing values test was not very high, as seen in \cref{fig:variance-missing-values}, it is
-advisable to prioritize the noise test.
-Therefore, we recommend selecting the \ac{ET} and \ac{GBT} models for this case.
-
-
-\textbf{Resource utilization: Small-scale manufacturing}
+For small-scale manufacturing, there are many companies, such as small workshops, that do only small-scale metal
+sheet bending.
+Such businesses with limited resources might want to optimize the bending process without consuming
+excessive time or computational resources.
+These companies want an accurate ML model that provides precise predictions while minimizing resource usage.
+In this case, all ML models used in the study, except the MLP, can be recommended.
+The results showed that the MLP consumed the most resources, while the other models had comparable performance with
+lower resource consumption.
 
 There are many companies, such as small workshops, that do only small-scale metal sheet bending.
 Such a small business with limited resources might want to optimize the bending process without consuming excessive
@@ -1462,16 +1458,37 @@ The results showed that the \ac{MLP} consumed the most resources, while the othe
 with lower resource
 consumption.
 
+In many collaborative projects with non-experts, some stakeholders or users do not have a deep understanding of ML,
+so it is essential that an ML model can explain its predictions.
+An interpretable model can help build trust in the
+model and its predictions and help identify errors in the data or the model.
+Since only model-agnostic methods were
+used in this study, the results are not very conclusive.
+All models can be recommended for this use case.
 
 
-\textbf{Interpretability: Collaborative projects with non-experts}:
-In many projects some stakeholders or users doe not have deep understand of \ac{ML}, therefore it is important that
-a \ac{ML} can explain it's predictions.
-An interpretable model can help to build trust in the model and the predictions and can help to identify errors in the
-data or the model.
+\begin{table}[h]
+    \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
+        \centering
+        \begin{tabular}{lll}
+            \toprule
+            \textbf{Use case} & \textbf{Description} & \textbf{Recommended models} \\
+            \midrule
+            High precision & High precision metal components & SVM, MLP \\
+            Relevant and stable & Diverse metal components & ET \\
+            Robust & Varying data quality & ET, GBT \\
+            Low resource consumption & Small-scale manufacturing & All except MLP \\
+            Interpretable & Collaborative projects & All \\
+            \bottomrule
+        \end{tabular}
+    \end{tcolorbox}
+    \caption{Representative instances for the local methods.
+    V denots the die opening, t denotes the thickness of the metal sheet and V/t denotes the V/t ratio.
+    The last column indicates if the V/t ratio is in, below or above the recommended range.}
+    \label{tab:results-in-practise}
+\end{table}
 
-Since only model-agnostic methods where used in this study the results are not very conclusive.
-All models can be recommended for this use cas.
+
 
 \subsection{Recommendations for Further Research}\label{subsec:recommendations-for-further-research}
 The limitations identified in this study provide direction for future research.

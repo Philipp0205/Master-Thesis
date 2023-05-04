@@ -105,13 +105,24 @@ reduce the number of trial-and-error cycles during the manufacturing process, th
 valuable resources such as material and labor
 (refer to \cref{sec:problem-identification-and-motivation}).
 
-
 For example the technology sighted in \cref{sec:technology-tables} requires 11 unique bends to obtain the data
-for one for one type of metal with a certain thickness.
-These metal sheets cannot be repurposed due to their specific angles resulting in wasted materials and manual labor.
-Additionally, the machines used for bending the metal are often occupied around the clock, further adding to the
-inefficiency of the process (personal communication, Dr. Wolfram Hochstrate).
-A \ac{ML} could generate these predictions in a fraction of the time without using any additional metal sheets.
+for only one type of metal with a certain thickness.
+There are multiple problems with this approach: (personal communication, Dipl. Ing. Michael Philipeit).
+\begin{itemize}
+    \item Only data for one type of metal with a certain thickness can be obtained with on technology table. If new data
+    is needed for a different type of metal or thickness, a new technology table has to be created.
+    \item The metal sheets cannot be repurposed due to their specific angles resulting in wasted materials and manual
+    labor.
+    \item The machines used for bending the metal are often occupied around the clock, further adding to the
+    inefficiency of the bending process.
+\end{itemize}
+
+Machine learning (\ac{ML}) models have the potential to accurately predict spring back for various types of metals,
+thicknesses, and angles, without the need for new technology tables.
+This approach offers several advantages,including faster processing times and reduced manual labor requirements.
+Additionally, it eliminates the need for new metal sheets, resulting in less waste.
+By leveraging the power of \ac{ML} algorithms, manufacturers can optimize
+their metal bending processes and reduce costs associated with material waste and manual labor.
 
 Nevertheless, it is crucial to acknowledge that developing an \ac{ML} model also entails resource consumption.
 Training \ac{ML} models can be a labor-intensive process, as it often requires significant
@@ -168,18 +179,31 @@ Many other studies use finite element method (FEM) simulations to generate their
 However, the FEM is a computationally expensive method and requires a significant amount of time to
 generate a dataset.
 Additionally, FIE simulations due to the simulated nature are not able to capture all the effects of the sheet metal
-forming process, data generated in real world experiments is more representative of the real world.
-Therefore it is expected that the models trained on the generated dataset will be more accurate and represent the real
+forming process.
+In contrast, data from real-world experiments is more representative of the actual behavior of the sheet metal since
+experiments can provide a more comprehensive understanding of the material properties, behavior, and interactions
+that are taking place during the forming process.
+This can include factors such as the properties of the metal being formed, the tooling used, and the specific process
+conditions.
+Real-world data can also provide insights into unexpected or unpredictable variations that may occur during the
+forming process, which can be difficult to capture in a simulated environment.
+Additionally, experiments can be used to validate and improve the accuracy of simulation models, ensuring that the
+simulation results are more representative of the actual behavior of the metal.
+Therefore, it is expected that the models trained on the generated dataset will be more accurate and represent the real
 world better.
+
 The experiments were carried out in a controlled environment, allowing for the development of a large dataset with
 good repeatability.
 
 \subsection{Experimental Setup}\label{subsec:experimental-setup}
-The stamping press utilized for the experimental setup is the \textit{ZwickRoell GmbH \& Co. KG1454MO}, which is
-equipped with a load cell
-and a displacement sensor.
+The stamping press utilized for the experimental setup is the \textit{ZwickRoell GmbH \& Co. Z100}, which is
+equipped with a load cell and a displacement sensor.
+The press is capable of exerting a maximum force of 100 kN and has a maximum stroke of 100 mm.
+Metal sheets with dimensions of 20~x~80 mm were used for the experiments.
 These measure the force (F) applied to the sheet in Newton (N) and the displacement of the punch, also called
 punch penetration ($y_p$ in mm), respectively.
+The force is measured by the an ``Xforce'' load cell, while the displacement is measured by the displacement sensor
+~\cite{_xforceloadcell_}.
 The stationary die is mounted on the bottom , while the movable punch is mounted
 (see\cref{subsec:sheet-metal-manufacturing} for more details).
 The die opening of the machine is adjustable from 10 mm to 100 mm.
@@ -210,13 +234,25 @@ To ensure consistent results, a set of constant and variable parameters were sel
 The punch was never changed and therefore the punch radius ($r_p$) is a constant parameter.
 Also the length and the width of the used metal sheets were standardized to 20 mm and 80 mm, respectively.
 
+The bending process was carried out as follows:
+\begin{enumerate}
+    \item The metal sheet was placed on the die
+    \item The punch was moved downwards until it reached the sheet (which is the case when the load cell measures
+    force of at least 1 N)
+    \item The punch was moved downwards at a constant speed of 80 mm/min until the maximum displacement ($y_p_{\max}$)
+    was reached
+    \item The punch was held at the maximum displacement ($y_p_{\max}$) for a minimum of 1 second
+    \item The punch was moved upwards at a constant speed of 80 mm/min until it reached the initial position
+    \item The metal sheet was removed from the die
+\end{enumerate}
+
 The hold time, which refers to the duration that the punch remains stationary
 after reaching the maximum displacement ($y_p_{\max}$), was set to a minimum of 1 second.
 The punch force threshold was set to 1 N, meaning that the punch was initially moved at
 a higher speed until the force reached 1 N, and then moved at a slower speed of 80 mm
 /min until the $y_p_{\max}$ was reached.
 
-\begin{table}[htb]
+\begin{table}[h]
     \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
         \sisetup{group-minimum-digits = 4}
         \centering
@@ -291,7 +327,7 @@ These parameters and their values are displayed in
 The output data included various data points that were used to calculate the spring back.
 Key parameters for this calculation were the force, punch travel, and time
 which are illustrated in \cref{fig:springback_measured}.
-The blue line is representing the for force while the gray line is representing the punch travel.
+The blue line is representing the force while the gray line is representing the punch travel.
 The punch movement is measured as soon as the displacement sensor is activated with when it notices a difference of 1 N
 which is the case when the punch touches the metal sheet.
 
@@ -303,16 +339,17 @@ The wait time at of 1 second $y_p_{max}$ is a limitation of the machine and can 
 changed and therefore is always a part of the experimental setup.
 
 At the point where the punch is moved fully down, known as $y_p_{max}$, there is a noticeable decrease in force, as
-observed in \cref{fig:springback_measured}. This phenomenon is most likely attributed to the released friction (
-personal communication with Prof. Dr.-Ing. Marco Schneider).
+observed in \cref{fig:springback_measured}.
+This phenomenon is most likely attributed to the released friction (personal communication with Prof. Dr.-Ing. Marco
+Schneider).
 
 \begin{figure}[H]
     \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
         \centering
-        \includegraphics[width=0.7\textwidth]{chap4/images/springback_measured}
+        \includegraphics[width=0.7\textwidth]{chap4/images/t1,5_V30_y_5_1.TRA.csv_springback}
     \end{tcolorbox}
     \caption{\textbf{Spring back measured:} A steel metal sheet was bent with a punch penetration of 5
-    mm the spring back is 0 .37 mm. The blue line shows the force and the blue line shows the punch penetration.
+    mm the spring back is 0 .37 mm.
     The distance between the green and the red point repesents the spring back distance.}
     \label{fig:springback_measured}
 \end{figure}
@@ -382,10 +419,14 @@ These trends are also observed for other die openings and therefore apply for th
 \end{figure}
 
 \subsubsection{Data Quality}
-The dataset was carefully created in a controlled experimental environment to ensure precise and accurate
+The dataset was created careful and in a controlled experimental environment to ensure precise and accurate
 measurements of the samples.
-As a result, the dataset exhibits a minimal number of outliers and high data quality,
-which is a crucial prerequisite for developing reliable machine learning models.
+As a result, the dataset exhibits a minimal number of outliers and high data quality, which is a crucial prerequisite
+for developing reliable machine learning models.
+As demonstrated in \cref{subsec:results-stability}, the stability of the models was tested, and it was observed that
+the addition of noise or outliers to the dataset resulted in a significant decrease in the performance of the models.
+This finding is indicative of the high quality of the dataset, as it implies that the dataset does not contain many
+outliers that could negatively impact model performance.
 
 \cref{fig:train_test_split} illustrates that the dataset encompasses nearly all possible combinations of the
 process parameters, namely $V$, $t$, and $y_p$.
@@ -419,7 +460,7 @@ developing more effective models for practical applications.
 \subsection{Data Preprocessing}\label{subsec:data-preprocessing}
 To normalize the independent features $y_p$, $V$, and $t$, as well as the dependent feature $spring\_back$, the
 \texttt{MinMaxScaler} or, in some cases, the \texttt{StandardScaler} from the
-\texttt{scikit-learn}~\cite{scikit -learn} library where employed.
+\texttt{scikit-learn}~\cite{scikit-learn} library where employed.
 
 The \texttt{MinMaxScaler} scales the data between 0 and 1 and the scaler was fit on the training data and
 subsequently used to transform the test data.
@@ -514,7 +555,7 @@ In this study, a Linear Regression (LR) model is employed as the baseline model.
 Linear regression a widely used method to predict a continuous output (dependent variables) based on a set
 of input features (independent variables).
 The goal of a \ac{LR} model is to find the best-fitting straight to explain the relationship between the dependent
-(spring back) and independent (die opening, thicnkess, punch penetration)
+(spring back) and independent (die opening, thickness, punch penetration)
 variables
 ~\cite[pp. 45--46]{muller_introductionmachinelearning_2016}.
 This so called regression line can be express as shown in \xref{eq:linear-regression}, which is taken from
@@ -739,7 +780,6 @@ random forests count to the most successful \ac{ML}
 methods
 ~\cite[p. 3--4]{biau_randomforestguided_2016}~\cite[p. 25]{breiman_randomforests_2001}.
 
-
 \subsubsection{Gradient Boosting Regression Tree}
 
 A \ac{GBT} is an ensemble learning algorithm that combines multiple Decision Trees
@@ -800,10 +840,8 @@ outcome
     \label{fig:gbr-example}
 \end{figure}
 
-
-
 \subsubsection{Extra Trees}\label{subsubsec:extra-trees}
-In the construction of a random forest, decision trees are developed using a randomly selected subset of features for
+In the construction of a Random Forest, Decision Trees are developed using a randomly selected subset of features for
 each node (see Section~\ref{subsubsec:random-forests}). To further enhance the randomness of the trees, random
 thresholds can be employed for decision rules in addition to the random selection of
 features~\cite[p. 351]{geron2022hands}.
@@ -824,8 +862,8 @@ perform classification and regression tasks.
 
 While this study does not go into detail about the usage of Artificial Neural Networks for spring back prediction
 because that would be outside the scope of this paper.
-Instead a simple Multi-Layer Perceptron (MLP) is used for the comparison with the other models. The goal is to
-evaluate if the employment of Neural Networks can be a future research area.
+Instead a simple Multi-Layer Perceptron (MLP) is used for the comparison with the other models.
+The goal is to evaluate if the employment of Neural Networks can be a future research area.
 
 The perceptron is inspired by the biological neuron in the brain and is the basic processing unit of a neural
 network.
@@ -855,12 +893,12 @@ first hidden layer.
 While doing this each neuron multiplies the input values with the weight value associated with the connections
 denoted as $w_i$
 The output layer of the neural network does produce the final output of the network.
-The output is calculated based on the weighted output produces by the last hidden layer
+The output is calculated based on the weighted output produced by the last hidden layer
 ~\cite[p. 106]{muller_introductionmachinelearning_2016}.
 
 Setting the weights to a specific values is the task of the training process and is the actual `learning' part of the
 MLP.
-During the training the algorithm adjusts the weights of the connections between the neurons in order to minimize
+During training the algorithm adjusts the weights of the connections between the neurons in order to minimize
 the error between the predicted and actual output.
 A backpropagation algorithm is typically used to train \ac{MLP} models, by
 propagating errors backwards from the output layer to the input layer in order to adjust
@@ -927,7 +965,8 @@ While a random train-test split can often yield better model performance, but th
 to predict new data with a different die opening.
 
 The decision to use a die opening of 30 was based on its central location within the selected dataset, allowing the
-models to predict this value accurately. Furthermore, removing data from the middle of the parameter space during
+models to predict this value accurately.
+Furthermore, removing data from the middle of the parameter space during
 training is expected to improve model performance and promote generalization to new data.
 All models were trained on the same dataset.
 For algorithms with hyper-parameters, Grid-Search Cross-validation was used to set the them accordingly.

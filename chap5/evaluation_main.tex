@@ -392,18 +392,23 @@ thee different split ratios to evaluate the performance of a deep learning model
 
 The results of this experiment provided valuable insights into the model's performance under
 different data compositions, particularly when dealing with missing
-data, and were used in conjunction with other metrics to gain a comprehensive understanding of
+data and were used in conjunction with other metrics to gain a comprehensive understanding of
 the model's overall performance.
 
-\cref{fig:results-missing-values} shows how the models performed when trained on
-continuously less data.
-It can be seen that all models perform well when trained with on 90\% of the data.
-However, when trained on 50\% of the data, the \ac{MLP}  and \ac{GBT} models start to perform
-better than the other models.
-When trained on 20\% of the data and less all models significantly underperform.
 
-The results show that having a small dataset doesn't necessarily mean that the results will be bead.
-In fact, the results indicate that even with only 400 samples in the dataset, half of that would sitll produce good
+The graph depicts the relationship between the size of the test set, expressed as a percentage on the x-axis, and the
+root RMSE achieved by the model on that particular test-train split, shown on the y-axis.
+As expected, the plot reveals a decline in the model's performance as the amount of training data decreases, since the
+model has less data to learn from and is therefore less accurate.
+Initially, when the model is trained on 90\% of the data and tested on 10\%, only the GBT and MLP models perform well.
+However, when trained on 80\% of the data, all models achieve good results, indicating that this test-train split is
+optimal for all the models.
+From this point on, the MLP consistently outperforms the other models, closely followed by the SVM model. The GBT
+model also performs well overall, but its performance starts to deteriorate when the training data drops below 60\%,
+lagging behind the other models.
+
+The results show that having a small dataset doesn't necessarily mean that the results will be bad.
+In fact, the results indicate that even with only 400 samples in the dataset, half of that would till produce good
 results.
 This implies that data quality plays a crucial role in determining the success of a model rather than the quantity of
 data.
@@ -420,7 +425,9 @@ The results who that even half of the only 400 sample string dataset would still
     \label{fig:results-missing-values}
 \end{figure}
 
-Looking at the variances shown in \cref{fig:variance-missing-values} the the \ac{SVM} and \ac{MLP} models
+After examining the variances depicted in \cref{fig:variance-missing-values}, it appears that the variances are
+relatively small, and the distinctions between the models are not particularly significant.
+Still it can be seen that the the \ac{SVM} and \ac{MLP} models
 perform the best and seem to be the most robust models when trained on less data.
 It has to be noted, that as seen in the previous figure the most variance comes from training on
 below 20\% of the data.
@@ -515,6 +522,14 @@ be below 200 samples in this case.
     }
     \label{fig:results-noise-fig}
 \end{figure}
+
+Comparing the noise test with the missing value test it can be seen that they yield quite different results.
+In the missing values test the \ac{MLP} and \ac{SVM} models performed the best while the opposite is true when noise
+was added to the training data.
+With added noise all tree-based learning algorithms perform better.
+Since the difference between all models in the missing values test wasn't that big the noise test could be
+prioritizes for the model selection but this will be discussed further in
+~\cref{subsec:how-to-apply-the-results-in-practise}
 
 
 \section{DP4: Stability}\label{sec:stability}
@@ -705,7 +720,7 @@ Consequently, this study cannot rely on model-specific interpretability methods 
 Also~\cite{doshi2017towards} differentiates between global and local interpretability.
 Global interpretability refers to the ability to understand the overall behavior of
 the model, while local interpretability refers to the ability to understand the behavior of the
-model for a specific instance~\cite[p. 7]{doshi2017towards}.
+model for a specific instance~\cite[p. 7]{doshi2017towards}
 \cite{doshi2017towards} note that global interpretability is important when scientific understanding or the detection
 of bias is the goal while local interpretability is important when the goal is to understand a specific prediction of
 the trained model
@@ -1150,8 +1165,100 @@ Overall it can be said that the models are able to predict the spring back with 
 For bad predictions the error is less than 0.25 mm, which is within the tolerance of the
 most manufacturing processes.
 
+\subsection{Interpretation of Results}\label{subsec:interpretation-of-results}
 
-\section{Results and Discussion}\label{sec:results-and-discussion}
+The results of the this study provide insights in the applications of machine learning on the field of metal sheet
+bending and the prediction of spring back.
+The interpretation of the results is as follows:
+
+\subsubsection{Hypothesis 1}
+The findings support the first hypothesis that \ac{ML} models can accurately predict the spring back of bent sheet
+metal parts.
+The Extra Tree and Support Vector Machine models performed best with a RMSE of 0.15 mm, while other models still
+exhibited good performance.
+This means that in average the predictions of the best models derivative by 0.15 mm from the actual spring back,
+with spring backs ranging from 0.5 mm to 3.1 mm in this study this performance is acceptable for many applications.
+
+Traditional trial-and-error methods, such as technology tables (refer to
+\cref{sec:problem-identification-and-motivation}), offer data for a limited number of bends, encompassing
+only those bends that were previously tested.
+In contrast, the resulting \ac{ML} models from this study are capable of predicting an unlimited number of new bends
+with high accuracy.
+Therefore, it can be conclusively stated that \ac{ML} models are capable of outperforming traditional methods.
+
+In the presentation section (\cref{sec:demonstration}) it could be seen that the models are not perfect.
+In particularly they tend to underestimate high spring back values, this could be part of an area where further research
+may be needed.
+To improve the prediction accuracy more data for high spring back cases might already be enough to improve the to a
+satisfying level.
+The reason for that is that not enough high spring back cases are present in the dataset as can be seen in
+\cref{sec:research-method-and-structure}, consequently the trained ML models do not perform well that regard.
+
+The use of real-word data instead of simulated data for the training of the models make the results of this study more
+representative for real-world applications.
+A comparison with other studies is challenging since variations in the bending process such as material, machine,
+bending method and other factors might yield significantly different results.
+%In comparison with similar studies like \cite{baig_machinelearningprediction_2021} it can be seen that the
+%real -world data used definitely paid of comparing the results
+
+\subsubsection{Hypothesis 2}
+
+The results show that specific \ac{ML} perform better compared to other models based on the six Design Principles
+that where used.
+The Extra Tree model demonstrated the best balance between bias and variance, as well as robust performance when
+exposed to missing data and noise.
+The Gradient Boosting model displayed the highest stability, while the Extra Tree and Random Forest models exhibited
+the best resource utilization.
+These findings suggest that selecting the most suitable ML models for specific applications is crucial for achieving
+optimal performance.
+
+The best overall performance was achieved by the Extra Tree model.
+It was the only model that performed well in all performed tests.
+The Extra Tree model is a good choice for applications where the model should be trained on a small dataset and
+Should be able to accurately forecast new samples.
+It is crucial to highlight that only a simple neural network was utilized in this study, and while it produced good
+results, more complicated neural networks could produce even better outcomes.
+Further more the use of ensemble models could yield interesting results (see recommendations for further
+research~\ref{subsec:recommendations-for-further-research}).
+
+\subsubsection{Hypothesis 3}
+The results show interpretability methods can provide valuable insights into factors that contribute to spring back,
+potentially leading to a better understanding of the underlying physical processes and more effective compensation
+strategies.
+The thickness of the metal sheet was found to have the most significant influence on spring back, while other
+features, such as punch penetration and die opening, also played important roles in the models' decision-making
+processes.
+
+With he use of model-agnostic methods, the study also revealed non-linear dependencies between the input and the
+target features, as well as interactions between thickness and distance.
+This information can be valuable for further refining the models, as well as for developing more effective
+compensation strategies in the sheet metal forming process.
+This study was not able to use models with high interpretability such as decision trees or linear models
+since their performance was not good enough.
+
+\subsection{Limitations of Research}\label{subsec:limitations-of-research}
+There are some limitations to this studay that needed to be considered when interpreting the results.
+
+The dataset used has a limited number of samples, with 400 samples the models might not have enough data to capture
+the full complexity of the spring back phenomenon.
+Furthermore the dataset did not contain many high spring back scenarios, which might have led to the models
+underestimating high spring back values.
+A larger dataset with more high spring back samples could potentially improve the model performance.
+Additionally it has to be noted that many parameters weren't changed in the experimental setup.
+For example the used press brake, punch radius and material of the metal sheets where not changed.
+Experiments with different bending methods and materials will most certainly yield different results.
+
+This study had a limited number of input features (punch penetration, die opening and
+metal sheet thickness).
+Other potentially relevant factors such as material properties, temperatures might limited the models ability to
+capture all factors affecting the spring back.
+
+Also this study had to selected a limited number of models,
+there might be other models or more advanced techniques that might yield better results, recommendations for further
+research will be made in the following section.
+
+
+\section{Discussion of the Results}\label{sec:results-and-discussion}
 This component of the research is structured as follows:
 The first section, titled ``Summary of Results'' presents an review of the study's findings.
 The second section, ``Interpretation of Results'' delves deeper into the findings and seeks to explain them.
@@ -1296,97 +1403,75 @@ in this field.
 This framework could be used in further research to evaluate the performance of \ac{ML} models not only in the field of
 spring back prediction but also in other fields.
 
-\subsection{Interpretation of Results}\label{subsec:interpretation-of-results}
+\subsection{How to apply the results in practise}\label{subsec:how-to-apply-the-results-in-practise}
+The results show which models are best suited for a particular \ac{DP} but do not provide a clear answer to the
+question of which model should be used in practice.
 
-The results of the this study provide insights in the applications of machine learning on the field of metal sheet
-bending and the prediction of spring back.
-The interpretation of the results is as follows:
+The goal of this section is to provide a recommendation for the use in practise and is the target groups are
+practitioners.
+To apply this study closely to practise for each \ac{DP}(s)  a concrete example use case is provided
+followed by a recommendation for the use of the models based on the results of the study.
 
-\subsubsection{Hypothesis 1}
-The findings support the first hypothesis that \ac{ML} models can accurately predict the spring back of bent sheet
-metal parts.
-The Extra Tree and Support Vector Machine models performed best with a RMSE of 0.15 mm, while other models still
-exhibited good performance.
-This means that in average the predictions of the best models derivative by 0.15 mm from the actual spring back,
-with spring backs ranging from 0.5 mm to 3.1 mm in this study this performance is acceptable for many applications.
+\textbf{Correctness: High precision metal components}:
 
-Traditional trial-and-error methods, such as technology tables (refer to
-\cref{sec:problem-identification-and-motivation}), offer data for a limited number of bends, encompassing
-only those bends that were previously tested.
-In contrast, the resulting \ac{ML} models from this study are capable of predicting an unlimited number of new bends
-with high accuracy.
-Therefore, it can be conclusively stated that \ac{ML} models are capable of outperforming traditional methods.
+Precision is very important in certain industries, such as aerospace, where even minor inaccuracies in metal
+production can result in critical failures.
+Therefore, the development of accurate \ac{ML} models is essential for predicting spring back in these applications.
+The recommended \ac{ML} models for this use case are the \ac{SVM} and \ac{MLP}based on their proven effectiveness in
+predicting the desired outcomes.
 
-In the presentation section (\cref{sec:demonstration}) it could be seen that the models are not perfect.
-In particularly they tend to underestimate high spring back values, this could be part of an area where further research
-may be needed.
-To improve the prediction accuracy more data for high spring back cases might already be enough to improve the to a
-satisfying level.
-The reason for that is that not enough high spring back cases are present in the dataset as can be seen in
-\cref{sec:research-method-and-structure}, consequently the trained ML models do not perform well that regard.
 
-The use of real-word data instead of simulated data for the training of the models make the results of this study more
-representative for real-world applications.
-A comparison with other studies is challenging since variations in the bending process such as material, machine,
-bending method and other factors might yield significantly different results.
-%In comparison with similar studies like \cite{baig_machinelearningprediction_2021} it can be seen that the
-%real -world data used definitely paid of comparing the results
+\textbf{Relevance \& Stability: Diverse metal components}:
 
-\subsubsection{Hypothesis 2}
+When working with a wide variety of metal components that differ in thicknesses, bending angles, or types of metal,
+\ac{ML} models need to be adaptable to these different conditions.
+A relevant and stable model is essential to ensure consistent performance across different projects and accurately
+predict the spring back for various parameters.
 
-The results show that specific \ac{ML} perform better compared to other models based on the six Design Principles
-that where used.
-The Extra Tree model demonstrated the best balance between bias and variance, as well as robust performance when
-exposed to missing data and noise.
-The Gradient Boosting model displayed the highest stability, while the Extra Tree and Random Forest models exhibited
-the best resource utilization.
-These findings suggest that selecting the most suitable ML models for specific applications is crucial for achieving
-optimal performance.
+Among the best models in terms of relevance were \ac{SVM}, \ac{ET}, and \ac{MLP}.
+However, the SVM and MLP models did not prove to be stable and were among the low-performing
+models in that regard.
+Therefore, the recommended model for this use case is the ET model.
 
-The best overall performance was achieved by the Extra Tree model.
-It was the only model that performed well in all performed tests.
-The Extra Tree model is a good choice for applications where the model should be trained on a small dataset and
-Should be able to accurately forecast new samples.
-It is crucial to highlight that only a simple neural network was utilized in this study, and while it produced good
-results, more complicated neural networks could produce even better outcomes.
-Further more the use of ensemble models could yield interesting results (see recommendations for further
-research~\ref{subsec:recommendations-for-further-research}).
+\textbf{Robustness: Manufacturing with varying data quality}:
+In some industries, such as the automotive industry, data quality may vary due to factors such as wear and tear on
+machinery or differences in material batches.
+Therefore, an \ac{ML} model that is robust would be essential in these scenarios as it could handle variations in the
+data more effectively.
 
-\subsubsection{Hypothesis 3}
-The results show interpretability methods can provide valuable insights into factors that contribute to spring back,
-potentially leading to a better understanding of the underlying physical processes and more effective compensation
-strategies.
-The thickness of the metal sheet was found to have the most significant influence on spring back, while other
-features, such as punch penetration and die opening, also played important roles in the models' decision-making
-processes.
+However, the results of this study make model selection quite challenging as two tests were conducted on all models,
+and the top-performing models were different in each test.
+In the missing values test, the \ac{MLP}, followed by the \ac{SVM}, seemed to be the best performing models.
+However, when noise was added to the training data, a different picture emerged, with both models performing the
+worst compared to the other tree-based models.
 
-With he use of model-agnostic methods, the study also revealed non-linear dependencies between the input and the
-target features, as well as interactions between thickness and distance.
-This information can be valuable for further refining the models, as well as for developing more effective
-compensation strategies in the sheet metal forming process.
-This study was not able to use models with high interpretability such as decision trees or linear models
-since their performance was not good enough.
+As the variance in the missing values test was not very high, as seen in \cref{fig:variance-missing-values}, it is
+advisable to prioritize the noise test.
+Therefore, we recommend selecting the \ac{ET} and \ac{GBT} models for this case.
 
-\subsection{Limitations of Research}\label{subsec:limitations-of-research}
-There are some limitations to this studay that needed to be considered when interpreting the results.
 
-The dataset used has a limited number of samples, with 400 samples the models might not have enough data to capture
-the full complexity of the spring back phenomenon.
-Furthermore the dataset did not contain many high spring back scenarios, which might have led to the models
-underestimating high spring back values.
-A larger dataset with more high spring back samples could potentially improve the model performance.
-Additionally it has to be noted that many parameters weren't changed in the experimental setup.
-For example the used press brake, punch radius and material of the metal sheets where not changed.
-Experiments with different bending methods and materials will most certainly yield different results.
+\textbf{Resource utilization: Small-scale manufacturing}
 
-This study had a limited number of input features (punch penetration, die opening and
-metal sheet thickness).
-Other potentially relevant factors such as material properties, temperatures might limited the models ability to
-capture all factors affecting the spring back.
+There are many companies, such as small workshops, that do only small-scale metal sheet bending.
+Such a small business with limited resources might want to optimize the bending process without consuming excessive
+time or computational resources.
+Such companies want an accurate \ac{ML} model that provides precise predictions while minimizing resource usage.
 
-Also this study had to selected a limited number of models,
-there might be other models or more advanced techniques that might yield better results, recommendations for further
-research will be made in the following section.
+In this case, all \ac{ML} models used in the study, except the \ac{MLP}, can be recommended.
+The results showed that the \ac{MLP} consumed the most resources, while the other models had comparable performance
+with lower resource
+consumption.
+
+
+
+\textbf{Interpretability: Collaborative projects with non-experts}:
+In many projects some stakeholders or users doe not have deep understand of \ac{ML}, therefore it is important that
+a \ac{ML} can explain it's predictions.
+An interpretable model can help to build trust in the model and the predictions and can help to identify errors in the
+data or the model.
+
+Since only model-agnostic methods where used in this study the results are not very conclusive.
+All models can be recommended for this use cas.
 
 \subsection{Recommendations for Further Research}\label{subsec:recommendations-for-further-research}
 The limitations identified in this study provide direction for future research.

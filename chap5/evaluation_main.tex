@@ -261,10 +261,10 @@ A common metric for gauging the effectiveness of regression models is the $R^2$ 
 the variance is explained by the model.
 It ranges usually from 0 to 1, where 0 means that the model does not explain any of the variance and a score of 1
 means that the model fully explains the variance
-~\cite[p. 43]{muller_introductionmachinelearning_2016}.
+~\cite[p. 43]{muller2016introduction}.
 
 \cref{eq:r2} shows the formula for the $R^2$ score as explained by
-~\cite[p. 43]{muller_introductionmachinelearning_2016}.
+~\cite[p. 43]{muller2016introduction}.
 
 \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
     \begin{equation}
@@ -277,11 +277,11 @@ One unique feature of scikit-learn's implementation of $R^2$ is that the score c
 poorly.
 For instance, a model would receive a $R^2$ score of 0.0 if it consistently predicted the expected value of y
 regardless of the input features
-~\cite{_sklearnmetricsr2_}.
+~\cite{scikit-learn}.
 In order to achieve a negative $R2$ score with sci-kit learns' implementation a model has to perform worse than a
 model that simply predicts the mean value of the dependend variable.
 Therefore, a high $R^2$ score indicates a good model fit and a good bias-variance
-tradeoff~\cite[p. 43]{muller_introductionmachinelearning_2016}.
+tradeoff~\cite[p. 43]{muller2016introduction}.
 
 \subsection{Results}\label{subsec:results3}
 
@@ -343,7 +343,7 @@ Unlike \ac{DP} Correctness(\cref{sec:dp1:-correctness}), robustness is a non-fun
 model.
 A way to evaluate the robustness is to check the correctness of the model with added noise to the
 data
-~\cite[p. 1]{saez_evaluatingclassifierbehavior_2016}, if the model is still able to predict the correct values, it is
+~\cite[p. 1]{saez2016evaluating}, if the model is still able to predict the correct values, it is
 considered robust.
 As mentioned in \cref{subsec:dataset-exploration} the data set was generated in a controlled environment does not
 contain many data quality issues and noise as they where removed during the process.
@@ -998,7 +998,7 @@ For the current dataset, the V/t ratios range from 10 to 100.
 The highest ratio can be achieved by bending a 0.5 mm thin metal sheet using a 50 mm wide die opening, while the
 lowest ratio is achieved by bending a 1 mm thick sheet on a 10 mm die opening.
 
-Recommended V/t ratios in industrial practices are between 6 and 10~\cite[p.7]{cruz_applicationmachinelearning_2021}.
+Recommended V/t ratios in industrial practices are between 6 and 10~\cite[p.7]{cruz2021application}.
 Bending operations performed outside of this range of recommended ratios may result in
 high spring back.
 The lowest V/t ration in the dataset is 10, after that it was not possible to squeeze metals larger than 1 mm
@@ -1403,82 +1403,85 @@ in this field.
 This framework could be used in further research to evaluate the performance of \ac{ML} models not only in the field of
 spring back prediction but also in other fields.
 
-
 \subsection{How to apply the results in practise}\label{subsec:how-to-apply-the-results-in-practise}
 The results show which models are best suited for a particular \ac{DP} but do not provide a clear answer to the
 question of which model should be used in practice.
-The goal of this sections is to provide recommendations for the use of the results in practise.
-A general prioritization of \ac{DP}s cannot be made since the importance is depending on the use case.
+A general recommendation of a model is not possible since different models excelled in different \ac{DP}s, also the
+prioritization of the \ac{DP}s is depending on the use case.
+This study evaluates five different use cases of metal forming processes, each with different requirements and
+priorities.
+Each use case has different priorities different \ac{DP}s and based on that the right \ac{ML} models
+can be recommended.
 
-In industries like aerospace, where high precision metal components are crucial, minor inaccuracies in metal production
-can result in critical failures.
-Therefore, the development of accurate (DP Correctness) ML models is essential for predicting spring
-back in these applications.
-The recommended ML models for this use case are the Support Vector Machine (SVM) and Multilayer Perceptron (MLP)
-based on their proven effectiveness in predicting the desired outcomes.
+\textbf{1. High Precision Metal Components in Aerospace Industry}
+In the aerospace industry, the importance of high precision metal components cannot be overstated.
+Any inaccuracies in metal production could lead to critical failures that might endanger lives and financial losses .
+In this context, ML models that prioritize correctness, such as Support Vector Machine (SVM) and the Multilayer
+Perceptron (MLP), are recommended.
+These models have demonstrated their effectiveness in predicting spring back,which is essential for maintaining the
+high precision required in aerospace applications.
 
+
+\textbf{2. Adaptable Models for diverse Metal Components}
 When working with a wide variety of diverse metal components that differ in thicknesses, bending angles, or types of
 metal, ML models need to be adaptable to these different conditions.
 A relevant and stable model is essential to ensure consistent performance across different projects and accurately
 predict the spring back for various parameters.
-Among the best models in terms of relevance were SVM, Extra Trees (ET), and MLP.
+Among the best models in terms of relevance where the SVM, ET and MLP models.
 However, the SVM and MLP models did not prove to be stable and were among the low-performing models in that regard.
 Therefore, the recommended model for this use case is the ET model.
 
+
+\textbf{3. Robust Models for Varying Data Quality in Automotive Industry}
 In some industries, such as the automotive industry, manufacturing with varying data quality may occur due to factors
 such as wear and tear on machinery or differences in material batches.
 Therefore, a robust ML model would be essential in these scenarios, as it could handle variations in the data more
 effectively.
 However, the results of this study make model selection quite challenging as two tests were conducted on all models,
 and the top-performing models were different in each test.
-In the missing values test, the MLP, followed by the SVM, seemed to be the best
-performing models.
+In the missing values test, the MLP, followed by the SVM, where the best performing models.
 However, when noise was added to the training data, a different picture emerged, with both models
 performing the worst compared to the other tree-based models.
 As the variance in the missing values test was not very
-high, as seen in the referenced figure, it is advisable to prioritize the noise test.
-Therefore, we recommend selecting the ET and Gradient Boosting Trees (GBT) models for this case.
+high,  it is advisable to prioritize the noise test.
+Therefore, recommend models are the ET and GBT models in this case.
 
-For small-scale manufacturing, there are many companies, such as small workshops, that do only small-scale metal
-sheet bending.
+
+\textbf{4. Resource-efficient Models for Small-scale Manufacturing}
+There are many companies, such as small workshops, that do only small-scale metal sheet bending.
 Such businesses with limited resources might want to optimize the bending process without consuming
 excessive time or computational resources.
 These companies want an accurate ML model that provides precise predictions while minimizing resource usage.
-In this case, all ML models used in the study, except the MLP, can be recommended.
 The results showed that the MLP consumed the most resources, while the other models had comparable performance with
 lower resource consumption.
+Therefore all ML models used in the study except the MLP can be recommended.
 
-There are many companies, such as small workshops, that do only small-scale metal sheet bending.
-Such a small business with limited resources might want to optimize the bending process without consuming excessive
-time or computational resources.
-Such companies want an accurate \ac{ML} model that provides precise predictions while minimizing resource usage.
 
-In this case, all \ac{ML} models used in the study, except the \ac{MLP}, can be recommended.
-The results showed that the \ac{MLP} consumed the most resources, while the other models had comparable performance
-with lower resource
-consumption.
-
+\textbf{5. Interpretability for Collaborative Projects with Non-experts}
 In many collaborative projects with non-experts, some stakeholders or users do not have a deep understanding of ML,
 so it is essential that an ML model can explain its predictions.
 An interpretable model can help build trust in the
 model and its predictions and help identify errors in the data or the model.
-Since only model-agnostic methods were
-used in this study, the results are not very conclusive.
-All models can be recommended for this use case.
+In this study only mode-agnostic method where used wich can be applies to any model, therefore all models can be
+recommended for this use-case.
 
 
 \begin{table}[h]
-    \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
+    \begin{tcolorbox}[arc=0pt,boxrule=0.5pt, hbox]
         \centering
         \begin{tabular}{lll}
             \toprule
-            \textbf{Use case} & \textbf{Description} & \textbf{Recommended models} \\
+            \textbf{Use case}        & \textbf{Description}            & \thead{\textbf{Recommend. models}} \\
             \midrule
-            High precision & High precision metal components & SVM, MLP \\
-            Relevant and stable & Diverse metal components & ET \\
-            Robust & Varying data quality & ET, GBT \\
-            Low resource consumption & Small-scale manufacturing & All except MLP \\
-            Interpretable & Collaborative projects & All \\
+            High precision           & High precision metal components & SVM, MLP                           \\
+            \hdashline
+            Relevant and stable      & Diverse metal components        & ET                                 \\
+            \hdashline
+            Robust                   & Varying data quality            & ET, GBT                            \\
+            \hdashline
+            Low resource consumption & Small-scale manufacturing       & All except MLP                     \\
+            \hdashline
+            Interpretable            & Collaborative projects          & All                                \\
             \bottomrule
         \end{tabular}
     \end{tcolorbox}
@@ -1487,8 +1490,6 @@ All models can be recommended for this use case.
     The last column indicates if the V/t ratio is in, below or above the recommended range.}
     \label{tab:results-in-practise}
 \end{table}
-
-
 
 \subsection{Recommendations for Further Research}\label{subsec:recommendations-for-further-research}
 The limitations identified in this study provide direction for future research.

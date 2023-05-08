@@ -36,12 +36,12 @@ second research question and the principle 6 will be used to answer the third re
 The demand for lightweight products is a driving force in the manufacturing industry,
 as consumers and businesses alike demand products that meet stringent standard of
 precision and accuracy
-~\cite[p. 2]{cruz_applicationmachinelearning_2021}.
+~\cite[p. 2]{cruz2021application}.
 This is particularly true in the case of sheet metal forming, where even small
 deviations from the desired dimensions can cause significant implications for the final
 product.
 Therefore it is desirable to minimize the spring back
-~\cite[p.1]{cruz_applicationmachinelearning_2021}.
+~\cite[p.1]{cruz2021application}.
 
 \ac{ML} has emerged as a powerful tool for predicting the spring back in other bending
 methods as shown in \cref{sec:state-of-research} ``State of Research''.
@@ -61,9 +61,9 @@ data and achieve a good bias-variance trade-off
 Understanding the bias-variance trade-off is crucial in developing \ac{ML} models that
 generalize well to unseen data
 % TODO Zitation nicht geprüft
-~\cite[p. 49--51]{zhou_machinelearning_2021}.
+~\cite[p. 49--51]{zhou2021machine}.
 It suggests, that a model can accurately capture the underlying patterns in the data
-without overfitting or underfitting~\cite[p. 49--51]{zhou_machinelearning_2021}.
+without overfitting or underfitting~\cite[p. 49--51]{zhou2021machine}.
 
 \subsection*{Design Principle 3: Robustness}
 Robustness is described in the IEEE standard glossary of software engineering terminology as:
@@ -72,7 +72,7 @@ invalid inputs or stressful environmental conditions''~\cite[p. 64]{terminology1
 \cite{saez2016evaluating} extend this definition to fit machine learning
 models and describe it as ``the capability of an algorithm to build models that are insensitive to
 data corruptions and suffer less from the impact of noise''
-~\cite[p. 2]{saez_evaluatingclassifierbehavior_2016}.
+~\cite[p. 2]{saez2016evaluating}.
 \cite{siebert2022construction} also specifically mention data quality issues like
 outliers or noise
 ~\cite[p. 16]{siebert2022construction}.
@@ -152,7 +152,7 @@ In this study it is the goal to comprehend the decision making process of the tr
 As discussed in \cref{ch:theoretical-foundations}, the sheet metal forming process involves numerous
 variables, making the process design intricate, particularly when producing components that necessitate several
 processing stages and multiple sets of tools
-~\cite[p. 1]{dib_singleensembleclassifiers_2020}.
+~\cite[p. 1]{dib2020single}.
 Therefore,  and interpretable model is deemed a better model and enables the user to make informed decision based
 on the models results.
 
@@ -536,19 +536,11 @@ The correlation matrix was generated using the \texttt{heatmap} function from th
 \section{Model Selection}\label{sec:model-selection}
 This thesis focuses on the utilization of Supervised Machine Learning models to predict
 spring back.
-Therefore, a selection of the most common machine learning models where used, based on
-the systematic literature review of
-~\cite{dridi2021supervised}.
-\cite{dridi2021supervised} defines eight widely used supervised machine learning models in the paper.
-These models are Logistic Regression, Support Vector Machines, Decision Trees, Random Forests, AdaBoost, Naive Bayes
-, and K-Nearest Neighbors.
+Therefore, a selection of the most common Machine Learning models where used, based on
+the selection of ~\cite{muller2016introduction}.
 
-However, Naive Bayes and K-Nearest Neighbors are not used in this thesis since they are typically
-utilized for classification problems.
-Furthermore, in order to compare the performance of the other models, a Linear Regression model
-and a Multi-Layer-Perceptron were also employed.
-The models can be classified into five categories: Logic-based learning, instance-based learning, Deep learning, and
-Support Vector Machines~\cite[p. 8]{dridi2021supervised}.
+%The models can be classified into five categories: Logic-based learning, instance-based learning, Deep learning, and
+%Support Vector Machines~\cite[p. 8]{dridi2021supervised}.
 
 \subsection{The Baseline Model}\label{subsec:regression-models}
 In this study, a Linear Regression (LR) model is employed as the baseline model.
@@ -557,10 +549,10 @@ of input features (independent variables).
 The goal of a \ac{LR} model is to find the best-fitting straight to explain the relationship between the dependent
 (spring back) and independent (die opening, thickness, punch penetration)
 variables
-~\cite[pp. 45--46]{muller_introductionmachinelearning_2016}.
+~\cite[pp. 45--46]{muller2016introduction}.
 This so called regression line can be express as shown in \xref{eq:linear-regression}, which is taken from
 Müller and Guido (2016)
-~\cite[p. 45]{muller_introductionmachinelearning_2016}.
+~\cite[p. 45]{muller2016introduction}.
 
 \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
     \begin{equation}
@@ -575,7 +567,7 @@ features.
 The learned parameters of the model are $w$ and $b$, and $\hat{y}$  is the prediction generated by the model.
 
 The Mean Squared Error is calculated by adding together the squared discrepancies between the predicted and true
-values~\cite[p. 47--68]{muller_introductionmachinelearning_2016}.
+values~\cite[p. 47--68]{muller2016introduction}.
 This model presumes a linear relationship between the independent and dependent variables.
 The dataset exploration in \cref{subsec:dataset-exploration}, on the other hand, revealed a nonlinear relationship
 , implying that the linear regression model may not deliver reliable predictions.
@@ -600,13 +592,13 @@ has a class assigned, in this case, either red or blue.
 The SVM algorithm seeks to identify a line (hyperplane) that separates the data points into different classes in the
 best way possible which means that there is the largest possible distance between the line and the
 nearest points of each class
-~\cite[pp. 92--96]{muller_introductionmachinelearning_2016}.
+~\cite[pp. 92--96]{muller2016introduction}.
 
 The points that lie closest to the hyperplane are called support vectors, these define the margin which is tried to be
 maximized by the algorithm and therefore are important for determining the optimal position of the hyperplane
-~\cite[p. 42]{awad_efficientlearningmachines_2015}.
+~\cite[p. 42]{awad2015efficient}.
 The hyperplane serves as a decision boundary that separates the data points into different
-classes~\cite[p. 11]{awad_efficientlearningmachines_2015}
+classes~\cite[p. 11]{awad2015efficient}
 , in the example the points on the one side of the hyperplane are classified with the blue class while the
 points on the other side are classified with the red class
 
@@ -616,14 +608,14 @@ In the case of the spring back dataset, for instance, the hyperplane would be a 
 not uncommon to have spaces with even higher dimensions.
 The algorithm seeks a hyperplane in an N-dimensional space (where N is the number of features) in order to
 effectively separate and classify data points
-~\cite[]{awad_efficientlearningmachines_2015}.
+~\cite[]{awad2015efficient}.
 
 \begin{figure}[H]
     \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
         \centering
         \includegraphics[width=0.7\textwidth]{chap4/images/svm_example}
     \end{tcolorbox}
-    \caption{Simple \ac{SVM} example~\cite[p. 94]{muller_introductionmachinelearning_2016}}
+    \caption{Simple \ac{SVM} example~\cite[p. 94]{muller2016introduction}}
     \label{fig:svm-example}
 \end{figure}
 
@@ -631,46 +623,53 @@ However, for regression problems such as predicting spring back, the \ac{SVM} al
 needs to be adapted to provide continuous values instead of a finite set of values.
 To address this, the Support Vector Regression (SVR) algorithm was developed, which draws inspiration from the
 \ac{SVM} algorithm and leverages similar principles
-~\cite[p. 92]{muller_introductionmachinelearning_2016}.
+~\cite[p. 92]{muller2016introduction}.
 
 To enable the \ac{SVR} algorithm to generate continuous predictions, it creates a ``tube''
 while the points outside the tube are penalized based on their distance from the
 predicted function.
 This approach is similar to how \ac{SVM}s penalize points in classification
 problems
-~\cite[p. 369]{montesinoslopez_supportvectormachines_2022}
-~\cite[pp. 67--68]{awad_efficientlearningmachines_2015}.
+~\cite[p. 369]{montesinos2022support}
+~\cite[pp. 67--68]{awad2015efficient}.
 
 % Kernel trick
 To transfer data into a higher-dimensional space, the kernel trick is used.
 Two methods are usually used for \ac{SVM}s, the polynomial kernel and the radial basis
 function, also known as gaussian kernel
-~\cite[p. 97--98]{muller_introductionmachinelearning_2016}.
+~\cite[p. 97--98]{muller2016introduction}.
 Similar to the \ac{SVM} algorithm, the \ac{SVR} algorithm finds a well-fitting hyperplane to a
 kernel-induced feature space to achieve good generalization performance using the original
 features.
-This is detailed in~\cite[p. 369]{montesinoslopez_supportvectormachines_2022}.
+This is detailed in~\cite[p. 369]{montesinos2022support}.
 
-\subsection{Logic-based learning}\label{subsec:logic-based-learning}
+\subsection{Tree-Based Algorithms}\label{subsec:tree-based-algorithms}
 
-Logic-based algorithms solve problems by applying logical functions sequentially or
-incrementally.
-An example of such an algorithm is a decision tree, which is commonly used as a classification
-and regression model
-~\cite[p. 10]{dridi2021supervised}.
+There are multiple \ac{ML} algorithms that are based on decision trees.
+Decision trees are a type of supervised learning algorithm that can be used for both classification and regression
+problems~\cite[p. 70]{muller2016introduction}.
+Based on this algorithm, there are multiple other algorithms that are based on decision trees, such as Random Forests
+, Extra Trees and Gradient Boosting Trees.
+This section will provide an overview of these algorithms and how they work.
+
+%Logic-based algorithms solve problems by applying logical functions sequentially or
+%incrementally.
+%An example of such an algorithm is a decision tree, which is commonly used as a classification
+%and regression model
+%~\cite[p. 10]{dridi2021supervised}.
 
 \subsubsection{Decision Trees}
 % -> Problem von decision tree
 Decision Trees (DT) construct a hierarchy of rules to predict outcomes based on the
 data
-~\cite[p. 70]{muller_introductionmachinelearning_2016}~\cite[p. 253]{shaik_briefsurveyrandom_2019}.
+~\cite[p. 70]{muller2016introduction}~\cite[p. 253]{shaik2019brief}.
 Based on certain feature values, the algorithm divides the data into various segments and creates a variety of
 subsets of the dataset, with each sample belonging to one subset.
 The intermediate subsets are called decision nodes, and the final subsets are called terminal or leaf nodes
 ~\cite[p. 358]{geron2022hands}.
 The average outcome of the training data of a particular leaf node is used to predict its
 outcome
-~\cite[p. 70--72]{muller_introductionmachinelearning_2016}.
+~\cite[p. 70--72]{muller2016introduction}.
 
 \cref{fig:dt-example} shows a reduced real-life example of a decision tree taken out of a Random Forest
 (see \cref{subsubsec:random-forests}that was trained for this study.
@@ -720,7 +719,7 @@ The primary issue with DT is their propensity to overfit, leading to poor genera
 performance and rendering them unsuitable for most use cases.
 To tackle this problem, ensemble methods are often employed instead of a single
 DT
-~\cite[p. 83]{muller_introductionmachinelearning_2016}~\cite[p. 251]{liu_newmachinelearning_2012}.
+~\cite[p. 83]{muller2016introduction}~\cite[p. 251]{liu2012new}.
 In ensemble methods, multiple models such as decision trees are combined to form a single model.
 To make new predictions, the predictions of each individual model are aggregated, for example by averaging the
 predictions
@@ -728,12 +727,12 @@ predictions
 %The RF algorithm builds trees independently in parallel, and then all of the trees' predictions are combined to make
 %the final prediction.
 
-The Random Forest (RF) algorithm~\cite[]{breiman_randomforests_2001} which combines multiple decision trees (weak
+The Random Forest (RF) algorithm~\cite[]{breiman2001random} which combines multiple decision trees (weak
 learners) to produce a more precise and stable prediction (strong learner)
-~\cite[p. 24]{awad_efficientlearningmachines_2015}~\cite[pp. 340]{gareth2013introduction}.
+~\cite[p. 24]{awad2015efficient}~\cite[pp. 340]{gareth2013introduction}.
 This approach, known as the ``divide and conquer'' method, involves dividing the data into smaller randomized subsets
 and constructing a randomized tree predictor for each subset
-~\cite[p. 251]{liu_newmachinelearning_2012}.
+~\cite[p. 251]{liu2012new}.
 
 The risk of overfitting is mitigated through subset and feature randomization, also known as bagging.
 Bagging involves randomly selecting a subset of features or variables at each decision node in the decision
@@ -745,7 +744,7 @@ the general pattern (see \cref{subsec:overfitting-and-underfitting}).
 Each root node utilizes a unique subset of the data, and each leaf is split using a random set of features.
 This approach ensures that no single tree is exposed to all the data, enabling the model to concentrate on general
 patterns rather than being susceptible to noise
-~\cite[p. 83]{muller_introductionmachinelearning_2016}.
+~\cite[p. 83]{muller2016introduction}.
 Therefore bagging aids in diminishing the impact of individual data points or outliers that may have a
 significant influence on a single decision tree.
 
@@ -757,14 +756,14 @@ The bagging was not visualized but every single decision tree is trained on a va
 described reasons.
 The red arrows indicate the decisions made by each decision tree for one specific sample.
 As a result, each decision tree independently arrives at one prediction which in this case would be a spring back value.
-Averaging the predictions of all trees makes the final prediction~\cite[p. 9]{breiman_randomforests_2001}.
+Averaging the predictions of all trees makes the final prediction~\cite[p. 9]{breiman2001random}.
 
 \begin{figure}[h]
     \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
         \centering
         \includegraphics[width=0.6\textwidth]{chap4/images/random_forest_example}
     \end{tcolorbox}
-    \caption{Visualization of the Random Forest algorithm as defined by~\cite[p.1]{breiman_randomforests_2001} (Own
+    \caption{Visualization of the Random Forest algorithm as defined by~\cite[p.1]{breiman2001random} (Own
     representation).
     }
     \label{fig:rf-example}
@@ -772,13 +771,13 @@ Averaging the predictions of all trees makes the final prediction~\cite[p. 9]{br
 
 The Random Forest mechanism is versatile enough to address both classification and regression problems, making it one
 of the most successful
-\ac{ML} methods~\cite[p. 3--4]{biau_randomforestguided_2016}~\cite[p. 25]{breiman_randomforests_2001}.
+\ac{ML} methods~\cite[p. 3--4]{biau2016random}~\cite[p. 25]{breiman2001random}.
 
 % -> Vorteile / Nachteile Random Forest
 This mechanism is flexible enough to handle classifications and regression problems,this is one of the reasons that
 random forests count to the most successful \ac{ML}
 methods
-~\cite[p. 3--4]{biau_randomforestguided_2016}~\cite[p. 25]{breiman_randomforests_2001}.
+~\cite[p. 3--4]{biau2016random}~\cite[p. 25]{breiman2001random}.
 
 \subsubsection{Gradient Boosting Regression Tree}
 
@@ -786,7 +785,7 @@ A \ac{GBT} is an ensemble learning algorithm that combines multiple Decision Tre
 to yield more accurate and stable predictions.
 The main difference between this algorithm and the Random Forest algorithm is that the trees are trained sequentially
 rather than simultaneously, with each tree correcting the errors of the previous tree.
-~\cite[p. 88--89]{muller_introductionmachinelearning_2016}.
+~\cite[p. 88--89]{muller2016introduction}.
 This is done with training each new tree with the residual errors of the previous tree, which is the
 difference between the predicted value and can also be called the loss.
 One example for a metric that can be used as loss is the Mean Squared Error (MSE) (more details in
@@ -808,11 +807,11 @@ at a specific depth.
 This provides the advantage of a smaller model that consumes less memory and facilitates faster prediction.
 Generally, generating more trees enhances the overall performance of the
 model
-~\cite[pp. 74, 88--89]{muller_introductionmachinelearning_2016}.
+~\cite[pp. 74, 88--89]{muller2016introduction}.
 
 Furthermore, the algorithm performs well without scaling the dataset and can handle a combination of binary and
 continuous features
-~\cite[p. 91]{muller_introductionmachinelearning_2016}
+~\cite[p. 91]{muller2016introduction}
 
 In \cref{fig:gbr-example}, we illustrate the Gradient Boosted Regression Trees (GBRT) algorithm using a sample
 dataset.
@@ -882,7 +881,7 @@ layer
 ~\cite[pp. 279--280]{bishop1995neural}.
 The input layer is the network's first layer and is in charge of receiving input data.
 It contains the same number of nodes as the number of features in the dataset
-~\cite[p. 105]{muller_introductionmachinelearning_2016}.
+~\cite[p. 105]{muller2016introduction}.
 In this example, the neural network's input layer would be made up of three perceptrons, each of which corresponded
 to one of the independent features, namely thickness, die opening, and punch penetration.
 The input layer does not perform any computation and only passes the input data to the next layer, which is
@@ -894,7 +893,7 @@ While doing this each neuron multiplies the input values with the weight value a
 denoted as $w_i$
 The output layer of the neural network does produce the final output of the network.
 The output is calculated based on the weighted output produced by the last hidden layer
-~\cite[p. 106]{muller_introductionmachinelearning_2016}.
+~\cite[p. 106]{muller2016introduction}.
 
 Setting the weights to a specific values is the task of the training process and is the actual `learning' part of the
 MLP.
@@ -974,13 +973,12 @@ The full hyper-parameters for each model are listed in \href{sec:hyper-parameter
 
 \subsection{Setting the Hyper-Parameters}\label{subsec:hyper-parameters}
 Prior to training a machine learning model, users of machine learning implementations like the ons found in
-\texttt{sci-kit learn} generally need to manually choose a Machine Learning algorithm and configure one or more model
-parameters, known as hyper-parameters~\cite[pp. 1]{claesen2015hyperparameter}.
-The chosen hyper-paramters significantly influence the performance of the resulting model and difference a lot from use
-case to use case~\cite[pp. 1]{claesen2015hyperparameter}.
-As a result, it is critical to set the proper parameters.
+\texttt{sci-kit learn}
+in most cases, some model parameters known as hyper-parameters need ot be chosen manually.
+The chosen hyper-paramters influence the performance of the resulting model and difference a lot from use
+case to use case~\cite[pp. 1]{probst2019tunability}.
 
-A few examples of hyper-parameters for a Random-Gorest modelcitescikit-learn include the number of trees, the number
+A few examples of hyper-parameters for a Random-Gorest model \cite{scikit-learn} include the number of trees, the number
 of features to consider when looking for the best split, and the maximum depth of the tree
 ~\cite{scikit-learn}.
 The use of a grid-search cross-validation is a popular method to discover the best hyper-parameters.

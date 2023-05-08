@@ -2,12 +2,12 @@
 
 The research methodology employed in this thesis adheres to the Design Science Research (DSR) approach, as detailed
 in
-~\cite[p. 17]{rennenkampff_managementitagilitaetentwicklung_2015}.
+~\cite[p. 17]{von2015management}.
 DSR is a research paradigm where the researcher, acting as a designer, strives to develop artifacts that address
 specific problems or questions
 ~\cite[p. 10]{hevner_designscienceresearch_2010}.
 In the context of DSR, ``design'' is defined by Peffers et al. (2007) as the process of crafting an applicable solution
-for a given problem~\cite[p. 47]{peffers_designscienceresearch_2007}.
+for a given problem~\cite[p. 47]{peffers2007design}.
 
 As a methodological framework, the design-oriented research approach is particularly well-suited for addressing the
 research questions at hand.
@@ -19,7 +19,7 @@ The term ``artifact'' is deliberately broad, encompassing various forms.
 In this study, the artifacts refer to \ac{ML} models that are applied to the problem of predicting spring back.
 Therefore the term artifact and machine learning model are used interchangeable in this study.
 
-DSR can be executed through diverse means, with a notable example provided by~\cite{peffers_designscienceresearch_2007},
+DSR can be executed through diverse means, with a notable example provided by~\cite{peffers2007design},
 as illustrated in Figure~\ref{fig:dsr_process}.
 This approach consists of six steps, which are further divided into the overarching phases of ``Build'' and
 ``Evaluate''.
@@ -30,14 +30,14 @@ This thesis adheres to these phases in its research methodology.
         \centering
         \includegraphics[width=1\linewidth]{chap3/images/dsr_process}
         \caption[DSR Process]{Design Science Research Approach according to Peffers et al.
-        Picture:~\cite[p. 72]{sonnenberg_evaluationpatternsdesign_2012}}
+        Picture:~\cite[p. 72]{sonnenberg2012evaluation}}
         \label{fig:dsr_process}
     \end{tcolorbox}
 \end{figure}
 
-\paragraph{``Activity 1 - Problem identification and motivation''~\cite[p. 52]{peffers_designscienceresearch_2007}:}
+\paragraph{``Activity 1 - Problem identification and motivation''~\cite[p. 52]{peffers2007design}:}
 ``Define the specific research problem and justify the value of a solution.''
-~\cite[p. 52]{peffers_designscienceresearch_2007}
+~\cite[p. 52]{peffers2007design}
 
 This study aims to improve the prediction of spring back in the air bending process using real world
 data with supervised learning.
@@ -46,41 +46,41 @@ the air bending process.
 The problem as well as the motivation for this study was described in the \cref{ch:introduction}
 ``Introduction'' in more detail.
 
-\paragraph{``Activity 2: Define the objectives for a solution''~\cite[p. 55]{peffers_designscienceresearch_2007}:}
+\paragraph{``Activity 2: Define the objectives for a solution''~\cite[p. 55]{peffers2007design}:}
 The goal of a solution comes from the definition of the problem, which takes into account what is possible and feasible.
 Objectives can be quantitative or qualitative, and they should be based on the problem specification that was
 established in the previous step.
-Knowledge about previous solutions and their effectiveness is required~\cite[p. 55]{peffers_designscienceresearch_2007}.
+Knowledge about previous solutions and their effectiveness is required~\cite[p. 55]{peffers2007design}.
 
 The objectives for the solution, the different \ac{ML} models, will be to excell in all six Design Principles which
 will be introduced in the next chapter.
 The Design Principles are a set of criteria that are used to evaluate the performance of the \ac{ML} models.
 
-\paragraph{``Activity 3: Design and development''~\cite[p. 55]{peffers_designscienceresearch_2007}:}
+\paragraph{``Activity 3: Design and development''~\cite[p. 55]{peffers2007design}:}
 In this phase, the development of the artifact takes place.
 An artifact, which may encompass models, methods, or constructs, serves as a critical element in addressing the
 research question.
 The process begins with outlining the functionality and architecture of the artifacts, followed by their subsequent
-creation~\cite[p. 55]{peffers_designscienceresearch_2007}.
+creation~\cite[p. 55]{peffers2007design}.
 
 In this study the artifacts are Machine Learning models.
 This steps includes the model selection and the training of the models.
 The development of the artifacts is described in the \cref{ch:build} ``Build''.
 
-\paragraph{``Activity 4: Evaluation''~\cite[p. 56]{peffers_designscienceresearch_2007}:}
+\paragraph{``Activity 4: Evaluation''~\cite[p. 56]{peffers2007design}:}
 In this activity, the effectiveness of the developed artifact in addressing the defined problems from Activity 1 is
 examined and assessed.
 The evaluator is expected to have knowledge of relevant metrics and analytical techniques.
 The evaluation process may vary based on the nature of the problem at hand which is Machine Learning in this
-study~\cite[p. 56]{peffers_designscienceresearch_2007}.
+study~\cite[p. 56]{peffers2007design}.
 A comparison between the functionality of the artifact and other existing solutions can be conducted.
 Additionally, quantifiable parameters can be employed to objectively measure the artifact's
-performance~\cite[p. 56]{peffers_designscienceresearch_2007}.
+performance~\cite[p. 56]{peffers2007design}.
 As already stated in this study the created artifacts are evaluated using six distinct design principles.
 
-\cite{peffers_designscienceresearch_2007} note that researches are not obligated to follow the order of activities
+\cite{peffers2007design} note that researches are not obligated to follow the order of activities
 from 1 to 6
-~\cite[p. 56]{peffers_designscienceresearch_2007}.
+~\cite[p. 56]{peffers2007design}.
 In this study the order fo the activities 4 and 5 swapped, in the original DSR approach the evaluation is done after
 the demonstration activity, this was changed because the evaluation activity is used to select the best performing
 artifacts.
@@ -91,7 +91,7 @@ How the \ac{ML} models where evaluated is described in the \cref{sec:evaluation-
 The purpose of this activity is to demonstrate the effectiveness of the previously created artifact in solving one or
 more problems.
 Effective knowledge of the artifact is necessary for this activity
-~\cite[p. 55]{peffers_designscienceresearch_2007}.
+~\cite[p. 55]{peffers2007design}.
 Unlike the evaluation activity, which assesses the overall performance of the artifact, demonstration focuses on the
 performance of the artifact in specific scenarios.
 To achieve this, three scenarios, each comprising two examples (single spring back predictions), are utilized to
@@ -102,14 +102,14 @@ The scenarios are selected to cover the entire attribute space of the problem an
 \paragraph{Activity 6 - Communication}
 The last activity is ued to communicate significance of the problem and the usefulness of the artifacts to a wider
 audience
-~\cite[p. 56]{peffers_designscienceresearch_2007}.
+~\cite[p. 56]{peffers2007design}.
 In this study this is done in the \cref{sec:results-and-discussion} ``Results and Discussion''.
 
 
 \section{Design Principles}\label{sec:design-principles}
 Recent studies suggest that the desired result of design science endeavors should also be knowledge that takes the
 shape of
-\ac{DP}~\cite{baskerville2010explanatory, sein2011action, gregor_positioningpresentingdesign_2013}.
+\ac{DP}~\cite{baskerville2010explanatory, sein2011action, gregor2013positioning}.
 They capture knowledge concerning the production of additional examples of objects that belong to the same
 category
 ~\cite[p. 39]{sein2011action}.
@@ -149,18 +149,18 @@ models in this work, further evaluation is described in \cref{ch:evaluation}.
 \section{Goal Question Metric Approach}\label{sec:goal-question-metric-approach}
 To make the defined quality attributes measurable, the Goal-Question-Metric (\ac{GQM})-approach was chosen in this
 study.
-It is one of the most common approaches in DSR and is divided into three levels~\cite[p. 3]{basili_goalquestionmetric_}.
+It is one of the most common approaches in DSR and is divided into three levels~\cite[p. 3]{van2002goal}.
 
 \paragraph{1. Conceptual level (goal):}
 ``A goal is defined for an object, for a variety of reasons,
 with respect to various models of quality, from various points of view, relative to a
 particular environment.''
-~\cite[p. 3]{basili_goalquestionmetric_}
+~\cite[p. 3]{van2002goal}
 
 Specific goals are established for a software product (in this case a \ac{ML} model).
 These goals consider various quality aspects, perspectives, and contexts.
 Clearly defined goals help to guide the direction of the development
-~\cite[p. 3]{basili_goalquestionmetric_}.
+~\cite[p. 3]{van2002goal}.
 In this study the goals are the Design Principles that are to be established in the next \cref{ch:build}.
 
 \paragraph{2. Operational level (question):}
@@ -168,12 +168,12 @@ To achieve the set goals, one or multiple questions are formulated to assess and
 These questions address the quality attributes and help to understand the object of measurement from the selected
 viewpoint.
 The questions guide the measurement process by identifying the relevant aspects that need to be
-analyzed~\cite[p. 3]{basili_goalquestionmetric_}.
+analyzed~\cite[p. 3]{van2002goal}.
 
 \paragraph{3. Quantitative level (metric):}
 For each question, a set of metrics is defined to provide quantitative data and answers.
 These metrics are used to evaluate the object of measurement, offering precise and objective insights into the
-quality aspects being assessed~\cite[p. 3]{basili_goalquestionmetric_}.
+quality aspects being assessed~\cite[p. 3]{van2002goal}.
 
 In this study only one question is formulated for each goal.
 The goals, questions and metrics are presented in the next chapter.

@@ -11,16 +11,16 @@ the models and their performance in these contexts.
 Finally, during the communication phase, the results of this study will be presented with the aim of effectively
 communicate the results and their interpretation.
 
-\cref{tab:evaluation_criteria} provides an overview of the quality metrics employed for the evaluation,
-structured based on the \ac{GQM} approach discussed in \cref{sec:goal-question-metric-approach}.
+The \cref{tab:evaluation_criteria} provides an overview of the quality metrics employed for the evaluation.
+They are structured based on the \ac{GQM} approach discussed in \cref{sec:goal-question-metric-approach}.
 The quality metrics align with the quality model from~\cite{siebert2022construction}, which in turn is based on
 the ISO/IEC 9126 standard for software quality evaluation.
-This standard has been adapted by~\cite{siebert2022construction} to address the specific requirements of machine
-learning models, as detailed in Section~\ref{sec:evaluation-of-machine-learning-models}.
+This standard has been adapted by~\cite{siebert2022construction} to address the specific requirements of Machine
+Learning models, as detailed in Section~\ref{sec:evaluation-of-machine-learning-models}.
 Since~\cite{siebert2022construction} primarily focus on evaluating classification models, the quality metrics have
 been tailored to suit the needs of the regression models implemented in this study.
 Each individual quality metric section provides further elaboration, on what was changed.
-\cref{tab:evaluation_criteria} also displays the quality metrics used for evaluating the \ac{ML} models.
+The \cref{tab:evaluation_criteria} also displays the quality metrics used for evaluating the \ac{ML} models.
 
 \captionsetup{margin={5pt,5pt}}
 \begin{table}[H]
@@ -106,27 +106,30 @@ Both measures will be included in the analysis, to give the reader a better unde
 the models.
 The MSE was not included in the analysis, as it is not expressed in the same unit as the data and is therefore
 more difficult to interpret and might be misleading.
+After selecting the metrics, the subsequent step is to determine an acceptable margin of error, which will be
+addressed in the following chapter.
 
-\subsection*{How much error is acceptable?}
+\subsection*{How much error is acceptable?}\label{subsec:how-much-error-is-acceptable}
 
-An important question to ask when evaluating the performance of a model is how much error is acceptable.
-This is a domain specific question and therefore tolerances in the domain of sheet metal forming are used.
-The DIN 2768 norm provides different mechanical precision levels and tolerances, Table three describes the tolerances
-for angular dimensions formed metal components.
-The norm does also differentiate between different levels of precision, the highest precision level is f (fine)
-followed by m (medium), c (coarse) and v (very coarse).
-The norm does differentiate between parts of different side length, since the metal sheets used in this study are 80
-mm long and are bent in the middle the side length is 40 mm each.
-For metal parts between 10~mm and 50~mm side length the fine and medium tolerance is ±0°30'minutes and degrees
-This translates to a ±0.5° tolerance of the opening angle.
+A crucial aspect to consider when assessing the performance of a model is determining the acceptable margin of error.
+The DIN 2768 standard outlines various levels of mechanical precision and associated tolerances, including those for
+angular dimensions in formed metal components.
+These tolerances are used to determine the acceptable margin of error for the model.
 
-That means the \ac{ML} models should be able to predict the spring back accurate enough so that the bended angle of
-the metal part is within the tolerance of ±0.5°.
-Since the spring back is measured in millimeters in the dataset in a first step it has to be converted to degrees to
-apply the tolerance.
+The standard distinguishes between different precision levels, with ``f'' (fine) being the highest, followed by ``m'' (
+medium), ``c'' (coarse), and ``v'' (very coarse).
+Additionally, the standard considers the side length of different parts, as this affects the tolerances.
+Given that the metal sheets used in this study measure 80 mm in length and are bent in the middle, each side has a
+length of 40 mm.
+For metal parts with side lengths between 10 mm and 50 mm, the fine and medium tolerance levels for angular
+dimensions are ±0°30' (degrees and minutes).
+This equates to a ±0.5° tolerance for the opening angle.
+This means that the model should be able to predict the spring back with an error of less than 0.5°.
+This will be checked in the evaluation of the models which is done in the next \cref{subsec:results}.
+
 
 \subsection{Results}\label{subsec:results}
-\cref{tab:results-correctness} presents the results of the evaluation of the Machine Learning models for
+The \cref{tab:results-correctness} presents the results of the evaluation of the Machine Learning models for
 correctness, sorted by the RMSE in ascending order.
 The results where calculated using 5-fold cross validation and the mean of the RMSE and MAE is presented.
 It can be can be concluded that the best models have an RMSE of less than 0.2 millimetres, indicating that they can
@@ -157,10 +160,10 @@ because the errors made by the other models are large for a few instances but sm
     \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
 % \sisetup{group-minimum-digits = 4}
         \centering
-        \begin{tabular}{llll}
+        \begin{tabular}{lll}
             \toprule
             \thead{\textbf{Model Name}} & \thead{\textbf{MAE}}
-            & \thead{\textbf{RMSE}} & \thead{\textbf{Relative Error}} \\
+            & \thead{\textbf{RMSE}}   \\
             \toprule
             \textbf{Decision Tree} & 0.275 & 0.401 \\
             \hdashline
@@ -180,7 +183,7 @@ because the errors made by the other models are large for a few instances but sm
             \bottomrule
         \end{tabular}
     \end{tcolorbox}
-    \caption{\textbf{Results for the Design Principle 1 Correctness:} The results are sorted by RMSE in ascending
+    \caption{\textbf{Results for the DP 1 :} The results are sorted by RMSE in ascending
     order.}
     \label{tab:results-correctness}
 \end{table}
@@ -188,11 +191,10 @@ because the errors made by the other models are large for a few instances but sm
 
 As already noted most models have a RMSE of 0.2 which means that the error for a prediction is 0.2~mm.
 For example if the spring back is 0.5 mm the model predicts could predict the spring back between 0.3~mm and 0.7~mm.
-To evaluate the the models the question still remains if this is an acceptable error or not.
-To answer this question the tolerance from the DIN 2768 which is 0.5\degree.
-In \cref{tab:examples-tolerance} multiple sample from the dataset where chosen and their tolerance was calculated.
-The examples chosen are the same as in \cref{sec:demonstration} where it was also explained why they where chosen,
-the goal was to choose samples with a wide range of spring back values and different input values.
+In \cref{subsec:how-much-error-is-acceptable} it was stated that the tolerance for the spring back is 0.5\degree.
+In \cref{tab:examples-tolerance} multiple samples from the dataset where chosen and their tolerance was calculated.
+The samples where chosen with the goal to have a wide range of spring back values and different input values.
+The \cref{sec:demonstration} describes in more detail why exactly these samples where chosen.
 
 Since the spring back in the dataset was measured in millimetres but the tolerance is given in degrees the following
 calculated was applied to convert the spring back to degrees:
@@ -205,10 +207,10 @@ calculated was applied to convert the spring back to degrees:
 
 Where $l$ is the support distance, which is the distance where the metal sheet is supported on the left and on the
 right in the experimental setup.
-The resuls in \cref{tab:examples-tolerance} show that the tolerances for the chosen examples are between 0.09\degree and
+The results in \cref{tab:examples-tolerance} show that the tolerances for the chosen examples are between 0.09\degree and
 0.27\degree which means that all of the examples are within the tolerance.
 This means that the \ac{ML} models in this study are able to predict the spring back with an accuracy that is well
-within the tolerance of the highest accuracy level denoted in the DIN 2768.
+within the tolerance of the highest accuracy level (f) denoted in the DIN 2768.
 That is enough for most applications used in the industry.
 
 \begin{table}[H]
@@ -234,8 +236,8 @@ That is enough for most applications used in the industry.
     \label{tab:examples-tolerance}
 \end{table}
 
-The overall performance of the machine learning models are good and the best performing models are the Extra Trees and
-Support Vector Machine models.
+The overall performance of the machine learning models are good and the best performing models are the
+Support Vector Machine, Multi-Layer-Perceptron and the Extra Tree models.
 
 
 \section{DP2: Relevance}\label{sec:relevance}
@@ -710,21 +712,19 @@ However, alternative approaches can be employed to gauge a model's interpretabil
 
 One strategy for achieving interpretability is restricting the selection of algorithms to those that yield
 model specific interpretable outcomes.
-Interpretable algorithms used in this study are Linear Regression and Decision
-Trees~\cite[p. 35]{molnar2020interpretable}.
+Linear Regression models are one of good interpretable models~\cite[p. 17]{hall2019introduction}
+
+Interpretable algorithms used in this study are Linear Regression~\cite[p. 17]{hall2019introduction} and Decision
+Trees~\cite[p. 20]{hall2019introduction}.
 Nonetheless, as discussed in \cref{sec:dp1:-correctness}, these algorithms do not demonstrate sufficient
 performance to be deemed viable solutions for predicting spring back.
 Consequently, this study cannot rely on model-specific interpretability methods and should instead utilize model
 -agnostic methods for generating explanations.
 
-Also~\cite{doshi2017towards} differentiates between global and local interpretability.
+Also~\cite{hall2019introduction} differentiates between global and local interpretability.
 Global interpretability refers to the ability to understand the overall behavior of
 the model, while local interpretability refers to the ability to understand the behavior of the
-model for a specific instance~\cite[p. 7]{doshi2017towards}
-\cite{doshi2017towards} note that global interpretability is important when scientific understanding or the detection
-of bias is the goal while local interpretability is important when the goal is to understand a specific prediction of
-the trained model
-~\cite[p. 7]{doshi2017towards}.
+model for a specific instance~\cite[p. 19]{hall2019introduction}.
 
 It does not make sense to apply model-agnostic method on all trained models, it makes more sense to
 apply the methods on the best performing models.
@@ -857,7 +857,7 @@ Permutation feature importance's assesses the impact on the model's prediction e
 of a feature a randomly permutes.
 Permutation in this context means the process of randomly shuffling the values of a single features while keeping the
 values of all other features unchanged.
-Thereby the association between the feature and the actual outcome is disrupted~\cite{_permutationfeatureimportance_}
+Thereby the association between the feature and the actual outcome is disrupted~\cite{scikit-learn}
 %~\cite[p. 157]{molnar2020interpretable}.
 The importance of a feature is evaluated by assessing the degree to which permuting its values
 results in an increase in the prediction error fo the model.
@@ -865,7 +865,7 @@ If permuting a features results in a significant increases in errors the feature
 important because the model relied on it for making accurate predictions.
 Conversely, if permuting a feature doesn't change the prediction error is considered unimportant
 because the model didn't utilize it for its prediction
-~\cite{_permutationfeatureimportance_}.
+~\cite{scikit-learn}.
 %~\cite[p. 158]{molnar2020interpretable}.
 
 The results for the MLP and SVM models presented in \cref{tab:permutation_feature_importance}.

@@ -140,10 +140,9 @@ This is crucial because a model's accuracy alone is insufficient; it must also b
 
 
 \subsection*{Design Principle 6: Interpretability}
-\cite{doshi2017towards} defines interpretability as ``as the ability to explain or to present in understandable
-terms to a human.''
-~\cite[p. w]{doshi2017towards}.
-\cite{miller2019explanation} add that it is also important to understand ``why'' the model has this performance
+\cite{muller2016introduction} define interpretability as ``how well a human could understand the decisions in the
+given context''
+Also the author add, that it is also important to understand ``why'' the model has this performance
 ~\cite[p. 1]{miller2019explanation}.
 Good interpretability is crucial because it fosters trust in the model and enables users to rely on it.
 Additionally, interpretability can aid in debugging and enhancing the model's performance.
@@ -904,9 +903,9 @@ propagating errors backwards from the output layer to the input layer in order t
 the weights
 ~\cite[p. 454]{taud2018multilayer}.
 
-This is done in multiple steps, \cite{nielsen_neuralnetworksdeep_2015} make and example with a network to recognize
+This is done in multiple steps, \cite{nielsen2015neural} make and example with a network to recognize
 handwritten digits, this example is simplified and applied on the MLP model used in this study
-(\cite[p. 12--24]{nielsen_neuralnetworksdeep_2015}):
+(\cite[p. 12--24]{nielsen2015neural}):
 
 \begin{enumerate}
     \item The input data is passed through the network, layer by layer, until it reaches the output layer and a
@@ -927,7 +926,7 @@ handwritten digits, this example is simplified and applied on the MLP model used
 In summary, backpropagation is a process that uses the error between the predicted and actual output to update the
 weights and biases of a neural network.
 By iteratively updating the weights and biases, the network can learn to make more accurate predictions
-~\cite[p. 53--57]{nielsen_neuralnetworksdeep_2015}.
+~\cite[p. 53--57]{nielsen2015neural}.
 
 Usually a weight $x_0$ is included in the perceptron model as an intercept value to increase its generality.
 It is typically represented as the weight coming from an additional bias unti that always has a value of +1.
@@ -942,7 +941,7 @@ The weights of the connections between the perceptrons are denoted as $w_i$.
         \includegraphics[width=0.8\textwidth]{chap4/images/mlp_example}
     \end{tcolorbox}
     \caption{Visual representation of a Multi-layer Perceptron. Modeled after decription of
-    \cite{nielsen_neuralnetworksdeep_2015} and applied on the scenario of this study
+    \cite{nielsen2015neural} and applied on the scenario of this study
         (own repsentation). }
     \label{fig:mlp-example}
 \end{figure}

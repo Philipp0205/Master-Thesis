@@ -11,32 +11,27 @@ the effectiveness of the artefact.
 
 The objectives of a solution are essential to evaluate the effectiveness of ML models in the
 DSR process.
-Therefore six Design Principles are used based on the quality parameters proposed by~\cite{siebert2022construction}.
-These quality parameters are specifically tailored for evaluating ML models and are therefore well-suited for this
-study.
-
-In the following sections six DPs will be described which will provide insights into the strengths and weaknesses of the
-ML models and guide the decision making process in the DSR process.
-The chosen \ac{DP} are: Correctness, relevance, robustness, stability, resource utilization and interpretability.
-By leveraging these principles, researches can optimize their models to achieve the desired outcomes and improve the
+In this study six DPs are used based on the quality parameters proposed by
+~\cite{siebert2022construction}, to serve as objectives and provide insights into the strengths and weaknesses of the
+ML models.
+The chosen \ac{DP}s are: Correctness, relevance, robustness, stability, resource utilization and interpretability.
+By leveraging these principles, researchers can optimize their models to achieve the desired outcomes and improve the
 quality of their research.
-In Chapter~\ref{ch:evaluation} ``Evaluation'' uses the DPs from this chapter and combines them with relevant
+The \cref{ch:evaluation} ``Evaluation'' uses the DPs from this chapter and combines them with relevant
 questions and metrics to assess the effectiveness of the ML models.
-This approach will ensure a thorough evaluation of the ML models based on the quality parameters that are important
-for the DSR process.
 
-This study aims to get all information to answer three research questions, which are formulated in the
-\cref{sec:problem-identification-and-motivation ``Problem Identification and Motivation''.
+This study aims to get all information to answer the three research questions, which are formulated in the
+\cref{sec:problem-identification-and-motivation} ``Problem Identification and Motivation''.
 Design Principle 1 will be used to answer the first research question, the principles 2 to 5 will be used to answer the
 second research question and the principle 6 will be used to answer the third research question.
 
+
 \subsection*{Design Principle 1: Correctness}\label{subsec:correctness}
 
-% TODO Cruz et al. does conclude that from other sources
-The demand for lightweight products is a driving force in the manufacturing industry,
+The demand for lightweight products is a driving force in the manufacturing industry
+~\cite[p. 1]{zheng_reviewformingtechniques_2018},
 as consumers and businesses alike demand products that meet stringent standard of
-precision and accuracy
-~\cite[p. 2]{cruz2021application}.
+precision and accuracy.
 This is particularly true in the case of sheet metal forming, where even small
 deviations from the desired dimensions can cause significant implications for the final
 product.
@@ -46,24 +41,25 @@ Therefore it is desirable to minimize the spring back
 \ac{ML} has emerged as a powerful tool for predicting the spring back in other bending
 methods as shown in \cref{sec:state-of-research} ``State of Research''.
 A \ac{ML} model should predict the spring back with a high degree of accuracy and
-correctness, as even small errors in the prediction will cause fitting problem in the
-manufacturing process.
+correctness, as even small errors in the prediction will cause fitting problems in the
+manufacturing process\cite[p. 1]{cruz2021application}.
+
+In addition to measure the correctness it is also important to understand `why'
+the model has this performance since this i crucial for the relevance of the model.
+
 
 \subsection*{Design Principle 2: Relevance}
-In addition to measure the correctness it is important to understand `why'
-the model has this performance.
 A model is considered relevant when it is able to accurately predict the outcomes of
-new unseen data that were not used during training.
-A relevant model should have a low error rate on both the training data and the test
-data and achieve a good bias-variance trade-off
+new unseen data that was not used during training
+~\cite[p. 49]{zhou2021machine}.
+A relevant model should achieve a good bias-variance trade-off
 ~\cite[p. 16]{siebert2022construction}.
 
 Understanding the bias-variance trade-off is crucial in developing \ac{ML} models that
-generalize well to unseen data
-% TODO Zitation nicht geprüft
-~\cite[p. 49--51]{zhou2021machine}.
+generalize well to unseen data.
 It suggests, that a model can accurately capture the underlying patterns in the data
-without overfitting or underfitting~\cite[p. 49--51]{zhou2021machine}.
+without overfitting or underfitting~\cite[p. 16]{siebert2022construction}.
+
 
 \subsection*{Design Principle 3: Robustness}
 Robustness is described in the IEEE standard glossary of software engineering terminology as:
@@ -74,40 +70,40 @@ models and describe it as ``the capability of an algorithm to build models that 
 data corruptions and suffer less from the impact of noise''
 ~\cite[p. 2]{saez2016evaluating}.
 \cite{siebert2022construction} also specifically mention data quality issues like
-outliers or noise
-~\cite[p. 16]{siebert2022construction}.
+noise ~\cite[p. 16]{siebert2022construction}.
 
 When working with real-world data, quality issues such as outliers, missing data, and
 noise are common problems.
-These issues can have a negative impact on the performance of the model, making it challenging to produce accurate
-predictions.
+These issues can have a negative impact on the performance of the model and might make it not usable for a specific
+tasks~\cite[p. 1]{scher2022robustness}.
 To overcome these challenges, a model should be robust, to be able to handle data quality issues and still produce
-accurate predictions~\cite[p. 16]{siebert2022construction}.
+accurate predictions.
+
 
 \subsection*{Design Principle 4: Stability}
 
 The stability of a model is an important quality parameter, as it is essential that
-the model produces the same results when trained on different datasets
+the model produces the same results when trained on different subsets for the training data
 ~\cite[p. 16]{siebert2022construction}.
 This is particularly important in this study, since the training data is limited and the model is trained on a
-smaller subset of the available data.
-Therefore, it is important that the model is able to generalize well to unseen data and
-produce repeatable results when trained on different datasets
-~\cite[p. 16]{siebert2022construction}.
+smaller subsets of the available data.
+
 Stability can be linked back to the discussion of variance in \cref{subsec:bias-variance-tradeoff}.
-Variance refers to the models precautions vary for different datasets, if a model is not stable it will generate
-results that differ for different datasets, which might results in poor overall generalization performance.
+Variance refers to the models predictions varying for different datasets. If a model is not stable it will generate
+results that differ for different datasets, which might result in poor overall generalization performance.
 
 
 \subsection*{Design Principle 5: Resource utilization}\label{subsec:dp5-resource-utilization}
-One of the primary objectives of utilizing machine learning for predicting spring back is to
+One of the primary objectives of utilizing ML for predicting the spring back is to
 reduce the number of trial-and-error cycles during the manufacturing process, thus saving
 valuable resources such as material and labor
 (refer to \cref{sec:problem-identification-and-motivation}).
 
-For example the technology sighted in \cref{sec:technology-tables} requires 11 unique bends to obtain the data
+For example the normal technology table (mentioned in \cref{sec:technology-tables}) requires 11 unique bends to obtain
+the
+data
 for only one type of metal with a certain thickness.
-There are multiple problems with this approach: (personal communication, Dipl. Ing. Michael Philipeit).
+There are multiple problems with this approach: (personal communication, Dipl. Ing. Michael Philipeit):
 \begin{itemize}
     \item Only data for one type of metal with a certain thickness can be obtained with on technology table. If new data
     is needed for a different type of metal or thickness, a new technology table has to be created.
@@ -117,42 +113,42 @@ There are multiple problems with this approach: (personal communication, Dipl. I
     inefficiency of the bending process.
 \end{itemize}
 
-Machine learning (\ac{ML}) models have the potential to accurately predict spring back for various types of metals,
+ML models have the potential to accurately predict spring back for various types of metals,
 thicknesses, and angles, without the need for new technology tables.
-This approach offers several advantages,including faster processing times and reduced manual labor requirements.
+This approach offers several advantages, including faster processing times and reduced manual labor requirements.
 Additionally, it eliminates the need for new metal sheets, resulting in less waste.
-By leveraging the power of \ac{ML} algorithms, manufacturers can optimize
+With using \ac{ML} algorithms, manufacturers can optimize
 their metal bending processes and reduce costs associated with material waste and manual labor.
 
-Nevertheless, it is crucial to acknowledge that developing an \ac{ML} model also entails resource consumption.
+Nevertheless, it is important to acknowledge that developing a \ac{ML} model needs resources.
 Training \ac{ML} models can be a labor-intensive process, as it often requires significant
 computing power and the generation of large amounts of training data, depending on the algorithm used.
-Resources used up by \ac{ML} are for example memory space and also time needed to train the model and make predictions.
+Resources used by \ac{ML} are for example memory space and also time needed to train the model and make predictions.
 
-Therefore, it is crucial to carefully consider the resources needed to train and use the model
-effectively
+Therefore, it is crucial to consider the resources needed when using \ac{ML} models
 ~\cite[p. 16]{siebert2022construction}.
-What resources are used and evaluated is described in more detail in~\ref{sec:resource-utilization}.
+What resources are used and evaluated is described in more detail in~\cref{sec:resource-utilization}.
 
-The initial five \ac{DP}s primarily assess the performance of \ac{ML} models across various criteria.
-However, the final \ac{DP} takes a divergent approach by focusing on the human aspect of \ac{ML} models.
-This is crucial because a model's accuracy alone is insufficient; it must also be comprehensible to the user.
+The first fice \ac{DP}s including resource utilization primarily assess the performance of \ac{ML} models.
+The final \ac{DP} takes a different approach by focusing more on the human aspect of understanding the results of
+\ac{ML} models.
+This is important because a model's accuracy alone is no enough, it must also be comprehensible to the user.
 
 
 \subsection*{Design Principle 6: Interpretability}
-\cite{muller2016introduction} define interpretability as ``how well a human could understand the decisions in the
-given context''
-Also the author add, that it is also important to understand ``why'' the model has this performance
+\cite{miller2019explanation} define interpretability as ``how well a human could understand the decisions in the
+given context''.
+Also the author adds, that it is important to understand ``why'' the model has this performance
 ~\cite[p. 1]{miller2019explanation}.
-Good interpretability is crucial because it fosters trust in the model and enables users to rely on it.
+Good interpretability is crucial because it improves trust in the model and enables users to rely on it.
 Additionally, interpretability can aid in debugging and enhancing the model's performance.
 
-In this study it is the goal to comprehend the decision making process of the trained models as good as possible.
+In this study it is the goal to comprehend the decision-making process of the trained models as good as possible.
 As discussed in \cref{ch:theoretical-foundations}, the sheet metal forming process involves numerous
-variables, making the process design intricate, particularly when producing components that necessitate several
+variables, making the process design complicated, particularly when producing components that necessitate several
 processing stages and multiple sets of tools
 ~\cite[p. 1]{dib2020single}.
-Therefore,  and interpretable model is deemed a better model and enables the user to make informed decision based
+Therefore, an interpretable model is deemed a better model and enables the user to make informed decisions based
 on the models results.
 
 
@@ -163,7 +159,7 @@ Cold-rolled steel conforming to the DIN EN 10130 standard was used as the materi
 0.5~mm to 3~mm.
 This material was chosen due to its widespread use in bending processes and its wide availability.
 To create the dataset, 20~x~80 mm sheets were utilized along with a stamping press from the company ZwickRoell GmbH
-\& Co. KG
+\& Co. KG.
 The metal sheets were bent in the rolling direction, as it could be observered in previous experiments that the spring
 back effect varied depending on the rolling direction.
 The original dataset comprised 384 \texttt{.tra} files, which is a proprietary format used by the stamping press.
@@ -171,18 +167,18 @@ Python scripts were developed to convert the output data format from the machine
 
 The following section outlines the experimental setup used for the experiments performed.
 Data collection occurred outside of the thesis period and initially consisted of 384 samples.
-An additional 20 samples were later added to the dataset to fill any gaps present in the dataset.
+An additional 20 samples were later added to the dataset to fill gaps present in the dataset.
 
 Many other studies use finite element method (FEM) simulations to generate their datasets as shown in
-\cref{sec:state-of-research}).
-However, the FEM is a computationally expensive method and requires a significant amount of time to
+\cref{sec:state-of-research}.
+However, FEM is a computationally expensive method and requires a significant amount of time to
 generate a dataset.
-Additionally, FIE simulations due to the simulated nature are not able to capture all the effects of the sheet metal
+Additionally, FIM simulations due to the simulated nature are not able to capture all the effects of the sheet metal
 forming process.
 In contrast, data from real-world experiments is more representative of the actual behavior of the sheet metal since
-experiments can provide a more comprehensive understanding of the material properties, behavior, and interactions
+experiments can provide a more comprehensive understanding of the material properties, behavior and interactions
 that are taking place during the forming process.
-This can include factors such as the properties of the metal being formed, the tooling used, and the specific process
+This can include factors such as the properties of the metal being formed, the tooling used and the specific process
 conditions.
 Real-world data can also provide insights into unexpected or unpredictable variations that may occur during the
 forming process, which can be difficult to capture in a simulated environment.
@@ -193,6 +189,7 @@ world better.
 
 The experiments were carried out in a controlled environment, allowing for the development of a large dataset with
 good repeatability.
+This controlled environment is described in more detail in the following section.
 
 \subsection{Experimental Setup}\label{subsec:experimental-setup}
 The stamping press utilized for the experimental setup is the \textit{ZwickRoell GmbH \& Co. Z100}, which is
@@ -202,20 +199,20 @@ Metal sheets with dimensions of 20~x~80 mm were used for the experiments.
 These measure the force (F) applied to the sheet in Newton (N) and the displacement of the punch, also called
 punch penetration ($y_p$ in mm), respectively.
 The force is measured by the an ``Xforce'' load cell, while the displacement is measured by the displacement sensor
-~\cite{_xforceloadcell_}.
-The stationary die is mounted on the bottom , while the movable punch is mounted
-(see\cref{subsec:sheet-metal-manufacturing} for more details).
+(~\cite{_xforceloadcell_}).
+The stationary die is mounted on the bottom , while the movable punch is mounted on the top
+(see~\cref{subsec:sheet-metal-manufacturing} for more details).
 The die opening of the machine is adjustable from 10 mm to 100 mm.
 The machine is operated via a computer and the \textit{ZwickRoell TestXpert} software, which is used for both machine
 control and data collection.
 
 The process parameters and experimental setup are illustrated in Figure~\ref{fig:process_parameters}.
-The die opening, $V$, represents the distance between the two contact points of the die, where the sheet metal is
+The die opening ($V$), represents the distance between the two contact points of the die, where the sheet metal is
 placed.
-The punch penetration, $y_p$ is the distance the punch moves into the sheet and
-the thickness of the metal sheet is denoted by $t$ and ranges from 0.5 to 3 mm in this study.
-The radius of the punch tip, denoted as $r_p$, remains constant throughout the experiments as it was never replaced.
-The bending angle, $\alpha$, is provided for completeness but will not be used in the subsequent analysis.
+The punch penetration ($y_p$ ) is the distance the punch moves into the sheet and
+the thickness of the metal sheet ($t$) and ranges from 0.5 to 3 mm in this study.
+The radius of the punch tip ($r_p$) remains constant throughout the experiments as it was never replaced.
+The bending angle ($\alpha$), is provided for completeness but will not be used in the subsequent analysis.
 
 \begin{figure}[h]
     \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
@@ -223,7 +220,7 @@ The bending angle, $\alpha$, is provided for completeness but will not be used i
         \includegraphics[trim=left botm right top, width=0.6\textwidth,
             clip]{chap4/images/process_parameters}
     \end{tcolorbox}
-    \caption{\textbf{Process parameters:} Sheet bending angle ($\alpha$), sheet
+    \caption{Process parameters: Sheet bending angle ($\alpha$), sheet
     thickness ($t$), punch
     penetration ($y_p$), die opening ($V$) and punch radius ($r_p$)}
     \label{fig:process_parameters}
@@ -267,13 +264,13 @@ a higher speed until the force reached 1 N, and then moved at a slower speed of 
             Sheet width & 20 & $mm$
             \\
             \hdashline
-            Sheet length & 100 & $mm$
+            Sheet length & 80 & $mm$
             \\
             \hdashline
             Punch speed & 80 &
             $mm/min$ \\
             \hdashline
-            Punch speed up (after bend) & 8 &
+            Punch speed up (after bend) & 80 &
             $mm/min$ \\
             \hdashline
             Hold time & 1 & $s$ \\
@@ -287,10 +284,10 @@ a higher speed until the force reached 1 N, and then moved at a slower speed of 
     \caption{Constant parameters in th eperimental setup}
 \end{table}
 
-The experiment involved varying three parameters: The die opening ($V$), the
+The experiment involved three varying parameters: The die opening ($V$), the
 punch penetration ($y_p$), and the thickness of the metal sheet ($t$).
-The die opneing was varies from 10 mm to 50 mm, the maximum punch penetration was varied from 2.5 mm to 20 mm and the
-metal sheet was varied from 0.5 mm to 2 mm.
+The die opening was varied from 10~mm to 50~mm, the maximum punch penetration was varied from 2.5~mm to 20~mm and the
+metal sheet was varied from 0.5~mm to 2~mm.
 These parameters and their values are displayed in
 \cref{tab:experimental-setup-variable-parameters}.
 
@@ -306,7 +303,6 @@ These parameters and their values are displayed in
             \midrule
             %  \unit{(Kcal\per\mole)\squared}}} & \thead{RMSD l.b.} &
             %  \thead{RMSD u.b.}  \\
-            \midrule
             Punch penetration  $y_p$ & 2.5, 5, 7.5, 10, 12.5, 15, 17.5, 20 &
             $mm$ \\
             \hdashline
@@ -324,10 +320,10 @@ These parameters and their values are displayed in
 
 \subsection{Measuring The Spring Back} \label{subsec:measuring_the_spring_back}
 The output data included various data points that were used to calculate the spring back.
-Key parameters for this calculation were the force, punch travel, and time
+Key parameters for this calculation where the force, punch travel, and time
 which are illustrated in \cref{fig:springback_measured}.
 The blue line is representing the force while the gray line is representing the punch travel.
-The punch movement is measured as soon as the displacement sensor is activated with when it notices a difference of 1 N
+The punch movement is measured as soon as the displacement sensor is activated with a force of 1 N
 which is the case when the punch touches the metal sheet.
 
 % TODO stimmt das?
@@ -342,7 +338,7 @@ observed in \cref{fig:springback_measured}.
 This phenomenon is most likely attributed to the released friction (personal communication with Prof. Dr.-Ing. Marco
 Schneider).
 
-\begin{figure}[H]
+\begin{figure}[h]
     \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
         \centering
         \includegraphics[width=0.7\textwidth]{chap4/images/t1,5_V30_y_5_1.TRA.csv_springback}
@@ -353,16 +349,17 @@ Schneider).
     \label{fig:springback_measured}
 \end{figure}
 
+
 \subsection{Dataset Exploration}\label{subsec:dataset-exploration}
-The dataset was explored using the \textit{pandas}~\cite{mckinney-proc-scipy-2010}
-and the \textit{matplotlib}~\cite{Hunter:2007} python library.
+The dataset was explored using the python libraries \textit{pandas}(~\cite{mckinney-proc-scipy-2010})
+and \textit{matplotlib}(~\cite{Hunter:2007}).
 The goal of this section is to give the reader an overview of the dataset and
 to show the relationship between the features and the dependent variable.
 
 \subsubsection{Features}
 The output data of the bending machine consisted of 26 features, which are listed in
 the appendix.
-Only three features - force, distance $y_p$, and time - are relevant for
+Only three features - force, punch perpetration  and time - are relevant for
 calculating the spring back, as described in the previous section~\ref{subsec:measuring_the_spring_back}.
 These three features were combined with the calculated spring back to form the final
 dataset, which contained a total of 404 data points generated.
@@ -388,7 +385,7 @@ An example of the dataset is presented in \cref{tab:dataset_example}.
             \hdashline
             ... & ...  & ...    & ... & ... \\
             \hdashline
-            396 & 5.0  & 0.6667 & 3.0 & 10  \\
+            40404 5.0  & 0.6667 & 3.0 & 10  \\
             \bottomrule
         \end{tabular}
     \end{tcolorbox}
@@ -396,7 +393,7 @@ An example of the dataset is presented in \cref{tab:dataset_example}.
     \label{tab:dataset_example}
 \end{table}
 
-\cref{fig:v30_springbacks} depicts the spring backs that were observed in a specific
+The \cref{fig:v30_springbacks} depicts the spring backs that were observed in a specific
 subset of the data where the die opening is 30 mm.
 The horizontal axis, labeled as the x-axis, represents the punch penetration distance, while the vertical axis,
 labeled as the y-axis, represents the spring back.
@@ -422,15 +419,16 @@ The dataset was created careful and in a controlled experimental environment to 
 measurements of the samples.
 As a result, the dataset exhibits a minimal number of outliers and high data quality, which is a crucial prerequisite
 for developing reliable machine learning models.
-As demonstrated in \cref{subsec:results-stability}, the stability of the models was tested, and it was observed that
-the addition of noise or outliers to the dataset resulted in a significant decrease in the performance of the models.
+As demonstrated in the \cref{subsec:results-stability} where the stability of the models was tested, it
+was observed
+that the addition of noise or outliers to the dataset resulted in a significant decrease in the performance of the models.
 This finding is indicative of the high quality of the dataset, as it implies that the dataset does not contain many
 outliers that could negatively impact model performance.
 
-\cref{fig:train_test_split} illustrates that the dataset encompasses nearly all possible combinations of the
+The \cref{fig:train_test_split} illustrates that the dataset encompasses nearly all possible combinations of the
 process parameters, namely $V$, $t$, and $y_p$.
 The $y_p$ values in the dataset are uniformly distributed and consistently ranged between 2.5 and 20 mm.
-Furthermore, the dataset was continuously expanded with new data points throughout the project to enhance its size and
+Furthermore, the dataset was expanded with new data points throughout the project to enhance its size and
 diversity.
 The figure also show the test-train split which will be explained in \cref{fig:train_test_split}.
 
@@ -444,7 +442,7 @@ The figure also show the test-train split which will be explained in \cref{fig:t
 \end{figure}
 
 The following gaps can be seen in the dataset: Metal sheet thickness with $V10$  after 1 mm could not be measured
-because the die opening was too small to fit the metal sheet.
+because the die opening was too small for the thickness of the metal sheet.
 Also data for $V$ 20 and $t$ 2,5 as well as $V$ 40 and $t$ 1 are missing, for time related reasons.
 
 Throughout the data collection and expansion process, any outliers and incorrect measurements were identified and
@@ -453,21 +451,21 @@ removed from the dataset to maintain its high quality.
 %measurements errors, noise and bias can impact data quality.
 %In later sections, data quality issues will be intentionally introduced to evaluate the models' robustness to such
 %challenges.
-This will provide insights into how well the machine learning models perform in more realistic scenarios and aid in
-developing more effective models for practical applications.
+%This will provide insights into how well the machine learning models perform in more realistic scenarios and aid in
+%developing more effective models for practical applications.
+
 
 \subsection{Data Preprocessing}\label{subsec:data-preprocessing}
 To normalize the independent features $y_p$, $V$, and $t$, as well as the dependent feature $spring\_back$, the
 \texttt{MinMaxScaler} or, in some cases, the \texttt{StandardScaler} from the
-\texttt{scikit-learn}~\cite{scikit-learn} library where employed.
+\texttt{scikit-learn}(~\cite{scikit-learn}) library where employed.
 
-The \texttt{MinMaxScaler} scales the data between 0 and 1 and the scaler was fit on the training data and
+The \texttt{MinMaxScaler} scales the data between 0 and 1, was fit on the training data and
 subsequently used to transform the test data.
 It is important to note that scaling was only performed on the training data, as cross-validation was later employed
 to tune and evaluate the models.
 Scaling the entire dataset before the split could result in data leakage, as the minimum and maximum values of the
 test data would be used to scale the training data.
-
 The data split is depicted in \cref{fig:train_test_split}.
 
 \subsection{Computational Setup}\label{subsec:computational-setup}
@@ -475,7 +473,7 @@ A ThinkPad X1 Carbon 2019 with an Intel Core i7-10610U CPU @ 1.80GHz and 16 GB R
 learning models.
 The OS used was Ubuntu 20.04.2 LTS on which the code was written in Python 3.8.5 with the PyCharm IDE.
 The code can be found on GitHub and on the the CD accompanying this thesis.
-The libraries used are listed in \cref{tab:libraries}.
+The libraries used are listed in the \cref{tab:libraries}.
 
 \captionsetup{width=1\textwidth}
 \begin{table}[h]
@@ -508,7 +506,6 @@ The libraries used are listed in \cref{tab:libraries}.
 
 A note to the citations of the libraries.
 All of the above libraries are well documented on their website.
-Libraries used for the machine learning models.
 
 Upon examining the correlation matrix depicted in \cref{fig:correlation_matrix}, the correlation is between 0 and 1,
 the higher the value the stronger the correlation.
@@ -520,7 +517,7 @@ The other features are not connected with each other, demonstrating the lack of 
 desirable trait for machine learning models.
 
 The correlation matrix was generated using the \texttt{heatmap} function from the \textit{seaborn} library
-~\cite{Waskom2021}.
+(~\cite{Waskom2021}).
 
 \begin{figure}[H]
     \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]

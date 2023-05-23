@@ -564,7 +564,7 @@ The learned parameters of the model are $w$ and $b$ and $\hat{y}$  is the predic
 ~\cite[p. 45]{muller2016introduction}.
 
 The Mean Squared Error is calculated by adding together the squared discrepancies between the predicted and true
-values~\cite[p. 47--68]{muller2016introduction}.
+values~\cite[pp. 47--68]{muller2016introduction}.
 This model presumes a linear relationship between the independent and dependent variables.
 The dataset exploration in \cref{subsec:dataset-exploration}, on the other hand, revealed a nonlinear relationship
 , implying that the linear regression model may not deliver reliable predictions.
@@ -627,7 +627,7 @@ problems
 To transfer data into a higher-dimensional space, the kernel trick is used.
 Two methods are usually used for \ac{SVM}s, the polynomial kernel and the radial basis
 function, also known as gaussian kernel
-~\cite[p. 97--98]{muller2016introduction}.
+~\cite[pp. 97--98]{muller2016introduction}.
 Similar to the \ac{SVM} algorithm, the \ac{SVR} algorithm finds a well-fitting hyperplane to a
 kernel-induced feature space to achieve good generalization performance using the original
 features.
@@ -708,7 +708,7 @@ performance and rendering them unsuitable for most use cases.
 To tackle this problem, ensemble methods are often employed instead of a single
 DT
 ~\cite[p. 83]{muller2016introduction}~\cite[p. 251]{liu2012new}.
-In ensemble methods, multiple models (such as decision trees) are combined to form a single model.
+%In ensemble methods, multiple models (such as decision trees) are combined to form a single model.
 %To make new predictions, the predictions of each individual model are aggregated, for example by averaging the
 %predictions
 %~\cite[p. 222]{boehmke2019hands}.
@@ -723,25 +723,24 @@ The risk of overfitting is mitigated through subset and feature randomization, a
 Bagging involves randomly selecting a subset of features or variables at each decision node in the decision
 tree.
 This process generates multiple, slightly varying copies of the dataset
-~\cite[p. 340--341]{gareth2013introduction}.
+~\cite[pp. 340--341]{gareth2013introduction}.
 Overfitting occurs when the algorithm learns individual data points instead of
 the general pattern (see \cref{subsec:overfitting-and-underfitting}).
-Each root node utilizes a unique subset of the data, and each leaf is split using a random set of features.
+Each root node utilizes a unique subset of the data and each leaf is split using a random set of features.
 This approach ensures that no single tree is exposed to all the data, enabling the model to concentrate on general
 patterns rather than being susceptible to noise
-~\cite[p. 83]{muller2016introduction}.
+~\cite[pp. 83--84]{muller2016introduction}.
 Therefore bagging aids in diminishing the impact of individual data points or outliers that may have a
 significant influence on a single decision tree.
 
 The algorithm is visualized in \cref{fig:rf-example}, the green nodes are the root nodes, the blue
 nodes are the decision nodes and red nodes are the leaf nodes.
-The red arrows indicate the decisions made by each decision tree for one specific sample.
-Instead of a single decision tree, $N$ decision trees are built in the format described in \cref{fig:dt-example}.
+Instead of a single decision tree, $N$ decision trees are built.
 The bagging was not visualized but every single decision tree is trained on a variation of the dataset for the before
 described reasons.
 The red arrows indicate the decisions made by each decision tree for one specific sample.
 As a result, each decision tree independently arrives at one prediction which in this case would be a spring back value.
-Averaging the predictions of all trees makes the final prediction~\cite[p. 9]{breiman2001random}.
+Averaging the predictions of all trees makes the final prediction~\cite[p. 247]{liu2012new}.
 
 \begin{figure}[h]
     \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
@@ -757,36 +756,35 @@ Averaging the predictions of all trees makes the final prediction~\cite[p. 9]{br
 The Random Forest mechanism is versatile enough to address both classification and regression problems, making it one
 of the most successful
 % TODO ab hier weiter prüfen
-\ac{ML} methods~\cite[p. 3--4]{biau2016random}~\cite[p. 25]{breiman2001random}.
+\ac{ML} methods~\cite[pp. 3--4]{biau2016random}~\cite[p. 25]{breiman2001random}.
 % -> Vorteile / Nachteile Random Forest
 This mechanism is flexible enough to handle classifications and regression problems,this is one of the reasons that
 random forests count to the most successful \ac{ML}
 methods
-~\cite[p. 3--4]{biau2016random}~\cite[p. 25]{breiman2001random}.
+~\cite[pp. 1--4]{biau2016random}.
+
+Another ensemble method based on decision trees is the Gradient Boosting Regression Tree algorithm.
 
 \subsubsection{Gradient Boosting Regression Tree}
 
-A \ac{GBT} is an ensemble learning algorithm that combines multiple Decision Trees
+A \ac{GBT} is another ensemble learning algorithm that combines multiple Decision Trees
 to yield more accurate and stable predictions.
-The main difference between this algorithm and the Random Forest algorithm is that the trees are trained sequentially
+The main difference to the \ac{RF} algorithm is that the trees are trained sequentially
 rather than simultaneously, with each tree correcting the errors of the previous tree.
-~\cite[p. 88--89]{muller2016introduction}.
+~\cite[pp. 88--89]{muller2016introduction}.
 This is done with training each new tree with the residual errors of the previous tree, which is the
-difference between the predicted value and can also be called the loss.
+difference between the actual and the predicted value (also called loss).
 One example for a metric that can be used as loss is the Mean Squared Error (MSE) (more details in
 section~\ref{subsec:correctness}).
 To train a tree on the residual errors, the process is similar to train a decision tree on any other regression
 task.
 Instead of using the original target variable (spring back) as the label for the training data instead the
 residual errors are used.
-This process sequentially boost the performance of the mode with new tree added to the
-ensemble, hence the name Gradient~\textit{Boosting}
+This process sequentially boost the performance of the model with new tree added to the
+ensemble, hence the name Gradient Boosting
 ~\cite[p. 222]{boehmke2019hands}
 
-GBMs form an ensemble of shallow trees built sequentially, whereas Random Forests (discussed in
-\cref{subsubsec:random-forests}) create an ensemble of independent trees with a deep structure.
-Every tree in the group learns from and enhances the previous tree
-~\cite[p. 221]{boehmke2019hands}.
+GBMs form an ensemble of shallow trees built sequentially, whereas Random Forests create an ensemble of independent trees with a deep structure.
 The shallow trees are achieved through a process called pre-pruning, which means that the growth of a tree is halted
 at a specific depth.
 This provides the advantage of a smaller model that consumes less memory and facilitates faster prediction.
@@ -796,21 +794,20 @@ model
 
 Furthermore, the algorithm performs well without scaling the dataset and can handle a combination of binary and
 continuous features
-~\cite[p. 91]{muller2016introduction}
+~\cite[p. 91]{muller2016introduction}.
 
-In \cref{fig:gbr-example}, we illustrate the Gradient Boosted Regression Trees (GBRT) algorithm using a sample
-dataset.
+The \cref{fig:gbr-example} illustrates the algorithm using a sample dataset.
 The first tree is trained on the original dataset with the target variable being the spring back.
-After the construction of the initial decision tree, each sample in the dataset will have a predicted value which is
+After the construction of the initial Decision Tree, each sample in the dataset will have a predicted value which is
 likely
 different from the actual spring back.
 For each sample, the residual, which is the difference between the predicted and actual spring back values, is
 computed.
 The second tree in the sequence is then trained using these residuals as the target variable instead of the
 actual spring back values.
-The GBRT algorithm continues to build trees sequentially, with each tree focusing on the residuals of the preceding
+The algorithm continues to build trees sequentially, with each tree focusing on the residuals of the preceding
 tree as its target variable.
-his process continues until a predefined stopping criterion is satisfied.
+This process continues until a predefined stopping criterion is satisfied.
 Such criteria may include a maximum number of trees or a threshold for minimal improvement in the final
 outcome
 ~\cite[p. 227]{boehmke2019hands}.
@@ -820,18 +817,17 @@ outcome
         \centering
         \includegraphics[width=1\textwidth]{chap4/images/gradient_boosting_example}
     \end{tcolorbox}
-    \caption{Visualization of the \ac{GBR} algorithm adapted from~\cite[p. 222]{boehmke2019hands}}
+    \caption{Visualization of the \ac{GBT} algorithm adapted from~\cite[p. 222]{boehmke2019hands}}
     \label{fig:gbr-example}
 \end{figure}
 
 \subsubsection{Extra Trees}\label{subsubsec:extra-trees}
-In the construction of a Random Forest, Decision Trees are developed using a randomly selected subset of features for
+In the \ac{RF} algorithm, Decision Trees are developed using a randomly selected subset of features for
 each node (see Section~\ref{subsubsec:random-forests}). To further enhance the randomness of the trees, random
 thresholds can be employed for decision rules in addition to the random selection of
 features~\cite[p. 351]{geron2022hands}.
 
-An ensemble consisting of such highly arbitrary trees is referred to as an Extra-Trees (or Extremely Randomized Trees
-) ensemble.
+An ensemble consisting of such highly arbitrary trees is referred to as an \ac{ET} ensemble.
 This approach generates more diverse and less correlated trees, leading to reduced variance and increased
 bias
 ~\cite[p. 351]{geron2022hands}.
@@ -844,32 +840,30 @@ growth
 Another method for supervised learning involves the utilization of Neural Networks to
 perform classification and regression tasks.
 
-While this study does not go into detail about the usage of Artificial Neural Networks for spring back prediction
-because that would be outside the scope of this paper.
-Instead a simple Multi-Layer Perceptron (MLP) is used for the comparison with the other models.
+This study does not go into detail about the usage of Artificial Neural Networks for spring back prediction,
+instead a simple Multi-Layer Perceptron (MLP) is used for the comparison with the other models.
 The goal is to evaluate if the employment of Neural Networks can be a future research area.
 
 The perceptron is inspired by the biological neuron in the brain and is the basic processing unit of a neural
 network.
-Each perceptron has one or more inputs from the previous perceptions or the environment and computes a weight sum of
+Each perceptron has one or more inputs from the previous perceptions or the environment and computes a weighted sum of
 these inputs.
 The weight determines if a perceptron triggers a certain activation function and `fires' or
 not.
 The activation function is often a simple sigmoid function which determines a threshold for the perceptron to activate
 ~\cite[pp. 271--273]{alpaydin2020introduction}.
 
-The MLP is a feedforward neural network which means that is organized into layers, with information
+The MLP is a feedforward neural network which means that it is organized into layers, with information
 moving in one direction from the input layer through the hidden layers to the output
-layer.
-These layers are the input layer, one or more hidden layers and an output
 layer
 ~\cite[pp. 279--280]{bishop1995neural}.
 The input layer is the network's first layer and is in charge of receiving input data.
 It contains the same number of nodes as the number of features in the dataset
 ~\cite[p. 105]{muller2016introduction}.
-In this example, the neural network's input layer would be made up of three perceptrons, each of which corresponded
+An example in the context of this study is shown in \cref{fig:mlp-example}.
+In this study, the neural network's input layer would be made up of three perceptrons, each of which correspond
 to one of the independent features, namely thickness, die opening, and punch penetration.
-The input layer does not perform any computation and only passes the input data to the next layer, which is
+The input layer does not perform any computation and only passes the input data to the next layer, which in is
 \cref{fig:mlp-example} is a hidden layer.
 
 In a fully connected neural network like the MLP each neuron in the input layer is connected to each neuron in the
@@ -891,7 +885,7 @@ the weights
 
 This is done in multiple steps, \cite{nielsen2015neural} make and example with a network to recognize
 handwritten digits, this example is simplified and applied on the MLP model used in this study
-(\cite[p. 12--24]{nielsen2015neural}):
+\cite[p. 12--24]{nielsen2015neural}:
 
 \begin{enumerate}
     \item The input data is passed through the network, layer by layer, until it reaches the output layer and a
@@ -916,8 +910,9 @@ By iteratively updating the weights and biases, the network can learn to make mo
 
 Usually a weight $x_0$ is included in the perceptron model as an intercept value to increase its generality.
 It is typically represented as the weight coming from an additional bias unti that always has a value of +1.
-\cref{fig:mlp-example} show a simplified visual representation of an MLP used in this study.
-It uses the tree input $V$, $t$, $y_p$ from the used dataset, the perceptrons in the input layer are denoted as $x_i$,
+The \cref{fig:mlp-example} show a simplified visual representation of an MLP used in this study.
+It uses the tree inputs ($V$, $t$, $y_p$) from the used dataset, the perceptrons in the input layer are denoted as $
+x_i$,
 the perceptrons in the hidden layer as $a_i$ and the perceptron in the output layer as $f(X)$.
 The weights of the connections between the perceptrons are denoted as $w_i$.
 
@@ -934,19 +929,19 @@ The weights of the connections between the perceptrons are denoted as $w_i$.
 
 
 \section{Model Training}\label{sec:model-training}
-Supervised learning involves training machine learning algorithms a dataset which contains the inputs features as well
-as target feature in this study spring back.
-In order to evaluate how well the model generalizes to new, unseen data, it is necessary to
+Supervised Learning involves training \ac{ML} algorithms a dataset which contains the inputs features as well
+as target feature.
+In order to evaluate how well the model generalizes to new and unseen data, it is necessary to
 split the dataset into training and testing sets.
 This involves taking some samples from the original dataset and using them exclusively to test the trained models.
 
 \subsection{Training-Test Split}\label{subsec:training-test-split}
-\cref{fig:train_test_split} displays the dataset partitioned into training and testing sets for the models used in
-this study.
+The \cref{fig:train_test_split} (used previously in \cref{subsec:dataset-exploration}) displays the dataset
+partitioned into training and testing sets for the models used in this study.
 Specifically, the samples with a die opening of 30 were reserved for testing, while the remaining data was used for
 training.
-While a random train-test split can often yield better model performance, but this may not evaluate the model's ability
-to predict new data with a different die opening.
+This approach was used instead of a random train-test split because it is expected to produce
+more realistic results since the models have never seen data with a die opening of 30.
 
 The decision to use a die opening of 30 was based on its central location within the selected dataset, allowing the
 models to predict this value accurately.
@@ -954,19 +949,17 @@ Furthermore, removing data from the middle of the parameter space during
 training is expected to improve model performance and promote generalization to new data.
 All models were trained on the same dataset.
 For algorithms with hyper-parameters, Grid-Search Cross-validation was used to set the them accordingly.
-The full hyper-parameters for each model are listed in \href{sec:hyper-parameters}.
+The full hyper-parameters for each model are listed in \cref{sec:hyper-parameters}.
 
 \subsection{Setting the Hyper-Parameters}\label{subsec:hyper-parameters}
-Prior to training a machine learning model, users of machine learning implementations like the ons found in
-\texttt{sci-kit learn}
-in most cases, some model parameters known as hyper-parameters need ot be chosen manually.
+In most \ac{ML} algorithms, some model parameters known as hyper-parameters need ot be chosen manually.
 The chosen hyper-paramters influence the performance of the resulting model and difference a lot from use
-case to use case~\cite[pp. 1]{probst2019tunability}.
+case to use case~\cite[p. 1]{probst2019tunability}.
 
-A few examples of hyper-parameters for a Random-Gorest model \cite{scikit-learn} include the number of trees, the number
-of features to consider when looking for the best split, and the maximum depth of the tree
-~\cite{scikit-learn}.
-The use of a grid-search cross-validation is a popular method to discover the best hyper-parameters.
+A few examples of hyper-parameters for a \ac{RF} model include the number of trees, the number
+of features to consider when looking for the best split and the maximum depth of the tree
+(~\cite{scikit-learn}).
+The use of Grid-Search Cross-Validation is a popular method to discover the best hyper-parameters.
 This is the approach used in this study and was described in \cref{subsubsec:grid-search} `Grid Search'.
 The hyper-parameters utilized for each model are listed in~\cref{sec:hyper-parameters} to allow the reader to
 duplicate the outcomes of this study.
@@ -975,12 +968,10 @@ This data can also be seen in the study's source code.
 
 \section{Result of the Build-Phase}\label{sec:results-build-phase}
 
-The design and development of the machine learning models have been completed, marking the end of the `Build' phase
+The design and development of the ac{ML} models have been completed, marking the end of the `Build' phase
 in this study.
 All models were implemented using the libraries listed in \cref{tab:libraries} and the source
-code is publicly available on GitHub at:
-
-\url{https://github.com/Philipp0205/Master-Thesis-Code}
+code is available on the CD-ROM accompanying this thesis.
 
 Each model has its own folder under the sub-directory \texttt{learner}, containing the model and any additional files
 associated with the learner.

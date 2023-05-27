@@ -115,8 +115,8 @@ There are multiple problems with this approach: (personal communication, Dipl. I
 
 ML models have the potential to accurately predict spring back for various types of metals,
 thicknesses, and angles, without the need for new technology tables.
-This approach offers several advantages, including faster processing times and reduced manual labor requirements.
-Additionally, it eliminates the need for new metal sheets, resulting in less waste.
+This method has various advantages, including faster processing times and less manual effort.
+It also removes the need for new metal sheets, which results in less waste.
 With using \ac{ML} algorithms, manufacturers can optimize
 their metal bending processes and reduce costs associated with material waste and manual labor.
 
@@ -180,10 +180,11 @@ experiments can provide a more comprehensive understanding of the material prope
 that are taking place during the forming process.
 This can include factors such as the properties of the metal being formed, the tooling used and the specific process
 conditions.
-Real-world data can also provide insights into unexpected or unpredictable variations that may occur during the
-forming process, which can be difficult to capture in a simulated environment.
-Additionally, experiments can be used to validate and improve the accuracy of simulation models, ensuring that the
-simulation results are more representative of the actual behavior of the metal.
+Real-world data can also reveal unanticipated or unpredictable variances that may arise during the formation process,
+which might be difficult to capture in a simulated environment.
+Experiments can also be used to test and improve the quality of simulation models, ensuring that simulation findings
+are more indicative of the metal's true behavior.
+
 Therefore, it is expected that the models trained on the generated dataset will be more accurate and represent the real
 world better.
 
@@ -349,7 +350,6 @@ Schneider).
     \label{fig:springback_measured}
 \end{figure}
 
-
 \subsection{Dataset Exploration}\label{subsec:dataset-exploration}
 The dataset was explored using the python libraries \textit{pandas}(~\cite{mckinney-proc-scipy-2010})
 and \textit{matplotlib}(~\cite{Hunter:2007}).
@@ -359,7 +359,7 @@ to show the relationship between the features and the dependent variable.
 \subsubsection{Features}
 The output data of the bending machine consisted of 26 features, which are listed in
 the appendix.
-Only three features - force, punch perpetration  and time - are relevant for
+Only three features - force, punch perpetration and time - are relevant for
 calculating the spring back, as described in the previous section~\ref{subsec:measuring_the_spring_back}.
 These three features were combined with the calculated spring back to form the final
 dataset, which contained a total of 404 data points generated.
@@ -385,7 +385,7 @@ An example of the dataset is presented in \cref{tab:dataset_example}.
             \hdashline
             ... & ...  & ...    & ... & ... \\
             \hdashline
-            40404 5.0  & 0.6667 & 3.0 & 10  \\
+            40404 5.0 & 0.6667 & 3.0 & 10 \\
             \bottomrule
         \end{tabular}
     \end{tcolorbox}
@@ -419,11 +419,11 @@ The dataset was created careful and in a controlled experimental environment to 
 measurements of the samples.
 As a result, the dataset exhibits a minimal number of outliers and high data quality, which is a crucial prerequisite
 for developing reliable machine learning models.
-As demonstrated in the \cref{subsec:results-stability} where the stability of the models was tested, it
-was observed
-that the addition of noise or outliers to the dataset resulted in a significant decrease in the performance of the models.
-This finding is indicative of the high quality of the dataset, as it implies that the dataset does not contain many
-outliers that could negatively impact model performance.
+
+As demonstrated in the \cref{subsec:results-stability}, where the models' stability was assessed, the
+addition of noise or outliers to the dataset resulted in a considerable fall in the models' performance.
+This discovery is indicative of the dataset's good quality, as it implies that the collection does not contain
+many outliers that could impair model performance.
 
 The \cref{fig:train_test_split} illustrates that the dataset encompasses nearly all possible combinations of the
 process parameters, namely $V$, $t$, and $y_p$.
@@ -453,7 +453,6 @@ removed from the dataset to maintain its high quality.
 %challenges.
 %This will provide insights into how well the machine learning models perform in more realistic scenarios and aid in
 %developing more effective models for practical applications.
-
 
 \subsection{Data Preprocessing}\label{subsec:data-preprocessing}
 To normalize the independent features $y_p$, $V$, and $t$, as well as the dependent feature $spring\_back$, the
@@ -540,7 +539,7 @@ the selection of ~\cite{muller2016introduction}.
 
 \subsection{The Baseline Model}\label{subsec:regression-models}
 In this study, a \ac{LR} model is employed as the baseline model.
-Linear regression is a widely used method to predict a continuous output  based on a set
+Linear regression is a widely used method to predict a continuous output based on a set
 of input features.
 The goal of a \ac{LR} model is to find the best-fitting straight to explain the relationship between the dependent
 (spring back) and independent (die opening, thickness, punch penetration)
@@ -557,9 +556,8 @@ Müller and Guido (2016)
     \end{equation}
 \end{tcolorbox}
 
-The linear regression model is trained by minimizing the sum of squared errors between predicted and actual values.
-The values $x[0]$ to $x[p]$ indicate the properties of a single data instance, with $p$ being the number of
-features.
+In this study The model is trained by minimizing the sum of squared errors between the predicted and actual springbacks.
+The numbers $x[0]$ to $x[p]$ reflect the characteristics of a single data instance and  $p$ is the number of features.
 The learned parameters of the model are $w$ and $b$ and $\hat{y}$  is the prediction generated by the model
 ~\cite[p. 45]{muller2016introduction}.
 
@@ -568,14 +566,15 @@ values~\cite[pp. 47--68]{muller2016introduction}.
 This model presumes a linear relationship between the independent and dependent variables.
 The dataset exploration in \cref{subsec:dataset-exploration}, on the other hand, revealed a nonlinear relationship
 , implying that the linear regression model may not deliver reliable predictions.
-Despite this disadvantage, the model can be used as a baseline against which other models can be compared.
+Despite this shortcoming, the model can be used as a starting point for comparing different models.
 
-Next to the linear regression, Support Vector Machines are a popular approach for solving regression problems.
-This model is described in the following section.
+Support Vector Machines, in addition to linear regression, are a popular approach for tackling regression problems.
+The next section describes this model.
 
 \subsection{Support Vector Machine}\label{subsec:support-vector-regression-(svr)}
-Support Vector Machines (SVMs) are a popular approach for solving classification problems.
-To understand how the SVM algorithm works, it can be helpful to approach the problem from a geometric perspective.
+Support Vector Machines (SVM) are a popular tool for classifying data.
+To further understand how the SVM algorithm works, consider approaching the problem from a geometric standpoint.
+
 For example, a two-dimensional space as shown in \cref{fig:svm-example} can be considered, where each data point
 has a class assigned, in this case, either red or blue.
 The SVM algorithm seeks to identify a line (hyperplane) that separates the data points into different classes in the
@@ -784,7 +783,8 @@ This process sequentially boost the performance of the model with new tree added
 ensemble, hence the name Gradient Boosting
 ~\cite[p. 222]{boehmke2019hands}
 
-GBMs form an ensemble of shallow trees built sequentially, whereas Random Forests create an ensemble of independent trees with a deep structure.
+GBMs form an ensemble of shallow trees built sequentially, whereas Random Forests create an ensemble of independent
+trees with a deep structure.
 The shallow trees are achieved through a process called pre-pruning, which means that the growth of a tree is halted
 at a specific depth.
 This provides the advantage of a smaller model that consumes less memory and facilitates faster prediction.
@@ -961,9 +961,9 @@ of features to consider when looking for the best split and the maximum depth of
 (~\cite{scikit-learn}).
 The use of Grid-Search Cross-Validation is a popular method to discover the best hyper-parameters.
 This is the approach used in this study and was described in \cref{subsubsec:grid-search} `Grid Search'.
-The hyper-parameters utilized for each model are listed in~\cref{sec:hyper-parameters} to allow the reader to
-duplicate the outcomes of this study.
-This data can also be seen in the study's source code.
+To assist the reader to replicate the results of this study, the hyper-parameters used for each model are listed  in
+\cref{sec:hyper-parameters}.
+This data is also included in the study's source code.
 
 
 \section{Result of the Build-Phase}\label{sec:results-build-phase}

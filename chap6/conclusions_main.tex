@@ -2,89 +2,110 @@
 
 
 \section{Summary of the main findings}\label{sec:summary-of-the-main-findings}
-This study investigated the use of Machine Learning \ac{ML} models to accurately predict spring back in sheet metal
-air-bending data, determining the best-performing models, and explore the potential of interpretability in ML models in
+This study investigated the use of Machine Learning models to accurately predict spring back in sheet metal
+air-bending data, determining the best-performing models and explore the potential of interpretability in ML models in
 providing insights into the factors that contribute to spring back.
 
-The results demonstrated that ML models, particularly the Extra Tree and Support Vector Machine models can accurately
-predict the spring back, outperforming traditional trial-and-error methods.
-The Extra Tree model showed the best overall performance across the six Design Principles (DPs), highlighting the
-importance to choose the right model depending on the application.
+The results demonstrated that ML models, particularly the Multi-Layer-Perceptron and Support Vector Machine models can
+accurately predict the spring back, outperforming traditional trial-and-error methods.
 
+More findings will be discussed in the following sections.
 
-\section{Answering the Research Questions}\label{sec:answering-the-research-question}
-In this section the findings are summarized to answer the research questions of this study.
+\section{Answering the Hypotheses}\label{sec:answering-the-research-question}
+Three hypotheses were posed in this study to guide the investigation of the use of \ac{ML} models to predict
+spring back in sheet metal forming.
+\ac{DP} 1 was used to answer the first hypothesis, \ac{DP} 2 to 5 to answer the second hypothesis and \ac{DP} 6 to
+answer the third hypothesis.
+The concrete findings where already discussed in the previous chapters, this section will only summarize the findings
+to give a final answer for the research questions.
 
-\subsection{Research Question 1: Can Machine Learning Models Accurately Predict Spring Back in Sheet Metal Forming?}
+\subsection{Research Question 1}
 \label{subsec:research-question-1:-can-machine-learning-models-accurately-predict-spring-back-in-sheet-metal-forming?}
+\textit{Machine Learning (ML) models can accurately predict spring back in sheet metal forming using
+real-world air-bending data, outperforming traditional trial-and-error methods.}
 
 The findings of this study support Hypothesis 1 and demonstrate that \ac{ML} models can accurately predict the spring
 back in sheet metal bending.
-The best performing models, Extra Trees and Support Vector Machine, achieved an RMSE of 0.15 mm, which is acceptable
-for many applications, considering the range of spring back values (0.5 mm to 3.1 mm).
+The best performing models, Multi-Layer-Perceptron and Support Vector Machine, achieved an RMSE of 0.15 mm.
+It was evaluated that this satisfies the ``fine'' level of accuracy defined by the~\cite{ISO2768}, this means that
+the \ac{ML} models created in this study can be used to predict spring back in sheet metal bending with a high level
+of accuracy.
+
 The \ac{ML} models outperform traditional trial-and-error methods, such as technology tables, by providing accurate
 predictions for a broader range of samples and bends.
 
-\subsection{Research Question 2: Which ML Models or Combinations of Models Yield the Best Performance?}
+\subsection{Research Question 2}
 \label{subsec:research-question-2:-which-ml-models-or-combinations-of-models-yield-the-best-performance?}
-The study's result answer Hypothesis 2, showing that specific \ac{ML} models perform better based on the six Design
+\textit{Specific ML models or combinations of models (e.g., ensemble methods) will yield better
+performance in terms of the six Design Principles (DPs) compared to other models.}
+
+The study's result support Hypothesis 2, showing that in fact specific \ac{ML} models perform better based on the six
+Design
 Principles used.
+The Multi-Layer-Perceptron and Support Vector Machine models achieved the best performance in terms of correctness.
 The Extra Trees model demonstrated the best balance between bias and variance and robust performance when exposed to
-missing data na noise.
-The Gradient Boosting model displayer the highest stability, while the Extra Trees and Random Forest models exhibited
+to noise.
+The Gradient Boosting model displayed the highest stability, while the Extra Trees and Random Forest models exhibited
 the the best resource utilization.
 The findings highlight the importance of selecting suitable \ac{ML} models for specific applications to achieve the
 best performance.
 
-\subsection{Research Question 3: Can ML Models with High Interpretability Provide Valuable Insights into the Factors
-Contributing to Spring Back?}
+Additionally this study defined different use cases based accompanied with a model recommendations based on these
+results.
+
+\subsection{Research Question 3}
 \label{subsec:research-question-3:-can-ml-models-with-high-interpretability-provide
 -valuable-insights-into-the-factors-
 contributing-to-spring-back?}
+\textit{Research Question 3: ML models with high interpretability can provide valuable insights into the factors that
+contribute to spring back, potentially leading to better understanding of the underlying physical processes and
+more effective compensation strategies.}
+
 This study's findings partially support Hypothesis 3, indicating that interpretability methods can provide valuable
 insights into the factors that contribute to spring back.
-The thickness of the metal sheet was found to have the most significant influence on the spring back, but also punch
+Only global model-agnostic methods were used in this study and the results showed that the thickness of the metal
+metal sheet was found to have the most significant influence on the spring back, but also punch
 penetration and die opening played important roles.
-Model-agnostic interpretability methods revealed non-linear dependencies and interactions between features, which can
+More interpretability methods revealed non-linear interactions between features, which can
 be valuable for refining the models and developing more effective compensations strategies.
+Additionally it was found that the die opening is most likely only important for the spring back important through an
+interaction with the punch penetration and thickness.
+To the best knowledge of the author, these interactions where not reported in previously.
 
 Furthermore, it is important to note that certain models which are considered as interpretable such as decision trees
 or linear models could not be used in this study due to their insufficient performance.
 This suggest that a balance between interpretability and performance is necessary for gaining valuable insights into
 the factors affecting spring back.
 
+
 \section{Classification in the State of Research}\label{sec:classification-in-the-state-of-research}
 This study contributes to the existing body of research on the application of ML models to metal forming processes.
-The findings of this study can be classified into three categories: (1) the use of ML models to predict spring back,
-(2) the use of interpretability methods in ML models, and (3) the use of real-world data in ML models.
+This study's findings fall into three categories: (1) the use of machine learning models to predict spring back, (2)
+the use of interpretability methods in machine learning models, and (3) the use of real-world data in machine
+learning models.
 
-Also this study attempted to create a framework for the evaluation of ML methods that could be used in further
-studies and also in other fields then metal forming.
+This study also sought to develop a framework for the evaluation of ML methods applicable to future research and
+other disciplines.
 By using data that was generated in the real-world and a more comprehensive evaluation framework based on six Design
-Principles, the study could provide a foundations for future research in this field.
-The findings of this study not only apply on the spring back prediction but also have broad implications for other
-evaluations of ML models in other domain.
+Principles, the study could provide a foundation for future research in this field.
 
 
-\section{Outlook for future research}\label{sec:outlook-for-future-research}
+\section{Outlook for Future Research}\label{sec:outlook-for-future-research}
 
 
-Future research can build upon the findings of this study by exploring several ways.
+Future research can build upon the findings of this study in the following areas.
 
 \begin{itemize}
     \item Investigating the use of more complex neural networks to improve the prediction accuracy of ML models in
-    \item spring back
-    prediction.
+    spring back prediction.
     \item Examining the performance of ensemble models and their potential in delivering better performance compared to
     individual models.
     \item Collecting and incorporating more data for high spring back cases to enhance the performance of ML models in
     predicting extreme cases.
     \item Developing standardized evaluation frameworks for ML models in various fields, drawing inspiration from the
-    \item Design
-    Principles used in this study.
+    Design Principles used in this study.
     \item Investigating the use of other interpretable ML models or model-agnostic methods to gain deeper insights
-    \item into the
-    factors affecting spring back and the underlying physical processes in sheet metal forming.
+    into the factors affecting spring back and the underlying physical processes in sheet metal forming.
 \end{itemize}
 
 By addressing these areas, future research can further advance the understanding and application of ML models in
@@ -92,11 +113,11 @@ predicting spring back and other complex processes.
 
 
 \section{Conclusion}\label{sec:conclusion}
-This study demonstrated the potential of \ac{ML} models to accurately predict spring back in sheet in the air
--bending metal forming process using real-world data.
+This study demonstrated the potential of \ac{ML} models to accurately predict spring back in sheet in the
+air-bending metal forming process using real-world data.
 The results support the three hypotheses posed, showing that \ac{ML} models can outperform traditional methods and
 that specific models or combinations of models yield better romance.
-Also that that interpretability methods can be used to provide valuable insights into the factors contributing to
+Also that interpretability methods can be used to provide valuable insights into the factors contributing to
 spring back.
 The findings of this study can be used to guide the development of \ac{ML} models for other complex processes and
 provide a foundation for future research in this field.

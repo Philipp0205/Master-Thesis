@@ -1,6 +1,8 @@
 \chapter{Appendix}\label{ch:appendix}
 
-\section*{Machine Configuration}\label{sec:machine-configuration}
+\section{Machine Configuration}\label{sec:machine-configuration}
+
+The \cref{tab:machine-config} shows the machine configuration used for the experimental setup.
 
 \begin{table}[H]
     \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
@@ -11,7 +13,7 @@
             \textbf{Parameter} & \textbf{Value}
             \\
             \toprule
-            andere Geschwindigkeit für Entlastung & 300 mm/min           \\
+            Andere Geschwindigkeit für Entlastung & 300 mm/min           \\
             Anzahl Stufen                         & 4                    \\
             Anzahl Zyklen                         & 1                    \\
             Automatische Kraftnullung             & Nein                 \\
@@ -38,21 +40,25 @@
 \end{table}
 
 
-\section*{Technology Tables}\label{sec:technology-tables}
+\section{Technology Tables}\label{sec:technology-tables}
+
+The \cref{fig:technology-table} show and example of a technology table.
 
 \begin{figure}[h]
     \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
         \centering
-        \includegraphics[width=1\textwidth,
-            clip]{schwenkbiegen_1}
+        \includegraphics[width=0.8\textwidth, clip]{appA/images/schwenkbiegen_1}
     \end{tcolorbox}
     \caption{Example of an technology table.}
     \label{fig:technology-table}
 \end{figure}
 
-\section*{Hyper Parameters}\label{sec:hyper-parameters}
+\section{Hyper Parameters}\label{sec:hyper-parameters}
 
-\subsection*{Decision Tree}
+The following sections show all the hyper-parameters used to train the \ac{ML} models of this study.
+They can be also found in the source code accompanying this thesis.
+
+\subsection{Decision Tree}
 Grid search cross validation was used to find the best hyper-parameters for
 the decision tree.
 All hyper-parameters are summarized in Table~\ref{tab:hyperparameters_decision_tree}.
@@ -85,9 +91,9 @@ All hyper-parameters are summarized in Table~\ref{tab:hyperparameters_decision_t
     \end{tcolorbox}
 \end{table}
 
-\subsection*{Random Forest}
+\subsection{Random Forest}
 
-\begin{table}[h]
+\begin{table}[H]
     \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
         \sisetup{group-minimum-digits = 4}
         \centering
@@ -122,9 +128,9 @@ All hyper-parameters are summarized in Table~\ref{tab:hyperparameters_decision_t
     \end{tcolorbox}
 \end{table}
 
-\subsection*{Extra Trees}
+\subsection{Extra Trees}
 
-\begin{table}[h]
+\begin{table}[H]
     \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
         \sisetup{group-minimum-digits = 4}
         \centering
@@ -153,9 +159,9 @@ All hyper-parameters are summarized in Table~\ref{tab:hyperparameters_decision_t
     \end{tcolorbox}
 \end{table}
 
-\subsection*{Gradient Boosting}
+\subsection{Gradient Boosting}
 
-\begin{table}[h]
+\begin{table}[H]
     \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
         \sisetup{group-minimum-digits = 4}
         \centering
@@ -184,43 +190,9 @@ All hyper-parameters are summarized in Table~\ref{tab:hyperparameters_decision_t
     \end{tcolorbox}
 \end{table}
 
-\subsection{Extra Trees}\label{subsec:extra-trees}
+\subsection{SVM}
 
-\begin{table}[h]
-    \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
-        \sisetup{group-minimum-digits = 4}
-        \centering
-        \begin{tabular}{lll}
-            \toprule
-            \thead{\textbf{Hyperparameter}} & \thead{\textbf{Value}} &
-            \thead{\textbf{Description}}
-            \\
-            \toprule
-            bootstrap & True \\
-            \\
-            \hdashline
-            learning\_reate & 0.1 \\
-            \hdashline
-            criterion & 'absolute_error' \\
-            \hdashline
-            max\_depth & 6 \\
-            \hdashline
-            min\_samples_split & 4 \\
-            \hdashline
-            n\_estimators & 10 \\
-            \hdashline
-            min\_samples\_leaf & 1 \\
-            \bottomrule
-        \end{tabular}
-        \caption{Hyperparameters of the Extra Trees model.}
-        \label{tab:hyperparameters_gradient_boosting}
-    \end{tcolorbox}
-\end{table}
-
-
-\subsection*{SVM}
-
-\begin{table}[h]
+\begin{table}[H]
     \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
         \sisetup{group-minimum-digits = 4}
         \centering
@@ -248,7 +220,7 @@ All hyper-parameters are summarized in Table~\ref{tab:hyperparameters_decision_t
     \end{tcolorbox}
 \end{table}
 
-\subsection*{MLP}
+\subsection{MLP}
 
 \begin{table}[H]
     \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
@@ -279,12 +251,3 @@ All hyper-parameters are summarized in Table~\ref{tab:hyperparameters_decision_t
         \label{tab:hyperparameters_mlp}
     \end{tcolorbox}
 \end{table}
-
-
-
-
-
-
-
-
-

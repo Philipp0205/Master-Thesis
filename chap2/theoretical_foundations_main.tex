@@ -10,7 +10,7 @@ When the value exceeds this particular range, it is classified as a ``plate'', w
 it is classified as a ``foil''
 ~\cite[p. 405]{groover2020fundamentals}.
 % Material
-Due to its accessibility, good formability, and sufficient strength for the majority of uses, low-carbon steel is a
+Due to its accessibility, good formability and sufficient strength for the majority of uses, low-carbon steel is a
 regularly used type of sheet metal
 ~\cite[p. 405]{groover2020fundamentals}.
 % Commercial importance
@@ -29,13 +29,13 @@ pressure on the sheet metal to shape it.
 The die is a stationary tool that is mounted in the press bed and provides a support surface for
 the sheet metal and also defines the shape of the finished
 product~\cref{sec:bending}~\cite[p. 412]{groover2020fundamentals}.
-\cref{fig:bending-methods} shows the tooling setup together with a sheet metal being bend.
+The \cref{fig:bending-methods} shows the tooling setup together with a sheet metal being bend.
 While the term `punch' is quite intuitive, the term ``die'' can cause confusion.
-The term `die' is a typically term in metal working to refer to the lower or stationary part of a tooling setup.
+The term `die' is a typical term in metal working to refer to the lower or stationary part of a tooling setup.
 
-Cutting, bending, and drawing are the three main groups of sheet metal forming processes.
+Cutting, bending and drawing are the three main groups of sheet metal forming processes.
 While bending and drawing processes are used to mold sheet metal into the desired forms necessary for making certain
-parts, cutting is used to separate huge sheets of material into smaller pieces.
+parts, cutting is used to separate huge sheets of material into smaller pieces
 ~\cite[p. 405]{groover2020fundamentals}.
 Drawing involves stretching the metal to create a convex or concave shape
 ~\cite[p. 416]{groover2020fundamentals}, while bending is ``defined as the straining of the
@@ -52,12 +52,9 @@ Bending is a forming operation that is used to change the shape of a sheet metal
 applying a load to it.
 It involves using force to shape the sheet metal into a desired form
 ~\cite[p. 1]{dib2020single}.
-The metal is subjected to a load that is greater than its yield strength but less than its ultimate tensile strength
-, allowing the metal to be permanently deformed into a different shape.
-~\cite[p. 1]{baig2021machine}.
-% TODO Selbst hergeleitet aber keine Quelle?
-This means that a load below the yield strength will not deform the metal, while a load above the utlimate tensile
-strength will cause the metal to break.
+The metal is put under a load that exceeds its yield strength but falls short of its ultimate tensile strength.
+This causes the metal to become permanently deformed into a different shape
+~\cite[pp. 1--2]{baig2021machine}.
 
 Sheet metal bending is usually used to produce large quantities of components at low cost in various
 industries~\cite[p. 1]{dib2020single}.
@@ -72,7 +69,7 @@ If only the loaded cross-section is considered for simplification, the neutral p
 neutral axis or neutral line
 ~\cite[pp. 67]{gustafson1998analytical}.
 %It is also called neutral axis or neutral line~\cite[pp. 67]{gustafson1998analytical}.
-\cref{fig:neutral-plane} shows the neutral plane after the bending operation, it is
+The \cref{fig:neutral-plane} shows the neutral plane after the bending operation, it is
 visible, that it is closer to the inside of the bend than to the outside of the bend.
 This is because the inside of the bend is compressed and the outside is stretched, described before.
 This causes the metal to deform and stretch on the outside, while compressing and thickening on the inside.
@@ -96,39 +93,51 @@ By controlling these factors, it is possible to achieve precise and consistent r
 \subsection{Air Bending}\label{subsec:air-bending}
 In the manufacturing industry, bending sheet metal is a critical process, allowing for the creation of various metal
 shapes and configurations.
-As can be seen in Groover (2020) V-bending and its variant, Air Bending, are both techniques that utilize punch-and
+As can be seen in \cite{groover2020fundamentals} V-bending and its variant, Air Bending, are both techniques that
+utilize punch-and
 -die tooling ~\cite[p. 416]{groover2020fundamentals}.
-The V-bending process, as shown in Figure~\ref{fig:v-bending}, entails pressing the metal into the shape of the die
+The V-bending process, as shown in ~\cref{fig:v-bending}, entails pressing the metal into the shape of the die
 to form precise and complex bends.
-The die can take various shapes, including U-shaped, Z-shaped, or any other shape required to achieve the desired bend.
+The die can take various shapes, including U-shaped, Z-shaped or any other shape required to achieve the desired bend.
 
-In contrast, air bending, as depicted in Figure~\ref{fig:air-bending}, utilizes an open die that only supports the
+In contrast, air bending, as depicted in \cref{fig:air-bending}, utilizes an open die that only supports the
 metal on each side.
 This process permits a more extensive range of bend angles since the punch travel distance is not
 restricted by the die.
 Air bending can also achieve a tighter bend radius compared to V-bending, but it may result in
 a slightly rounded bend.
 
-\begin{figure}[h]
-    \begin{tcolorbox}[arc=0pt,boxrule=0.5pt, colback=white]
+\begin{figure}
+    \begin{tcolorbox}[arc=0pt,boxrule=0.5pt, color=white]
         \centering
-        \begin{subfigure}{0.4\textwidth}
-            \centering
-            \includegraphics[width=\textwidth]{chap3/images/air-bending}
-            \caption{Air bending}
-            \label{fig:air-bending}
-        \end{subfigure}
-        \hfill
-        \begin{subfigure}{0.4\textwidth}
-            \includegraphics[width=\textwidth]{chap3/images/v-bending}
-            \caption{V-Bending}
-            \label{fig:v-bending}
-        \end{subfigure}
-        \hfill
+        \subfigure[a]{\includegraphics[width=0.4\textwidth]{chap3/images/air-bending}}
+        \subfigure[b]{\includegraphics[width=0.4\textwidth]{chap3/images/v-bending}}
+        \label{fig:bending-methods}
     \end{tcolorbox}
     \caption{Differnt bending methods~\cite[pp. 416]{groover2020fundamentals}}
-    \label{fig:bending-methods}
 \end{figure}
+
+
+%\begin{figure}[h]
+%    \begin{tcolorbox}[arc=0pt,boxrule=0.5pt, colback=white]
+%        \centering
+%        \begin{subfigure}{0.4\textwidth}
+%            \centering
+%            \includegraphics[width=\textwidth]{chap3/images/air-bending}
+%            \caption{Air bending}
+%            \label{fig:air-bending}
+%        \end{subfigure}
+%        \hfill
+%        \begin{subfigure}{0.4\textwidth}
+%            \includegraphics[width=\textwidth]{chap3/images/v-bending}
+%            \caption{V-Bending}
+%            \label{fig:v-bending}
+%        \end{subfigure}
+%        \hfill
+%    \end{tcolorbox}
+%    \caption{Differnt bending methods~\cite[pp. 416]{groover2020fundamentals}}
+%    \label{fig:bending-methods}
+%\end{figure}
 
 % Usage of air bending
 In the automotive sector, air bending is frequently utilized to create sheet metal components
@@ -136,13 +145,9 @@ In the automotive sector, air bending is frequently utilized to create sheet met
 Because it is flexible, it can achieve a variety of bending angles with the same punch-and-die tooling, it
 is usually the most popular bending technique
 ~\cite[p. 3]{miranda_formingspringbackprediction_2018}~\cite[p. 1]{cruz2021application}.
-
-Modern press machines are frequently fitted with "computer numerical control" (CNC) systems, which automatically
-regulate the bending process and generate the desired shape.
-~\cite[p. 3]{miranda_formingspringbackprediction_2018}
 The process parameters are explained in \cref{fig:process_parameters}.
 
-\subsubsection{Spring Back}\label{subsubsec:spring-back}
+\subsection{Spring Back}\label{subsubsec:spring-back}
 % How the spring back is created
 After the deformation pressure is released, there is still
 some elastic energy remaining in the bent part.
@@ -150,7 +155,7 @@ As a result, the bent part will partially return to its original
 shape, which is known as spring back
 ~\cite[p. 413--414]{groover2020fundamentals}.
 
-\cref{fig:spring-back} shows the spring back of a metal plate after the punch was removed.
+The \cref{fig:spring-back} shows the spring back of a metal plate after the punch was removed.
 The spring back is determined by the angle of the bent part after the punch is removed compared to the angle when
 the punch was still applied.
 The solid line shows the metal plate in its original form when the punch was still
@@ -186,7 +191,7 @@ process ~\cite[p. 114]{groover2020fundamentals}.
 
 
 \section{Machine Learning}\label{sec:machine-learning}
-\cite{muller2016introduction} describe machine learning as ``Machine learning is about extracting
+\cite{muller2016introduction} describe \ac{ML} as ``about extracting
 knowledge from data.'' and ``it is a research field at the intersection of statistics, artificial intelligence, and
 computer science and is also known as predictive analytics or statistical learning.''
 ~\cite[p. 1]{muller2016introduction}.
@@ -202,28 +207,28 @@ inputs but also with new, previously unseen data.''
 The training is the fundamental aspect of \ac{ML} and it can be continuous allowing the algorithm to
 learn from new data and its mistakes~\cite[pp. 4]{el2015machine}.
 
-Machine learning algorithms have numerous applications in fields just as example
-agriculture (\cite{yoosefzadeh2021application}), computer vision (\cite{hu2020voronoi}) or metal working
-(see section~\ref{sec:state-of-research}).
+\ac{ML} algorithms have numerous applications in fields just as example, computer vision \cite[]{hu2020voronoi},
+agriculture \cite[]{yoosefzadeh2021application}
+or metal working(see ~\cref{sec:state-of-research}).
 
 \subsection{Terminology}\label{subsec:terminology}
 This study tries to use common terminology for \ac{ML} to make it easier to understand:
-To carry out machine learning, a \textit{dataset} (~\cite[p. 3]{zhou2021machine}) is required as the
+To carry out machine learning, a \textit{dataset} ~\cite[p. 3]{zhou2021machine} is required as the
 initial foundation.
 A dataset is composed of \textit{samples}, with each sample being a single row or observation.
 For example, if a dataset contains information about metal sheet bending, each row would represent a single bend.
 
-A \textit{feature} is an individual measurable property or characteristic of the data, and the associated value is
+A \textit{feature} is an individual measurable property or characteristic of the data and the associated value is
 called an \textit{attribute}.
-A feature could be, for example, the thickness of a sheet metal component, and the attribute could be 3 mm.
+A feature could be, for example, the thickness of a sheet metal sheet and the attribute could be 3 mm.
 Features used to predict the outcome of a sample are called \textit{independent features} or \textit{input}, while the
 outcome feature is referred to as the \textit{dependent feature} or \textit{target}.
 In this study, the spring back is the dependent feature, while the other features which will be explained later are
 independent features.
 The dataset of this study will be explained in~\cref{subsec:dataset-exploration}.
 
-The process of using machine learning algorithms to create a model is called \textit{training} or \textit{fitting}
-~\cite[p. 4]{el2015machine}, and the data used for that process is commonly referred to as \textit{training data}.
+The process of using \ac{ML} algorithms to create a model is called \textit{training} or \textit{fitting}
+~\cite[p. 4]{el2015machine} and the data used for that process is commonly referred to as \textit{training data}.
 Usually, the training data is a subset of the whole dataset.
 The process of using the model to make predictions on new, unseen data is called
 \textit{generalization}
@@ -231,12 +236,12 @@ The process of using the model to make predictions on new, unseen data is called
 The test-train split is described in more detail in section~\ref{subsec:training-test-split}.
 
 The outcome of the learning process is referred to as a \textit{model} that can be used to make predictions on new,
-unseen data.\ac{ML} algorithms are also often referred as \textit{learners}.
+unseen data. \ac{ML} algorithms are also often referred as \textit{learners}.
 
 \subsection{Supervised Learning and Unsupervised Learning}\label{subsec:supervised-learning}
 Learning tasks are classified into two types based on whether or not the outcome is already included in the training
 data.
-There are two types of learning: supervised learning and unsupervised learning.
+There are two types of learning: Supervised learning and unsupervised learning
 ~\cite[p. 4]{zhou2021machine}.
 
 Supervised learning is employed when not only the independent features but also the dependent feature is known.
@@ -250,10 +255,10 @@ The two main types of supervised learning are classification and regression
 ~\cite[p. 25]{muller2016introduction}, which will be explained in the following section.
 
 \subsection{Classification and Regression}\label{subsec:regression}
-Problems that are solved with machine learning can fall in one of two categories: Classifications and regression
-problems.
-Depending on the nature of the problems different algorithms are performance metrics are used~(see
-~\cref{subsec:correctness}).
+Problems that are solved with \ac{ML} can fall in one of two categories:
+Classification and regression problems.
+Depending on the nature of the problem different algorithms or performance metrics are used
+(see~\cref{subsec:correctness}).
 For classifications the ML model needs to predict a class label from a predefined set of labels which are already
 present in the dataset
 ~\cite[pp. 25--26]{muller2016introduction}.
@@ -277,10 +282,10 @@ The discrepancy between the output predicted by the learning algorithm and the a
 error.
 The error is usually determined on the new for the model unseen samples and therefore is also
 called generalization error.
-The error calculated on the training set is called empirical error.
+The error calculated on the training set is called empirical error
 ~\cite[p. 26]{zhou2021machine}.
 
-One of the main goals of Machine Learning is to minimize the generalization error to create a model that performs well
+One of the main goals of \ac{ML} is to minimize the generalization error to create a model that performs well
 on new, unseen data.
 The difficulty is, that the details of new samples are unknown while training the learning algorithm, that means that
 only the empirical error can be minimized.
@@ -289,9 +294,9 @@ A usual reason is that the algorithm learns details of the training samples as g
 which are not true for new samples.
 This phenomenon is called overfitting and is the main reason why the generalization error is usually higher than the
 empirical error.
-The opposite phenomenon is called underfitting and happens when the algorithm fails to learn geneal properties of
-the training samples~\cite[p. 26]{zhou2021machine}.
-
+Underfitting, on the other hand, is a condition in which the algorithm fails to recognize general characteristics of
+the training data
+~\cite[p. 26]{zhou2021machine}.
 Overfitting models are too complex for the amount of data provided and hence do not generalize well, whereas
 underfitting models are too simplistic and perform poorly on the training set
 ~\cite[p. 28]{muller2016introduction}.
@@ -303,19 +308,18 @@ that is too complex and therefore overfits the data.
 The middle plot shows a model that fits the data well and generalizes well to new samples.
 
 \begin{figure}[h]
-    \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
+    \begin{tcolorbox}[arc=0pt,boxrule=0.5pt, color=white]
         \centering
         \includegraphics[trim=left botm right top, width=0.9\textwidth]
-        {chap2/images/cross_validation}
-        \caption{Variance of cross-validation, source:~\cite[p. 260]{muller2016introduction}, own
-        illustration }
+        {chap2/images/overfitting_example}
         \label{fig:overfitting_example}
     \end{tcolorbox}
+    \caption{Example of overfitting~\cite[p. 876]{badillo2020introduction}}
 \end{figure}
 
 The goal is to find the simplest model that captures the variability in the
 data~\cite[p. 35]{muller2016introduction}.
-Overfitting and underfitting can result from two different sources of error in the model: bias and variance, which
+Overfitting and underfitting can result from two different sources of error in the model: Bias and variance, which
 will be explained in the following section.
 
 \subsection{Bias-Variance Tradeoff}\label{subsec:bias-variance-tradeoff}
@@ -325,8 +329,8 @@ Accuracy refers usually to the closeness of the model's predictions to the actua
 Precision refers to the closeness of the model's predictions to each other, meaning how consistent the model's
 predictions
 are.
-Bias can be though of as the opposite of precision and refers to the systematic error in the model's predictions,
-meaning how far off the predictions are from the actual values.
+Bias can be thought of as the opposite of precision and refers to the systematic error in the model's predictions,
+meaning how far off the predictions are from the actual values
 ~\cite[p. 2]{doroudi2020bias}.
 Applying this on the previous \cref{subsec:overfitting-and-underfitting} high bias can result in underfitting, where
 the models is too simple to capture the complexity of the data.
@@ -345,7 +349,7 @@ In order to have good generalization performance of the model a small bias and a
 %set~\cite[p. 51]{zhou_machinelearning_2021}.
 \cite{geman1992neural} describe in their paper that the ``price to pay for achieving low bias is high variance''
 ~\cite[p. 14]{geman1992neural}.
-Therefore, as the model becomes more complex, the bias decreases and the variance increases, and vice vers
+Therefore, as the model becomes more complex, the bias decreases and the variance increases and vice versa
 ~\cite[p. 14]{geman1992neural}.
 This is known as the bias-variance tradeoff and goal is to find a model that has a low bias and a low variance
 and minimized the overall error.
@@ -355,12 +359,14 @@ error.
 The following sections explain how to evaluate and improve ML models and how to find the best model for a given
 problem.
 
+
 \subsection{Evaluation and Improvements of Models}\label{subsec:evaluations-and-improvements-of-models}
 There are several methods to evaluate and improve ML models.
 In the following sections provide explanations for the most important metrics and methods for this study.
 
+
 \subsubsection{Regression Evaluation Metrics}\label{subsubsec:regression-metrics}
-Commonly used metrics for regression models are the \ac{MAE}, Mean Squared Error \ac{MSE} and \ac{RMSE}.
+Commonly used metrics for regression models are the \ac{MAE}, \ac{MSE} and \ac{RMSE}.
 Their formal description is given in the equations~\ref{eq:mae} and~\ref{eq:rmse} where
 $e_i$ is the prediction error which is the difference between the predicted value of the model and the actual value.
 While $y_i$ is the actual value and $n$ is the number of samples in the testing data set.
@@ -376,7 +382,8 @@ A lower MAE indicates better model performance~\cite[pp. 1248]{chai2014root}.
     \end{equation}
 \end{tcolorbox}
 
-The MSE is computed like shown in \cref{eq:rmse}~\cite[p. 1248]{chai2014root} (only the part inside the root) by
+The MSE is computed like shown in \cref{eq:rmse} which was taken from \cite{chai2014root}
+~\cite[p. 1248]{chai2014root} by
 determining the average of the squared differences between the predicted and actual values.
 %As it is based on squared differences, it is more sensitive to outliers than the MAE
 If the predicted responses closely align with the actual responses, the MSE will be low, but if there is a significant
@@ -392,26 +399,26 @@ The RMSE and respectively the MSE are more sensitive to outliers than the MAE.
 \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
     \begin{equation}
         \label{eq:rmse}
-        MSE = \sqrt{\frac{1}{n} \sum_{i=1}^{n} e_i^2}
+        RMSE = \sqrt{\text{MSE}}
     \end{equation}
 \end{tcolorbox}
+
 
 \subsubsection{Cross Validation}\label{subsubsec:cross-validation}
 % TODO gut genug paraphrasiert?
 Cross-validation is a technique for testing a model's performance by training multiple models on different subsets of
 data and comparing their performance.
-The most frequent type of cross-validation is k-fold cross-validation, which divides the data into k folds and trains
-k models, each with one fold serving as the test set and the remainder serving as the training set.
-set
+The most frequent type of Cross-Validation is k-fold Cross-Validation, which divides the data into k folds and trains
+k models, each with one fold serving as the test set and the remainder serving as the training set
 ~\cite[p. 252--260]{muller2016introduction}.
-The accuracy of each model is then assessed, and the average accuracy over all k models is used to quantify the model's
+The accuracy of each model is then assessed and the average accuracy over all k models is used to quantify the model's
 generalization performance.
 This process helps to reduce the variability in model performance due to the specific choice of training and test
-sets, and is therefore considered to be a more stable and reliable way to evaluate the performance of a
+sets and is therefore considered to be a more stable and reliable way to evaluate the performance of a
 model
 ~\cite[p. 252--260]{muller2016introduction}.
 
-Figure~\ref{fig:cross-validation} shows how the cross-validation process and how the variance
+Fig.~\ref{fig:cross-validation} shows how the Cross-Validation process and how the variance
 is calculated.
 It can be seen that the training data set was divided into multiple folds.
 The number of folds is denoted as $k$.
@@ -423,7 +430,7 @@ Common metrics that can be used for evaluation are $R^2$, $MSE$, $MAE$ and $RMSE
 \begin{figure}[h]
     \begin{tcolorbox}[arc=0pt,boxrule=0.5pt]
         \centering
-        \includegraphics[trim=left botm right top, width=0.9\textwidth]
+        \includegraphics[trim=left botm right top, width=0.8\textwidth]
         {chap2/images/cross_validation}
         \caption{Variance of cross-validation, source:~\cite[p. 260]{muller2016introduction}, own
         illustration }
@@ -431,8 +438,9 @@ Common metrics that can be used for evaluation are $R^2$, $MSE$, $MAE$ and $RMSE
     \end{tcolorbox}
 \end{figure}
 
+
 \subsubsection{Grid Search}\label{subsubsec:grid-search}
-Each machine learning method has a number of parameters that can be tuned to improve the
+Each \ac{ML} method has a number of parameters that can be tuned to improve the
 performance of the model.
 Parameters are often not known in advance and must be tuned to the data.
 This is a common task in machine learning and therefore there are standard methods like
@@ -445,7 +453,7 @@ performance
 
 \section{State of research}\label{sec:state-of-research}
 Sheet metals are prone to experience spring back after being bend since their elastic properties.
-Therefore, extensive research has already been conducted about spring back behavior in sheet metal forming processes.
+Therefore, extensive research has already been conducted about spring back behavior in sheet metal forming processes
 ~\cite[p. 566]{liu2021deep}.
 This chapter presents a non-exhaustive overview of the most important research for this study in the field of
 spring back prediction in sheet metal forming processes.
@@ -456,7 +464,7 @@ forming, aiming to achieve optimal manufacturing quality.
 Both supervised and unsupervised \ac{ML} methods have been employed in these applications
 ~\cite[p. 2]{cruz2021application}.
 Current research on mitigating spring back in sheet metal forming often use numerical simulations, most notably
-finite element analysis (FEA) to generate the data
+the Finite Element Mehod (FEM) to generate the data
 ~\cite[p. 566]{liu2021deep}.
 That means that the data used for training the model is generated by a simulation and not generated with real-life
 experiments.
